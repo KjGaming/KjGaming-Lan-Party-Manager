@@ -15,6 +15,18 @@ export const PAGES_MENU = [
         }
       },
       {
+        path: 'news',
+        data: {
+          menu: {
+            title: 'News',
+            icon: 'fa fa fa-newspaper-o',
+            selected: false,
+            expanded: false,
+            order: 90,
+          }
+        }
+      },
+      {
         path: 'editors',
         data: {
           menu: {

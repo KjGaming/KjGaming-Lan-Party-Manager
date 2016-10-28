@@ -18,8 +18,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
  */
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
-  title: 'ng2-admin - Angular 2 Admin Template',
-  description: 'Free Angular 2 and Bootstrap 4 Admin Template',
+  title: 'KjGaming LAN Manager',
+  description: 'The new LAN Manager for the KjGaming LAN Party',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer()
 };
@@ -190,7 +190,8 @@ module.exports = function (options) {
         {
           test: /\.html$/,
           loader: 'raw-loader',
-          exclude: [helpers.root('src/index.html')]
+          /*exclude: [helpers.root('src/index.html')]*/
+          exclude: [helpers.root('views/index.hbs')]
         },
 
         /* File loader for supporting images, for example, in CSS files.
@@ -284,7 +285,8 @@ module.exports = function (options) {
        * See: https://github.com/ampedandwired/html-webpack-plugin
        */
       new HtmlWebpackPlugin({
-        template: 'src/index.html',
+        /*template: 'src/index.html',*/
+        template: 'views/index.hbs',
         chunksSortMode: 'dependency'
       }),
 

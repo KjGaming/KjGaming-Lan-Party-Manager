@@ -49,6 +49,7 @@
   font-size: 14px;
   &:focus {
     box-shadow: none;
+    color: $content-text;
     border-color: $primary-bg;
     background: $input-background;
   }

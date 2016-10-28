@@ -1,9 +1,9 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
-  selector: 'pages',
-  encapsulation: ViewEncapsulation.None,
-  styles: [],
-  template: `
+    selector: 'pages',
+    encapsulation: ViewEncapsulation.None,
+    styles: [],
+    template: `
     <ba-sidebar></ba-sidebar>
     <ba-page-top></ba-page-top>
     <div class="al-main">
@@ -15,12 +15,13 @@ import {Component, ViewEncapsulation} from '@angular/core';
     <footer class="al-footer clearfix">
       <div class="al-footer-right">Created with <i class="ion-heart"></i></div>
       <div class="al-footer-main clearfix">
-        <div class="al-copy">&copy; <a href="http://akveo.com">Akveo</a> 2016</div>
+        <div class="al-copy">&copy; <a href="http://kjgaming.de">KjGaming</a> 2016</div>
         <ul class="al-share clearfix">
-          <li><i class="socicon socicon-facebook"></i></li>
-          <li><i class="socicon socicon-twitter"></i></li>
-          <li><i class="socicon socicon-google"></i></li>
-          <li><i class="socicon socicon-github"></i></li>
+          <li>
+              <a href="https://www.facebook.com/KjGaming.LANParty.Filderstadt">
+                <i class="socicon socicon-facebook"></i>
+              </a>
+          </li>
         </ul>
       </div>
     </footer>
@@ -29,9 +30,9 @@ import {Component, ViewEncapsulation} from '@angular/core';
 })
 export class Pages {
 
-  constructor() {
-  }
+    constructor() {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 }
