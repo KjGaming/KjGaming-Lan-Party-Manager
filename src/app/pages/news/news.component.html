@@ -1,0 +1,25 @@
+<section class="content">
+    <ul class="timeline">
+        <li class="time-label">
+            <span class="bg-light-blue-gradient">kleiner Test</span>
+        </li>
+
+
+        <li *ngFor="let _news of news">
+            <i class="fa fa-{{_news.icon.look}} bg-{{_news.icon.color}}"></i>
+            <div class="timeline-item">
+                <span class="time"><i class="fa fa-clock-o"></i> {{_news.day}}.{{_news.month}} -
+                    {{_news.time}}</span>
+
+                <h3 class="timeline-header"><b>{{_news.title}}</b></h3>
+                <div class="timeline-body">{{_news.content}}</div>
+            </div>
+        </li>
+
+
+
+        <li>
+            <i class="fa fa-stop bg-gray"></i>
+        </li>
+    </ul>
+</section>

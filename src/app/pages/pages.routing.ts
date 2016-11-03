@@ -19,6 +19,7 @@ const routes: Routes = [
       { path: 'editors', loadChildren: () => System.import('./editors/editors.module') },
       { path: 'charts', loadChildren: () => System.import('./charts/charts.module') },
       { path: 'news', loadChildren: () => System.import('./news/news.module') },
+      { path: 'memberlist', loadChildren: () => System.import('./memberlist/memberlist.module') },
       { path: 'ui', loadChildren: () => System.import('./ui/ui.module') },
       { path: 'forms', loadChildren: () => System.import('./forms/forms.module') },
       { path: 'tables', loadChildren: () => System.import('./tables/tables.module') },

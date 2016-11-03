@@ -27,6 +27,18 @@ export const PAGES_MENU = [
         }
       },
       {
+        path: 'memberlist',
+        data: {
+          menu: {
+            title: 'Userlist',
+            icon: 'fa fa fa-users',
+            selected: false,
+            expanded: false,
+            order: 91,
+          }
+        }
+      },
+      {
         path: 'editors',
         data: {
           menu: {

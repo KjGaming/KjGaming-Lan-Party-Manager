@@ -3,12 +3,10 @@ import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgaModule } from '../../theme/nga.module';
 
-import { routing }       from './news.routing';
-import { NewsComponent } from './news.component';
-/*import { NewsService } from "./news.service";
-import { News } from "./news.model";*/
+import { routing }       from './memberlist.routing';
+import { MemberlistComponent } from './memberlist.component';
+import { MemberlistService } from "./memberlist.service";
 import { HttpModule } from "@angular/http";
-import { NewsService } from "./news.service";
 
 
 @NgModule({
@@ -20,11 +18,11 @@ import { NewsService } from "./news.service";
         HttpModule
     ],
     declarations: [
-        NewsComponent
+        MemberlistComponent
     ],
     providers: [
-        NewsService
+        MemberlistService
     ]
 })
-export default class NewsModule {
+export default class MemberlistModule {
 }

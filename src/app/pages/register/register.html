@@ -1,53 +1,135 @@
 <div class="auth-main">
-  <div class="auth-block">
-    <h1>Sign up to ng2-admin</h1>
-    <a routerLink="/login" class="auth-link">Already have an ng2-admin account? Sign in!</a>
+    <div class="auth-block">
+        <h1>Anmeldung für die KjGaming[5]</h1>
+        <a routerLink="/login" class="auth-link">Schon angemeldet? Hier gehts zum einloggen!</a>
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
-      <div class="form-group row" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
-        <label for="inputName3" class="col-sm-2 control-label">Name</label>
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 
-        <div class="col-sm-10">
-          <input [formControl]="name" type="text" class="form-control" id="inputName3" placeholder="Full Name">
-        </div>
-      </div>
-      <div class="form-group row" [ngClass]="{'has-error': (!email.valid && email.touched), 'has-success': (email.valid && email.touched)}">
-        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+            <div class="form-group row"
+                 [ngClass]="{'has-error': (!lanPacket.valid && lanPacket.touched), 'has-success': (lanPacket.valid && lanPacket.touched)}">
+                <label for="lanPacket" class="col-sm-2 control-label">Paket</label>
 
-        <div class="col-sm-10">
-          <input [formControl]="email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
-        </div>
-      </div>
-      <div class="form-group row" [ngClass]="{'has-error': (!password.valid && password.touched), 'has-success': (password.valid && password.touched)}">
-        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <select [formControl]="lanPacket" class="form-control" id="lanPacket">
+                        <option *ngFor="let lanpacket of lanPacketData">{{lanpacket.display}}</option>
+                    </select>
+                </div>
+            </div>
 
-        <div class="col-sm-10">
-          <input [formControl]="password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
-        </div>
-      </div>
-      <div class="form-group row" [ngClass]="{'has-error': (!repeatPassword.valid && repeatPassword.touched), 'has-success': (repeatPassword.valid && repeatPassword.touched)}">
-        <label for="inputPassword4" class="col-sm-2 control-label">Repeat</label>
+            <div class="form-group row"
+                 [ngClass]="{'has-error': (!nickname.valid && nickname.touched), 'has-success': (nickname.valid && nickname.touched)}">
+                <label for="nickname" class="col-sm-2 control-label">Nickname</label>
 
-        <div class="col-sm-10">
-          <input [formControl]="repeatPassword" type="password" class="form-control" id="inputPassword4" placeholder="Repeat">
-          <span *ngIf="!passwords.valid && (password.touched || repeatPassword.touched)" class="help-block sub-little-text">Passwords don't match.</span>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="offset-sm-2 col-sm-10">
-          <button [disabled]="!form.valid" type="submit" class="btn btn-default btn-auth">Sign up</button>
-        </div>
-      </div>
-    </form>
+                <div class="col-sm-10">
+                    <input [formControl]="nickname" type="text" class="form-control" id="nickname"
+                           placeholder="Nickname">
+                </div>
+            </div>
 
-    <div class="auth-sep"><span><span>or Sign up with one click</span></span></div>
+            <div class="form-group row"
+                 [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
+                <label for="name" class="col-sm-2 control-label">Name</label>
 
-    <div class="al-share-auth">
-      <ul class="al-share clearfix">
-        <li><i class="socicon socicon-facebook" title="Share on Facebook"></i></li>
-        <li><i class="socicon socicon-twitter" title="Share on Twitter"></i></li>
-        <li><i class="socicon socicon-google" title="Share on Google Plus"></i></li>
-      </ul>
+                <div class="col-sm-10">
+                    <input [formControl]="name" type="text" class="form-control" id="name"
+                           placeholder="Vor- & Nachname">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="street" class="col-sm-2 control-label">Adresse</label>
+
+                <div class="col-sm-7" [ngClass]="{
+                 'has-error': (!street.valid && street.touched),'has-success': (street.valid && street.touched)}">
+                    <input [formControl]="street" type="text" class="form-control" id="street"
+                           placeholder="Straße">
+                </div>
+                <div class="col-sm-3" [ngClass]="{
+                 'has-error': (!nr.valid && nr.touched),'has-success': (nr.valid && nr.touched)}">
+                    <input [formControl]="nr" type="number" class="form-control" id="nr"
+                           placeholder="Nr.">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="postalCode" class="col-sm-2 control-label"></label>
+
+                <div class="col-sm-3" [ngClass]="{
+                 'has-error': (!postalCode.valid && postalCode.touched),'has-success': (postalCode.valid && postalCode.touched)}">
+                    <input [formControl]="postalCode" type="number" class="form-control" id="postalCode"
+                           placeholder="PLZ">
+                </div>
+                <div class="col-sm-7" [ngClass]="{
+                 'has-error': (!city.valid && city.touched),'has-success': (city.valid && city.touched)}">
+                    <input [formControl]="city" type="text" class="form-control" id="city"
+                           placeholder="Stadt">
+                </div>
+            </div>
+
+            <div class="form-group row"
+                 [ngClass]="{'has-error': (!birth.valid && birth.touched), 'has-success': (birth.valid && birth.touched)}">
+                <label for="birth" class="col-sm-2 control-label">Geburtstag</label>
+
+                <div class="col-sm-10">
+                    <input [formControl]="birth" type="date" class="form-control" id="birth">
+                </div>
+            </div>
+
+
+            <div class="form-group row"
+                 [ngClass]="{'has-error': (!email.valid && email.touched), 'has-success': (email.valid && email.touched)}">
+                <label for="email" class="col-sm-2 control-label">Email</label>
+
+                <div class="col-sm-10">
+                    <input [formControl]="email" type="email" class="form-control" id="email" placeholder="Email">
+                </div>
+            </div>
+
+
+            <div class="form-group row"
+                 [ngClass]="{'has-error': (!password.valid && password.touched), 'has-success': (password.valid && password.touched)}">
+                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+
+                <div class="col-sm-10">
+                    <input [formControl]="password" type="password" class="form-control" id="inputPassword3"
+                           placeholder="Password">
+                </div>
+            </div>
+
+            <div class="form-group row"
+                 [ngClass]="{'has-error': (!repeatPassword.valid && repeatPassword.touched), 'has-success': (repeatPassword.valid && repeatPassword.touched)}">
+                <label for="inputPassword4" class="col-sm-2 control-label">Repeat</label>
+
+                <div class="col-sm-10">
+                    <input [formControl]="repeatPassword" type="password" class="form-control" id="inputPassword4"
+                           placeholder="Repeat">
+                    <span *ngIf="!passwords.valid && (password.touched || repeatPassword.touched)"
+                          class="help-block sub-little-text">Passwords don't match.</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="agb" class="col-sm-2 control-label">AGB</label>
+
+                <div class="col-sm-10"
+                     [ngClass]="{'has-error': (!agb.valid && agb.touched), 'has-success': (agb.valid && agb.touched)}">
+                    <label class="custom-checkbox">
+                            <input [formControl]="agb" type="checkbox" class="form-control" id="agb">
+                            <span class="custom-control-description"></span>
+                    </label>
+                </div>
+
+            </div>
+
+            <re-captcha site_key="6Lc3iCUTAAAAAK0ov2zFCkOFKiKgM61Os8TDaESt>"></re-captcha>
+
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10 align-right">
+                    <button [disabled]="!form.valid" type="submit" class="btn btn-default btn-auth">Anmelden</button>
+                </div>
+            </div>
+
+        </form>
+
     </div>
-  </div>
 </div>

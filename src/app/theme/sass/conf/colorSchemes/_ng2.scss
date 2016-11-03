@@ -85,3 +85,21 @@ $hoverlink: darken($activelink, 20%);
 @mixin additional-bg() {
   //display: block; // additional background layer, hidden by default
 }
+
+//KjGaming LAN MANAGER
+
+.bg-light-blue-gradient {
+  background: #3c8dbc !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #3c8dbc), color-stop(1, #67a8ce)) !important;
+  background: -ms-linear-gradient(bottom, #3c8dbc, #67a8ce) !important;
+  background: -moz-linear-gradient(center bottom, #3c8dbc 0%, #67a8ce 100%) !important;
+  background: -o-linear-gradient(#67a8ce, #3c8dbc) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#67a8ce', endColorstr='#3c8dbc', GradientType=0) !important;
+  color: #fff;
+}
+
+.bg-success{ background-color: $success;}
+.bg-primary{ background-color: $primary}
+.bg-info{ background-color: $info}
+.bg-warning{ background-color: $warning;}
+.bg-danger{ background-color: $danger;}

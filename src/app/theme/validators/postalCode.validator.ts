@@ -1,12 +1,12 @@
 import { AbstractControl } from '@angular/forms';
 
-export class EmailValidator {
+export class PostalCodeValidator {
 
     public static validate(c: AbstractControl) {
-        let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+        let EMAIL_REGEXP = /^[0-9]{5}/i;
 
         return EMAIL_REGEXP.test(c.value) ? null : {
-            validateEmail: {
+            validatePostalCode: {
                 valid: false
             }
         };
