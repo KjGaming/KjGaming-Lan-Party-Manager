@@ -68,7 +68,7 @@ router.post('/signin', function (req, res, next) {
                 error: {message: 'Passwort oder E-Mail ist Falsch'}
             });
         }
-        var token = jwt.sign({user: user}, '20Kj!G!aming?Rock.17', {expiresIn: 7200});
+        var token = jwt.sign({user: user}, secretJwt, {expiresIn: 7200});
         res.status(200).json({
             message: 'Successfully logged in',
             token: token,
@@ -78,7 +78,7 @@ router.post('/signin', function (req, res, next) {
 });
 
 router.use('/', function (req, res, next) {
-    jwt.verify(req.query.token, '20Kj!G!aming?Rock.17', function (err, decoded) {
+    jwt.verify(req.query.token, secretJwt, function (err, decoded) {
         if (err) {
             return res.status(401).json({
                 title: 'Not Authenticated',
