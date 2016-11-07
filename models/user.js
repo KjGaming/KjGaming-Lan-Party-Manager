@@ -20,7 +20,7 @@ var schema = new Schema({
     lanPacketId: {type: Number, default: 0},// Packet id (LAN Packet | 0 = spar, 1 = complete, 2 = individually)
     lanPacketPaid: {type: Boolean, default: false},// Packet paid or not
     lanPacketPrice: {type: Number, default: 0},// Packet price
-    lanFood: {type: Number, default: 0},// Food id
+    lanFood: {type: String, default: 0},// Food id
     lanVegi: {type: Boolean, default: false},// User vegitable
     lanSum: {type: Number, default: 0},// Outher coast like drinks, snacks and so on
     lanPaid: {type: Boolean, default: false}// Paid all

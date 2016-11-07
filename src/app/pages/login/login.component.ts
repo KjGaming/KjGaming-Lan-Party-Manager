@@ -34,12 +34,14 @@ export class Login {
                 values['email'],
                 values['password'],
             );
+            const expireDate: any = Date.now() + (2*60*60*1000);
 
             this.authService.signin(user)
                 .subscribe(
                     data => {
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('userId', data.userId);
+                        localStorage.setItem('expireDate', expireDate);
                         this.router.navigateByUrl('/');
                     },
                     error => console.error(error)

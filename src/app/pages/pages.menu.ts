@@ -39,6 +39,42 @@ export const PAGES_MENU = [
         }
       },
       {
+        path: 'clan',
+        data: {
+          menu: {
+            title: 'Clan',
+            icon: 'fa fa fa-user-plus',
+            selected: false,
+            expanded: false,
+            order: 91,
+          }
+        }
+      },
+      {
+        path: 'seating',
+        data: {
+          menu: {
+            title: 'Sitzplan',
+            icon: 'fa fa fa-user-plus',
+            selected: false,
+            expanded: false,
+            order: 91,
+          }
+        }
+      },
+      {
+        path: 'timetable',
+        data: {
+          menu: {
+            title: 'Zeitplan',
+            icon: 'fa fa fa-calendar',
+            selected: false,
+            expanded: false,
+            order: 92,
+          }
+        }
+      },
+      {
         path: 'editors',
         data: {
           menu: {

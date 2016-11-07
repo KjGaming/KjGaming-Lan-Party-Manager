@@ -4,7 +4,7 @@ import { EmailValidator, EqualPasswordsValidator, DateValidator } from '../../th
 import { PostalCodeValidator } from "../../theme/validators/postalCode.validator";
 import { AuthService } from "../../theme/services";
 import { User } from "../../theme/model";
-import { ErrorService } from "../../theme/components/errors/error.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'register',
@@ -14,11 +14,31 @@ import { ErrorService } from "../../theme/components/errors/error.service";
 })
 export class Register {
     public lanPacketData = [
-        {value: null, display: 'Wähle ein Paket'},
+        {value: 0, display: 'Wähle ein Paket'},
         {value: 0, display: 'Sparpaket (15€)'},
         {value: 1, display: 'Komplettpaket (30€)'},
         {value: 2, display: 'Individuelles Paket'}
     ];
+
+    public eatPackets = [
+        {value: 0, display: 'Abendessen 20.04 (4€)', price: 4},
+        {value: 1, display: 'Frühstück 21.04 (2€)', price: 2},
+        {value: 2, display: 'Mittagessen 21.04 (3€)', price: 3},
+        {value: 3, display: 'Abendessen 21.04 (4€)', price: 4},
+        {value: 4, display: 'Frühstück 22.04 (2€)', price: 2},
+        {value: 5, display: 'Mittagessen 22.04 (3€)', price: 3},
+        {value: 6, display: 'Abendessen 22.04 (4€)', price: 4},
+        {value: 7, display: 'Frühstück 23.04 (3€)', price: 2}
+
+    ];
+
+    error;
+
+    packetId = 0;
+    checkboxAGB = false;
+    checkboxVegi = false;
+    amount: number = 0;
+    lanFood: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
 
     public form: FormGroup;
     public lanPacket: AbstractControl;
@@ -28,7 +48,6 @@ export class Register {
     public nr: AbstractControl;
     public postalCode: AbstractControl;
     public city: AbstractControl;
-    public agb: AbstractControl;
     public vegi: AbstractControl;
     public name: AbstractControl;
     public email: AbstractControl;
@@ -38,10 +57,10 @@ export class Register {
 
     public submitted: boolean = false;
 
-    constructor(fb: FormBuilder, private authService: AuthService) {
+    constructor(fb: FormBuilder, private authService: AuthService, private router: Router) {
 
         this.form = fb.group({
-            'lanPacket': ['', Validators.compose([Validators.required])],
+            'lanPacket': ['', Validators.required],
             'nickname': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
             'name': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
             'email': ['', Validators.compose([Validators.required, EmailValidator.validate])],
@@ -50,7 +69,7 @@ export class Register {
             'nr': ['', Validators.required],
             'postalCode': ['', Validators.compose([Validators.required, PostalCodeValidator.validate])],
             'city': ['', Validators.required],
-            'agb': ['', Validators.required],
+
             /*'vegi': ['', Validators.required],*/
             'passwords': fb.group({
                 'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
@@ -67,32 +86,46 @@ export class Register {
         this.nr = this.form.controls['nr'];
         this.postalCode = this.form.controls['postalCode'];
         this.city = this.form.controls['city'];
-        this.agb = this.form.controls['agb'];
         this.passwords = <FormGroup> this.form.controls['passwords'];
         this.password = this.passwords.controls['password'];
         this.repeatPassword = this.passwords.controls['repeatPassword'];
         /* this.vegi = this.form.controls['vegi'];*/
     }
 
+
+    addAmountLanPacket(lanNumber: number): void {
+        console.log(lanNumber);
+
+        if (lanNumber == 0) {
+            this.amount = 15;
+            this.packetId = 0;
+        } else if (lanNumber == 1) {
+            this.amount = 30;
+            this.packetId = 1;
+        } else {
+            this.amount = 15;
+            this.packetId = 2;
+        }
+    }
+
+    addAmountFood(checked: boolean, price: number, value: number) {
+        if (checked) {
+            this.amount += price;
+            this.lanFood[value] = 1;
+        } else {
+            this.amount -= price;
+            this.lanFood[value] = 0;
+        }
+    }
+
     public onSubmit(values: Object): void {
         this.submitted = true;
         if (this.form.valid) {
-           let name = values['name'].split(" ");
+            let name = values['name'].split(" ");
             let date = new Date(values['birth']);
-            let packet;
-            switch (values['lanPacket']) {
-                case 0:
-                    packet = 0;
-                    break;
-                case 1:
-                    packet = 255;
-                    break;
-                case 2:
-                    packet = 100;
-                    break;
-                default:
-                    break;
-            }
+
+            let lanFoodString = this.lanFood.toString();
+            lanFoodString = lanFoodString.replace(/,/g, "");
 
             const user = new User(
                 values['email'], // email
@@ -107,18 +140,29 @@ export class Register {
                 values['nr'], // nr
                 values['postalCode'], // postalCode
                 values['city'], // city
-                values['agb'], // agb
-                0,
-                null,
-                packet
+                this.checkboxAGB, // agb
+                0, // Seat place at the LAN Event
+                null, // Clan ID
+                this.packetId, // Packet id
+                false, // Packet paid or not
+                this.amount,// Packet price
+                lanFoodString,// Food id
+                this.checkboxVegi,// User vegitable
+                0,// Outher coast like drinks, snacks and so on
+                false// Paid all
+
+
             );
-            this.authService.signup(user)
+            let regSuccess = this.authService.signup(user)
                 .subscribe(
-                    data => console.log(data),
-                    error => console.error(error)
+                    data => {
+                        localStorage.setItem('regToken', 'LoggedInSuccessfully');
+                        console.log(data);
+                        this.router.navigateByUrl('/confirmReg');
+                    },
+                    error => this.error = error
                 );
-            this.form.reset();
-            console.log(user);
+
         }
     }
 }

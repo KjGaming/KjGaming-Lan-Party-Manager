@@ -1,7 +1,9 @@
 <div class="auth-main">
     <div class="auth-block">
         <h1>Anmeldung für die KjGaming[5]</h1>
-        <a routerLink="/login" class="auth-link">Schon angemeldet? Hier gehts zum einloggen!</a>
+        <!--<a routerLink="/login" class="auth-link">Schon angemeldet? Hier gehts zum einloggen!</a>-->
+
+        <app-error></app-error>
 
         <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 
@@ -10,9 +12,23 @@
                 <label for="lanPacket" class="col-sm-2 control-label">Paket</label>
 
                 <div class="col-sm-10">
-                    <select [formControl]="lanPacket" class="form-control" id="lanPacket">
-                        <option *ngFor="let lanpacket of lanPacketData">{{lanpacket.display}}</option>
+                    <select [formControl]="lanPacket" class="form-control" id="lanPacket" [ngModel]="lanPacket"
+                            (change)="addAmountLanPacket($event.target.value)">
+                        <option *ngFor="let lanpacket of lanPacketData" [value]="lanpacket.value">{{lanpacket
+                            .display}}
+                        </option>
                     </select>
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="lanPacket.value == 2">
+                <div class="checkbox offset-sm-2 col-sm-10" *ngFor="let eatPacket of eatPackets"
+                     (change)="addAmountFood($event.target.checked, eatPacket.price, eatPacket.value)">
+                    <label class="checkbox-inline custom-checkbox nowrap">
+                        <input type="checkbox"
+                               [attr.id]="'foodCheckbox' + eatPacket.value">
+                        <span>{{eatPacket.display}}</span>
+                    </label>
                 </div>
             </div>
 
@@ -109,23 +125,50 @@
             </div>
 
             <div class="form-group row">
-                <label for="agb" class="col-sm-2 control-label">AGB</label>
-
-                <div class="col-sm-10"
-                     [ngClass]="{'has-error': (!agb.valid && agb.touched), 'has-success': (agb.valid && agb.touched)}">
-                    <label class="custom-checkbox">
-                            <input [formControl]="agb" type="checkbox" class="form-control" id="agb">
-                            <span class="custom-control-description"></span>
-                    </label>
+                <div class="offset-sm-2 col-sm-10">
+                    <div class="checkbox">
+                        <label class="checkbox-inline custom-checkbox nowrap">
+                            <input type="checkbox"
+                                   [checked]="checkboxVegi"
+                                   (change)="checkboxVegi = $event.target.checked">
+                            <span>Ich bin Vegetarier</span>
+                        </label>
+                    </div>
                 </div>
-
             </div>
+
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10"
+                     [ngClass]="{'has-error': (!checkboxAGB), 'has-success': (checkboxAGB)}">
+                    <div class="checkbox">
+                        <label class="checkbox-inline custom-checkbox nowrap">
+                            <input type="checkbox"
+                                   [checked]="checkboxAGB"
+                                   (change)="checkboxAGB = $event.target.checked">
+                            <span>Ich habe die AGB`s gelesen und akzeptiert</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
 
             <re-captcha site_key="6Lc3iCUTAAAAAK0ov2zFCkOFKiKgM61Os8TDaESt>"></re-captcha>
 
+            <div *ngIf="amount > 30" class="alert alert-warning" role="alert" [ngStyle]="{'display': display}">
+                <button type="button" class="close" aria-label="Close" (click)="onErrorHandled()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Sonderangebot!</strong><br>
+                Sie haben das Individuelle Paket gewählt und würden mit der Anmeldung mehr Zahlen als unser
+                Sonderangebot im Komplettpaket. Vielleicht wollen sie es sich noch überlegen das billigere Angebot zu
+                nehmen!
+            </div>
+
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10 align-right">
-                    <button [disabled]="!form.valid" type="submit" class="btn btn-default btn-auth">Anmelden</button>
+                    <button [disabled]="!checkboxAGB || !form.valid" type="submit"
+                            class="btn btn-default btn-auth">Anmelden ( {{amount}}€ )
+                    </button>
                 </div>
             </div>
 

@@ -1,1 +1,0 @@
-var secretJwt = 'yourSecretJwt';

@@ -9,6 +9,7 @@ import {ControlValueAccessor, NgModel} from '@angular/forms';
 export class BaCheckbox implements ControlValueAccessor {
   @Input() disabled:boolean;
   @Input() label:string;
+  @Input() formCon:string;
   @Input() value:string;
   @Input() baCheckboxClass:string;
 

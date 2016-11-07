@@ -17,7 +17,7 @@ export class User {
                 public packetId?: number,// Packet id (LAN Packet | 0 = spar, 1 = complete, 2 = individually)
                 public packetPaid?: boolean,// Packet paid or not
                 public packetPrice?: number,// Packet price
-                public lanFood?: number,// Food id
+                public lanFood?: string,// Food id
                 public lanVegi?: boolean,// User vegitable
                 public lanSum?: number,// Outher coast like drinks, snacks and so on
                 public lanPaid?: boolean// Paid all
