@@ -10,9 +10,9 @@ export class MemberlistService {
     }
 
     // Uses http.get() to load a single JSON file
-    getNews(): Observable<any> {
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+    getUserMemberlist(): Observable<any> {
+        const token = localStorage.getItem('id_token')
+            ? '?id_token=' + localStorage.getItem('id_token')
             : '';
         return this.http.get('/api/user' + token)
             .map((res: Response) => res.json())

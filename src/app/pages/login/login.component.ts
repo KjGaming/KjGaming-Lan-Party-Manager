@@ -17,7 +17,7 @@ export class Login {
     public password: AbstractControl;
     public submitted: boolean = false;
 
-    constructor(fb: FormBuilder, private authService: AuthService, private router:Router) {
+    constructor(fb: FormBuilder, private authService: AuthService, private router: Router) {
         this.form = fb.group({
             'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
             'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
@@ -29,25 +29,27 @@ export class Login {
 
     public onSubmit(values: Object): void {
         this.submitted = true;
+
+
         if (this.form.valid) {
             const user = new User(
                 values['email'],
                 values['password'],
             );
-            const expireDate: any = Date.now() + (2*60*60*1000);
+            const expireDate: any = Date.now() + (2 * 60 * 60 * 1000);
 
             this.authService.signin(user)
                 .subscribe(
                     data => {
-                        localStorage.setItem('token', data.token);
-                        localStorage.setItem('userId', data.userId);
+                        localStorage.setItem('id_token', data.id_token);
                         localStorage.setItem('expireDate', expireDate);
+                        localStorage.setItem('userId', data.userId);
+                        localStorage.setItem('blackWidow', data.blackWidow);
                         this.router.navigateByUrl('/');
                     },
                     error => console.error(error)
                 );
 
-            console.log(values);
         }
     }
 }

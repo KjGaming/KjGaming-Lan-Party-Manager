@@ -6,9 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+
 var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
 var newsRoutes = require('./routes/news');
+var serverRoutes = require('./routes/server');
 
 var app = express();
 mongoose.connect('localhost:27017/kjgaming');
@@ -31,9 +33,9 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
     next();
 });
-
-app.use('/api/news', newsRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/news', newsRoutes);
+app.use('/api/server', serverRoutes);
 app.use('/', appRoutes);
 
 

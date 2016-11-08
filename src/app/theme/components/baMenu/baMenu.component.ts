@@ -50,6 +50,7 @@ export class BaMenu {
 
   public ngOnInit():void {
     this.menuItems = this._service.convertRoutesToMenus(this.menuRoutes);
+    console.log(this.menuItems);
   }
 
   public ngOnDestroy():void {

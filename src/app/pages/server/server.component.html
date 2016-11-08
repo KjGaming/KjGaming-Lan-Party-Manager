@@ -1,0 +1,24 @@
+<div class="horizontal-scroll">
+    <table class="table table-hover">
+        <thead>
+        <tr class="black-muted-bg">
+            <th>#</th>
+            <th class="align-left">Titel</th>
+            <th class="align-left">Text</th>
+            <th class="align-left">IP</th>
+            <th class="align-left">Mode</th>
+            <th class="align-left">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let server of servers;" class="no-top-border">
+            <td *ngIf="server.server" class="align-left">{{serverIndex}}</td>
+            <td *ngIf="server.server" class="align-left">{{server.title}}</td>
+            <td *ngIf="server.server" class="align-left">{{server.content}}</td>
+            <td *ngIf="server.server" class="align-left">{{server.server.ip}}</td>
+            <td *ngIf="server.server" class="align-left">{{server.server.mode}}</td>
+            <td *ngIf="server.server" class="align-left">{{server.status}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

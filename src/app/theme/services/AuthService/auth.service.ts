@@ -42,7 +42,7 @@ export class AuthService {
     }
 
     isAuthenticated() {
-        var token = localStorage.getItem('token');
+        var token = localStorage.getItem('id_token');
         var expireDate = localStorage.getItem('expireDate');
         if (token) {
             if (Number(expireDate) > Date.now()) {
@@ -59,16 +59,31 @@ export class AuthService {
     }
 
     isLoggedIn() {
-        return localStorage.getItem('token') !== null;
+        return localStorage.getItem('id_token') !== null;
+    }
+
+    isAdmin(): boolean {
+        var adminToken = Number(localStorage.getItem('blackWidow'));
+        console.log(adminToken);
+        if (adminToken == 481) {
+            return true;
+        } else if (adminToken == 153) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     successfullLogIn() {
         var token = localStorage.getItem('regToken');
 
-        if(token == 'LoggedInSuccessfully'){
+        if (token == 'LoggedInSuccessfully') {
             return true;
         }
         this.router.navigate(['/']);
         return false;
     }
+
+
 }

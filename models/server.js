@@ -6,7 +6,7 @@ var schema = new Schema({
     content: {type: String, required: true},
     status: {type: Boolean, default: false},
     download:{
-        path: {type: String},
+        path: {type: String}
     },
     server: {
         mode: {type: String},

@@ -18,13 +18,15 @@ import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 import { AuthGuard, RegGuard } from "./theme/guard";
+import { AdminGuard } from "./theme/guard/admin.guard";
 
 // Application wide providers
 const APP_PROVIDERS = [
     AppState,
     GlobalState,
     AuthGuard,
-    RegGuard
+    RegGuard,
+    AdminGuard
 ];
 
 type StoreType = {

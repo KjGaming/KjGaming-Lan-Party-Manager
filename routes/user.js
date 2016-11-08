@@ -17,18 +17,19 @@ router.post('/', function (req, res, next) {
         email: req.body.email,
         role: req.body.role,
         lock: req.body.lock,
-        street: req.body.street,
-        nr: req.body.nr,
-        postalCode: req.body.postalCode,
-        city: req.body.city,
-        agb: req.body.agb,
-        lanPacketId: req.body.packetId,
-        lanFood: req.body.lanFood,
-        lanVegi: req.body.lanVegi,
-        lanPacketPaid: req.body.packetPaid,
-        lanPacketPrice: req.body.packetPrice
+        agb: req.body.agb
 
     });
+
+    user.address.street = req.body.street;
+    user.address.nr = req.body.nr;
+    user.address.postalCode = req.body.postalCode;
+    user.address.city = req.body.city;
+    user.lan.packet.id = req.body.packetId;
+    user.lan.food = req.body.lanFood;
+    user.lan.vegi = req.body.lanVegi;
+    user.lan.packet.paid = req.body.packetPaid;
+    user.lan.packet.price = req.body.packetPrice;
 
     user.save(function (err, result) {
         if (err) {
@@ -85,17 +86,32 @@ router.post('/signin', function (req, res, next) {
                 error: {message: 'Passwort oder E-Mail ist Falsch'}
             });
         }
-        var token = jwt.sign({user: user}, '20Kj!G!aming?Rock.17', {expiresIn: 7200});
+        var token;
+        var adminToken;
+        if (user.role == 2) {
+            token = jwt.sign(user._id, '20Kj!G!aming?Rock.Admin.17', {expiresIn: 7200});
+            adminToken = 481;
+        } else if (user.role == 1) {
+            token = jwt.sign(user._id, '20Kj!G!aming?Rock.Creator.17', {expiresIn: 7200});
+            adminToken = 153;
+        } else {
+            token = jwt.sign(user._id, '20Kj!G!aming?Rock.17', {expiresIn: 7200});
+            adminToken = 0;
+        }
+
         res.status(200).json({
             message: 'Successfully logged in',
-            token: token,
+            id_token: token,
+            blackWidow: adminToken,
             userId: user._id
         });
     });
 });
 
+
 router.use('/', function (req, res, next) {
-    jwt.verify(req.query.token, '20Kj!G!aming?Rock.17', function (err, decoded) {
+
+    jwt.verify(req.query.id_token, '20Kj!G!aming?Rock.17' || '20Kj!G!aming?Rock.Creator.17' || '20Kj!G!aming?Rock.Admin.17', function (err, decoded) {
         if (err) {
             return res.status(401).json({
                 title: 'Not Authenticated',
@@ -108,18 +124,28 @@ router.use('/', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-
+    var userArray = [];
     User.find()
         .exec(function (err, user) {
+            console.log(user);
             if (err) {
                 return res.status(500).json({
                     title: 'An error occurred',
                     error: err
                 });
             }
+            for (var i = 0; user.length > i; i++) {
+                userArray[i] = {
+                    firstName: user[i].firstName,
+                    nickName: user[i].nickName,
+                    seat: user[i].seat,
+                    role: user[i].role
+                }
+            }
+
             res.status(200).json({
                 message: 'Success',
-                obj: user
+                obj: userArray
             });
         });
 });

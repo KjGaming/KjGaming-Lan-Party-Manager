@@ -23,7 +23,7 @@ export class MemberlistComponent implements OnInit {
 
 
     getMember() {
-        this._memberService.getNews().subscribe(
+        this._memberService.getUserMemberlist().subscribe(
             // the first argument is a function which runs on success
             data => {
                 this.users = data.obj;
