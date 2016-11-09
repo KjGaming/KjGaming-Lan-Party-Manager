@@ -5,7 +5,6 @@ import { NgaModule } from '../../theme/nga.module';
 
 import { routing }       from './feedback.routing';
 import { FeedbackComponent } from './feedback.component';
-import { FeedbackService } from "./feedback.service";
 import { HttpModule } from "@angular/http";
 
 
@@ -21,7 +20,6 @@ import { HttpModule } from "@angular/http";
         FeedbackComponent
     ],
     providers: [
-        FeedbackService
     ]
 })
 export default class FeedbackModule {
