@@ -1,19 +1,21 @@
 <div class="widgets">
     <div class="row">
         <div class="col-md-12">
-            <form>
+            <app-error></app-error>
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
                 <ba-card title="Gib uns Feedback" baCardClass="with-scroll">
                     <div class="form-group col-sm-12">
-                        <input type="text" class="form-control" id="subject" placeholder="Betreff">
+                        <input [formControl]="subject" type="text" class="form-control" id="subject" placeholder="Betreff">
                     </div>
                     <div class="form-group col-sm-12">
-                        <textarea class="form-control" id="text" placeholder="Dein Feedback"></textarea>
+                        <textarea [formControl]="text" class="form-control" id="text" placeholder="Dein Feedback"></textarea>
                     </div>
                     <div class="form-group col-sm-12 align-right">
-                        <button type="submit" class="btn btn-primary btn-mm">Feedback abschicken!</button>
+                        <button [disabled]="!form.valid" type="submit" class="btn btn-primary btn-mm">Feedback abschicken!</button>
                     </div>
                 </ba-card>
             </form>
+
         </div>
     </div>
 </div>

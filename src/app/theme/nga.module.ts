@@ -47,7 +47,8 @@ import {
     BaImageLoaderService,
     BaThemePreloader,
     BaThemeSpinner,
-    AuthService
+    AuthService,
+    SendMailService
 
 } from './services';
 
