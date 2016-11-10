@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import {FormGroup, AbstractControl, FormBuilder, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {SendMailService} from "../../theme/services";
+import { FormGroup, AbstractControl, FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { SendMailService } from "../../theme/services";
+import { Mail } from "../../theme/model";
 
 
 @Component({
@@ -11,7 +12,7 @@ import {SendMailService} from "../../theme/services";
 })
 
 
-export class FeedbackComponent{
+export class FeedbackComponent {
     public form: FormGroup;
     public subject: AbstractControl;
     public text: AbstractControl;
@@ -31,22 +32,23 @@ export class FeedbackComponent{
     public onSubmit(values: Object): void {
         this.submitted = true;
 
-        if (this.form.valid) {
-            const feedback = {
-                "subject": values['subject'],
-                "text": values['text'],
-                "info": "Feedback Form"
-            };
 
-            this.sendMailService.sendMail(feedback)
-                .subscribe(
+        if (this.form.valid) {
+
+            const mail = new Mail(
+                values['subject'],
+                values['text'],
+                "Feedback Formular"
+            );
+
+            this.sendMailService.sendMail(mail)
+               .subscribe(
                     data => console.log(data),
                     error => console.error(error)
                 );
 
         }
     }
-
 
 
 }

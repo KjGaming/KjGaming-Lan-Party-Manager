@@ -30,7 +30,6 @@ export class Login {
     public onSubmit(values: Object): void {
         this.submitted = true;
 
-
         if (this.form.valid) {
             const user = new User(
                 values['email'],

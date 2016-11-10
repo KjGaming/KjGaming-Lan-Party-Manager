@@ -5,6 +5,7 @@ import 'rxjs/Rx';
 import {Observable} from "rxjs";
 import {ErrorService} from "../../components/errors/error.service";
 import {Router} from "@angular/router";
+import { Mail } from "../../model/mail.model";
 
 
 @Injectable()
@@ -12,8 +13,8 @@ export class SendMailService {
     constructor(private http: Http, private errorService: ErrorService, private router: Router) {
     }
 
-    sendMail(content) {
-        const body = JSON.stringify(content);
+    sendMail(mail: Mail) {
+        const body = JSON.stringify(mail);
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('id_token')
