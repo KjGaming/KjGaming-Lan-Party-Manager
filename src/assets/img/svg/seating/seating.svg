@@ -1,25 +1,23 @@
-<div class="horizontal-scroll">
-    <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="860" height="520" viewBox="0 0 1920 1080" enable-background="new 0 0 860 520" xml:space="preserve">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN">
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1920px" height="1080px" viewBox="0 0 1920 1080" enable-background="new 0 0 1920 1080" xml:space="preserve">
 <rect x="633.5" y="29.5" fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" width="1052"
 	   height="615"/>
 <rect x="1319.5" y="644.5" fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" width="542" height="322"/>
 <rect x="42.5" y="644.5" fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" width="1277" height="322"/>
 <rect x="42.5" y="29.5" fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" width="591" height="615"/>
 <rect x="1685.5" y="29.5" fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" width="176" height="615"/>
-<rect (mouseover)='changeColor(a.id)' id="seatingPlace1" x="640.5" y="561.5" fill="none" stroke="#FF0000"
-	  stroke-width="5"
-	  stroke-miterlimit="10"
-	  width="75" height="75" #a/>
-<rect (mouseover)='changeColor(b.id)' id="seatingPlace2" x="715.5" y="561.5" fill="none" stroke="#FF0000"
-	  stroke-width="5"
+<rect  id="seatingPlace1" x="640.5" y="561.5" fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10"
+	  width="75" height="75"/>
+<rect id="seatingPlace2" x="715.5" y="561.5" fill="none" stroke="#FF0000" stroke-width="5"
 	stroke-miterlimit="10"
 	  width="75"
-	  height="75" #b/>
-<rect (mouseover)='changeColor(c.id)' id="seatingPlace3" x="790.5" y="561.5" fill="none" stroke="#FF0000"
-	  stroke-width="5" stroke-miterlimit="10"
+	  height="75"/>
+<rect id="seatingPlace3" x="790.5" y="561.5" fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10"
 	  width="75"
-	  height="75" #c/>
+	  height="75"/>
 <rect x="865.5" y="561.5" fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" width="75" height="75"/>
 <rect x="940.5" y="561.5" fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" width="75" height="75"/>
 <rect x="1015.5" y="561.5" fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" width="75" height="75"/>
@@ -262,4 +260,3 @@
 <path d="M1608,906.82v-12.25c0-1.92-1.58-3.5-3.5-3.5h-42c-1.92,0-3.5,1.58-3.5,3.5v35c0,1.92,1.58,3.5,3.5,3.5h42
 	c1.92,0,3.5-1.58,3.5-3.5v-12.25l14,14v-38.5L1608,906.82z"/>
 </svg>
-</div>

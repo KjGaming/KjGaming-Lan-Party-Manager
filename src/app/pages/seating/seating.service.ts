@@ -6,7 +6,7 @@ import { ErrorService } from "../../theme/components/errors/error.service";
 @Injectable()
 export class SeatingService {
 
-    constructor(private http: Http, private errorService:ErrorService) {
+   /* constructor(private http: Http, private errorService:ErrorService) {
     }
 
     // Uses http.get() to load a single JSON file
@@ -21,6 +21,6 @@ export class SeatingService {
                 return Observable.throw(err.json());
             });
 
-    }
+    }*/
 }
 
