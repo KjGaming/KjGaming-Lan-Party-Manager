@@ -16,7 +16,7 @@ export class Login {
     public options = {
         position: ["top", "center"],
         timeOut: 5000
-    }
+    };
 
     public form: FormGroup;
     public email: AbstractControl;
@@ -60,13 +60,5 @@ export class Login {
                 );
 
         }
-    }
-
-    created(event) {
-
-    }
-
-    destroyed(event) {
-
     }
 }
