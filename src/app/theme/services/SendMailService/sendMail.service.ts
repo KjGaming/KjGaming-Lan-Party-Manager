@@ -6,11 +6,12 @@ import {Observable} from "rxjs";
 import {ErrorService} from "../../components/errors/error.service";
 import {Router} from "@angular/router";
 import { Mail } from "../../model/mail.model";
+import {NotificationsService} from "angular2-notifications/src/notifications.service";
 
 
 @Injectable()
 export class SendMailService {
-    constructor(private http: Http, private errorService: ErrorService, private router: Router) {
+    constructor(private http: Http, private _toastService: NotificationsService, private router: Router) {
     }
 
     sendMail(mail: Mail) {
@@ -23,7 +24,7 @@ export class SendMailService {
         return this.http.post('/api/sendMail', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
-                this.errorService.handleError(err.json);
+                this._toastService.error('Test', 'test');
                 return Observable.throw(err.json);
             });
 

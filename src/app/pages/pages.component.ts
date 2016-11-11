@@ -10,7 +10,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
       <div class="al-content">
         <ba-content-top></ba-content-top>
         <router-outlet></router-outlet>
-        <app-error></app-error>
       </div>
     </div>
     <footer class="al-footer clearfix">

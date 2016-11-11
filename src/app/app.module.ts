@@ -19,6 +19,7 @@ import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 import { AuthGuard, RegGuard } from "./theme/guard";
 import { AdminGuard } from "./theme/guard/admin.guard";
+import {SimpleNotificationsModule} from "angular2-notifications/src/simple-notifications.module";
 
 // Application wide providers
 const APP_PROVIDERS = [

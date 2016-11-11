@@ -1,8 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from "../../theme/services";
-import { User } from "../../theme/model";
-import { Router } from "@angular/router";
+import {Component, ViewEncapsulation} from '@angular/core';
+import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {AuthService} from "../../theme/services";
+import {User} from "../../theme/model";
+import {Router} from "@angular/router";
+import {NotificationsService} from "angular2-notifications/src/notifications.service";
 
 @Component({
     selector: 'login',
@@ -12,12 +13,17 @@ import { Router } from "@angular/router";
 })
 export class Login {
 
+    public options = {
+        position: ["top", "center"],
+        timeOut: 5000
+    }
+
     public form: FormGroup;
     public email: AbstractControl;
     public password: AbstractControl;
     public submitted: boolean = false;
 
-    constructor(fb: FormBuilder, private authService: AuthService, private router: Router) {
+    constructor(fb: FormBuilder, private authService: AuthService, private router: Router, private _toastService: NotificationsService) {
         this.form = fb.group({
             'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
             'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
@@ -46,9 +52,21 @@ export class Login {
                         localStorage.setItem('blackWidow', data.blackWidow);
                         this.router.navigateByUrl('/');
                     },
-                    error => console.error(error)
+                    error => {
+                        console.error(error);
+                        this._toastService.error(error.title,error.error.message);
+
+                    }
                 );
 
         }
+    }
+
+    created(event) {
+
+    }
+
+    destroyed(event) {
+
     }
 }
