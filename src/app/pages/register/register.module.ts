@@ -6,6 +6,7 @@ import { NgaModule } from '../../theme/nga.module';
 import { Register } from './register.component';
 import { routing }       from './register.routing';
 import { ReCaptchaModule } from 'angular2-recaptcha';
+import {SimpleNotificationsModule} from "angular2-notifications/src/simple-notifications.module";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ReCaptchaModule } from 'angular2-recaptcha';
     FormsModule,
     NgaModule,
     routing,
-    ReCaptchaModule
+    ReCaptchaModule,
+    SimpleNotificationsModule
   ],
   declarations: [
     Register
