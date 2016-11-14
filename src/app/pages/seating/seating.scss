@@ -1,0 +1,18 @@
+.seatHover {
+  fill: #008800;
+  stroke: #000000;
+  stroke-width: 5;
+  stroke-miterlimit: 10;
+  width: 75px;
+  height: 75px;
+
+  &:hover {
+    fill: orange;
+  }
+}
+.seatUsed{
+  fill: red;
+}
+.seatOwn{
+  fill: blue;
+}

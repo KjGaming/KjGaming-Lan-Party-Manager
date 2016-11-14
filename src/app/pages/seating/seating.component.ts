@@ -1,4 +1,5 @@
-import { Component,  } from '@angular/core';
+import { Component } from '@angular/core';
+import { Seating } from "../../theme/model";
 
 
 @Component({
@@ -9,11 +10,91 @@ import { Component,  } from '@angular/core';
 })
 
 
+export class SeatingComponent {
+    public seats = [
+        new Seating(640.5, 561.5, 'seating_1'),
+        new Seating(715.5, 561.5, 'seating_2'),
+        new Seating(790.5, 561.5, 'seating_3'),
+        new Seating(865.5, 561.5, 'seating_4'),
+        new Seating(940.5, 561.5, 'seating_5'),
+        new Seating(1015.5, 561.5, 'seating_6'),
+        new Seating(1090.5, 561.5, 'seating_7'),
+        new Seating(1165.5, 561.5, 'seating_8'),
+        new Seating(1240.5, 561.5, 'seating_9'),
+        new Seating(1315.5, 561.5, 'seating_10'),
+        new Seating(1390.5, 561.5, 'seating_11'),
+        new Seating(1465.5, 561.5, 'seating_12'),
 
-export class SeatingComponent{
+        new Seating(640.5, 410.5, 'seating_13'),
+        new Seating(715.5, 410.5, 'seating_14'),
+        new Seating(790.5, 410.5, 'seating_15'),
+        new Seating(865.5, 410.5, 'seating_16'),
+        new Seating(940.5, 410.5, 'seating_17'),
+        new Seating(1015.5, 410.5, 'seating_18'),
+        new Seating(1165.5, 410.5, 'seating_19'),
+        new Seating(1240.5, 410.5, 'seating_20'),
+        new Seating(1315.5, 410.5, 'seating_21'),
+        new Seating(1390.5, 410.5, 'seating_22'),
+        new Seating(1465.5, 410.5, 'seating_23'),
+        new Seating(1540.5, 410.5, 'seating_24'),
 
-    changeColor(id){
-        console.log(id);
+        new Seating(640.5, 323.5, 'seating_25'),
+        new Seating(715.5, 323.5, 'seating_26'),
+        new Seating(790.5, 323.5, 'seating_27'),
+        new Seating(865.5, 323.5, 'seating_28'),
+        new Seating(940.5, 323.5, 'seating_29'),
+        new Seating(1015.5, 323.5, 'seating_30'),
+        new Seating(1165.5, 323.5, 'seating_31'),
+        new Seating(1240.5, 323.5, 'seating_32'),
+        new Seating(1315.5, 323.5, 'seating_33'),
+        new Seating(1390.5, 323.5, 'seating_34'),
+        new Seating(1465.5, 323.5, 'seating_35'),
+        new Seating(1540.5, 323.5, 'seating_36'),
+
+        new Seating(640.5, 173.5, 'seating_37'),
+        new Seating(715.5, 173.5, 'seating_38'),
+        new Seating(790.5, 173.5, 'seating_39'),
+        new Seating(865.5, 173.5, 'seating_40'),
+        new Seating(940.5, 173.5, 'seating_41'),
+        new Seating(1015.5, 173.5, 'seating_42'),
+        new Seating(1165.5, 173.5, 'seating_43'),
+        new Seating(1240.5, 173.5, 'seating_44'),
+        new Seating(1315.5, 173.5, 'seating_45'),
+        new Seating(1390.5, 173.5, 'seating_46'),
+        new Seating(1465.5, 173.5, 'seating_47'),
+        new Seating(1540.5, 173.5, 'seating_48'),
+
+        new Seating(790.5, 87.5, 'seating_49'),
+        new Seating(865.5, 87.5, 'seating_50'),
+        new Seating(1165.5, 87.5, 'seating_51'),
+        new Seating(1240.5, 87.5, 'seating_52'),
+        new Seating(1390.5, 87.5, 'seating_53'),
+        new Seating(1465.5, 87.5, 'seating_54')
+    ];
+    public seatUsed: boolean = false;
+    public seatOwn: boolean = false;
+    public seatArray: number [] = [7, 24];
+
+
+    showClass(id) {
+        for (var i = 0; this.seatArray.length > i; i++) {
+            if ('seating_' + this.seatArray[i] == id) {
+                this.seatUsed = true;
+                break;
+            }else {
+                this.seatUsed = false;
+            }
+        }
+
+        if (this.seatUsed) {
+            return {seatHover: true, seatUsed: true, seatOwn: false};
+        } else if (this.seatOwn) {
+            return {seatHover: true, seatUsed: false, seatOwn: true};
+        } else {
+            return {seatHover: true, seatUsed: false, seatOwn: false};
+        }
+
     }
+
 
 }
