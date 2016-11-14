@@ -1,7 +1,7 @@
 <div class="widgets">
+    <simple-notifications [options]="options"></simple-notifications>
     <div class="row">
         <div class="col-md-12">
-            <app-error></app-error>
             <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
                 <ba-card title="Gib uns Feedback" baCardClass="with-scroll">
                     <div class="form-group col-sm-12">
