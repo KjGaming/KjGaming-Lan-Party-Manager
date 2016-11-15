@@ -8,6 +8,7 @@ import { SeatingComponent } from './seating.component';
 import { SeatingService } from "./seating.service";
 import { HttpModule } from "@angular/http";
 import { PopoverModule } from "ng2-popover";
+import { SimpleNotificationsModule } from "angular2-notifications/src/simple-notifications.module";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PopoverModule } from "ng2-popover";
         NgaModule,
         routing,
         HttpModule,
-        PopoverModule
+        PopoverModule,
+        SimpleNotificationsModule
     ],
     declarations: [
         SeatingComponent

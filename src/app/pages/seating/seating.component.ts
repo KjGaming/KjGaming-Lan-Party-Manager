@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Seating } from "../../theme/model";
+import { SeatingService } from "./seating.service";
+import { NotificationsService } from "angular2-notifications/src/notifications.service";
 
 
 @Component({
@@ -10,7 +12,12 @@ import { Seating } from "../../theme/model";
 })
 
 
-export class SeatingComponent {
+export class SeatingComponent implements OnInit {
+    public options = {
+        position: ["top", "center"],
+        timeOut: 5000
+    };
+
     public seats = [
         new Seating(640.5, 561.5, 'seating_1'),
         new Seating(715.5, 561.5, 'seating_2'),
@@ -75,10 +82,17 @@ export class SeatingComponent {
     seatOwn: boolean;
 
 
-    public seatArray = [{'nickname': 'genin', 'seat': 7}, {'nickname': 'SciTe', 'seat': 24}];
+    public seatArray: any[] = [];
     seatTitle: string;
     seatContent: string;
     seatId: string;
+
+    constructor(private _seatingService: SeatingService, private _toastService:NotificationsService) {
+    }
+
+    ngOnInit() {
+        this.getSeat();
+    }
 
     showClass(id) {
 
@@ -114,15 +128,41 @@ export class SeatingComponent {
     seatShow(id: string) {
         for (var i = 0; this.seatArray.length > i; i++) {
             if ('seating_' + this.seatArray[i].seat == id) {
-                return {seatUsed: true, seatPlace: 'belegt', seatName: this.seatArray[i].nickname, seatOwn:false};
+                return {seatUsed: true, seatPlace: 'belegt', seatName: this.seatArray[i].nickName, seatOwn: false};
             }
         }
-        return {seatUsed: false, seatPlace: 'frei', seatName: '', seatOwn:false};
+        return {seatUsed: false, seatPlace: 'frei', seatName: '', seatOwn: false};
     }
 
+    getSeat() {
+        this._seatingService.getSeat()
+            .subscribe(
+                // the first argument is a function which runs on success
+                data => {
+                    this.seatArray = data.obj;
+                    console.log(this.seatArray);
+                },
+                // the second argument is a function which runs on error
+                err => console.error(err),
+                // the third argument is a function which runs on completion
+                () => console.log('done loading news')
+            );
+        console.log(this.seatArray);
+    }
 
-    reserve(id){
-        alert("Wollen sie Platz "+ id +" reservieren?")
+    reserve(id) {
+        this._seatingService.postSeat(id).
+        subscribe(
+            data => {
+                this._toastService.success(data.message,'');
+                this.getSeat();
+                console.log(data);
+            },
+            error => {
+                this._toastService.error(error.title,error.error.message);
+                console.error(error)
+            }
+        );
     }
 
 

@@ -3,7 +3,6 @@ import {Http, Headers, Response} from "@angular/http";
 import 'rxjs/Rx';
 
 import {Observable} from "rxjs";
-import {ErrorService} from "../../components/errors/error.service";
 import {Router} from "@angular/router";
 import { Mail } from "../../model/mail.model";
 import {NotificationsService} from "angular2-notifications/src/notifications.service";
