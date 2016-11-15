@@ -8,6 +8,7 @@ import {Pages} from './pages.component';
 import {NotificationsService} from "angular2-notifications/src/notifications.service";
 import {SimpleNotificationsModule} from "angular2-notifications/src/simple-notifications.module";
 
+
 @NgModule({
     imports: [CommonModule, NgaModule, routing, SimpleNotificationsModule],
     declarations: [Pages],

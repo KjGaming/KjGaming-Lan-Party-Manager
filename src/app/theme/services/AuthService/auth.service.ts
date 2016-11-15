@@ -4,7 +4,6 @@ import 'rxjs/Rx';
 
 import { User } from "../../model";
 import { Observable } from "rxjs";
-import { ErrorService } from "../../components/errors/error.service";
 import { Router } from "@angular/router";
 import {NotificationsService} from "angular2-notifications/src/notifications.service";
 
