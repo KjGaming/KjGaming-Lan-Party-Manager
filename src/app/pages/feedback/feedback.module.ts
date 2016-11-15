@@ -7,6 +7,7 @@ import { routing }       from './feedback.routing';
 import { FeedbackComponent } from './feedback.component';
 import { HttpModule } from "@angular/http";
 import {SendMailService} from "../../theme/services/SendMailService/sendMail.service";
+import {SimpleNotificationsModule} from "angular2-notifications/src/simple-notifications.module";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {SendMailService} from "../../theme/services/SendMailService/sendMail.ser
         NgaModule,
         routing,
         HttpModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SimpleNotificationsModule
     ],
     declarations: [
         FeedbackComponent

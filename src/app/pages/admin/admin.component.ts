@@ -12,6 +12,7 @@ export class AdminComponent {
   }
 
   ngOnInit() {
+
   }
 
 }

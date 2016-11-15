@@ -53,8 +53,8 @@ router.post('/', function (req, res, next) {
             }
 
             return res.status(500).json({
-                title: 'Anmeldung fehlgeschlagen',
-                error: {message: 'Passwort oder E-Mail ist Falsch'},
+                title: 'Anmeldung fehlgeschlagen !!!!!',
+                error: {message: 'Passwort oder E-Mail ist Falsch'}
             });
         }
         res.status(201).json({
@@ -111,7 +111,7 @@ router.post('/signin', function (req, res, next) {
 
 router.use('/', function (req, res, next) {
 
-    jwt.verify(req.query.id_token, '20Kj!G!aming?Rock.17' || '20Kj!G!aming?Rock.Creator.17' || '20Kj!G!aming?Rock.Admin.17', function (err, decoded) {
+    jwt.verify(req.query.id_token || req.get('Authorization'), '20Kj!G!aming?Rock.17' || '20Kj!G!aming?Rock.Creator.17' || '20Kj!G!aming?Rock.Admin.17', function (err, decoded) {
         if (err) {
             return res.status(401).json({
                 title: 'Not Authenticated',
@@ -148,6 +148,67 @@ router.get('/', function (req, res, next) {
                 obj: userArray
             });
         });
+});
+router.get('/seat', function (req, res, next) {
+    var userArray = [];
+    User.find()
+        .exec(function (err, user) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            for (var i = 0; user.length > i; i++) {
+                userArray[i] = {
+                    id: user[i]._id,
+                    nickName: user[i].nickName,
+                    seat: user[i].seat
+                }
+            }
+
+            res.status(200).json({
+                message: 'Success',
+                obj: userArray
+            });
+        });
+});
+router.post('/seat', function (req, res, next) {
+    User.findOne({'seat': req.body.seat}, function (err, user) {
+        if (err) {
+            return res.status(500).json({
+                title: 'Die Platzreservierung hat nicht funktioniert',
+                error: err
+            });
+        }
+        if(!user || req.body.seat === null){
+            User.findOneAndUpdate({_id: req.body.id}, {'$set': {'seat': req.body.seat}}, function (err, user) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'Die Platzreservierung hat nicht funktioniert',
+                        error: err
+                    });
+                }
+                if(req.body.seat == null){
+                    res.status(200).json({
+                        message: 'Platz wurde freigegeben'
+                    });
+                }else{
+                    res.status(200).json({
+                        message: 'Platz ' + req.body.seat + ' wurde für dich reserviert'
+                    });
+                }
+
+            });
+
+        }else{
+            return res.status(500).json({
+                title: 'Fehler',
+                error: {message: 'Dieser Platz ist schon vergeben'}
+            });
+        }
+    });
+
 });
 
 module.exports = router;

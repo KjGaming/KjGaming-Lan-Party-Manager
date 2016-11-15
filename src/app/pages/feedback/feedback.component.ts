@@ -3,6 +3,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from "@angular/fo
 import { Router } from "@angular/router";
 import { SendMailService } from "../../theme/services";
 import { Mail } from "../../theme/model";
+import {NotificationsService} from "angular2-notifications/src/notifications.service";
 
 
 @Component({
@@ -13,12 +14,18 @@ import { Mail } from "../../theme/model";
 
 
 export class FeedbackComponent {
+
+    public options = {
+        position: ["top", "center"],
+        timeOut: 5000
+    };
+
     public form: FormGroup;
     public subject: AbstractControl;
     public text: AbstractControl;
     public submitted: boolean = false;
 
-    constructor(fb: FormBuilder, private router: Router, private sendMailService: SendMailService) {
+    constructor(fb: FormBuilder, private router: Router, private sendMailService: SendMailService, private _toastService: NotificationsService) {
         this.form = fb.group({
             'subject': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z0-9 \\.\\,\\!\\?\\-\\+]+')])],
             'text': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z0-9 \\.\\,\\!\\?\\-\\+]+')])]
@@ -43,8 +50,14 @@ export class FeedbackComponent {
 
             this.sendMailService.sendMail(mail)
                .subscribe(
-                    data => console.log(data),
-                    error => console.error(error)
+                    data => {
+                        this._toastService.success(data.message, '');
+                        console.log(data)
+                    },
+                    error => {
+                        this._toastService.error(error.title,error.error.message);
+                        console.error(error)
+                    }
                 );
 
         }

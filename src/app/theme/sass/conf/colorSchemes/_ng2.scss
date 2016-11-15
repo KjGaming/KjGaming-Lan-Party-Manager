@@ -103,3 +103,9 @@ $hoverlink: darken($activelink, 20%);
 .bg-info{ background-color: $info}
 .bg-warning{ background-color: $warning;}
 .bg-danger{ background-color: $danger;}
+
+//Popover
+
+.popover {
+  color: black !important;
+}

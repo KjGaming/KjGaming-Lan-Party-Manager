@@ -4,13 +4,13 @@ import 'rxjs/Rx';
 
 import { User } from "../../model";
 import { Observable } from "rxjs";
-import { ErrorService } from "../../components/errors/error.service";
 import { Router } from "@angular/router";
+import {NotificationsService} from "angular2-notifications/src/notifications.service";
 
 
 @Injectable()
 export class AuthService {
-    constructor(private http: Http, private errorService: ErrorService, private router: Router) {
+    constructor(private http: Http, private _toastService: NotificationsService, private router: Router) {
     }
 
     signup(user: User) {
@@ -19,7 +19,7 @@ export class AuthService {
         return this.http.post('/api/user', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
-                this.errorService.handleError(err.json());
+                this._toastService.error('Test', 'test');
                 return Observable.throw(err.json());
             });
     }
@@ -30,7 +30,7 @@ export class AuthService {
         return this.http.post('/api/user/signin', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
-                this.errorService.handleError(err.json());
+                this._toastService.error('Test', 'test');
                 return Observable.throw(err.json());
             });
 

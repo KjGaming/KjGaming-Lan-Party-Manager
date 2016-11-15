@@ -1,23 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
+import { Http, Response, Headers } from "@angular/http";
 import { Observable } from 'rxjs/Rx';
-import { ErrorService } from "../../theme/components/errors/error.service";
+import { NotificationsService } from "angular2-notifications/src/notifications.service";
 
 @Injectable()
 export class SeatingService {
 
-    constructor(private http: Http, private errorService:ErrorService) {
+    constructor(private http: Http, private _toastService: NotificationsService) {
     }
 
     // Uses http.get() to load a single JSON file
-    getNews(): Observable<any> {
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+    getSeat(): Observable<any> {
+        const token = localStorage.getItem('id_token')
+            ? '?id_token=' + localStorage.getItem('id_token')
             : '';
-        return this.http.get('/api/user' + token)
+        return this.http.get('/api/user/seat' + token)
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
-                this.errorService.handleError(err.json());
+                this._toastService.error('test', 'test');
+                return Observable.throw(err.json());
+            });
+
+    }
+
+    postSeat(id:number): Observable<any> {
+        const seat = {
+            seat: id,
+            id: localStorage.getItem('userId')
+        };
+        const body = seat;
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.post('/api/user/seat', body, {headers: headers})
+            .map((res: Response)=> res.json())
+            .catch((err: Response)=> {
                 return Observable.throw(err.json());
             });
 
