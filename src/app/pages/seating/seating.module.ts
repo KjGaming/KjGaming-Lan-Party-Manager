@@ -7,6 +7,7 @@ import { routing }       from './seating.routing';
 import { SeatingComponent } from './seating.component';
 import { SeatingService } from "./seating.service";
 import { HttpModule } from "@angular/http";
+import { PopoverModule } from "ng2-popover";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { HttpModule } from "@angular/http";
         FormsModule,
         NgaModule,
         routing,
-        HttpModule
+        HttpModule,
+        PopoverModule
     ],
     declarations: [
         SeatingComponent

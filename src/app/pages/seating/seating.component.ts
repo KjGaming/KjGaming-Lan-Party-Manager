@@ -71,20 +71,20 @@ export class SeatingComponent {
         new Seating(1390.5, 87.5, 'seating_53'),
         new Seating(1465.5, 87.5, 'seating_54')
     ];
-    public seatUsed: boolean = false;
-    public seatOwn: boolean = false;
-    public seatArray: number [] = [7, 24];
+    seatUsed: boolean;
+    seatOwn: boolean;
 
+
+    public seatArray = [{'nickname': 'genin', 'seat': 7}, {'nickname': 'SciTe', 'seat': 24}];
+    seatTitle: string;
+    seatContent: string;
+    seatId: string;
 
     showClass(id) {
-        for (var i = 0; this.seatArray.length > i; i++) {
-            if ('seating_' + this.seatArray[i] == id) {
-                this.seatUsed = true;
-                break;
-            }else {
-                this.seatUsed = false;
-            }
-        }
+
+        const seat = this.seatShow(id);
+        this.seatUsed = seat.seatUsed;
+        this.seatOwn = seat.seatOwn;
 
         if (this.seatUsed) {
             return {seatHover: true, seatUsed: true, seatOwn: false};
@@ -94,6 +94,35 @@ export class SeatingComponent {
             return {seatHover: true, seatUsed: false, seatOwn: false};
         }
 
+    }
+
+    clickIt(id) {
+        const seat = this.seatShow(id);
+        this.seatUsed = seat.seatUsed;
+        this.seatId = id.split("_")[1];
+
+        if (seat.seatUsed) {
+            this.seatTitle = "Hier sitzt '" + seat.seatName + "'";
+            this.seatContent = 'belegt';
+        } else {
+            this.seatTitle = 'Platz ' + id.split("_")[1] + ' ist frei';
+            this.seatContent = 'frei';
+        }
+        console.log('clicked: ' + id);
+    }
+
+    seatShow(id: string) {
+        for (var i = 0; this.seatArray.length > i; i++) {
+            if ('seating_' + this.seatArray[i].seat == id) {
+                return {seatUsed: true, seatPlace: 'belegt', seatName: this.seatArray[i].nickname, seatOwn:false};
+            }
+        }
+        return {seatUsed: false, seatPlace: 'frei', seatName: '', seatOwn:false};
+    }
+
+
+    reserve(id){
+        alert("Wollen sie Platz "+ id +" reservieren?")
     }
 
 
