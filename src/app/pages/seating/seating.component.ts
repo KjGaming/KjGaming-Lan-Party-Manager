@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Seating } from "../../theme/model";
 import { SeatingService } from "./seating.service";
 import { NotificationsService } from "angular2-notifications/src/notifications.service";
+import { error } from "util";
 
 
 @Component({
@@ -87,7 +88,7 @@ export class SeatingComponent implements OnInit {
     seatContent: string;
     seatId: string;
 
-    constructor(private _seatingService: SeatingService, private _toastService:NotificationsService) {
+    constructor(private _seatingService: SeatingService, private _toastService: NotificationsService) {
     }
 
     ngOnInit() {
@@ -100,10 +101,11 @@ export class SeatingComponent implements OnInit {
         this.seatUsed = seat.seatUsed;
         this.seatOwn = seat.seatOwn;
 
-        if (this.seatUsed) {
+        if (seat.seatUsed) {
+            if (seat.seatOwn) {
+                return {seatHover: true, seatUsed: false, seatOwn: true};
+            }
             return {seatHover: true, seatUsed: true, seatOwn: false};
-        } else if (this.seatOwn) {
-            return {seatHover: true, seatUsed: false, seatOwn: true};
         } else {
             return {seatHover: true, seatUsed: false, seatOwn: false};
         }
@@ -116,11 +118,16 @@ export class SeatingComponent implements OnInit {
         this.seatId = id.split("_")[1];
 
         if (seat.seatUsed) {
-            this.seatTitle = "Hier sitzt '" + seat.seatName + "'";
-            this.seatContent = 'belegt';
+            if(seat.seatOwn){
+                this.seatContent = 'self';
+                this.seatTitle = "Hier sitzt Du";
+            }else{
+                this.seatContent = '';
+                this.seatTitle = "Hier sitzt '" + seat.seatName + "'";
+            }
         } else {
             this.seatTitle = 'Platz ' + id.split("_")[1] + ' ist frei';
-            this.seatContent = 'frei';
+            this.seatContent = 'free';
         }
         console.log('clicked: ' + id);
     }
@@ -128,7 +135,12 @@ export class SeatingComponent implements OnInit {
     seatShow(id: string) {
         for (var i = 0; this.seatArray.length > i; i++) {
             if ('seating_' + this.seatArray[i].seat == id) {
-                return {seatUsed: true, seatPlace: 'belegt', seatName: this.seatArray[i].nickName, seatOwn: false};
+                if (this.seatArray[i].id == localStorage.getItem('userId')) {
+                    return {seatUsed: true, seatPlace: 'belegt', seatName: this.seatArray[i].nickName, seatOwn: true};
+                } else {
+                    return {seatUsed: true, seatPlace: 'belegt', seatName: this.seatArray[i].nickName, seatOwn: false};
+                }
+
             }
         }
         return {seatUsed: false, seatPlace: 'frei', seatName: '', seatOwn: false};
@@ -151,16 +163,27 @@ export class SeatingComponent implements OnInit {
     }
 
     reserve(id) {
-        this._seatingService.postSeat(id).
-        subscribe(
+        this._seatingService.postSeat(id).subscribe(
             data => {
-                this._toastService.success(data.message,'');
+                this._toastService.success(data.message, '');
+                this.getSeat();
+                console.log(data);
+            },
+            error => {
+                this._toastService.error(error.title, error.error.message);
+                console.error(error)
+            }
+        );
+    }
+    releaseReserve(){
+        this._seatingService.postSeat(null).subscribe(
+            data => {
+                this._toastService.success(data.message, '');
                 this.getSeat();
                 console.log(data);
             },
             error => {
                 this._toastService.error(error.title,error.error.message);
-                console.error(error)
             }
         );
     }

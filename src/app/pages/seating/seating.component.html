@@ -101,8 +101,11 @@
                      placement="bottom"
                      [closeOnClickOutside]="true"
                     >
-      <!--<div *ngIf="seatContent == 'belegt'"> benutzt </div>-->
-        <div *ngIf="seatContent == 'frei'">
+
+        <div *ngIf="seatContent === 'self'">
+            <button class="btn btn-danger" (click)="releaseReserve()">Platz freigeben</button>
+        </div>
+        <div *ngIf="seatContent === 'free'">
             <button class="btn btn-success" (click)="reserve(seatId)">reservieren</button>
         </div>
     </popover-content>

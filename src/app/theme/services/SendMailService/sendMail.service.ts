@@ -22,10 +22,7 @@ export class SendMailService {
 
         return this.http.post('/api/sendMail', body, {headers: headers})
             .map((res: Response)=> res.json())
-            .catch((err: Response)=> {
-                this._toastService.error('Test', 'test');
-                return Observable.throw(err.json);
-            });
+            .catch((err: Response)=> err.json());
 
     }
 

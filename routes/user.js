@@ -53,8 +53,8 @@ router.post('/', function (req, res, next) {
             }
 
             return res.status(500).json({
-                title: 'Anmeldung fehlgeschlagen',
-                error: {message: 'Passwort oder E-Mail ist Falsch'},
+                title: 'Anmeldung fehlgeschlagen !!!!!',
+                error: {message: 'Passwort oder E-Mail ist Falsch'}
             });
         }
         res.status(201).json({
@@ -161,6 +161,7 @@ router.get('/seat', function (req, res, next) {
             }
             for (var i = 0; user.length > i; i++) {
                 userArray[i] = {
+                    id: user[i]._id,
                     nickName: user[i].nickName,
                     seat: user[i].seat
                 }
@@ -179,7 +180,8 @@ router.post('/seat', function (req, res, next) {
                 title: 'Die Platzreservierung hat nicht funktioniert',
                 error: err
             });
-        } else {
+        }
+        if(!user || req.body.seat === null){
             User.findOneAndUpdate({_id: req.body.id}, {'$set': {'seat': req.body.seat}}, function (err, user) {
                 if (err) {
                     return res.status(500).json({
@@ -187,11 +189,23 @@ router.post('/seat', function (req, res, next) {
                         error: err
                     });
                 }
-                res.status(200).json({
-                    message: 'Platz ' + req.body.seat + ' wurde für dich reserviert'
-                });
+                if(req.body.seat == null){
+                    res.status(200).json({
+                        message: 'Platz wurde freigegeben'
+                    });
+                }else{
+                    res.status(200).json({
+                        message: 'Platz ' + req.body.seat + ' wurde für dich reserviert'
+                    });
+                }
+
             });
 
+        }else{
+            return res.status(500).json({
+                title: 'Fehler',
+                error: {message: 'Dieser Platz ist schon vergeben'}
+            });
         }
     });
 

@@ -37,8 +37,7 @@ export class SeatingService {
         return this.http.post('/api/user/seat', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
-                this._toastService.error('Test', 'test');
-                return Observable.throw(err.json);
+                return Observable.throw(err.json());
             });
 
     }

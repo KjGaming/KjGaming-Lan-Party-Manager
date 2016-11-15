@@ -51,7 +51,7 @@ export class FeedbackComponent {
             this.sendMailService.sendMail(mail)
                .subscribe(
                     data => {
-                        this._toastService.success(data.message,'');
+                        this._toastService.success(data.message, '');
                         console.log(data)
                     },
                     error => {
