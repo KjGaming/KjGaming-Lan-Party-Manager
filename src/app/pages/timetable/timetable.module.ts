@@ -19,8 +19,7 @@ import {dayeventComponent} from "./component/dayEvent";
         HttpModule
     ],
     declarations: [
-        TimetableComponent,
-        dayeventComponent
+        TimetableComponent
     ],
     providers: [
         TimetableService
