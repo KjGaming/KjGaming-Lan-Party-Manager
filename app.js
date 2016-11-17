@@ -12,6 +12,7 @@ var userRoutes = require('./routes/user');
 var newsRoutes = require('./routes/news');
 var sendMailRoutes = require('./routes/sendMail');
 var serverRoutes = require('./routes/server');
+var timetableRoutes = require('./routes/timetable');
 
 var app = express();
 mongoose.connect('localhost:27017/kjgaming');
@@ -39,6 +40,7 @@ app.use('/api/news', newsRoutes);
 app.use('/api/server', serverRoutes);
 app.use('/api/sendMail', sendMailRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/event', timetableRoutes);
 app.use('/', appRoutes);
 
 

@@ -19,7 +19,6 @@ export class AuthService {
         return this.http.post('/api/user', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
-                this._toastService.error('Test', 'test');
                 return Observable.throw(err.json());
             });
     }
@@ -30,7 +29,6 @@ export class AuthService {
         return this.http.post('/api/user/signin', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
-                this._toastService.error('Test', 'test');
                 return Observable.throw(err.json());
             });
 
