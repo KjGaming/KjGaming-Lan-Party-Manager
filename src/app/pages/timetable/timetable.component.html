@@ -1,26 +1,14 @@
-<div class="horizontal-scroll">
-    <table class="table table-hover">
-        <thead>
-        <tr class="black-muted-bg">
-            <th>#</th>
-            <th class="align-left">Vorname</th>
-            <th class="align-left">Nachname</th>
-            <th class="align-left">Email</th>
-            <th class="align-left">Street</th>
-            <th class="align-left">City</th>
-            <th class="align-left">Country</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let user of users; let i = index" class="no-top-border">
-            <td class="align-left">{{i + 1}}</td>
-            <td class="align-left">{{user.firstName}}</td>
-            <td class="align-left">{{user.lastName}}</td>
-            <td class="align-left">{{user.email}}</td>
-            <td class="align-left">{{user.street}}</td>
-            <td class="align-left">{{user.city}}</td>
-            <td class="align-left">{{user.postalCode}}</td>
-        </tr>
-        </tbody>
-    </table>
+<div class="widgets">
+
+    <div class="row">
+        <div class="col-lg-6 col-md-12" *ngFor="let day of listDays">
+            <ba-card title="{{day.dayName}}   {{day.day}}.{{day.month}}.{{day.year}}" baCardClass="with-scroll table-panel">
+                <eventTable></eventTable>
+            </ba-card>
+        </div>
+    </div>
+
+
+
+
 </div>

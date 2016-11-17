@@ -7,6 +7,7 @@ import { routing }       from './timetable.routing';
 import { TimetableComponent } from './timetable.component';
 import { TimetableService } from "./timetable.service";
 import { HttpModule } from "@angular/http";
+import {dayeventComponent} from "./component/dayEvent";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { HttpModule } from "@angular/http";
         HttpModule
     ],
     declarations: [
-        TimetableComponent
+        TimetableComponent,
+        dayeventComponent
     ],
     providers: [
         TimetableService

@@ -10,14 +10,24 @@ export class TimetableService {
     }
 
     // Uses http.get() to load a single JSON file
-    getNews(): Observable<any> {
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+    getEvent(): Observable<any> {
+        const token = localStorage.getItem('id_token')
+            ? '?id_token=' + localStorage.getItem('id_token')
+            : '';
+        return this.http.get('/api/event' + token)
+            .map((res: Response) => res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+
+    }
+    creatEvent(): Observable<any> {
+        const token = localStorage.getItem('id_token')
+            ? '?id_token=' + localStorage.getItem('id_token')
             : '';
         return this.http.get('/api/user' + token)
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
-                this._toastService.error('test', 'test');
                 return Observable.throw(err.json());
             });
 
