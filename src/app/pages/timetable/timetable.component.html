@@ -1,14 +1,22 @@
 <div class="widgets">
     <div class="row">
-        <div class="col-lg-6 col-md-12" *ngFor="let day of listDays">
-            <ba-card title="{{day.dayName}}   {{day.day}}.{{day.month}}.{{day.year}}" baCardClass="with-scroll table-panel">
-               <div *ngFor="let pieceEvent of day.events">
-                   <div></div>
-                   <ol>
-                       <li>{{pieceEvent.title}}</li>
-                   </ol>
-               </div>
-             </ba-card>
+        <div class="col-lg-6 col-md-12" *ngFor="let date of listDays">
+            <ba-card title="{{date.dayName}}   {{date.day}}.{{date.month}}.{{date.year}}"
+                     baCardClass="with-scroll table-panel">
+
+                <div *ngFor="let pieceEvent of date.events">
+                    <div *ngIf="watchDay(pieceEvent.timeHour , pieceEvent.timeMinits)">
+                        {{pieceEvent.timeHour}}:{{pieceEvent.timeMinits}}
+                    </div>
+                    <div>
+                        {{pieceEvent.title}}
+                    </div>
+
+
+                </div>
+
+
+            </ba-card>
         </div>
     </div>
 </div>

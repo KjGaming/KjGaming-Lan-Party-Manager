@@ -9,6 +9,22 @@ export class TimetableService {
     constructor(private http: Http, private _toastService: NotificationsService) {
     }
 
+    sortDay(a,b){
+        if (a.day < b.day && a.month <= b.month && a.year <= b.year)
+            return -1;
+        if (a.day > b.day && a.month >= b.month && a.year >= b.year)
+            return 1;
+        return 0;
+    }
+
+    sortTime(a,b){
+        if (a.timeStart < b.timeStart)
+            return -1;
+        if (a.timeStart > b.timeStart)
+            return 1;
+        return 0;
+    }
+
     // Uses http.get() to load a single JSON file
     getEvent(): Observable<any> {
         const token = localStorage.getItem('id_token')

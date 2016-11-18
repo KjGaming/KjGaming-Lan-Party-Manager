@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {TimetableService} from "./timetable.service";
-import {NotificationsService} from "angular2-notifications/src/notifications.service";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { TimetableService } from "./timetable.service";
+import { NotificationsService } from "angular2-notifications/src/notifications.service";
 
 
 @Component({
@@ -13,9 +13,8 @@ import {NotificationsService} from "angular2-notifications/src/notifications.ser
 
 export class TimetableComponent implements OnInit {
     public listDays: any[] = [];
-
     public events;
-
+    eventTime = null;
 
     constructor(private _timeService: TimetableService, private _toastService: NotificationsService) {
     }
@@ -27,14 +26,28 @@ export class TimetableComponent implements OnInit {
 
     sortEvent(events) {
         for (let event of events) {
-            var eventTime = new Date(event.timeStart * 1000);
+            var eventTime = new Date(+event.timeStart);
+            event['durationMin'] = ((event.timeEnd - event.timeStart) / (60 * 1000)) % 60;
+            event['durationHour'] = ((event.timeEnd - event.timeStart) / (60 * 60 * 1000));
+            if (eventTime.getHours() < 10) {
+                event['timeHour'] = '0' + eventTime.getHours();
+            } else {
+                event['timeHour'] = '' + eventTime.getHours();
+            }
+
+            if (eventTime.getMinutes() < 10) {
+                event['timeMinits'] = '0' + eventTime.getMinutes();
+            } else {
+                event['timeMinits'] = '' + eventTime.getMinutes();
+            }
+
 
             if (this.listDays.length != 0) {
                 var isDayInList: boolean = true;
                 for (let index in this.listDays) {
                     if (eventTime.getDate() == this.listDays[index].day) {
-                        if(eventTime.getMonth() == this.listDays[index].month){
-                            if(eventTime.getFullYear() == this.listDays[index].year){
+                        if (eventTime.getMonth() == this.listDays[index].month) {
+                            if (eventTime.getFullYear() == this.listDays[index].year) {
                                 isDayInList = false;
                                 this.listDays[index].events.push(event);
                                 break;
@@ -42,37 +55,54 @@ export class TimetableComponent implements OnInit {
                         }
                     }
                 }
-                if(isDayInList === true){
-                    var dayTime = this.getDayName(eventTime.getUTCDay());
+                if (isDayInList === true) {
+                    if (eventTime.getHours() == 0 && eventTime.getMinutes() == 0 && eventTime.getSeconds() == 0) {
+                        var dayTime = this.getDayName(eventTime.getUTCDay() + 1);
+                    } else {
+                        var dayTime = this.getDayName(eventTime.getUTCDay());
+                    }
+
                     this.listDays.push({
                         'day': eventTime.getDate(),
                         'month': eventTime.getMonth(),
                         'year': eventTime.getFullYear(),
                         'dayName': dayTime,
-                        'events':[]
+                        'events': []
                     });
                     this.listDays[this.listDays.length - 1].events.push(event);
                 }
             } else {
-                var dayTime = this.getDayName(eventTime.getUTCDay());
+                if (eventTime.getHours() == 0 && eventTime.getMinutes() == 0 && eventTime.getSeconds() == 0) {
+                    var dayTime = this.getDayName(eventTime.getUTCDay() + 1);
+                } else {
+                    var dayTime = this.getDayName(eventTime.getUTCDay());
+                }
                 this.listDays[0] = {
                     'day': eventTime.getDate(),
                     'month': eventTime.getMonth(),
                     'year': eventTime.getFullYear(),
                     'dayName': dayTime,
-                    'events':[]
+                    'events': []
                 };
                 this.listDays[0].events.push(event);
             }
 
             console.log(this.listDays);
         }
+        //Sort the date
+        this.listDays.sort(this._timeService.sortDay);
+
+        //Sort the events
+        for (let days of this.listDays) {
+            days.events.sort(this._timeService.sortTime);
+        }
+
 
     };
 
-    getDayName(dayNumber){
+    getDayName(dayNumber) {
         var dayName;
-        switch (dayNumber){
+        switch (dayNumber) {
             case 1:
                 dayName = 'Montag';
                 break;
@@ -98,6 +128,20 @@ export class TimetableComponent implements OnInit {
         return dayName;
     }
 
+    watchDay(hour, minits) {
+        if(this.eventTime){
+            if(this.eventTime == hour +':'+ minits){
+                return false;
+            }else{
+                this.eventTime = hour +':'+ minits;
+                return true;
+            }
+        }else{
+            this.eventTime = hour +':'+ minits;
+            return true;
+        }
+
+    }
 
     getEvents() {
         this._timeService.getEvent().subscribe(
