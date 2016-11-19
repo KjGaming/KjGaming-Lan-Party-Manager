@@ -4,12 +4,31 @@
             <ba-card title="{{date.dayName}}   {{date.day}}.{{date.month}}.{{date.year}}"
                      baCardClass="with-scroll table-panel">
 
-                <div *ngFor="let pieceEvent of date.events">
-                    <div *ngIf="watchDay(pieceEvent.timeHour , pieceEvent.timeMinits)">
-                        {{pieceEvent.timeHour}}:{{pieceEvent.timeMinits}}
+                <div *ngFor="let pieceEvent of date.events" class="event-container">
+                    <div *ngIf="watchDay(pieceEvent.timeHour , pieceEvent.timeMinits)" class="event-time">
+                        <div>
+                            {{pieceEvent.timeHour}}:{{pieceEvent.timeMinits}}
+                        </div>
                     </div>
-                    <div>
-                        {{pieceEvent.title}}
+                    <div *ngIf="watch == true" class="event-time">
+
+                    </div>
+
+                    <div class="event-item">
+                        <div>
+                            <div class="event-title">
+                                {{pieceEvent.title}}
+                                <div class="event-duration pull-right">
+                                    <i class="material-icons">access_time</i> {{pieceEvent.durationHour}}:{{pieceEvent
+                                    .durationMin}}
+                                </div>
+                            </div>
+                            <div class="event-content">
+                                {{pieceEvent.content}}
+                            </div>
+
+                        </div>
+
                     </div>
 
 

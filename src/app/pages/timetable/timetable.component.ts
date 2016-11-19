@@ -15,6 +15,7 @@ export class TimetableComponent implements OnInit {
     public listDays: any[] = [];
     public events;
     eventTime = null;
+    watch = null;
 
     constructor(private _timeService: TimetableService, private _toastService: NotificationsService) {
     }
@@ -27,8 +28,19 @@ export class TimetableComponent implements OnInit {
     sortEvent(events) {
         for (let event of events) {
             var eventTime = new Date(+event.timeStart);
-            event['durationMin'] = ((event.timeEnd - event.timeStart) / (60 * 1000)) % 60;
+
+
+            if ((((event.timeEnd - event.timeStart) / (60 * 1000)) % 60) < 10) {
+                event['durationMin'] = '0' + ((event.timeEnd - event.timeStart) / (60 * 1000)) % 60;
+            }else{
+                event['durationMin'] = ((event.timeEnd - event.timeStart) / (60 * 1000)) % 60;
+            }
+
+
             event['durationHour'] = ((event.timeEnd - event.timeStart) / (60 * 60 * 1000));
+
+
+
             if (eventTime.getHours() < 10) {
                 event['timeHour'] = '0' + eventTime.getHours();
             } else {
@@ -131,16 +143,18 @@ export class TimetableComponent implements OnInit {
     watchDay(hour, minits) {
         if(this.eventTime){
             if(this.eventTime == hour +':'+ minits){
+                this.watch = true;
                 return false;
             }else{
                 this.eventTime = hour +':'+ minits;
+                this.watch = false;
                 return true;
             }
         }else{
             this.eventTime = hour +':'+ minits;
+            this.watch = false;
             return true;
         }
-
     }
 
     getEvents() {
