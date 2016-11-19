@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken');
 
 router.use('/', function (req, res, next) {
 
-    jwt.verify(req.query.id_token, '20Kj!G!aming?Rock.17' || '20Kj!G!aming?Rock.Creator.17' || '20Kj!G!aming?Rock.Admin.17', function (err, decoded) {
+    jwt.verify(req.query.id_token || req.get('Authorization'), '20Kj!G!aming?Rock.17' || '20Kj!G!aming?Rock.Creator.17' || '20Kj!G!aming?Rock.Admin.17', function (err, decoded) {
         if (err) {
             return res.status(401).json({
                 title: 'Not Authenticated',
@@ -36,7 +36,8 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
     var eventTable = new Timetable({
         title: req.body.title,
-        time: req.body.time,
+        timeStart: req.body.timeStart,
+        timeEnd: req.body.timeEnd,
         mode: req.body.mode,
         content: req.body.content
 
