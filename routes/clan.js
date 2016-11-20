@@ -30,7 +30,6 @@ router.get('/', function (req, res, next) {
                     error: err
                 });
             }
-            console.log(clan)
             res.status(200).json({
                 message: 'Success',
                 obj: clan
@@ -38,7 +37,7 @@ router.get('/', function (req, res, next) {
         });
 });
 
-/*router.post('/creat', function (req, res, next) {
+router.post('/creat', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
     User.findById(decoded.user._id, function (err, user) {
         if (err) {
@@ -77,7 +76,7 @@ router.get('/', function (req, res, next) {
 
 });
 
-router.post('/editClan', function (req, res, next) {
+/*router.post('/editClan', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
     User.findById(decoded.user._id, function (err, user) {
         if (err) {
