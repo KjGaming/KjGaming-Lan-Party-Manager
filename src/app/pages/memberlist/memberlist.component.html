@@ -1,22 +1,37 @@
-<div class="horizontal-scroll">
-    <table class="table table-hover">
-        <thead>
-        <tr class="black-muted-bg">
-            <th>#</th>
-            <th class="align-left">Nickname</th>
-            <th class="align-left">Vorname</th>
-            <th class="align-left">Platznummer</th>
-            <th class="align-left">Rolle</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let user of users; let i = index" class="no-top-border">
-            <td class="align-left">{{i + 1}}</td>
-            <td class="align-left">{{user.nickName}}</td>
-            <td class="align-left">{{user.firstName}}</td>
-            <td class="align-left">{{user.seat}}</td>
-            <td class="align-left">{{user.role}}</td>
-        </tr>
-        </tbody>
-    </table>
+<div class="widgets">
+    <div class="row">
+        <div class="col-lg-12">
+            <ba-card baCardClass="with-scroll table-panel">
+                <div class="horizontal-scroll">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr class="black-muted-bg">
+                            <th>#</th>
+                            <th class="align-left">Nickname</th>
+                            <th class="align-left">Vorname</th>
+                            <th class="align-left">Platznummer</th>
+                            <th class="align-left">Clan</th>
+                            <th class="align-left">Rolle</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let user of users; let i = index" class="no-top-border">
+                            <td class="align-left">{{i + 1}}</td>
+                            <td class="align-left">{{user.nickName}}</td>
+                            <td class="align-left">{{user.firstName}}</td>
+                            <td class="align-left">{{user.seat}}</td>
+                            <td class="align-left" *ngIf="user.clan">
+                                <div *ngFor="let clan of user.clan; let i = index">
+                                    {{i+1}}: {{clan.shortName}}
+                                </div>
+                            </td>
+                            <td class="align-left" *ngIf="!user.clan">-</td>
+                            <td class="align-left">{{user.role}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ba-card>
+        </div>
+    </div>
 </div>

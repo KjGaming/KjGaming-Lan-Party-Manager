@@ -12,6 +12,7 @@ var userRoutes = require('./routes/user');
 var newsRoutes = require('./routes/news');
 var sendMailRoutes = require('./routes/sendMail');
 var serverRoutes = require('./routes/server');
+var clanRoutes = require('./routes/clan');
 var timetableRoutes = require('./routes/timetable');
 
 var app = express();
@@ -41,6 +42,7 @@ app.use('/api/server', serverRoutes);
 app.use('/api/sendMail', sendMailRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/event', timetableRoutes);
+app.use('/api/clan', clanRoutes);
 app.use('/', appRoutes);
 
 

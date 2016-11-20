@@ -7,6 +7,12 @@ import { routing }       from './clan.routing';
 import { ClanComponent } from './clan.component';
 import { ClanService } from "./clan.service";
 import { HttpModule } from "@angular/http";
+import { CreatClanComponent } from "./components/creatClan/creatclan.component";
+import { EditClanComponent } from "./components/editClan/editclan.component";
+import { ShowClanComponent } from "./components/showClan/showclan.component";
+import { ShowClanService } from "./components/showClan/showclan.service";
+import { CreatClanService } from "./components/creatClan/creatclan.service";
+import { EditClanService } from "./components/editClan/editclan.service";
 
 
 @NgModule({
@@ -18,10 +24,18 @@ import { HttpModule } from "@angular/http";
         HttpModule
     ],
     declarations: [
-        ClanComponent
+        ClanComponent,
+        CreatClanComponent,
+        EditClanComponent,
+        ShowClanComponent
     ],
     providers: [
-        ClanService
+        ClanService,
+        CreatClanService,
+        EditClanService,
+        ShowClanService,
+
+
     ]
 })
 export default class ClanModule {
