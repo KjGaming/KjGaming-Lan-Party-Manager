@@ -21,7 +21,7 @@ router.use('/', function (req, res, next) {
 
 router.get('/', function (req, res, next) {
     Clan.find()
-        .populate('user', 'nickName')
+        .populate('user', 'nickName firstName lastName')
         .populate('admin', 'nickName')
         .exec(function (err, clan) {
             if (err) {

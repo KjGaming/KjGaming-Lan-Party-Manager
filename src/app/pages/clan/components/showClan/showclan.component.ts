@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { ShowClanService } from './showclan.service';
+import { ClanService } from "../../clan.service";
 
 @Component({
     selector: 'clan-show',
@@ -12,15 +12,16 @@ export class ShowClanComponent {
     public clanlist;
 
 
-    constructor(private _showClanService: ShowClanService) {}
+    constructor(private _clanService: ClanService) {}
 
     ngOnInit() {
-        this.getMember();
+        this.getClan();
     }
 
 
-    getMember() {
-        this._showClanService.getClanList().subscribe(
+    getClan() {
+        this._clanService.getClanList()
+            .subscribe(
             // the first argument is a function which runs on success
             data => {
                 this.clanlist = data.obj;

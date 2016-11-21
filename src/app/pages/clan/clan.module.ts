@@ -14,6 +14,7 @@ import { CreatClanService } from "./components/creatClan/creatclan.service";
 import { EditClanService } from "./components/editClan/editclan.service";
 import { NotificationsService } from "angular2-notifications/src/notifications.service";
 import { SimpleNotificationsModule } from "angular2-notifications/src/simple-notifications.module";
+import { ClanService } from "./clan.service";
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { SimpleNotificationsModule } from "angular2-notifications/src/simple-not
         CreatClanService,
         EditClanService,
         ShowClanService,
+        ClanService,
         NotificationsService
 
 
