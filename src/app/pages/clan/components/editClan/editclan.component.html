@@ -7,11 +7,12 @@
             <div class="col-sm-10">
                 <select [formControl]="clanId" class="form-control" id="clanList" [ngModel]="clanId"
                         (change)="getClanValue($event.target.value)">
-                    <option *ngFor="let clan of clanListDate" [value]="clan._id">{{clan
-                        .name}}
+                    <option *ngFor="let clan of clanListDate" [value]="clan._id">
+                        {{clan.name}}
                     </option>
                 </select>
             </div>
+
         </div>
 
         <div *ngIf="editClan == 0">
@@ -30,15 +31,14 @@
                     <ul class="clan-list">
                         <li *ngFor="let item of clanListUser"
                             [ngClass]="{checked: item.isChecked, active: item.isActive}"
-                            (mouseenter)="item.isActive=true" (mouseleave)="item.isActive=false">
+                            >
 
                             <div class="blur-container">
                                 <div class="blur-box"></div>
                             </div>
                             <i class="mark" [ngStyle]="{ 'background-color': 'green' }"></i>
-                            <label class="clan-checkbox custom-checkbox custom-input-success">
-                                <input type="checkbox">
-                                <span class="cut-with-dots">{{item.firstName}} `{{ item.nickName }}` {{item.lastName}}</span>
+                            <label>
+                                <span>{{item.firstName}} `{{ item.nickName }}` {{item.lastName}}</span>
                             </label>
                         </li>
                     </ul>
@@ -134,9 +134,9 @@
 
 
                 <div class="col-sm-6 align-right">
-                    <button type="button" class="btn btn-danger">Clan löschen
+                    <button type="button" class="btn btn-danger" (click)="deleteClan(clanId)">Clan löschen
                     </button>
-                    <button [disabled]="!form.valid" type="submit" class="btn btn-default btn-auth">speichern
+                    <button [disabled]="!form.valid" type="submit" class="btn btn-default">speichern
                     </button>
 
                 </div>

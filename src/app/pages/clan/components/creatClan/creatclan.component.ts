@@ -3,6 +3,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from "@angular/fo
 import { CreatClanService } from './creatclan.service';
 import { NotificationsService } from "angular2-notifications/src/notifications.service";
 import { EqualPasswordsValidator } from "../../../../theme/validators/equalPasswords.validator";
+import { ClanService } from "../../clan.service";
 
 @Component({
     selector: 'clan-creat',
@@ -20,7 +21,7 @@ export class CreatClanComponent {
     public passwords: FormGroup;
     public submitted: boolean = false;
 
-    constructor(fb: FormBuilder, private _toastService: NotificationsService, private _creatClanService: CreatClanService) {
+    constructor(fb: FormBuilder, private _toastService: NotificationsService, private _clanService: ClanService) {
         this.form = fb.group({
             'clanName': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
             'clanShortName': ['', Validators.required],
@@ -48,7 +49,7 @@ export class CreatClanComponent {
                 admin: localStorage.getItem('userId')
             });
 
-            this._creatClanService.creatClan(clan)
+            this._clanService.creatClan(clan)
                 .subscribe(
                     data => {
                         this._toastService.success(data.message, '');

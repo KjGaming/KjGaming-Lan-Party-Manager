@@ -27,6 +27,8 @@ export class EditClanComponent implements OnInit {
     public clanShortName: AbstractControl;
     public password: AbstractControl;
     public clanId: AbstractControl;
+    public submitType: AbstractControl;
+
     public submitted: boolean = false;
 
     constructor(fb: FormBuilder,
@@ -50,28 +52,67 @@ export class EditClanComponent implements OnInit {
     }
 
     public onSubmit(values: Object): void {
-        this.submitted = true;
 
         if (this.form.valid) {
-            const clan = ({
-                name: values['clanName'],
-                shortName: values['clanShortName'],
-                password: values['passwords']['password'],
-                admin: localStorage.getItem('userId')
-            });
 
-            this._clanService.editClan(clan)
-                .subscribe(
-                    data => {
-                        this._toastService.success(data.message, '');
-                    },
-                    error => {
-                        console.error(error);
-                        this._toastService.error(error.title, error.error.message);
+            if (this.editClan == 2) {
+                const clan = ({
+                    clanId: values['clanId'],
+                    name: values['clanName'],
+                    shortName: values['clanShortName'],
+                    password: values['password']
+                });
 
-                    }
-                );
+                this._clanService.editClan(clan)
+                    .subscribe(
+                        data => {
+                            this._toastService.success(data.message, '');
+                            this.getClanList();
+                        },
+                        error => {
+                            console.error(error);
+                            this._toastService.error(error.title, error.error.message);
 
+                        }
+                    );
+
+            } else if (this.editClan == 1) {
+                const clan = ({
+                    clanId: values['clanId']
+                });
+
+                this._clanService.clanOut(clan)
+                    .subscribe(
+                        data => {
+                            this._toastService.success(data.message, '');
+                            this.getClanList();
+                        },
+                        error => {
+                            console.error(error);
+                            this._toastService.error(error.title, error.error.message);
+
+                        }
+                    );
+
+            } else {
+                const clan = ({
+                    clanId: values['clanId'],
+                    password: values['password']
+                });
+
+                this._clanService.clanIn(clan)
+                    .subscribe(
+                        data => {
+                            this._toastService.success(data.message, '');
+                            this.getClanList();
+                        },
+                        error => {
+                            console.error(error);
+                            this._toastService.error(error.title, error.error.message);
+
+                        }
+                    );
+            }
         }
     }
 
@@ -85,7 +126,6 @@ export class EditClanComponent implements OnInit {
             // the first argument is a function which runs on success
             data => {
                 this.clanListDate = data.obj;
-                console.log(this.clanListDate);
             },
             // the second argument is a function which runs on error
             err => console.error(err),
@@ -94,6 +134,26 @@ export class EditClanComponent implements OnInit {
         );
     }
 
+    deleteClan(clanId) {
+        const clan = ({
+            clanId: clanId._value
+        });
+
+        this._clanService.clanDel(clan)
+            .subscribe(
+                data => {
+                    this.getClanList();
+                    this._toastService.success(data.message, '');
+                },
+                error => {
+                    console.error(error);
+                    this._toastService.error(error.title, error.error.message);
+
+                }
+            );
+
+
+    }
 
     //Look if User in clan or not. Also look if he is Admin or not
     getClanValue(clanValue) {
@@ -113,7 +173,6 @@ export class EditClanComponent implements OnInit {
                         lastName: user.lastName,
                     });
                 }
-                console.log(this.clanListUser);
 
                 //If User in this clan
                 for (let user of clan.user) {
@@ -132,7 +191,6 @@ export class EditClanComponent implements OnInit {
                 }
             }
         }
-        console.log(this.editClan);
     }
 
 
