@@ -1,0 +1,26 @@
+<div class="horizontal-scroll">
+  <table class="table table-hover">
+    <thead>
+    <tr class="black-muted-bg">
+      <th>#</th>
+      <th class="align-left">Clanname</th>
+      <th class="align-left">Clankürzel</th>
+      <th class="align-left">Mitglieder</th>
+      <th class="align-left">Admin</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let clan of clanlist; let i = index" class="no-top-border">
+      <td class="align-left">{{i + 1}}</td>
+      <td class="align-left">{{clan.name}}</td>
+      <td class="align-left">{{clan.shortName}}</td>
+      <td class="align-left">
+        <div *ngFor="let user of clan.user; let i = index">
+          {{i+1}}: {{user.nickName}}
+        </div>
+      </td>
+      <td class="align-left">{{clan.admin.nickName}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

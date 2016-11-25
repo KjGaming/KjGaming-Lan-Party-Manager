@@ -17,7 +17,8 @@ router.post('/', function (req, res, next) {
         email: req.body.email,
         role: req.body.role,
         lock: req.body.lock,
-        agb: req.body.agb
+        agb: req.body.agb,
+        clan: []
 
     });
 
@@ -64,7 +65,6 @@ router.post('/', function (req, res, next) {
     });
 });
 
-
 // login User
 router.post('/signin', function (req, res, next) {
     User.findOne({email: req.body.email}, function (err, user) {
@@ -89,13 +89,13 @@ router.post('/signin', function (req, res, next) {
         var token;
         var adminToken;
         if (user.role == 2) {
-            token = jwt.sign(user._id, '20Kj!G!aming?Rock.Admin.17', {expiresIn: 7200});
+            token = jwt.sign({user: user}, '20Kj!G!aming?Rock.Admin.17', {expiresIn: 7200});
             adminToken = 481;
         } else if (user.role == 1) {
-            token = jwt.sign(user._id, '20Kj!G!aming?Rock.Creator.17', {expiresIn: 7200});
+            token = jwt.sign({user: user}, '20Kj!G!aming?Rock.Creator.17', {expiresIn: 7200});
             adminToken = 153;
         } else {
-            token = jwt.sign(user._id, '20Kj!G!aming?Rock.17', {expiresIn: 7200});
+            token = jwt.sign({user: user}, '20Kj!G!aming?Rock.17', {expiresIn: 7200});
             adminToken = 0;
         }
 
@@ -107,7 +107,6 @@ router.post('/signin', function (req, res, next) {
         });
     });
 });
-
 
 router.use('/', function (req, res, next) {
 
@@ -126,6 +125,7 @@ router.use('/', function (req, res, next) {
 router.get('/', function (req, res, next) {
     var userArray = [];
     User.find()
+        .populate('clan', 'shortName name')
         .exec(function (err, user) {
             console.log(user);
             if (err) {
@@ -139,7 +139,8 @@ router.get('/', function (req, res, next) {
                     firstName: user[i].firstName,
                     nickName: user[i].nickName,
                     seat: user[i].seat,
-                    role: user[i].role
+                    role: user[i].role,
+                    clan: user[i].clan
                 }
             }
 
@@ -149,6 +150,7 @@ router.get('/', function (req, res, next) {
             });
         });
 });
+
 router.get('/seat', function (req, res, next) {
     var userArray = [];
     User.find()
@@ -173,6 +175,7 @@ router.get('/seat', function (req, res, next) {
             });
         });
 });
+
 router.post('/seat', function (req, res, next) {
     User.findOne({'seat': req.body.seat}, function (err, user) {
         if (err) {
@@ -181,7 +184,7 @@ router.post('/seat', function (req, res, next) {
                 error: err
             });
         }
-        if(!user || req.body.seat === null){
+        if (!user || req.body.seat === null) {
             User.findOneAndUpdate({_id: req.body.id}, {'$set': {'seat': req.body.seat}}, function (err, user) {
                 if (err) {
                     return res.status(500).json({
@@ -189,11 +192,11 @@ router.post('/seat', function (req, res, next) {
                         error: err
                     });
                 }
-                if(req.body.seat == null){
+                if (req.body.seat == null) {
                     res.status(200).json({
                         message: 'Platz wurde freigegeben'
                     });
-                }else{
+                } else {
                     res.status(200).json({
                         message: 'Platz ' + req.body.seat + ' wurde für dich reserviert'
                     });
@@ -201,7 +204,7 @@ router.post('/seat', function (req, res, next) {
 
             });
 
-        }else{
+        } else {
             return res.status(500).json({
                 title: 'Fehler',
                 error: {message: 'Dieser Platz ist schon vergeben'}
