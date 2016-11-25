@@ -7,6 +7,7 @@ import { routing }       from './catering.routing';
 import { CateringComponent } from './catering.component';
 import { CateringService } from "./catering.service";
 import { HttpModule } from "@angular/http";
+import { SimpleNotificationsModule } from "angular2-notifications";
 
 
 @NgModule({
@@ -15,13 +16,14 @@ import { HttpModule } from "@angular/http";
         FormsModule,
         NgaModule,
         routing,
-        HttpModule
+        HttpModule,
+        SimpleNotificationsModule
     ],
     declarations: [
         CateringComponent
     ],
     providers: [
-        CateringService
+        CateringService,
     ]
 })
 export default class CateringModule {

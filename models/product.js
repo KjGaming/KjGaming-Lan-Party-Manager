@@ -7,7 +7,6 @@ var schema = new Schema({
     info: {type: String}
 });
 
-schema.plugin(mongooseUniqueValidator);
 
 module.exports = mongoose.model('product', schema);
 

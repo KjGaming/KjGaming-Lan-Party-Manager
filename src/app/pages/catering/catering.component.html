@@ -1,26 +1,116 @@
-<div class="horizontal-scroll">
-    <table class="table table-hover">
-        <thead>
-        <tr class="black-muted-bg">
-            <th>#</th>
-            <th class="align-left">Vorname</th>
-            <th class="align-left">Nachname</th>
-            <th class="align-left">Email</th>
-            <th class="align-left">Street</th>
-            <th class="align-left">City</th>
-            <th class="align-left">Country</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let user of users; let i = index" class="no-top-border">
-            <td class="align-left">{{i + 1}}</td>
-            <td class="align-left">{{user.firstName}}</td>
-            <td class="align-left">{{user.lastName}}</td>
-            <td class="align-left">{{user.email}}</td>
-            <td class="align-left">{{user.street}}</td>
-            <td class="align-left">{{user.city}}</td>
-            <td class="align-left">{{user.postalCode}}</td>
-        </tr>
-        </tbody>
-    </table>
+<simple-notifications [options]="options"></simple-notifications>
+<div class="row">
+    <ba-card class="col-xlg-2 col-xl-2 col-lg-4 col-sm-4 col-xs-4"
+             *ngFor="let product of products" title="{{product.name}}">
+        <div>
+            <button style="margin-top: 10px" type="button" class="btn btn-primary "
+                    (click)="addToShoppingCart(product)"><i class="material-icons">add_shopping_cart</i></button>
+        </div>
+    </ba-card>
+</div>
+<div class="row">
+    <ba-card class="col-xlg-12 col-xl-12 col-lg-12 col-sm-12 col-xs-12" title="Warenkorb">
+        <div class="vertical-scroll">
+            <table class="table table-hover">
+                <thead>
+                <tr class="black-muted-bg">
+                    <th class="table-id">#</th>
+                    <th>Produkt</th>
+                    <th>Einzelpreis</th>
+                    <th>Anzahl</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of shoppingCart; let i = index">
+                    <td class="table-id">{{i + 1}}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }} €</td>
+                    <td>{{ item.count }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div align="center">
+                <button style="margin-top: 10px" type="button" class="btn btn-success"
+                        (click)="sendShoppingCart(shoppingCart)">bestellen</button>
+            </div>
+
+        </div>
+    </ba-card>
+</div>
+<div class="row">
+    <ba-card class="col-xlg-3 col-xl-4 col-lg-12 col-sm-12 col-xs-12"
+             title="Bestellt">
+        <div class="vertical-scroll">
+            <table class="table table-hover">
+                <thead>
+                <tr class="black-muted-bg">
+                    <th class="table-id">#</th>
+                    <th>Produkt</th>
+                    <th>Einzelpreis</th>
+                    <th>Anzahl</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of ordered; let i = index">
+                    <td class="table-id">{{i + 1}}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }} €</td>
+                    <td>{{ item.count }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div align="center">
+                <button style="margin-top: 10px" type="button" class="btn btn-danger "
+                        (click)="deleteOrdered()">Bestellung Stornieren
+                </button>
+            </div>
+
+        </div>
+    </ba-card>
+    <ba-card class="col-xlg-3 col-xl-4 col-lg-12 col-sm-12 col-xs-12"
+             title="Auf dem Weg zu dir!">
+        <div class="vertical-scroll">
+            <table class="table table-hover">
+                <thead>
+                <tr class="black-muted-bg">
+                    <th class="table-id">#</th>
+                    <th>Produkt</th>
+                    <th>Einzelpreis</th>
+                    <th>Anzahl</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of received; let i = index">
+                    <td class="table-id">{{i + 1}}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }} €</td>
+                    <td>{{ item.count }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </ba-card>
+    <ba-card class="col-xlg-3 col-xl-4 col-lg-12 col-sm-12 col-xs-12"
+             title="Rechnung">
+        <div class="vertical-scroll">
+            <table class="table table-hover">
+                <thead>
+                <tr class="black-muted-bg">
+                    <th class="table-id">#</th>
+                    <th>Produkt</th>
+                    <th>Einzelpreis</th>
+                    <th>Anzahl</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of delivered; let i = index">
+                    <td class="table-id">{{i + 1}}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }} €</td>
+                    <td>{{ item.count }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </ba-card>
 </div>
