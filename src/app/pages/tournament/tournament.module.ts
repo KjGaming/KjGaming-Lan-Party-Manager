@@ -7,6 +7,7 @@ import { routing }       from './tournament.routing';
 import { TournamentComponent } from './tournament.component';
 import { TournamentService } from "./tournament.service";
 import { HttpModule } from "@angular/http";
+import { B16Component } from "./components/b16/b16.component";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { HttpModule } from "@angular/http";
         HttpModule
     ],
     declarations: [
-        TournamentComponent
+        TournamentComponent,
+        B16Component
     ],
     providers: [
         TournamentService

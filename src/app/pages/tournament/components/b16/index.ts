@@ -1,0 +1,1 @@
+export * from './b16.component';

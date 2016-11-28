@@ -1,0 +1,23 @@
+.tournamentColumn3 {
+  display: flex;
+  flex-direction: column;
+  padding-top: 180px;
+  padding-bottom: 240px;
+}
+
+.team2 {
+  fill: rgba(0,0,0,0);
+  &:hover {
+    fill: rgba(255,255,255,0.1);
+  }
+}
+
+.team1 {
+  fill: rgba(0,0,0,0);
+  &:hover {
+    fill: rgba(255,255,255,0.1);
+  }
+}
+.text{
+  font-size: 15px;
+}
