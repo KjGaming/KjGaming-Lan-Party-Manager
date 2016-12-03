@@ -15,6 +15,7 @@ var serverRoutes = require('./routes/server');
 var clanRoutes = require('./routes/clan');
 var timetableRoutes = require('./routes/timetable');
 var cateringRoutes = require('./routes/catering');
+var tournamentRoutes = require('./routes/tournament');
 
 var app = express();
 mongoose.connect('localhost:27017/kjgaming');
@@ -45,6 +46,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/event', timetableRoutes);
 app.use('/api/clan', clanRoutes);
 app.use('/api/catering', cateringRoutes);
+app.use('/api/tournament', tournamentRoutes);
 app.use('/', appRoutes);
 
 

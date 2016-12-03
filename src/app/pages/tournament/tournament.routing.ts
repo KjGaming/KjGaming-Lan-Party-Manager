@@ -1,4 +1,5 @@
 import { Routes, RouterModule }  from '@angular/router';
+import { AuthGuard, RegGuard } from "../theme/guard";
 
 import { TournamentComponent } from './tournament.component';
 
@@ -11,3 +12,4 @@ const routes: Routes = [
 ];
 
 export const routing = RouterModule.forChild(routes);
+
