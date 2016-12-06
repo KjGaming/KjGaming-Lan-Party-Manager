@@ -9,8 +9,8 @@ var schema = new Schema({
         playerMode: {type: String, required: true, enum: ['User', 'Clan']}, // Game mode Clan or User
         games:[{
             gameId: {type: Number}, // Game id
-            team1: {any: Object},
-            team2: {any: Object},
+            team1: {type: String},
+            team2: {type: String},
             result1: {type: Number},
             result2: {type: Number},
             timeStart:{type: String},

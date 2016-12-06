@@ -23,5 +23,20 @@ export class TournamentService {
             });
 
     }
+
+    getTournamentInfos(id): Observable<any> {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+
+        });
+
+        return this.http.get('/api/tournament/selected?id='+ id, {headers: headers})
+            .map((res: Response) => res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+
+    }
 }
 

@@ -20,6 +20,9 @@ import { B16Component } from "./components/b16/b16.component";
     ],
     declarations: [
         B16Component
+    ],
+    providers: [
+        TournamentService
     ]
 })
 export default class B16Module {

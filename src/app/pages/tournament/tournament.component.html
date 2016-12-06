@@ -4,7 +4,5 @@
 </div>-->
 
 <div *ngFor="let tournament of tournaments">
-	<button class="btn btn-success" (click)="openAlert(tournament)">{{tournament.name}}</button>
+	<button [routerLink]="[tournament.mode,{tournamentId: tournament._id}]" class="btn btn-success">{{tournament.name}}</button>
 </div>
-
-<router-outlet></router-outlet>
