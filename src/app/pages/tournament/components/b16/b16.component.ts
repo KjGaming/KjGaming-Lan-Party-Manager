@@ -11,7 +11,12 @@ import {ActivatedRoute} from "@angular/router";
     template: require('./b16.component.html')
 })
 export class B16Component implements OnInit {
-    public game;
+    public bracket = {
+        "row1" : 8,
+        "row2" : 4,
+        "row3" : 3
+    }
+    public games;
     gameId;
     private sub: any;
 
@@ -31,9 +36,8 @@ export class B16Component implements OnInit {
         this._tournamentService.getTournamentInfos(id).subscribe(
             // the first argument is a function which runs on success
             data => {
-                this.game = data.obj.games;
-                console.log(this.game);
-
+                this.games = data.obj.games;
+                console.log(this.games);
 
             },
             // the second argument is a function which runs on error

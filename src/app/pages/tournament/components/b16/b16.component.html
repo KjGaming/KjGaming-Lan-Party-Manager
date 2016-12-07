@@ -1,987 +1,1115 @@
 <div class="row">
+    <div id="firstRow">
+        <div *ngFor="let game of games, let i = index"  [attr.id]="'game' + game.gameId">
+			<div *ngIf="game.gameId <= 8">
+            	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+					width="281px" height="61px" xml:space="preserve">
+				<rect class="team1" y="0" fill="none" width="224" height="30"/>
+				<g class="text">
+					<text x="112" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="game.team1">
+						{{game.team1}}
+					</text>
+					<text x="112" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="!game.team1">
+						TBA
+					</text>
+				</g>
+				<rect class="team2" y="31" fill="none" width="224" height="30"/>
+				<g class="text">
+					<text x="112" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="game.team2">
+						{{game.team2}}
+					</text>
+					<text x="112" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="!game.team2">
+						TBA
+					</text>
+				</g>
+				<rect class="team1_result" x="225" y="0" fill="none" width="55" height="30"/>
+				<g class="text">
+					<text x="250" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="game.result1">
+						{{game.result1}}
+					</text>
+					<text x="250" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="!game.result1">
+						-
+					</text>
+				</g>
+
+				<rect class="team2_result" x="225" y="31" fill="none" width="55" height="30"/>
+				<g class="text">
+					<text x="250" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="game.result2">
+						{{game.result2}}
+					</text>
+					<text x="250" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="!game.result2">
+						-
+					</text>
+				</g>
+					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+
+				<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1292.9006" x2="-431.0098" y2="1292.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_1_)" stroke-miterlimit="10" x1="0" y1="30.5" x2="108" y2="30.5"/>
+				<rect x="109.52" y="27.77" fill="none" width="8.46" height="5.46"/>
+				<text transform="matrix(1 0 0 1 108.5215 33.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+				<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="0" x2="224.5" y2="61"/>
+
+				<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1292.9016" x2="-419.0107" y2="1292.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="30.5" x2="224" y2="30.5"/>
+				</svg>
+			</div>
+        </div>
+    </div>
+	<hr />
+	<div id="secondRow">
+		<div *ngFor="let game of games, let i = index"  [attr.id]="'game' + game.gameId">
+			<div *ngIf="game.gameId <= 12 && game.gameId >= 9">
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+					width="281px" height="61px" xml:space="preserve">
+				<rect class="team1" y="0" fill="none" width="224" height="30"/>
+				<g class="text">
+					<text x="112" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="game.team1">
+						{{game.team1}}
+					</text>
+					<text x="112" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="!game.team1">
+						TBA
+					</text>
+				</g>
+				<rect class="team2" y="31" fill="none" width="224" height="30"/>
+				<g class="text">
+					<text x="112" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="game.team2">
+						{{game.team2}}
+					</text>
+					<text x="112" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="!game.team2">
+						TBA
+					</text>
+				</g>
+				<rect class="team1_result" x="225" y="0" fill="none" width="55" height="30"/>
+				<g class="text">
+					<text x="250" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="game.result1">
+						{{game.result1}}
+					</text>
+					<text x="250" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="!game.result1">
+						-
+					</text>
+				</g>
+
+				<rect class="team2_result" x="225" y="31" fill="none" width="55" height="30"/>
+				<g class="text">
+					<text x="250" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="game.result2">
+						{{game.result2}}
+					</text>
+					<text x="250" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="!game.result2">
+						-
+					</text>
+				</g>
+					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+
+				<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1292.9006" x2="-431.0098" y2="1292.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_1_)" stroke-miterlimit="10" x1="0" y1="30.5" x2="108" y2="30.5"/>
+				<rect x="109.52" y="27.77" fill="none" width="8.46" height="5.46"/>
+				<text transform="matrix(1 0 0 1 108.5215 33.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+				<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="0" x2="224.5" y2="61"/>
+
+				<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1292.9016" x2="-419.0107" y2="1292.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="30.5" x2="224" y2="30.5"/>
+				</svg>
+			</div>
+		</div>
+	</div>
+
+    <!--
     <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="1920px" height="1080px" xml:space="preserve">
+     width="1920px" height="1080px" xml:space="preserve">
 <g id="firstRow">
-	<g id="game1">
-		<rect class="team1" y="0" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="game.game1">
-			 {{game.game1.team1}}
-			</text>
-			<text x="112" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game1">
-			 TBA
-			</text>
-		</g>
-		<rect class="team2" y="31" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="game.game1">
-			 {{game.game1.team2}}
-			</text>
-			<text x="112" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game1">
-			 TBA
-			</text>
-		</g>
-		<rect class="team1_result" x="225" y="0" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="game.game1.resultT1">
-			 {{game.game1.resultT1}}
-			</text>
-			<text x="250" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game1.resultT1">
-			 -
-			</text>
-		</g>
+    <g id="game1">
+        <rect class="team1" y="0" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="game.game1">
+             {{game.game1.team1}}
+            </text>
+            <text x="112" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game1">
+             TBA
+            </text>
+        </g>
+        <rect class="team2" y="31" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="game.game1">
+             {{game.game1.team2}}
+            </text>
+            <text x="112" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game1">
+             TBA
+            </text>
+        </g>
+        <rect class="team1_result" x="225" y="0" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="game.game1.resultT1">
+             {{game.game1.resultT1}}
+            </text>
+            <text x="250" y="15" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game1.resultT1">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="225" y="31" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="game.game1.resultT2">
-			 {{game.game1.resultT2}}
-			</text>
-			<text x="250" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game1.resultT2">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="225" y="31" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="game.game1.resultT2">
+             {{game.game1.resultT2}}
+            </text>
+            <text x="250" y="46" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game1.resultT2">
+             -
+            </text>
+        </g>
 
-		<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1292.9006" x2="-431.0098" y2="1292.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_1_)" stroke-miterlimit="10" x1="0" y1="30.5" x2="108" y2="30.5"/>
-		<rect x="109.52" y="27.77" fill="none" width="8.46" height="5.46"/>
-		<text transform="matrix(1 0 0 1 108.5215 33.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="0" x2="224.5" y2="61"/>
+            <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1292.9006" x2="-431.0098" y2="1292.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_1_)" stroke-miterlimit="10" x1="0" y1="30.5" x2="108" y2="30.5"/>
+        <rect x="109.52" y="27.77" fill="none" width="8.46" height="5.46"/>
+        <text transform="matrix(1 0 0 1 108.5215 33.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="0" x2="224.5" y2="61"/>
 
-			<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1292.9016" x2="-419.0107" y2="1292.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="30.5" x2="224" y2="30.5"/>
-	</g>
-	<g id="game2">
-		<rect class="team1" y="120" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="135" text-anchor="middle" alignment-baseline="central" *ngIf="game.game2">
-			 {{game.game2.team1}}
-			</text>
-			<text x="112" y="135" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game1">
-			 TBA
-			</text>
-		</g>
+            <linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1292.9016" x2="-419.0107" y2="1292.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="30.5" x2="224" y2="30.5"/>
+    </g>
+    <g id="game2">
+        <rect class="team1" y="120" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="135" text-anchor="middle" alignment-baseline="central" *ngIf="game.game2">
+             {{game.game2.team1}}
+            </text>
+            <text x="112" y="135" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game1">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" y="151" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="166" text-anchor="middle" alignment-baseline="central" *ngIf="game.game2">
-			 {{game.game2.team2}}
-			</text>
-			<text x="112" y="166" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game2">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" y="151" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="166" text-anchor="middle" alignment-baseline="central" *ngIf="game.game2">
+             {{game.game2.team2}}
+            </text>
+            <text x="112" y="166" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game2">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="225" y="120" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="135" text-anchor="middle" alignment-baseline="central" *ngIf="game.game2.resultT1">
-			 {{game.game2.resultT1}}
-			</text>
-			<text x="250" y="135" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game2.resultT1">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="225" y="120" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="135" text-anchor="middle" alignment-baseline="central" *ngIf="game.game2.resultT1">
+             {{game.game2.resultT1}}
+            </text>
+            <text x="250" y="135" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game2.resultT1">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="225" y="151" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="166" text-anchor="middle" alignment-baseline="central" *ngIf="game.game2.resultT2">
-			 {{game.game2.resultT2}}
-			</text>
-			<text x="250" y="166" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game2.resultT2">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="225" y="151" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="166" text-anchor="middle" alignment-baseline="central" *ngIf="game.game2.resultT2">
+             {{game.game2.resultT2}}
+            </text>
+            <text x="250" y="166" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game2.resultT2">
+             -
+            </text>
+        </g>
 
-		<rect x="0.5" y="120.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="0.5" y="120.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1172.9006" x2="-431.0098" y2="1172.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_3_)" stroke-miterlimit="10" x1="0" y1="150.5" x2="108" y2="150.5"/>
-		<rect x="109.52" y="147.77" fill="none" width="8.46" height="5.46"/>
-		<text transform="matrix(1 0 0 1 108.5215 153.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="120" x2="224.5" y2="181"/>
+            <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1172.9006" x2="-431.0098" y2="1172.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_3_)" stroke-miterlimit="10" x1="0" y1="150.5" x2="108" y2="150.5"/>
+        <rect x="109.52" y="147.77" fill="none" width="8.46" height="5.46"/>
+        <text transform="matrix(1 0 0 1 108.5215 153.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="120" x2="224.5" y2="181"/>
 
-			<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1172.9016" x2="-419.0107" y2="1172.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_4_)" stroke-miterlimit="10" x1="120" y1="150.5" x2="224" y2="150.5"/>
-	</g>
-	<g id="game3">
-		<rect class="team1" y="240" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="255" text-anchor="middle" alignment-baseline="central" *ngIf="game.game3">
-			 {{game.game3.team1}}
-			</text>
-			<text x="112" y="255" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game3">
-			 TBA
-			</text>
-		</g>
+            <linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1172.9016" x2="-419.0107" y2="1172.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_4_)" stroke-miterlimit="10" x1="120" y1="150.5" x2="224" y2="150.5"/>
+    </g>
+    <g id="game3">
+        <rect class="team1" y="240" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="255" text-anchor="middle" alignment-baseline="central" *ngIf="game.game3">
+             {{game.game3.team1}}
+            </text>
+            <text x="112" y="255" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game3">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" y="271" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="286" text-anchor="middle" alignment-baseline="central" *ngIf="game.game3">
-			 {{game.game3.team2}}
-			</text>
-			<text x="112" y="286" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game3">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" y="271" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="286" text-anchor="middle" alignment-baseline="central" *ngIf="game.game3">
+             {{game.game3.team2}}
+            </text>
+            <text x="112" y="286" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game3">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="225" y="240" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="255" text-anchor="middle" alignment-baseline="central" *ngIf="game.game3">
-			 {{game.game3.resultT1}}
-			</text>
-			<text x="250" y="255" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game3">
-			 -
-			</text>
-		</g>
-		<rect class="team2_result" x="225" y="271" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="286" text-anchor="middle" alignment-baseline="central" *ngIf="game.game3">
-			 {{game.game3.resultT2}}
-			</text>
-			<text x="250" y="286" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game3">
-			 -
-			</text>
-		</g>
-		<rect x="0.5" y="240.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect class="team1_result" x="225" y="240" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="255" text-anchor="middle" alignment-baseline="central" *ngIf="game.game3">
+             {{game.game3.resultT1}}
+            </text>
+            <text x="250" y="255" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game3">
+             -
+            </text>
+        </g>
+        <rect class="team2_result" x="225" y="271" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="286" text-anchor="middle" alignment-baseline="central" *ngIf="game.game3">
+             {{game.game3.resultT2}}
+            </text>
+            <text x="250" y="286" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game3">
+             -
+            </text>
+        </g>
+        <rect x="0.5" y="240.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_5_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1052.9006" x2="-431.0098" y2="1052.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_5_)" stroke-miterlimit="10" x1="0" y1="270.5" x2="108" y2="270.5"/>
-		<rect x="109.52" y="267.77" fill="none" width="8.46" height="5.46"/>
-		<text transform="matrix(1 0 0 1 108.5215 273.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="240" x2="224.5" y2="301"/>
+            <linearGradient id="SVGID_5_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1052.9006" x2="-431.0098" y2="1052.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_5_)" stroke-miterlimit="10" x1="0" y1="270.5" x2="108" y2="270.5"/>
+        <rect x="109.52" y="267.77" fill="none" width="8.46" height="5.46"/>
+        <text transform="matrix(1 0 0 1 108.5215 273.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="240" x2="224.5" y2="301"/>
 
-			<linearGradient id="SVGID_6_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1052.9016" x2="-419.0107" y2="1052.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_6_)" stroke-miterlimit="10" x1="120" y1="270.5" x2="224" y2="270.5"/>
-	</g>
-	<g id="game4">
-		<rect class="team1" y="360" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="375" text-anchor="middle" alignment-baseline="central" *ngIf="game.game4">
-			 {{game.game4.team1}}
-			</text>
-			<text x="112" y="375" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game4">
-			 TBA
-			</text>
-		</g>
+            <linearGradient id="SVGID_6_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1052.9016" x2="-419.0107" y2="1052.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_6_)" stroke-miterlimit="10" x1="120" y1="270.5" x2="224" y2="270.5"/>
+    </g>
+    <g id="game4">
+        <rect class="team1" y="360" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="375" text-anchor="middle" alignment-baseline="central" *ngIf="game.game4">
+             {{game.game4.team1}}
+            </text>
+            <text x="112" y="375" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game4">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" y="391" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="406" text-anchor="middle" alignment-baseline="central" *ngIf="game.game4">
-			 {{game.game4.team2}}
-			</text>
-			<text x="112" y="406" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game4">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" y="391" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="406" text-anchor="middle" alignment-baseline="central" *ngIf="game.game4">
+             {{game.game4.team2}}
+            </text>
+            <text x="112" y="406" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game4">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="225" y="360" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="375" text-anchor="middle" alignment-baseline="central" *ngIf="game.game4">
-			 {{game.game4.resultT1}}
-			</text>
-			<text x="250" y="375" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game4">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="225" y="360" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="375" text-anchor="middle" alignment-baseline="central" *ngIf="game.game4">
+             {{game.game4.resultT1}}
+            </text>
+            <text x="250" y="375" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game4">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="225" y="391" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="406" text-anchor="middle" alignment-baseline="central" *ngIf="game.game4">
-			 {{game.game4.resultT2}}
-			</text>
-			<text x="250" y="406" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game4">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="225" y="391" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="406" text-anchor="middle" alignment-baseline="central" *ngIf="game.game4">
+             {{game.game4.resultT2}}
+            </text>
+            <text x="250" y="406" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game4">
+             -
+            </text>
+        </g>
 
-		<rect x="0.5" y="360.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="0.5" y="360.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_7_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="932.9006" x2="-431.0098" y2="932.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_7_)" stroke-miterlimit="10" x1="0" y1="390.5" x2="108" y2="390.5"/>
-		<rect x="109.52" y="387.77" fill="none" width="8.46" height="5.46"/>
-		<text transform="matrix(1 0 0 1 108.5215 393.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="360" x2="224.5" y2="421"/>
+            <linearGradient id="SVGID_7_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="932.9006" x2="-431.0098" y2="932.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_7_)" stroke-miterlimit="10" x1="0" y1="390.5" x2="108" y2="390.5"/>
+        <rect x="109.52" y="387.77" fill="none" width="8.46" height="5.46"/>
+        <text transform="matrix(1 0 0 1 108.5215 393.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="360" x2="224.5" y2="421"/>
 
-			<linearGradient id="SVGID_8_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="932.9016" x2="-419.0107" y2="932.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_8_)" stroke-miterlimit="10" x1="120" y1="390.5" x2="224" y2="390.5"/>
-	</g>
-	<g id="game5">
-		<rect class="team1" y="480" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="496" text-anchor="middle" alignment-baseline="central" *ngIf="game.game5">
-			 {{game.game5.team1}}
-			</text>
-			<text x="112" y="496" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game5">
-			 TBA
-			</text>
-		</g>
+            <linearGradient id="SVGID_8_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="932.9016" x2="-419.0107" y2="932.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_8_)" stroke-miterlimit="10" x1="120" y1="390.5" x2="224" y2="390.5"/>
+    </g>
+    <g id="game5">
+        <rect class="team1" y="480" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="496" text-anchor="middle" alignment-baseline="central" *ngIf="game.game5">
+             {{game.game5.team1}}
+            </text>
+            <text x="112" y="496" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game5">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" y="511" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="526" text-anchor="middle" alignment-baseline="central" *ngIf="game.game5">
-			 {{game.game5.team2}}
-			</text>
-			<text x="112" y="526" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game5">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" y="511" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="526" text-anchor="middle" alignment-baseline="central" *ngIf="game.game5">
+             {{game.game5.team2}}
+            </text>
+            <text x="112" y="526" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game5">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="225" y="480" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="496" text-anchor="middle" alignment-baseline="central" *ngIf="game.game5">
-			 {{game.game5.resultT1}}
-			</text>
-			<text x="250" y="496" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game5">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="225" y="480" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="496" text-anchor="middle" alignment-baseline="central" *ngIf="game.game5">
+             {{game.game5.resultT1}}
+            </text>
+            <text x="250" y="496" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game5">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="225" y="511" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="526" text-anchor="middle" alignment-baseline="central" *ngIf="game.game5">
-			 {{game.game3.resultT2}}
-			</text>
-			<text x="250" y="526" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game5">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="225" y="511" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="526" text-anchor="middle" alignment-baseline="central" *ngIf="game.game5">
+             {{game.game3.resultT2}}
+            </text>
+            <text x="250" y="526" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game5">
+             -
+            </text>
+        </g>
 
-		<rect x="0.5" y="480.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="0.5" y="480.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_9_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="812.9006" x2="-431.0098" y2="812.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_9_)" stroke-miterlimit="10" x1="0" y1="510.5" x2="108" y2="510.5"/>
-		<rect x="109.52" y="507.77" fill="none" width="8.46" height="5.46"/>
-		<text transform="matrix(1 0 0 1 108.5215 513.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="480" x2="224.5" y2="541"/>
+            <linearGradient id="SVGID_9_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="812.9006" x2="-431.0098" y2="812.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_9_)" stroke-miterlimit="10" x1="0" y1="510.5" x2="108" y2="510.5"/>
+        <rect x="109.52" y="507.77" fill="none" width="8.46" height="5.46"/>
+        <text transform="matrix(1 0 0 1 108.5215 513.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="480" x2="224.5" y2="541"/>
 
-			<linearGradient id="SVGID_10_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="812.9016" x2="-419.0107" y2="812.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_10_)" stroke-miterlimit="10" x1="120" y1="510.5" x2="224" y2="510.5"/>
-	</g>
-	<g id="game6">
-		<rect class="team1" y="600" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="615" text-anchor="middle" alignment-baseline="central" *ngIf="game.game6">
-			 {{game.game6.team1}}
-			</text>
-			<text x="112" y="615" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game6">
-			 TBA
-			</text>
-		</g>
+            <linearGradient id="SVGID_10_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="812.9016" x2="-419.0107" y2="812.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_10_)" stroke-miterlimit="10" x1="120" y1="510.5" x2="224" y2="510.5"/>
+    </g>
+    <g id="game6">
+        <rect class="team1" y="600" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="615" text-anchor="middle" alignment-baseline="central" *ngIf="game.game6">
+             {{game.game6.team1}}
+            </text>
+            <text x="112" y="615" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game6">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" y="631" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="646" text-anchor="middle" alignment-baseline="central" *ngIf="game.game6">
-			 {{game.game6.team2}}
-			</text>
-			<text x="112" y="646" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game6">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" y="631" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="646" text-anchor="middle" alignment-baseline="central" *ngIf="game.game6">
+             {{game.game6.team2}}
+            </text>
+            <text x="112" y="646" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game6">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="225" y="600" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="615" text-anchor="middle" alignment-baseline="central" *ngIf="game.game6">
-			 {{game.game6.resultT1}}
-			</text>
-			<text x="250" y="615" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game6">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="225" y="600" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="615" text-anchor="middle" alignment-baseline="central" *ngIf="game.game6">
+             {{game.game6.resultT1}}
+            </text>
+            <text x="250" y="615" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game6">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="225" y="631" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="646" text-anchor="middle" alignment-baseline="central" *ngIf="game.game6">
-			 {{game.game6.resultT2}}
-			</text>
-			<text x="250" y="646" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game6">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="225" y="631" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="646" text-anchor="middle" alignment-baseline="central" *ngIf="game.game6">
+             {{game.game6.resultT2}}
+            </text>
+            <text x="250" y="646" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game6">
+             -
+            </text>
+        </g>
 
-		<rect x="0.5" y="600.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="0.5" y="600.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_11_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="692.9006" x2="-431.0098" y2="692.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_11_)" stroke-miterlimit="10" x1="0" y1="630.5" x2="108" y2="630.5"/>
-		<rect x="109.52" y="627.77" fill="none" width="8.46" height="5.46"/>
-		<text transform="matrix(1 0 0 1 108.5215 633.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="600" x2="224.5" y2="661"/>
+            <linearGradient id="SVGID_11_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="692.9006" x2="-431.0098" y2="692.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_11_)" stroke-miterlimit="10" x1="0" y1="630.5" x2="108" y2="630.5"/>
+        <rect x="109.52" y="627.77" fill="none" width="8.46" height="5.46"/>
+        <text transform="matrix(1 0 0 1 108.5215 633.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="600" x2="224.5" y2="661"/>
 
-			<linearGradient id="SVGID_12_" gradientUnits="userSpaceOnUse" x1="-315.0103" y1="692.9016" x2="-419.0103" y2="692.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_12_)" stroke-miterlimit="10" x1="120" y1="630.5" x2="224" y2="630.5"/>
-	</g>
-	<g id="game7">
-		<rect class="team1" y="720" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="735" text-anchor="middle" alignment-baseline="central" *ngIf="game.game7">
-			 {{game.game7.team1}}
-			</text>
-			<text x="112" y="735" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game7">
-			 TBA
-			</text>
-		</g>
+            <linearGradient id="SVGID_12_" gradientUnits="userSpaceOnUse" x1="-315.0103" y1="692.9016" x2="-419.0103" y2="692.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_12_)" stroke-miterlimit="10" x1="120" y1="630.5" x2="224" y2="630.5"/>
+    </g>
+    <g id="game7">
+        <rect class="team1" y="720" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="735" text-anchor="middle" alignment-baseline="central" *ngIf="game.game7">
+             {{game.game7.team1}}
+            </text>
+            <text x="112" y="735" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game7">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" y="751" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="766" text-anchor="middle" alignment-baseline="central" *ngIf="game.game7">
-			 {{game.game7.team2}}
-			</text>
-			<text x="112" y="766" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game7">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" y="751" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="766" text-anchor="middle" alignment-baseline="central" *ngIf="game.game7">
+             {{game.game7.team2}}
+            </text>
+            <text x="112" y="766" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game7">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="225" y="720" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="735" text-anchor="middle" alignment-baseline="central" *ngIf="game.game7">
-			 {{game.game7.resultT1}}
-			</text>
-			<text x="250" y="735" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game7">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="225" y="720" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="735" text-anchor="middle" alignment-baseline="central" *ngIf="game.game7">
+             {{game.game7.resultT1}}
+            </text>
+            <text x="250" y="735" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game7">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="225" y="751" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="766" text-anchor="middle" alignment-baseline="central" *ngIf="game.game7">
-			 {{game.game7.resultT2}}
-			</text>
-			<text x="250" y="766" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game7">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="225" y="751" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="766" text-anchor="middle" alignment-baseline="central" *ngIf="game.game7">
+             {{game.game7.resultT2}}
+            </text>
+            <text x="250" y="766" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game7">
+             -
+            </text>
+        </g>
 
-		<rect x="0.5" y="720.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="0.5" y="720.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_13_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="572.9006" x2="-431.0098" y2="572.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_13_)" stroke-miterlimit="10" x1="0" y1="750.5" x2="108" y2="750.5"/>
-		<rect x="109.52" y="747.77" fill="none" width="8.46" height="5.46"/>
-		<text transform="matrix(1 0 0 1 108.5215 753.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="720" x2="224.5" y2="781"/>
+            <linearGradient id="SVGID_13_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="572.9006" x2="-431.0098" y2="572.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_13_)" stroke-miterlimit="10" x1="0" y1="750.5" x2="108" y2="750.5"/>
+        <rect x="109.52" y="747.77" fill="none" width="8.46" height="5.46"/>
+        <text transform="matrix(1 0 0 1 108.5215 753.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="720" x2="224.5" y2="781"/>
 
-			<linearGradient id="SVGID_14_" gradientUnits="userSpaceOnUse" x1="-315.0103" y1="572.9016" x2="-419.0103" y2="572.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_14_)" stroke-miterlimit="10" x1="120" y1="750.5" x2="224" y2="750.5"/>
-	</g>
-	<g id="game8">
-		<rect class="team1" y="840" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="855" text-anchor="middle" alignment-baseline="central" *ngIf="game.game8">
-			 {{game.game8.team1}}
-			</text>
-			<text x="112" y="855" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game8">
-			 TBA
-			</text>
-		</g>
+            <linearGradient id="SVGID_14_" gradientUnits="userSpaceOnUse" x1="-315.0103" y1="572.9016" x2="-419.0103" y2="572.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_14_)" stroke-miterlimit="10" x1="120" y1="750.5" x2="224" y2="750.5"/>
+    </g>
+    <g id="game8">
+        <rect class="team1" y="840" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="855" text-anchor="middle" alignment-baseline="central" *ngIf="game.game8">
+             {{game.game8.team1}}
+            </text>
+            <text x="112" y="855" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game8">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" y="871" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="112" y="886" text-anchor="middle" alignment-baseline="central" *ngIf="game.game8">
-			 {{game.game8.team2}}
-			</text>
-			<text x="112" y="886" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game8">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" y="871" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="112" y="886" text-anchor="middle" alignment-baseline="central" *ngIf="game.game8">
+             {{game.game8.team2}}
+            </text>
+            <text x="112" y="886" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game8">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="225" y="840" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="855" text-anchor="middle" alignment-baseline="central" *ngIf="game.game8">
-			 {{game.game8.resultT1}}
-			</text>
-			<text x="250" y="855" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game8">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="225" y="840" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="855" text-anchor="middle" alignment-baseline="central" *ngIf="game.game8">
+             {{game.game8.resultT1}}
+            </text>
+            <text x="250" y="855" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game8">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="225" y="871" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="250" y="886" text-anchor="middle" alignment-baseline="central" *ngIf="game.game8">
-			 {{game.game8.resultT2}}
-			</text>
-			<text x="250" y="886" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game8">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="225" y="871" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="250" y="886" text-anchor="middle" alignment-baseline="central" *ngIf="game.game8">
+             {{game.game8.resultT2}}
+            </text>
+            <text x="250" y="886" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game8">
+             -
+            </text>
+        </g>
 
-		<rect x="0.5" y="840.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="0.5" y="840.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_15_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="452.9006" x2="-431.0098" y2="452.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_15_)" stroke-miterlimit="10" x1="0" y1="870.5" x2="108" y2="870.5"/>
-		<rect x="109.52" y="867.77" fill="none" width="8.46" height="5.46"/>
-		<text transform="matrix(1 0 0 1 108.5215 873.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="840" x2="224.5" y2="901"/>
+            <linearGradient id="SVGID_15_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="452.9006" x2="-431.0098" y2="452.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_15_)" stroke-miterlimit="10" x1="0" y1="870.5" x2="108" y2="870.5"/>
+        <rect x="109.52" y="867.77" fill="none" width="8.46" height="5.46"/>
+        <text transform="matrix(1 0 0 1 108.5215 873.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="840" x2="224.5" y2="901"/>
 
-			<linearGradient id="SVGID_16_" gradientUnits="userSpaceOnUse" x1="-315.0103" y1="452.9011" x2="-419.0103" y2="452.9011" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_16_)" stroke-miterlimit="10" x1="120" y1="870.5" x2="224" y2="870.5"/>
-	</g>
+            <linearGradient id="SVGID_16_" gradientUnits="userSpaceOnUse" x1="-315.0103" y1="452.9011" x2="-419.0103" y2="452.9011" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_16_)" stroke-miterlimit="10" x1="120" y1="870.5" x2="224" y2="870.5"/>
+    </g>
 </g>
 <g id="secondRow">
-	<g id="game9">
-		<rect class="team1" x="348" y="61" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="460" y="76" text-anchor="middle" alignment-baseline="central" *ngIf="game.game9">
-			 {{game.game9.team1}}
-			</text>
-			<text x="460" y="76" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game9">
-			 TBA
-			</text>
-		</g>
+    <g id="game9">
+        <rect class="team1" x="348" y="61" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="460" y="76" text-anchor="middle" alignment-baseline="central" *ngIf="game.game9">
+             {{game.game9.team1}}
+            </text>
+            <text x="460" y="76" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game9">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" x="348" y="92" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="460" y="107" text-anchor="middle" alignment-baseline="central" *ngIf="game.game9">
-			 {{game.game9.team2}}
-			</text>
-			<text x="460" y="107" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game9">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" x="348" y="92" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="460" y="107" text-anchor="middle" alignment-baseline="central" *ngIf="game.game9">
+             {{game.game9.team2}}
+            </text>
+            <text x="460" y="107" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game9">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="573" y="61" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="598" y="76" text-anchor="middle" alignment-baseline="central" *ngIf="game.game9">
-			 {{game.game9.resultT1}}
-			</text>
-			<text x="598" y="76" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game9">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="573" y="61" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="598" y="76" text-anchor="middle" alignment-baseline="central" *ngIf="game.game9">
+             {{game.game9.resultT1}}
+            </text>
+            <text x="598" y="76" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game9">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="573" y="92" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="598" y="107" text-anchor="middle" alignment-baseline="central" *ngIf="game.game9">
-			 {{game.game9.resultT2}}
-			</text>
-			<text x="598" y="107" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game9">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="573" y="92" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="598" y="107" text-anchor="middle" alignment-baseline="central" *ngIf="game.game9">
+             {{game.game9.resultT2}}
+            </text>
+            <text x="598" y="107" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game9">
+             -
+            </text>
+        </g>
 
-		<rect x="348.5" y="61.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="348.5" y="61.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_17_" gradientUnits="userSpaceOnUse" x1="-191.0098" y1="1231.9006" x2="-83.0098" y2="1231.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_17_)" stroke-miterlimit="10" x1="348" y1="91.5" x2="456" y2="91.5"/>
-		<rect x="457.52" y="88.77" fill="none" width="8.461" height="5.46"/>
-		<text transform="matrix(1 0 0 1 456.5215 94.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="572.5" y1="61" x2="572.5" y2="122"/>
+            <linearGradient id="SVGID_17_" gradientUnits="userSpaceOnUse" x1="-191.0098" y1="1231.9006" x2="-83.0098" y2="1231.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_17_)" stroke-miterlimit="10" x1="348" y1="91.5" x2="456" y2="91.5"/>
+        <rect x="457.52" y="88.77" fill="none" width="8.461" height="5.46"/>
+        <text transform="matrix(1 0 0 1 456.5215 94.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="572.5" y1="61" x2="572.5" y2="122"/>
 
-			<linearGradient id="SVGID_18_" gradientUnits="userSpaceOnUse" x1="32.9893" y1="1231.9016" x2="-71.0107" y2="1231.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_18_)" stroke-miterlimit="10" x1="468" y1="91.5" x2="572" y2="91.5"/>
-	</g>
-	<g id="game10">
-		<rect class="team1" x="348" y="300" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="460" y="315" text-anchor="middle" alignment-baseline="central" *ngIf="game.game10">
-			 {{game.game10.team1}}
-			</text>
-			<text x="460" y="315" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game10">
-			 TBA
-			</text>
-		</g>
+            <linearGradient id="SVGID_18_" gradientUnits="userSpaceOnUse" x1="32.9893" y1="1231.9016" x2="-71.0107" y2="1231.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_18_)" stroke-miterlimit="10" x1="468" y1="91.5" x2="572" y2="91.5"/>
+    </g>
+    <g id="game10">
+        <rect class="team1" x="348" y="300" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="460" y="315" text-anchor="middle" alignment-baseline="central" *ngIf="game.game10">
+             {{game.game10.team1}}
+            </text>
+            <text x="460" y="315" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game10">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" x="348" y="331" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="460" y="346" text-anchor="middle" alignment-baseline="central" *ngIf="game.game10">
-			 {{game.game10.team2}}
-			</text>
-			<text x="460" y="346" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game10">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" x="348" y="331" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="460" y="346" text-anchor="middle" alignment-baseline="central" *ngIf="game.game10">
+             {{game.game10.team2}}
+            </text>
+            <text x="460" y="346" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game10">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="573" y="300" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="598" y="315" text-anchor="middle" alignment-baseline="central" *ngIf="game.game10">
-			 {{game.game10.resultT1}}
-			</text>
-			<text x="598" y="315" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game10">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="573" y="300" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="598" y="315" text-anchor="middle" alignment-baseline="central" *ngIf="game.game10">
+             {{game.game10.resultT1}}
+            </text>
+            <text x="598" y="315" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game10">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="573" y="331" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="598" y="346" text-anchor="middle" alignment-baseline="central" *ngIf="game.game10">
-			 {{game.game10.resultT2}}
-			</text>
-			<text x="598" y="346" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game10">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="573" y="331" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="598" y="346" text-anchor="middle" alignment-baseline="central" *ngIf="game.game10">
+             {{game.game10.resultT2}}
+            </text>
+            <text x="598" y="346" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game10">
+             -
+            </text>
+        </g>
 
-		<rect x="348.5" y="300.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="348.5" y="300.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_19_" gradientUnits="userSpaceOnUse" x1="-191.0098" y1="992.9006" x2="-83.0098" y2="992.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_19_)" stroke-miterlimit="10" x1="348" y1="330.5" x2="456" y2="330.5"/>
-		<rect x="457.52" y="327.77" fill="none" width="8.461" height="5.46"/>
-		<text transform="matrix(1 0 0 1 456.5215 333.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="572.5" y1="300" x2="572.5" y2="361"/>
+            <linearGradient id="SVGID_19_" gradientUnits="userSpaceOnUse" x1="-191.0098" y1="992.9006" x2="-83.0098" y2="992.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_19_)" stroke-miterlimit="10" x1="348" y1="330.5" x2="456" y2="330.5"/>
+        <rect x="457.52" y="327.77" fill="none" width="8.461" height="5.46"/>
+        <text transform="matrix(1 0 0 1 456.5215 333.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="572.5" y1="300" x2="572.5" y2="361"/>
 
-			<linearGradient id="SVGID_20_" gradientUnits="userSpaceOnUse" x1="32.9893" y1="992.9016" x2="-71.0107" y2="992.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_20_)" stroke-miterlimit="10" x1="468" y1="330.5" x2="572" y2="330.5"/>
-	</g>
-	<g id="game11">
-		<rect class="team1" x="348" y="540" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="460" y="555" text-anchor="middle" alignment-baseline="central" *ngIf="game.game11">
-			 {{game.game11.team1}}
-			</text>
-			<text x="460" y="555" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game11">
-			 TBA
-			</text>
-		</g>
+            <linearGradient id="SVGID_20_" gradientUnits="userSpaceOnUse" x1="32.9893" y1="992.9016" x2="-71.0107" y2="992.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_20_)" stroke-miterlimit="10" x1="468" y1="330.5" x2="572" y2="330.5"/>
+    </g>
+    <g id="game11">
+        <rect class="team1" x="348" y="540" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="460" y="555" text-anchor="middle" alignment-baseline="central" *ngIf="game.game11">
+             {{game.game11.team1}}
+            </text>
+            <text x="460" y="555" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game11">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" x="348" y="571" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="460" y="586" text-anchor="middle" alignment-baseline="central" *ngIf="game.game11">
-			 {{game.game11.team2}}
-			</text>
-			<text x="460" y="586" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game11">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" x="348" y="571" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="460" y="586" text-anchor="middle" alignment-baseline="central" *ngIf="game.game11">
+             {{game.game11.team2}}
+            </text>
+            <text x="460" y="586" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game11">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="573" y="540" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="598" y="555" text-anchor="middle" alignment-baseline="central" *ngIf="game.game11">
-			 {{game.game11.resultT1}}
-			</text>
-			<text x="598" y="555" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game11">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="573" y="540" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="598" y="555" text-anchor="middle" alignment-baseline="central" *ngIf="game.game11">
+             {{game.game11.resultT1}}
+            </text>
+            <text x="598" y="555" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game11">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="573" y="571" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="598" y="586" text-anchor="middle" alignment-baseline="central" *ngIf="game.game11">
-			 {{game.game11.resultT2}}
-			</text>
-			<text x="598" y="586" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game11">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="573" y="571" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="598" y="586" text-anchor="middle" alignment-baseline="central" *ngIf="game.game11">
+             {{game.game11.resultT2}}
+            </text>
+            <text x="598" y="586" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game11">
+             -
+            </text>
+        </g>
 
-		<rect x="348.5" y="540.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="348.5" y="540.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_21_" gradientUnits="userSpaceOnUse" x1="-191.0098" y1="752.9006" x2="-83.0098" y2="752.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_21_)" stroke-miterlimit="10" x1="348" y1="570.5" x2="456" y2="570.5"/>
-		<rect x="457.52" y="567.77" fill="none" width="8.461" height="5.46"/>
-		<text transform="matrix(1 0 0 1 456.5215 573.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="572.5" y1="540" x2="572.5" y2="601"/>
+            <linearGradient id="SVGID_21_" gradientUnits="userSpaceOnUse" x1="-191.0098" y1="752.9006" x2="-83.0098" y2="752.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_21_)" stroke-miterlimit="10" x1="348" y1="570.5" x2="456" y2="570.5"/>
+        <rect x="457.52" y="567.77" fill="none" width="8.461" height="5.46"/>
+        <text transform="matrix(1 0 0 1 456.5215 573.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="572.5" y1="540" x2="572.5" y2="601"/>
 
-			<linearGradient id="SVGID_22_" gradientUnits="userSpaceOnUse" x1="32.9893" y1="752.9016" x2="-71.0107" y2="752.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_22_)" stroke-miterlimit="10" x1="468" y1="570.5" x2="572" y2="570.5"/>
-	</g>
-	<g id="game12">
-		<rect class="team1" x="348" y="781" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="460" y="796" text-anchor="middle" alignment-baseline="central" *ngIf="game.game12">
-			 {{game.game12.team1}}
-			</text>
-			<text x="460" y="796" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game12">
-			 TBA
-			</text>
-		</g>
+            <linearGradient id="SVGID_22_" gradientUnits="userSpaceOnUse" x1="32.9893" y1="752.9016" x2="-71.0107" y2="752.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_22_)" stroke-miterlimit="10" x1="468" y1="570.5" x2="572" y2="570.5"/>
+    </g>
+    <g id="game12">
+        <rect class="team1" x="348" y="781" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="460" y="796" text-anchor="middle" alignment-baseline="central" *ngIf="game.game12">
+             {{game.game12.team1}}
+            </text>
+            <text x="460" y="796" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game12">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" x="348" y="812" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="460" y="827" text-anchor="middle" alignment-baseline="central" *ngIf="game.game12">
-			 {{game.game12.team2}}
-			</text>
-			<text x="460" y="827" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game12">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" x="348" y="812" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="460" y="827" text-anchor="middle" alignment-baseline="central" *ngIf="game.game12">
+             {{game.game12.team2}}
+            </text>
+            <text x="460" y="827" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game12">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="573" y="781" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="598" y="796" text-anchor="middle" alignment-baseline="central" *ngIf="game.game12">
-			 {{game.game12.resultT1}}
-			</text>
-			<text x="598" y="796" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game12">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="573" y="781" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="598" y="796" text-anchor="middle" alignment-baseline="central" *ngIf="game.game12">
+             {{game.game12.resultT1}}
+            </text>
+            <text x="598" y="796" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game12">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="573" y="812" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="598" y="827" text-anchor="middle" alignment-baseline="central" *ngIf="game.game12">
-			 {{game.game12.resultT2}}
-			</text>
-			<text  x="598" y="827" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game12">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="573" y="812" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="598" y="827" text-anchor="middle" alignment-baseline="central" *ngIf="game.game12">
+             {{game.game12.resultT2}}
+            </text>
+            <text  x="598" y="827" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game12">
+             -
+            </text>
+        </g>
 
-		<rect x="348.5" y="781.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="348.5" y="781.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_23_" gradientUnits="userSpaceOnUse" x1="-191.0098" y1="511.9006" x2="-83.0098" y2="511.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_23_)" stroke-miterlimit="10" x1="348" y1="811.5" x2="456" y2="811.5"/>
-		<rect x="457.52" y="808.77" fill="none" width="8.461" height="5.46"/>
-		<text transform="matrix(1 0 0 1 456.5215 814.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="572.5" y1="781" x2="572.5" y2="842"/>
+            <linearGradient id="SVGID_23_" gradientUnits="userSpaceOnUse" x1="-191.0098" y1="511.9006" x2="-83.0098" y2="511.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_23_)" stroke-miterlimit="10" x1="348" y1="811.5" x2="456" y2="811.5"/>
+        <rect x="457.52" y="808.77" fill="none" width="8.461" height="5.46"/>
+        <text transform="matrix(1 0 0 1 456.5215 814.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="572.5" y1="781" x2="572.5" y2="842"/>
 
-			<linearGradient id="SVGID_24_" gradientUnits="userSpaceOnUse" x1="32.9897" y1="511.9011" x2="-71.0103" y2="511.9011" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_24_)" stroke-miterlimit="10" x1="468" y1="811.5" x2="572" y2="811.5"/>
-	</g>
+            <linearGradient id="SVGID_24_" gradientUnits="userSpaceOnUse" x1="32.9897" y1="511.9011" x2="-71.0103" y2="511.9011" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_24_)" stroke-miterlimit="10" x1="468" y1="811.5" x2="572" y2="811.5"/>
+    </g>
 </g>
 <g id="thirdRow">
-	<g id="game13">
-		<rect class="team1" x="698" y="180" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="810" y="195" text-anchor="middle" alignment-baseline="central" *ngIf="game.game13">
-			 {{game.game13.team1}}
-			</text>
-			<text x="810" y="195" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game13">
-			 TBA
-			</text>
-		</g>
+    <g id="game13">
+        <rect class="team1" x="698" y="180" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="810" y="195" text-anchor="middle" alignment-baseline="central" *ngIf="game.game13">
+             {{game.game13.team1}}
+            </text>
+            <text x="810" y="195" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game13">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" x="698" y="211" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="810" y="226" text-anchor="middle" alignment-baseline="central" *ngIf="game.game13">
-			 {{game.game13.team2}}
-			</text>
-			<text x="810" y="226" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game13">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" x="698" y="211" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="810" y="226" text-anchor="middle" alignment-baseline="central" *ngIf="game.game13">
+             {{game.game13.team2}}
+            </text>
+            <text x="810" y="226" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game13">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="923" y="180" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="948" y="195" text-anchor="middle" alignment-baseline="central" *ngIf="game.game13">
-			 {{game.game13.resultT1}}
-			</text>
-			<text x="948" y="195" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game13">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="923" y="180" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="948" y="195" text-anchor="middle" alignment-baseline="central" *ngIf="game.game13">
+             {{game.game13.resultT1}}
+            </text>
+            <text x="948" y="195" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game13">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="923" y="211" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="948" y="226" text-anchor="middle" alignment-baseline="central" *ngIf="game.game13">
-			 {{game.game13.resultT2}}
-			</text>
-			<text x="948" y="226" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game13">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="923" y="211" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="948" y="226" text-anchor="middle" alignment-baseline="central" *ngIf="game.game13">
+             {{game.game13.resultT2}}
+            </text>
+            <text x="948" y="226" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game13">
+             -
+            </text>
+        </g>
 
-		<rect x="698.5" y="180.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="698.5" y="180.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_25_" gradientUnits="userSpaceOnUse" x1="158.9902" y1="1112.9006" x2="266.9902" y2="1112.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_25_)" stroke-miterlimit="10" x1="698" y1="210.5" x2="806" y2="210.5"/>
-		<rect x="807.52" y="207.77" fill="none" width="8.461" height="5.46"/>
-		<text transform="matrix(1 0 0 1 806.5215 213.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="922.5" y1="180" x2="922.5" y2="241"/>
+            <linearGradient id="SVGID_25_" gradientUnits="userSpaceOnUse" x1="158.9902" y1="1112.9006" x2="266.9902" y2="1112.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_25_)" stroke-miterlimit="10" x1="698" y1="210.5" x2="806" y2="210.5"/>
+        <rect x="807.52" y="207.77" fill="none" width="8.461" height="5.46"/>
+        <text transform="matrix(1 0 0 1 806.5215 213.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="922.5" y1="180" x2="922.5" y2="241"/>
 
-			<linearGradient id="SVGID_26_" gradientUnits="userSpaceOnUse" x1="382.9893" y1="1112.9016" x2="278.9893" y2="1112.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_26_)" stroke-miterlimit="10" x1="818" y1="210.5" x2="922" y2="210.5"/>
-	</g>
-	<g id="game14">
-		<rect class="team1" x="698" y="661" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="810" y="676" text-anchor="middle" alignment-baseline="central" *ngIf="game.game14">
-			 {{game.game14.team1}}
-			</text>
-			<text text x="810" y="676" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game14">
-			 TBA
-			</text>
-		</g>
+            <linearGradient id="SVGID_26_" gradientUnits="userSpaceOnUse" x1="382.9893" y1="1112.9016" x2="278.9893" y2="1112.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_26_)" stroke-miterlimit="10" x1="818" y1="210.5" x2="922" y2="210.5"/>
+    </g>
+    <g id="game14">
+        <rect class="team1" x="698" y="661" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="810" y="676" text-anchor="middle" alignment-baseline="central" *ngIf="game.game14">
+             {{game.game14.team1}}
+            </text>
+            <text text x="810" y="676" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game14">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" x="698" y="692" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="810" y="707" text-anchor="middle" alignment-baseline="central" *ngIf="game.game14">
-			 {{game.game14.team2}}
-			</text>
-			<text text x="810" y="707" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game14">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" x="698" y="692" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="810" y="707" text-anchor="middle" alignment-baseline="central" *ngIf="game.game14">
+             {{game.game14.team2}}
+            </text>
+            <text text x="810" y="707" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game14">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="923" y="661" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="948" y="676" text-anchor="middle" alignment-baseline="central" *ngIf="game.game14">
-			 {{game.game14.resultT1}}
-			</text>
-			<text text x="948" y="676" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game14">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="923" y="661" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="948" y="676" text-anchor="middle" alignment-baseline="central" *ngIf="game.game14">
+             {{game.game14.resultT1}}
+            </text>
+            <text text x="948" y="676" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game14">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="923" y="692" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="948" y="707" text-anchor="middle" alignment-baseline="central" *ngIf="game.game14">
-			 {{game.game14.resultT2}}
-			</text>
-			<text text x="948" y="707" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game14">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="923" y="692" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="948" y="707" text-anchor="middle" alignment-baseline="central" *ngIf="game.game14">
+             {{game.game14.resultT2}}
+            </text>
+            <text text x="948" y="707" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game14">
+             -
+            </text>
+        </g>
 
-		<rect x="698.5" y="661.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="698.5" y="661.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_27_" gradientUnits="userSpaceOnUse" x1="158.9902" y1="631.9006" x2="266.9902" y2="631.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_27_)" stroke-miterlimit="10" x1="698" y1="691.5" x2="806" y2="691.5"/>
-		<rect x="807.52" y="688.77" fill="none" width="8.461" height="5.46"/>
-		<text transform="matrix(1 0 0 1 806.5215 694.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="922.5" y1="661" x2="922.5" y2="722"/>
+            <linearGradient id="SVGID_27_" gradientUnits="userSpaceOnUse" x1="158.9902" y1="631.9006" x2="266.9902" y2="631.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_27_)" stroke-miterlimit="10" x1="698" y1="691.5" x2="806" y2="691.5"/>
+        <rect x="807.52" y="688.77" fill="none" width="8.461" height="5.46"/>
+        <text transform="matrix(1 0 0 1 806.5215 694.1057)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="922.5" y1="661" x2="922.5" y2="722"/>
 
-			<linearGradient id="SVGID_28_" gradientUnits="userSpaceOnUse" x1="382.9897" y1="631.9016" x2="278.9897" y2="631.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_28_)" stroke-miterlimit="10" x1="818" y1="691.5" x2="922" y2="691.5"/>
-	</g>
+            <linearGradient id="SVGID_28_" gradientUnits="userSpaceOnUse" x1="382.9897" y1="631.9016" x2="278.9897" y2="631.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_28_)" stroke-miterlimit="10" x1="818" y1="691.5" x2="922" y2="691.5"/>
+    </g>
 </g>
 <g id="Ebene_19">
-	<g id="game15">
-		<rect class="team1" x="1049" y="420" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="1169" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="game.game15">
-			 {{game.game15.team1}}
-			</text>
-			<text text x="1169" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game15">
-			 TBA
-			</text>
-		</g>
+    <g id="game15">
+        <rect class="team1" x="1049" y="420" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="1169" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="game.game15">
+             {{game.game15.team1}}
+            </text>
+            <text text x="1169" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game15">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" x="1049" y="451" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="1169" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="game.game15">
-			 {{game.game15.team2}}
-			</text>
-			<text text x="1169" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game15">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" x="1049" y="451" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="1169" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="game.game15">
+             {{game.game15.team2}}
+            </text>
+            <text text x="1169" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game15">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="1274" y="420" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="1299" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="game.game15">
-			 {{game.game15.resultT1}}
-			</text>
-			<text text x="1299" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game15">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="1274" y="420" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="1299" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="game.game15">
+             {{game.game15.resultT1}}
+            </text>
+            <text text x="1299" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game15">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="1274" y="451" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="1299" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="game.game15">
-			 {{game.game15.resultT2}}
-			</text>
-			<text text x="1299" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game15">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="1274" y="451" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="1299" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="game.game15">
+             {{game.game15.resultT2}}
+            </text>
+            <text text x="1299" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game15">
+             -
+            </text>
+        </g>
 
-		<rect x="1049.5" y="420.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="1049.5" y="420.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_29_" gradientUnits="userSpaceOnUse" x1="509.9902" y1="872.9006" x2="617.9902" y2="872.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_29_)" stroke-miterlimit="10" x1="1049" y1="450.5" x2="1157" y2="450.5"/>
-		<rect x="1158.52" y="447.77" fill="none" width="8.461" height="5.46"/>
-		<text transform="matrix(1 0 0 1 1157.5215 453.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="1273.5" y1="420" x2="1273.5" y2="481"/>
+            <linearGradient id="SVGID_29_" gradientUnits="userSpaceOnUse" x1="509.9902" y1="872.9006" x2="617.9902" y2="872.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_29_)" stroke-miterlimit="10" x1="1049" y1="450.5" x2="1157" y2="450.5"/>
+        <rect x="1158.52" y="447.77" fill="none" width="8.461" height="5.46"/>
+        <text transform="matrix(1 0 0 1 1157.5215 453.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="1273.5" y1="420" x2="1273.5" y2="481"/>
 
-		<linearGradient id="SVGID_30_" gradientUnits="userSpaceOnUse" x1="733.9893" y1="872.9016" x2="629.9893" y2="872.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-		<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-		<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_30_)" stroke-miterlimit="10" x1="1169" y1="450.5" x2="1273" y2="450.5"/>
-	</g>
-	<g id="game16">
-		<rect class="team1" x="698" y="420" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="810" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="game.game16">
-			 {{game.game16.team1}}
-			</text>
-			<text text x="810" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game16">
-			 TBA
-			</text>
-		</g>
+        <linearGradient id="SVGID_30_" gradientUnits="userSpaceOnUse" x1="733.9893" y1="872.9016" x2="629.9893" y2="872.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+        <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+        <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_30_)" stroke-miterlimit="10" x1="1169" y1="450.5" x2="1273" y2="450.5"/>
+    </g>
+    <g id="game16">
+        <rect class="team1" x="698" y="420" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="810" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="game.game16">
+             {{game.game16.team1}}
+            </text>
+            <text text x="810" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game16">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team2" x="698" y="451" fill="none" width="224" height="30"/>
-		<g class="text">
-			<text x="810" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="game.game16">
-			 {{game.game16.team2}}
-			</text>
-			<text text x="810" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game16">
-			 TBA
-			</text>
-		</g>
+        <rect class="team2" x="698" y="451" fill="none" width="224" height="30"/>
+        <g class="text">
+            <text x="810" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="game.game16">
+             {{game.game16.team2}}
+            </text>
+            <text text x="810" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game16">
+             TBA
+            </text>
+        </g>
 
-		<rect class="team1_result" x="923" y="420" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="948" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="game.game16">
-			 {{game.game16.resultT1}}
-			</text>
-			<text text x="948" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game16">
-			 -
-			</text>
-		</g>
+        <rect class="team1_result" x="923" y="420" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="948" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="game.game16">
+             {{game.game16.resultT1}}
+            </text>
+            <text text x="948" y="435" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game16">
+             -
+            </text>
+        </g>
 
-		<rect class="team2_result" x="923" y="451" fill="none" width="55" height="30"/>
-		<g class="text">
-			<text x="948" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="game.game16">
-			 {{game.game16.resultT2}}
-			</text>
-			<text text x="948" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game16">
-			 -
-			</text>
-		</g>
+        <rect class="team2_result" x="923" y="451" fill="none" width="55" height="30"/>
+        <g class="text">
+            <text x="948" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="game.game16">
+             {{game.game16.resultT2}}
+            </text>
+            <text text x="948" y="466" text-anchor="middle" alignment-baseline="central" *ngIf="!game.game16">
+             -
+            </text>
+        </g>
 
-		<rect x="698.5" y="420.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
+        <rect x="698.5" y="420.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="60"/>
 
-			<linearGradient id="SVGID_31_" gradientUnits="userSpaceOnUse" x1="158.9902" y1="872.9006" x2="266.9902" y2="872.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_31_)" stroke-miterlimit="10" x1="698" y1="450.5" x2="806" y2="450.5"/>
-		<rect x="807.52" y="447.77" fill="none" width="8.461" height="5.46"/>
-		<text transform="matrix(1 0 0 1 806.5215 453.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-		<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="922.5" y1="420" x2="922.5" y2="481"/>
+            <linearGradient id="SVGID_31_" gradientUnits="userSpaceOnUse" x1="158.9902" y1="872.9006" x2="266.9902" y2="872.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_31_)" stroke-miterlimit="10" x1="698" y1="450.5" x2="806" y2="450.5"/>
+        <rect x="807.52" y="447.77" fill="none" width="8.461" height="5.46"/>
+        <text transform="matrix(1 0 0 1 806.5215 453.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+        <line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="922.5" y1="420" x2="922.5" y2="481"/>
 
-			<linearGradient id="SVGID_32_" gradientUnits="userSpaceOnUse" x1="382.9893" y1="872.9016" x2="278.9893" y2="872.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-			<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-			<stop  offset="0.7422" style="stop-color:#000000"/>
-		</linearGradient>
-		<line fill="none" stroke="url(#SVGID_32_)" stroke-miterlimit="10" x1="818" y1="450.5" x2="922" y2="450.5"/>
-	</g>
+            <linearGradient id="SVGID_32_" gradientUnits="userSpaceOnUse" x1="382.9893" y1="872.9016" x2="278.9893" y2="872.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+            <stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+            <stop  offset="0.7422" style="stop-color:#000000"/>
+        </linearGradient>
+        <line fill="none" stroke="url(#SVGID_32_)" stroke-miterlimit="10" x1="818" y1="450.5" x2="922" y2="450.5"/>
+    </g>
 </g>
 <g id="Linien">
-	<g id="Ebene_20">
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="280" y1="30.5" x2="316" y2="30.5"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="31" x2="315.5" y2="92"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315" y1="91.5" x2="348" y2="91.5"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="92" x2="315.5" y2="151"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316" y1="151.5" x2="280" y2="151.5"/>
-	</g>
-	<g id="Ebene_21">
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="280" y1="269.5" x2="316" y2="269.5"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="270" x2="315.5" y2="331"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315" y1="330.5" x2="348" y2="330.5"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="331" x2="315.5" y2="390"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316" y1="390.5" x2="280" y2="390.5"/>
-	</g>
-	<g id="Ebene_23">
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="281" y1="509.5" x2="317" y2="509.5"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316.5" y1="510" x2="316.5" y2="571"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316" y1="570.5" x2="349" y2="570.5"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316.5" y1="571" x2="316.5" y2="630"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="317" y1="630.5" x2="281" y2="630.5"/>
-	</g>
-	<g id="Ebene_24">
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="280" y1="750.5" x2="316" y2="750.5"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="751" x2="315.5" y2="812"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315" y1="811.5" x2="348" y2="811.5"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="812" x2="315.5" y2="871"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316" y1="871.5" x2="280" y2="871.5"/>
-	</g>
-	<g id="Ebene_24_1_">
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="628.75" y1="92" x2="665.094" y2="92"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="91.5" x2="665.5" y2="211"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665" y1="210.5" x2="698" y2="210.5"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="211" x2="665.5" y2="331"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="330.5" x2="628.5" y2="330.5"/>
-	</g>
-	<g id="Ebene_24_2_">
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="628.75" y1="572.75" x2="665.094" y2="572.75"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="572.25" x2="665.5" y2="691.75"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665" y1="691.25" x2="698" y2="691.25"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="691.75" x2="665.5" y2="811.75"/>
-		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="811.25" x2="628.5" y2="811.25"/>
-	</g>
+    <g id="Ebene_20">
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="280" y1="30.5" x2="316" y2="30.5"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="31" x2="315.5" y2="92"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315" y1="91.5" x2="348" y2="91.5"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="92" x2="315.5" y2="151"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316" y1="151.5" x2="280" y2="151.5"/>
+    </g>
+    <g id="Ebene_21">
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="280" y1="269.5" x2="316" y2="269.5"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="270" x2="315.5" y2="331"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315" y1="330.5" x2="348" y2="330.5"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="331" x2="315.5" y2="390"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316" y1="390.5" x2="280" y2="390.5"/>
+    </g>
+    <g id="Ebene_23">
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="281" y1="509.5" x2="317" y2="509.5"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316.5" y1="510" x2="316.5" y2="571"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316" y1="570.5" x2="349" y2="570.5"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316.5" y1="571" x2="316.5" y2="630"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="317" y1="630.5" x2="281" y2="630.5"/>
+    </g>
+    <g id="Ebene_24">
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="280" y1="750.5" x2="316" y2="750.5"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="751" x2="315.5" y2="812"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315" y1="811.5" x2="348" y2="811.5"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="315.5" y1="812" x2="315.5" y2="871"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="316" y1="871.5" x2="280" y2="871.5"/>
+    </g>
+    <g id="Ebene_24_1_">
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="628.75" y1="92" x2="665.094" y2="92"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="91.5" x2="665.5" y2="211"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665" y1="210.5" x2="698" y2="210.5"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="211" x2="665.5" y2="331"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="330.5" x2="628.5" y2="330.5"/>
+    </g>
+    <g id="Ebene_24_2_">
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="628.75" y1="572.75" x2="665.094" y2="572.75"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="572.25" x2="665.5" y2="691.75"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665" y1="691.25" x2="698" y2="691.25"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="691.75" x2="665.5" y2="811.75"/>
+        <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="665.5" y1="811.25" x2="628.5" y2="811.25"/>
+    </g>
 </g>
 <g id="Ebene_2_1_">
-	<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="978" y1="211" x2="1189.5" y2="211"/>
-	<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="1189.5" y1="210.5" x2="1189.5" y2="420"/>
-	<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="1189.5" y1="480.5" x2="1189.5" y2="691.531"/>
-	<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="1189.5" y1="691" x2="978" y2="691"/>
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="978" y1="211" x2="1189.5" y2="211"/>
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="1189.5" y1="210.5" x2="1189.5" y2="420"/>
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="1189.5" y1="480.5" x2="1189.5" y2="691.531"/>
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="1189.5" y1="691" x2="978" y2="691"/>
 </g>
 </svg>
 </div>
+-->
