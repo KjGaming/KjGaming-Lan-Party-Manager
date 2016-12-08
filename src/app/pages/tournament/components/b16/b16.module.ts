@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgaModule } from '../../theme/nga.module';
 
 import { routing }       from './tournament.routing';
@@ -16,7 +16,8 @@ import { B16Component } from "./components/b16/b16.component";
         FormsModule,
         NgaModule,
         routing,
-        HttpModule
+        HttpModule,
+        ReactiveFormsModule
     ],
     declarations: [
         B16Component

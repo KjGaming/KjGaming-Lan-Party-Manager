@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Seating } from "../../theme/model";
 import { SeatingService } from "./seating.service";
 import { NotificationsService } from "angular2-notifications/src/notifications.service";
-import { error } from "util";
 
 
 @Component({
@@ -175,6 +174,7 @@ export class SeatingComponent implements OnInit {
             }
         );
     }
+
     releaseReserve(){
         this._seatingService.postSeat(null).subscribe(
             data => {

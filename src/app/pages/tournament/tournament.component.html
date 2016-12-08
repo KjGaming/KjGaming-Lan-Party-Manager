@@ -1,8 +1,3 @@
-<!--
-<div>
-	<bracket-16></bracket-16>
-</div>-->
-
 <div *ngFor="let tournament of tournaments">
 	<button [routerLink]="[tournament.mode,{tournamentId: tournament._id}]" class="btn btn-success">{{tournament.name}}</button>
 </div>
