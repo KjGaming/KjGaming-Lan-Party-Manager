@@ -46,10 +46,13 @@ export class Login {
             this.authService.signin(user)
                 .subscribe(
                     data => {
+                        console.log(data);
                         localStorage.setItem('id_token', data.id_token);
                         localStorage.setItem('expireDate', expireDate);
                         localStorage.setItem('userId', data.userId);
+                        localStorage.setItem('nickName', data.nickName);
                         localStorage.setItem('blackWidow', data.blackWidow);
+                        localStorage.setItem('clans', JSON.stringify(data.clan));
                         this.router.navigateByUrl('/');
                     },
                     error => {

@@ -67,45 +67,50 @@ router.post('/', function (req, res, next) {
 
 // login User
 router.post('/signin', function (req, res, next) {
-    User.findOne({email: req.body.email}, function (err, user) {
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred',
-                error: err
-            });
-        }
-        if (!user) {
-            return res.status(401).json({
-                title: 'Login fehlgeschlagen',
-                error: {message: 'Passwort oder E-Mail ist Falsch'}
-            });
-        }
-        if (!bcrypt.compareSync(req.body.password, user.password)) {
-            return res.status(401).json({
-                title: 'Login fehlgeschlagen',
-                error: {message: 'Passwort oder E-Mail ist Falsch'}
-            });
-        }
-        var token;
-        var adminToken;
-        if (user.role == 2) {
-            token = jwt.sign({user: user}, '20Kj!G!aming?Rock.Admin.17', {expiresIn: 7200});
-            adminToken = 481;
-        } else if (user.role == 1) {
-            token = jwt.sign({user: user}, '20Kj!G!aming?Rock.Creator.17', {expiresIn: 7200});
-            adminToken = 153;
-        } else {
-            token = jwt.sign({user: user}, '20Kj!G!aming?Rock.17', {expiresIn: 7200});
-            adminToken = 0;
-        }
+    User.findOne({email: req.body.email})
+        .populate('clan', '_id name')
+        .exec(function (err, user) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            if (!user) {
+                return res.status(401).json({
+                    title: 'Login fehlgeschlagen',
+                    error: {message: 'Passwort oder E-Mail ist Falsch'}
+                });
+            }
+            if (!bcrypt.compareSync(req.body.password, user.password)) {
+                return res.status(401).json({
+                    title: 'Login fehlgeschlagen',
+                    error: {message: 'Passwort oder E-Mail ist Falsch'}
+                });
+            }
+            var token;
+            var adminToken;
+            if (user.role == 2) {
+                token = jwt.sign({user: user}, '20Kj!G!aming?Rock.Admin.17', {expiresIn: 7200});
+                adminToken = 481;
+            } else if (user.role == 1) {
+                token = jwt.sign({user: user}, '20Kj!G!aming?Rock.Creator.17', {expiresIn: 7200});
+                adminToken = 153;
+            } else {
+                token = jwt.sign({user: user}, '20Kj!G!aming?Rock.17', {expiresIn: 7200});
+                adminToken = 0;
+            }
 
-        res.status(200).json({
-            message: 'Successfully logged in',
-            id_token: token,
-            blackWidow: adminToken,
-            userId: user._id
+            res.status(200).json({
+                message: 'Successfully logged in',
+                id_token: token,
+                blackWidow: adminToken,
+                userId: user._id,
+                nickName: user.nickName,
+                clan: user.clan
+
+            });
         });
-    });
 });
 
 router.use('/', function (req, res, next) {
