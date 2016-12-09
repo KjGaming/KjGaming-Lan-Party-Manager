@@ -106,6 +106,7 @@ router.post('/signin', function (req, res, next) {
                 id_token: token,
                 blackWidow: adminToken,
                 userId: user._id,
+                nickName: user.nickName,
                 clan: user.clan
 
             });

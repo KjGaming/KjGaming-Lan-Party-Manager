@@ -1,3 +1,4 @@
+<simple-notifications [options]="options"></simple-notifications>
 <div class="bracket">
     <div id="row1">
         <div *ngFor="let row_1 of row1, let i = index" [attr.id]="'game' + row_1.gameId">
@@ -301,7 +302,7 @@
             Map: {{gameMap}}
         </div>
         <div style="text-align: center;" *ngIf="(userStatus == 481 || inGamen) && (!gameResult1 && !gameResult2)">
-            <button class="btn btn-success" type="submit">Ergebnis Speichern</button>
+            <button class="btn btn-success" type="submit" (click)="myPopover.hide()">Ergebnis Speichern</button>
             <p style="font-size: 10px;">Nur der Verlierer kann das Ergebnis eintragen!!</p>
         </div>
     </form>

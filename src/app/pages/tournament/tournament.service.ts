@@ -36,7 +36,22 @@ export class TournamentService {
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
             });
+    }
+
+    postTournamentResult(event): Observable<any> {
+        const body = event;
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.post('/api/tournament/saveResult', body, {headers: headers})
+            .map((res: Response)=> res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
 
     }
+
 }
 
