@@ -73,25 +73,40 @@ router.post('/saveResult', function (req, res, next) {
             });
         }
         for (var key in tournament.games) {
+
             if (tournament.games[key].gameId == req.body.gameId) {
+
+                var team1 = tournament.games[key]['team1'];
+                var team2 = tournament.games[key]['team2'];
+                var winningTeam = null;
+                var looserTeam = null;
+
 
                 // Check if user and clan. Also check if user or clan in this game
                 if (tournament.playerMode == 'Clan') {
                     for (var key in decoded.user.clan) {
-                        if (decoded.user.clan[key].name == tournament.games[key].team1) {
+                        if (decoded.user.clan[key].name == team1) {
                             whichTeam = 'team1';
                             break;
-                        } else if (decoded.user.clan[key].name == tournament.games[key].team2) {
+                        } else if (decoded.user.clan[key].name == team2) {
                             whichTeam = 'team2';
                             break;
                         }
                     }
                 } else {
-                    if (decoded.user.nickName == tournament.games[key].team1) {
+                    if (decoded.user.nickName == team1) {
                         whichTeam = 'team1';
-                    } else if (decoded.user.nickName == tournament.games[key].team2) {
+                    } else if (decoded.user.nickName == team2) {
                         whichTeam = 'team2';
                     }
+                }
+
+                if(req.body.result1 > req.body.result2){
+                    winningTeam = team1;
+                    looserTeam = team2;
+                }else if(req.body.result1 < req.body.result2){
+                    winningTeam = team2;
+                    looserTeam = team1;
                 }
 
                 // Check if user is Admin
@@ -129,6 +144,59 @@ router.post('/saveResult', function (req, res, next) {
                                 title: 'Fehler beim speichern',
                                 error: err
                             });
+                        }
+                        if(req.body.winnerGame){
+
+                            if(req.body.gameId % 2 == 0){
+                                Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.winnerGame },
+                                    {$set:{'games.$.team2': winningTeam}},
+                                    function(err, result) {
+                                        if(err){
+                                            return res.status(500).json({
+                                                title: 'Fehler beim speichern',
+                                                error: err
+                                            });
+                                        }
+                                    });
+                            }else{
+                                Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.winnerGame },
+                                    {$set:{'games.$.team1': winningTeam}},
+                                    function(err, result) {
+                                        if(err){
+                                            return res.status(500).json({
+                                                title: 'Fehler beim speichern',
+                                                error: err
+                                            });
+                                        }
+                                    });
+                            }
+
+                        }
+
+                        if(req.body.looserGame){
+                            if(req.body.gameId % 2 == 0){
+                                Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.looserGame },
+                                    {$set:{'games.$.team2': looserTeam}},
+                                    function(err, result) {
+                                        if(err){
+                                            return res.status(500).json({
+                                                title: 'Fehler beim speichern',
+                                                error: err
+                                            });
+                                        }
+                                    });
+                            }else{
+                                Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.looserGame },
+                                    {$set:{'games.$.team1': looserTeam}},
+                                    function(err, result) {
+                                        if(err){
+                                            return res.status(500).json({
+                                                title: 'Fehler beim speichern',
+                                                error: err
+                                            });
+                                        }
+                                    });
+                            }
                         }
                         return res.status(201).json({
                             message: 'Ergebnis gespeichert',

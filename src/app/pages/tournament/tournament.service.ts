@@ -39,7 +39,7 @@ export class TournamentService {
     }
 
     postTournamentResult(event): Observable<any> {
-        const body = event;
+        const body = JSON.stringify(event);
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('id_token')

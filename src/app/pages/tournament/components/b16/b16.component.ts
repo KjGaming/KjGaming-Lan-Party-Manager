@@ -135,7 +135,7 @@ export class B16Component implements OnInit {
             }
         }
 
-        if(JSON.parse(localStorage.getItem('blackWidow')) == 481){
+        if (JSON.parse(localStorage.getItem('blackWidow')) == 481) {
             this.inGamen = "admin";
         }
 
@@ -146,19 +146,88 @@ export class B16Component implements OnInit {
         event['tournamentId'] = this.tournamentId;
         event['inGame'] = this.inGamen;
 
+        switch (this.gameGameId) {
+            case 1:
+            case 2:
+                event['winnerGame'] = 9;
+                event['looserGame'] = null;
+                break;
+            case 3:
+            case 4:
+                event['winnerGame'] = 10;
+                event['looserGame'] = null;
+                break;
+            case 5:
+            case 6:
+                event['winnerGame'] = 11;
+                event['looserGame'] = null;
+                break;
+            case 7:
+            case 8:
+                event['winnerGame'] = 12;
+                event['looserGame'] = null;
+                break;
+            case 9:
+            case 10:
+                event['winnerGame'] = 13;
+                event['looserGame'] = null;
+                break;
+            case 11:
+            case 12:
+                event['winnerGame'] = 14;
+                event['looserGame'] = null;
+                break;
+            case 13:
+            case 14:
+                event['winnerGame'] = 15;
+                event['looserGame'] = 16;
+                break;
+            default:
+                event['winnerGame'] = null;
+                event['looserGame'] = null;
+                break;
+        }
+
         console.log(event);
 
-        if(event.result1 > event.result2 && event.inGame == "team2"){
-            // Save the result
-            this._toastService.success('Erfolg','Team2');
-        }else if(event.result1 < event.result2 && event.inGame == "team1"){
-            // Save the result
-            this._toastService.success('Erfolg','Team1');
-        }else if(event.inGame == "admin"){
-            // Save the result
-            this._toastService.success('Erfolg','Admin hat das Ergebnis eingetragen');
-        }else{
-            this._toastService.error('Fehler','Das Ergebnis konnt so nicht übertragen werden');
+        if (event.result1 > event.result2 && event.inGame == "team2") {
+            this._tournamentService.postTournamentResult(event)
+                .subscribe(
+                    data => {
+                        this._toastService.success(data.message, '');
+                    },
+                    error => {
+                        console.error(error);
+                        this._toastService.error(error.title, error.error.message);
+
+                    }
+                );
+        } else if (event.result1 < event.result2 && event.inGame == "team1") {
+            this._tournamentService.postTournamentResult(event)
+                .subscribe(
+                    data => {
+                        this._toastService.success(data.message, '');
+                    },
+                    error => {
+                        console.error(error);
+                        this._toastService.error(error.title, error.error.message);
+
+                    }
+                );
+        } else if (event.inGame == "admin") {
+            this._tournamentService.postTournamentResult(event)
+                .subscribe(
+                    data => {
+                        this._toastService.success(data.message, '');
+                    },
+                    error => {
+                        console.error(error);
+                        this._toastService.error(error.title, error.error.message);
+
+                    }
+                );
+        } else {
+            this._toastService.error('Fehler', 'Das Ergebnis konnt so nicht übertragen werden');
         }
 
 
