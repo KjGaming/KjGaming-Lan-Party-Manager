@@ -39,10 +39,10 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('/api/user', userRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/api/server', serverRoutes);
 app.use('/api/sendMail', sendMailRoutes);
-app.use('/api/user', userRoutes);
 app.use('/api/event', timetableRoutes);
 app.use('/api/clan', clanRoutes);
 app.use('/api/catering', cateringRoutes);
