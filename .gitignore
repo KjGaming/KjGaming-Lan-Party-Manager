@@ -55,11 +55,19 @@ npm-debug.log
 /build
 /build/**
 
-# Doc #
-/doc/
 
 # IDE #
 .idea/
 *.swp
 
 /secret/secret.kjgaming.js
+
+# Some personal Modules#
+/src/app/pages/charts/
+/src/app/pages/editors/
+/src/app/pages/forms/
+/src/app/pages/maps/
+/src/app/pages/tables/
+/src/app/pages/ui/
+/src/app/pages/components/
+

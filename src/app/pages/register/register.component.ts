@@ -1,10 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { EmailValidator, EqualPasswordsValidator, DateValidator } from '../../theme/validators';
-import { PostalCodeValidator } from "../../theme/validators/postalCode.validator";
-import { AuthService } from "../../theme/services";
-import { User } from "../../theme/model";
-import { Router } from "@angular/router";
+import {Component, ViewEncapsulation} from '@angular/core';
+import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {EmailValidator, EqualPasswordsValidator, DateValidator} from '../../theme/validators';
+import {PostalCodeValidator} from "../../theme/validators/postalCode.validator";
+import {AuthService} from "../../theme/services";
+import {User} from "../../theme/model";
+import {Router} from "@angular/router";
+import {NotificationsService} from "angular2-notifications/src/notifications.service";
 
 @Component({
     selector: 'register',
@@ -29,8 +30,12 @@ export class Register {
         {value: 5, display: 'Mittagessen 22.04 (3€)', price: 3},
         {value: 6, display: 'Abendessen 22.04 (4€)', price: 4},
         {value: 7, display: 'Frühstück 23.04 (3€)', price: 2}
-
     ];
+
+    public options = {
+        position: ["top", "center"],
+        timeOut: 5000
+    }
 
     error;
 
@@ -57,7 +62,7 @@ export class Register {
 
     public submitted: boolean = false;
 
-    constructor(fb: FormBuilder, private authService: AuthService, private router: Router) {
+    constructor(fb: FormBuilder, private authService: AuthService, private router: Router, private _toastService: NotificationsService) {
 
         this.form = fb.group({
             'lanPacket': ['', Validators.required],
@@ -153,14 +158,18 @@ export class Register {
 
 
             );
-            let regSuccess = this.authService.signup(user)
+
+            this.authService.signup(user)
                 .subscribe(
                     data => {
                         localStorage.setItem('regToken', 'LoggedInSuccessfully');
                         console.log(data);
                         this.router.navigateByUrl('/confirmReg');
                     },
-                    error => this.error = error
+                    error => {
+                        this._toastService.error(error.title, error.error.message);
+                        this.error = error;
+                    }
                 );
 
         }

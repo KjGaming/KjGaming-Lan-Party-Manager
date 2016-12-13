@@ -1,12 +1,13 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgaModule } from '../../theme/nga.module';
 
 import { routing }       from './feedback.routing';
 import { FeedbackComponent } from './feedback.component';
-import { FeedbackService } from "./feedback.service";
 import { HttpModule } from "@angular/http";
+import {SendMailService} from "../../theme/services/SendMailService/sendMail.service";
+import {SimpleNotificationsModule} from "angular2-notifications/src/simple-notifications.module";
 
 
 @NgModule({
@@ -15,13 +16,15 @@ import { HttpModule } from "@angular/http";
         FormsModule,
         NgaModule,
         routing,
-        HttpModule
+        HttpModule,
+        ReactiveFormsModule,
+        SimpleNotificationsModule
     ],
     declarations: [
         FeedbackComponent
     ],
     providers: [
-        FeedbackService
+        SendMailService
     ]
 })
 export default class FeedbackModule {

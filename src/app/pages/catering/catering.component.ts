@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CateringService } from "./catering.service";
-import { User } from "../../theme/model";
+import { NotificationsService } from "angular2-notifications";
 
 
 @Component({
@@ -11,28 +11,133 @@ import { User } from "../../theme/model";
 
 
 export class CateringComponent implements OnInit {
-    public users: User[];
+    public products;
+    public ordered;
+    public delivered;
+    public received;
+    public shoppingCart = [];
+    public options = {
+        position: ["top", "center"],
+        timeOut: 5000
+    };
 
 
-    constructor(private _memberService: CateringService) {
+    constructor(private _cateringService: CateringService, private _toastService: NotificationsService) {
     }
 
     ngOnInit() {
-        this.getMember();
+        this.getProducts();
+        this.getCatering();
+        if(localStorage.getItem('shoppingCard')){
+            this.shoppingCart = JSON.parse(localStorage.getItem('shoppingCard'));
+        }
     }
 
-
-    getMember() {
-        this._memberService.getNews().subscribe(
+    getProducts() {
+        this._cateringService.getProducts().subscribe(
             // the first argument is a function which runs on success
             data => {
-                this.users = data.obj;
-                console.log(this.users);
+                this.products = data.obj;
             },
             // the second argument is a function which runs on error
             err => console.error(err),
             // the third argument is a function which runs on completion
-            () => console.log('done loading news')
+            () => console.log('done products')
         );
+    }
+
+    getCatering() {
+        this._cateringService.getCatering('ordered').subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                this.ordered = data.obj;
+            },
+            // the second argument is a function which runs on error
+            err => console.error(err),
+            // the third argument is a function which runs on completion
+            () => console.log('done ordered')
+        );
+        this._cateringService.getCatering('delivered').subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                this.delivered = data.obj;
+            },
+            // the second argument is a function which runs on error
+            err => console.error(err),
+            // the third argument is a function which runs on completion
+            () => console.log('done ordered')
+        );
+        this._cateringService.getCatering('received').subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                this.received = data.obj;
+            },
+            // the second argument is a function which runs on error
+            err => console.error(err),
+            // the third argument is a function which runs on completion
+            () => console.log('done ordered')
+        );
+    }
+
+    deleteOrdered() {
+        this._cateringService.deleteOrdered().subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                console.log(data);
+                this.getCatering();
+                this._toastService.success(data.message, '');
+            },
+            // the second argument is a function which runs on error
+            err => console.error(err)
+        );
+    }
+
+    addToShoppingCart(product) {
+        var isInArray = false;
+        if (!this.shoppingCart) {
+            this.shoppingCart.push({
+                id: product._id,
+                name: product.name,
+                price: product.price,
+                count: 1
+            });
+        } else {
+            for (let key in this.shoppingCart) {
+                if (this.shoppingCart[key].id == product._id) {
+                    this.shoppingCart[key].count += 1;
+                    isInArray = true;
+                    break;
+
+                }
+            }
+            if (!isInArray) {
+                this.shoppingCart.push({
+                    id: product._id,
+                    name: product.name,
+                    price: product.price,
+                    count: 1
+                });
+            }
+        }
+        localStorage.setItem('shoppingCard', JSON.stringify(this.shoppingCart));
+
+    }
+
+    sendShoppingCart(shoppingCard){
+        this._cateringService.sendOrdered(shoppingCard).subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                this._toastService.success(data.message, '');
+                this.ngOnInit();
+                console.log(this.products);
+            },
+            // the second argument is a function which runs on error
+            err => console.error(err),
+            // the third argument is a function which runs on completion
+            () => console.log('done products')
+        );
+
+        localStorage.removeItem('shoppingCard');
+        this.shoppingCart = [];
     }
 }

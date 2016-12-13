@@ -1,9 +1,9 @@
 <div class="auth-main">
+    <simple-notifications [options]="options"></simple-notifications>
     <div class="auth-block">
         <h1>Anmeldung für die KjGaming[5]</h1>
         <!--<a routerLink="/login" class="auth-link">Schon angemeldet? Hier gehts zum einloggen!</a>-->
 
-        <app-error></app-error>
 
         <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
 

@@ -11,28 +11,32 @@ import { User } from "../../theme/model";
 
 
 export class TournamentComponent implements OnInit {
-    public users: User[];
+    public tournaments;
 
 
-    constructor(private _memberService: TournamentService) {
+    constructor(private _tournamentService: TournamentService) {
     }
 
     ngOnInit() {
-        this.getMember();
+        this.getTournament();
     }
 
 
-    getMember() {
-        this._memberService.getNews().subscribe(
+    getTournament() {
+        this._tournamentService.getTournament().subscribe(
             // the first argument is a function which runs on success
             data => {
-                this.users = data.obj;
-                console.log(this.users);
+                this.tournaments = data.obj;
+                console.log(this.tournaments);
             },
             // the second argument is a function which runs on error
             err => console.error(err),
             // the third argument is a function which runs on completion
             () => console.log('done loading news')
         );
+    }
+
+    openAlert(tournamentData){
+        alert(tournamentData);
     }
 }
