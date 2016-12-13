@@ -11,13 +11,14 @@ export class SeatingService {
 
     // Uses http.get() to load a single JSON file
     getSeat(): Observable<any> {
-        const token = localStorage.getItem('id_token')
-            ? '?id_token=' + localStorage.getItem('id_token')
-            : '';
-        return this.http.get('/api/user/seat' + token)
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.get('/api/user/seat', {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
-                this._toastService.error('test', 'test');
                 return Observable.throw(err.json());
             });
 
