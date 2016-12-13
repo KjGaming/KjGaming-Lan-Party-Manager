@@ -128,7 +128,7 @@
     "webpack": "webpack --progress --profile --bail",
     "webpack-dev-server": "webpack-dev-server",
     "webdriver-manager": "webdriver-manager",
-    "clean": "npm cache clean && npm run rimraf -- node_modules docs dist",
+    "clean": "npm cache clean && npm run rimraf -- node_modules dist",
     "clean:dist": "npm run rimraf -- dist",
     "clean:electron": "npm run rimraf -- build",
     "preclean:install": "npm run clean",
