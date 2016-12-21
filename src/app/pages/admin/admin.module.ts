@@ -6,6 +6,7 @@ import { NgaModule } from '../../theme/nga.module';
 import { routing }       from './admin.routing';
 import { AdminComponent } from './admin.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { AdminNewsComponent } from "./components/news/news.component";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SettingsComponent } from './components/settings/settings.component';
   declarations: [
     AdminComponent,
     SettingsComponent,
+    AdminNewsComponent
   ],
   providers: [
   ]
