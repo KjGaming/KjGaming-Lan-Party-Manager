@@ -54,7 +54,8 @@ export class Register {
     public postalCode: AbstractControl;
     public city: AbstractControl;
     public vegi: AbstractControl;
-    public name: AbstractControl;
+    public lastname: AbstractControl;
+    public firstname: AbstractControl;
     public email: AbstractControl;
     public password: AbstractControl;
     public repeatPassword: AbstractControl;
@@ -67,7 +68,8 @@ export class Register {
         this.form = fb.group({
             'lanPacket': ['', Validators.required],
             'nickname': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-            'name': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+            'firstname': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+            'lastname': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
             'email': ['', Validators.compose([Validators.required, EmailValidator.validate])],
             'birth': ['', Validators.compose([Validators.required, DateValidator.validate])],
             'street': ['', Validators.required],
@@ -84,7 +86,8 @@ export class Register {
 
         this.lanPacket = this.form.controls['lanPacket'];
         this.nickname = this.form.controls['nickname'];
-        this.name = this.form.controls['name'];
+        this.firstname = this.form.controls['firstname'];
+        this.lastname = this.form.controls['lastname'];
         this.email = this.form.controls['email'];
         this.birth = this.form.controls['birth'];
         this.street = this.form.controls['street'];
@@ -126,7 +129,6 @@ export class Register {
     public onSubmit(values: Object): void {
         this.submitted = true;
         if (this.form.valid) {
-            let name = values['name'].split(" ");
             let date = new Date(values['birth']);
 
             let lanFoodString = this.lanFood.toString();
@@ -136,8 +138,8 @@ export class Register {
                 values['email'], // email
                 values['passwords']['password'], // password
                 values['nickname'], // nickname
-                name[0], // firstname
-                name[1], // lastname
+                values['firstname'], // firstname
+                values['lastname'], // lastname
                 date, // birth
                 0, //User role
                 false, // User lock

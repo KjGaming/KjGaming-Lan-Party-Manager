@@ -43,12 +43,21 @@
             </div>
 
             <div class="form-group row"
-                 [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
-                <label for="name" class="col-sm-2 control-label">Name</label>
+                 [ngClass]="{'has-error': (!firstname.valid && firstname.touched), 'has-success': (firstname.valid && firstname.touched)}">
+                <label for="firstname" class="col-sm-2 control-label">Vorname</label>
 
                 <div class="col-sm-10">
-                    <input [formControl]="name" type="text" class="form-control" id="name"
-                           placeholder="Vor- & Nachname">
+                    <input [formControl]="firstname" type="text" class="form-control" id="firstname"
+                           placeholder="Vorname">
+                </div>
+            </div>
+            <div class="form-group row"
+                 [ngClass]="{'has-error': (!lastname.valid && lastname.touched), 'has-success': (lastname.valid && lastname.touched)}">
+                <label for="lastname" class="col-sm-2 control-label">Nachname</label>
+
+                <div class="col-sm-10">
+                    <input [formControl]="lastname" type="text" class="form-control" id="lastname"
+                           placeholder="Nachname">
                 </div>
             </div>
 
@@ -145,7 +154,8 @@
                             <input type="checkbox"
                                    [checked]="checkboxAGB"
                                    (change)="checkboxAGB = $event.target.checked">
-                            <span>Ich habe die AGB`s gelesen und akzeptiert</span>
+                            <span>Ich habe die <a target="_blank" href="https://www.kjgaming.de/assets/pdf/AGB.pdf">AGB`s</a>
+                                gelesen und akzeptiert</span>
                         </label>
                     </div>
                 </div>
@@ -154,15 +164,15 @@
 
             <re-captcha site_key="6Lc3iCUTAAAAAK0ov2zFCkOFKiKgM61Os8TDaESt>"></re-captcha>
 
-            <div *ngIf="amount > 30" class="alert alert-warning" role="alert" [ngStyle]="{'display': display}">
-                <button type="button" class="close" aria-label="Close" (click)="onErrorHandled()">
+            <!--<div *ngIf="amount > 30" class="alert alert-warning" role="alert" [ngStyle]="{'display': display}">
+                <button type="button" class="close" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <strong>Sonderangebot!</strong><br>
                 Sie haben das Individuelle Paket gewählt und würden mit der Anmeldung mehr Zahlen als unser
                 Sonderangebot im Komplettpaket. Vielleicht wollen sie es sich noch überlegen das billigere Angebot zu
                 nehmen!
-            </div>
+            </div>-->
 
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10 align-right">
