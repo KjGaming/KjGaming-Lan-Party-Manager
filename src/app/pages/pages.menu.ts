@@ -186,7 +186,7 @@ export const PAGES_MENU = [
                         }
                     },
                     {
-                        path: 'Event',
+                        path: 'event',
                         data: {
                             menu: {
                                 title: 'Event',

@@ -358,4 +358,4 @@ module.exports = function (options) {
     }
 
   };
-}
+};
