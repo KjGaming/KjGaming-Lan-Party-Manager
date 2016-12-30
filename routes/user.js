@@ -16,7 +16,7 @@ router.post('/', function (req, res, next) {
         birth: req.body.birth,
         email: req.body.email,
         role: req.body.role,
-        lock: req.body.lock,
+        lock: false,
         agb: req.body.agb,
         clan: []
 
@@ -86,6 +86,12 @@ router.post('/signin', function (req, res, next) {
                 return res.status(401).json({
                     title: 'Login fehlgeschlagen',
                     error: {message: 'Passwort oder E-Mail ist Falsch'}
+                });
+            }
+            if (user.lock != true) {
+                return res.status(401).json({
+                    title: 'Login fehlgeschlagen',
+                    error: {message: 'Noch nicht freigeschalten!'}
                 });
             }
             var token;
