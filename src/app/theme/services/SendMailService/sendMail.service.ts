@@ -3,14 +3,12 @@ import {Http, Headers, Response} from "@angular/http";
 import 'rxjs/Rx';
 
 import {Observable} from "rxjs";
-import {Router} from "@angular/router";
 import { Mail } from "../../model/mail.model";
-import {NotificationsService} from "angular2-notifications/src/notifications.service";
 
 
 @Injectable()
 export class SendMailService {
-    constructor(private http: Http, private _toastService: NotificationsService, private router: Router) {
+    constructor(private http: Http) {
     }
 
     sendMail(mail: Mail) {
