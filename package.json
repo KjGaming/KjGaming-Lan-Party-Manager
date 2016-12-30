@@ -57,7 +57,7 @@
     "mongoose": "^4.6.4",
     "mongoose-unique-validator": "^1.0.2",
     "morgan": "^1.7.0",
-    "ng2-bootstrap": "^1.1.5",
+    "ng2-bootstrap": "^1.1.16",
     "ng2-ckeditor": "^1.0.7",
     "ng2-popover": "0.0.11",
     "ng2-smart-table": "^0.3.1",
@@ -170,10 +170,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://genin@bitbucket.org/genin/kjgamingintern.git"
-  },
-  "engines": {
-    "node": ">= 4.2.1",
-    "npm": ">= 3"
+    "url": "https://github.com/KjGaming/KjGaming-Lan-Party-Manager.git"
   }
 }

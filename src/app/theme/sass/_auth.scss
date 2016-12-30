@@ -12,9 +12,14 @@ $text-color: #ffffff;
 }
 
 .auth-block {
-  width: 540px;
-  margin: 0 auto;
+  width: 500px;
+
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 5px;
+  @media (max-width : 480px) {
+    margin-top: auto;
+  }
   @include bg-translucent-dark(0.55);
   color: #fff;
   padding: 32px;
