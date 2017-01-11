@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, AbstractControl, FormBuilder } from "@angular/forms";
 import { NotificationsService } from "angular2-notifications";
 
 @Component({
@@ -14,18 +14,27 @@ export class AdminServerComponent implements OnInit {
     };
 
     /** variables **/
-    public allServer;
+    public allServer = ["Kein Server aktive"];
 
     /** Formula variables **/
     public formAdd: FormGroup;
     public formEdit: FormGroup;
     public formDel: FormGroup;
-    public server: AbstractControl;
-    public title: AbstractControl;
-    public content: AbstractControl;
-    public status: AbstractControl;
-    public mode: AbstractControl;
-    public ip: AbstractControl;
+
+    public addTitle: AbstractControl;
+    public addContent: AbstractControl;
+    public addStatus: AbstractControl;
+    public addMode: AbstractControl;
+    public addIp: AbstractControl;
+
+    public editServer: AbstractControl;
+    public editTitle: AbstractControl;
+    public editContent: AbstractControl;
+    public editStatus: AbstractControl;
+    public editMode: AbstractControl;
+    public editIp: AbstractControl;
+
+    public delServer: AbstractControl;
 
     constructor(fb: FormBuilder, private _toastService: NotificationsService) {
         this.formAdd = fb.group({
@@ -36,11 +45,11 @@ export class AdminServerComponent implements OnInit {
             'ip': ['']
         });
 
-        this.title = this.formAdd.controls['title'];
-        this.content = this.formAdd.controls['content'];
-        this.status = this.formAdd.controls['status'];
-        this.mode = this.formAdd.controls['mode'];
-        this.ip = this.formAdd.controls['ip'];
+        this.addTitle = this.formAdd.controls['title'];
+        this.addContent = this.formAdd.controls['content'];
+        this.addStatus = this.formAdd.controls['status'];
+        this.addMode = this.formAdd.controls['mode'];
+        this.addIp = this.formAdd.controls['ip'];
 
         this.formEdit = fb.group({
             'server': [''],
@@ -51,18 +60,18 @@ export class AdminServerComponent implements OnInit {
             'ip': ['']
         });
 
-        this.server = this.formEdit.controls['server'];
-        this.title = this.formEdit.controls['title'];
-        this.content = this.formEdit.controls['content'];
-        this.status = this.formEdit.controls['status'];
-        this.mode = this.formEdit.controls['mode'];
-        this.ip = this.formEdit.controls['ip'];
+        this.editServer = this.formEdit.controls['server'];
+        this.editTitle = this.formEdit.controls['title'];
+        this.editContent = this.formEdit.controls['content'];
+        this.editStatus = this.formEdit.controls['status'];
+        this.editMode = this.formEdit.controls['mode'];
+        this.editIp = this.formEdit.controls['ip'];
 
         this.formDel = fb.group({
             'server': ['']
         });
 
-        this.server = this.formDel.controls['server'];
+        this.delServer = this.formDel.controls['server'];
 
     }
 
@@ -72,6 +81,6 @@ export class AdminServerComponent implements OnInit {
 
     ngOnInit() {
         this.allServer = ["Server1","Server2","Server3","Server4"];
-        console.log(allServer);
+        console.log(this.allServer);
     }
 }

@@ -1,3 +1,4 @@
+<!--
 <ba-card title="Server hinzufügen" class="col-xl-4">
     <form [formGroup]="formAdd" (ngSubmit)="addServer(formAdd.value)" class="form-horizontal">
         <div class="form-group row">
@@ -40,14 +41,14 @@
 </ba-card>
 <ba-card title="Server bearbeiten" class="col-xl-4">
     <form [formGroup]="formEdit" (ngSubmit)="addServer(formEdit.value)" class="form-horizontal">
-        <div class="form-group row">
+        &lt;!&ndash;<div class="form-group row">
             <label for="exampleSelect2" class="col-xs-3">Server</label>
             <div class="col-xs-9">
                 <select [formControl]="server" class="form-control" id="editServer">
                     <option *ngIf="let server of allServer">{{server}}</option>
                 </select>
             </div>
-        </div>
+        </div>&ndash;&gt;
         <div class="form-group row">
             <label for="editTitle" class="col-xs-3 col-form-label">Titel</label>
             <div class="col-xs-9">
@@ -95,3 +96,4 @@
 
     </form>
 </ba-card>
+-->

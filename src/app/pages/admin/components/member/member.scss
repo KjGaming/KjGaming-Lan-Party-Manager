@@ -6,9 +6,10 @@
     line-height: 35px;
     vertical-align: middle;
 
-
   }
-
+  .age{
+    width: 70px !important;
+  }
 
   color: $default-text;
 
@@ -60,4 +61,3 @@ nav.ng2-smart-pagination-nav {
   display: flex;
   justify-content: center;
 }
-

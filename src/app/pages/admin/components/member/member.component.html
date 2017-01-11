@@ -1,0 +1,12 @@
+<div class="widgets">
+
+  <div class="row">
+    <ba-card title="Basic Example" baCardClass="with-scroll">
+      <ng2-smart-table class='form-control' [settings]="settings" [source]="source"
+                       (deleteConfirm)="onDeleteConfirm($event)"
+                       (editConfirm)="onSaveConfirm($event)"
+                       (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+    </ba-card>
+  </div>
+
+</div>

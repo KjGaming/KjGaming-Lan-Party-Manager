@@ -139,6 +139,7 @@ router.use('/', function (req, res, next) {
     });
 });
 
+/** Get alle Users with minmal Information **/
 router.get('/', function (req, res, next) {
     var userArray = [];
     User.find()
@@ -164,6 +165,27 @@ router.get('/', function (req, res, next) {
             res.status(200).json({
                 message: 'Success',
                 obj: userArray
+            });
+        });
+});
+
+/** Get alle Users with all Information **/
+router.get('/all', function (req, res, next) {
+    var userArray = [];
+    User.find()
+        .populate('clan', 'shortName name')
+        .exec(function (err, user) {
+            console.log(user);
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+
+            res.status(200).json({
+                message: 'Success',
+                obj: user
             });
         });
 });
