@@ -3,6 +3,7 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { SmartTablesService } from './smartTables.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { DomSanitizer } from "@angular/platform-browser";
+import { NotificationsService } from "angular2-notifications";
 
 
 
@@ -16,8 +17,12 @@ import { DomSanitizer } from "@angular/platform-browser";
 export class AdminMemberComponent implements OnInit{
 
     users = [];
+    public options = {
+        position: ["top", "center"],
+        timeOut: 5000
+    };
 
-    constructor(protected service: SmartTablesService, private _sanitizer: DomSanitizer) {
+    constructor(protected service: SmartTablesService, private _sanitizer: DomSanitizer, private _toastService: NotificationsService) {
 
     }
 
@@ -99,20 +104,24 @@ export class AdminMemberComponent implements OnInit{
 
     source: LocalDataSource = new LocalDataSource();
 
-
+    /** Delete methode to delete a user **/
     onDeleteConfirm(event): void {
-        if (window.confirm('Are you sure you want to delete?')) {
+        if (window.confirm('Willst du '+event.data.name + ' wirklich löschen?')) {
+            this._toastService.success('Erfolgreich', 'Du hast erfoglreich ' +event.data.name+ ' gelöscht');
             event.confirm.resolve();
         } else {
+            this._toastService.info('Info', 'Es wurde nichts gelöscht');
             event.confirm.reject();
         }
     }
 
+    /** change methode to change a current user **/
     onSaveConfirm(event): void {
         console.log(event);
         event.confirm.resolve();
     }
 
+    /** create methode to create a new user **/
     onCreateConfirm(event): void {
         console.log(event);
         event.confirm.resolve();

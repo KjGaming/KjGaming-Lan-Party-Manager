@@ -289,6 +289,7 @@ router.post('/del', function (req, res, next) {
         for (var i = 0; clan.user.length > i ; i++) {
             User.findByIdAndUpdate(clan.user[i], {$pull: {clan: req.body.clanId}},
                 function (err, user) {
+
                     if (err) {
                         return res.status(500).json({
                             title: 'User finde error',
