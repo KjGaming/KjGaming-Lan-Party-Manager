@@ -6,9 +6,10 @@
     line-height: 35px;
     vertical-align: middle;
 
-
   }
-
+  .age{
+    width: 70px !important;
+  }
 
   color: $default-text;
 
@@ -61,3 +62,13 @@ nav.ng2-smart-pagination-nav {
   justify-content: center;
 }
 
+.memberList{
+  height: 60px;
+  > td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  .switch{
+    vertical-align: middle;
+  }
+}

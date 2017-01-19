@@ -1,7 +1,11 @@
 import { Routes, RouterModule }  from '@angular/router';
 
 import { AdminComponent } from './admin.component';
-import { SettingsComponent } from './components/settings/settings.component';
+import { AdminNewsComponent } from "./components/news/news.component";
+import { AdminDownloadComponent } from "./components/download/download.component";
+import { AdminServerComponent } from "./components/server/server.component";
+import { AdminEventComponent } from "./components/event/event.component";
+import { AdminMemberComponent } from "./components/member/member.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -9,7 +13,13 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      { path: 'settings', component: SettingsComponent }
+      { path: 'news', component: AdminNewsComponent },
+      { path: 'download', component: AdminDownloadComponent },
+      { path: 'server', component: AdminServerComponent },
+      { path: 'event', component: AdminEventComponent },
+      { path: 'user', component: AdminMemberComponent },
+      { path: 'catering', component: AdminNewsComponent },
+      { path: 'tournament', component: AdminNewsComponent },
     ]
   }
 ];

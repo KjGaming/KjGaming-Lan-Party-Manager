@@ -132,319 +132,6 @@ export const PAGES_MENU = [
                     }
                 }
             },
-            /*{
-                path: 'editors',
-                data: {
-                    menu: {
-                        title: 'Editors',
-                        icon: '',
-                        iconClass: 'ion-edit',
-                        selected: false,
-                        expanded: false,
-                        order: 100,
-                    }
-                },
-                children: [
-                    {
-                        path: 'ckeditor',
-                        data: {
-                            menu: {
-                                title: 'CKEditor',
-                            }
-                        }
-                    }
-                ]
-            },
-            //{
-            //  path: 'components',
-            //  data: {
-            //    menu: {
-            //      title: 'Components',
-            //      icon: 'ion-gear-a',
-            //      selected: false,
-            //      expanded: false,
-            //      order: 250,
-            //    }
-            //  },
-            //  children: [
-            //    {
-            //      path: 'treeview',
-            //      data: {
-            //        menu: {
-            //          title: 'Tree View',
-            //        }
-            //      }
-            //    }
-            //  ]
-            //},
-            {
-                path: 'charts',
-                data: {
-                    menu: {
-                        title: 'Charts',
-                        icon: '',
-                        iconClass: 'ion-stats-bars',
-                        selected: false,
-                        expanded: false,
-                        order: 200,
-                    }
-                },
-                children: [
-                    {
-                        path: 'chartist-js',
-                        data: {
-                            menu: {
-                                title: 'Chartist.Js',
-                            }
-                        }
-                    }
-                ]
-            },
-            {
-                path: 'ui',
-                data: {
-                    menu: {
-                        title: 'UI Features',
-                        icon: '',
-                        iconClass: 'ion-android-laptop',
-                        selected: false,
-                        expanded: false,
-                        order: 300,
-                    }
-                },
-                children: [
-                    {
-                        path: 'typography',
-                        data: {
-                            menu: {
-                                title: 'Typography',
-                            }
-                        }
-                    },
-                    {
-                        path: 'buttons',
-                        data: {
-                            menu: {
-                                title: 'Buttons',
-                            }
-                        }
-                    },
-                    {
-                        path: 'icons',
-                        data: {
-                            menu: {
-                                title: 'Icons',
-                            }
-                        }
-                    },
-                    {
-                        path: 'grid',
-                        data: {
-                            menu: {
-                                title: 'Grid',
-                            }
-                        }
-                    },
-                ]
-            },
-            {
-                path: 'forms',
-                data: {
-                    menu: {
-                        title: 'Form Elements',
-                        icon: '',
-                        iconClass: 'ion-compose',
-                        selected: false,
-                        expanded: false,
-                        order: 400,
-                    }
-                },
-                children: [
-                    {
-                        path: 'inputs',
-                        data: {
-                            menu: {
-                                title: 'Form Inputs',
-                            }
-                        }
-                    },
-                    {
-                        path: 'layouts',
-                        data: {
-                            menu: {
-                                title: 'Form Layouts',
-                            }
-                        }
-                    }
-                ]
-            },
-            {
-                path: 'tables',
-                data: {
-                    menu: {
-                        title: 'Tables',
-                        icon: '',
-                        iconClass: 'ion-grid',
-                        selected: false,
-                        expanded: false,
-                        order: 500,
-                    }
-                },
-                children: [
-                    {
-                        path: 'basictables',
-                        data: {
-                            menu: {
-                                title: 'Basic Tables',
-                            }
-                        }
-                    },
-                    {
-                        path: 'smarttables',
-                        data: {
-                            menu: {
-                                title: 'Smart Tables',
-                            }
-                        }
-                    }
-                ]
-            },
-            {
-                path: 'maps',
-                data: {
-                    menu: {
-                        title: 'Maps',
-                        icon: '',
-                        iconClass: 'ion-ios-location-outline',
-                        selected: false,
-                        expanded: false,
-                        order: 600,
-                    }
-                },
-                children: [
-                    {
-                        path: 'googlemaps',
-                        data: {
-                            menu: {
-                                title: 'Google Maps',
-                            }
-                        }
-                    },
-                    {
-                        path: 'leafletmaps',
-                        data: {
-                            menu: {
-                                title: 'Leaflet Maps',
-                            }
-                        }
-                    },
-                    {
-                        path: 'bubblemaps',
-                        data: {
-                            menu: {
-                                title: 'Bubble Maps',
-                            }
-                        }
-                    },
-                    {
-                        path: 'linemaps',
-                        data: {
-                            menu: {
-                                title: 'Line Maps',
-                            }
-                        }
-                    }
-                ]
-            },
-            {
-                path: '',
-                data: {
-                    menu: {
-                        title: 'Pages',
-                        icon: '',
-                        iconClass: 'ion-document',
-                        selected: false,
-                        expanded: false,
-                        order: 650,
-                    }
-                },
-                children: [
-                    {
-                        path: ['/login'],
-                        data: {
-                            menu: {
-                                title: 'Login'
-                            }
-                        }
-                    },
-                    {
-                        path: ['/register'],
-                        data: {
-                            menu: {
-                                title: 'Register'
-                            }
-                        }
-                    }
-                ]
-            },
-            {
-                path: '',
-                data: {
-                    menu: {
-                        title: 'Menu Level 1',
-                        icon: '',
-                        iconClass: 'ion-ios-more',
-                        selected: false,
-                        expanded: false,
-                        order: 700,
-                    }
-                },
-                children: [
-                    {
-                        path: '',
-                        data: {
-                            menu: {
-                                title: 'Menu Level 1.1',
-                                url: '#'
-                            }
-                        }
-                    },
-                    {
-                        path: '',
-                        data: {
-                            menu: {
-                                title: 'Menu Level 1.2',
-                                iconClass: '',
-                                url: '#'
-                            }
-                        },
-                        children: [
-                            {
-                                path: '',
-                                data: {
-                                    menu: {
-                                        title: 'Menu Level 1.2.1',
-                                        url: '#'
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                path: '',
-                data: {
-                    menu: {
-                        title: 'External Link',
-                        url: 'http://akveo.com',
-                        icon: '',
-                        iconClass: 'ion-android-exit',
-                        order: 800,
-                        target: '_blank'
-                    }
-                }
-            },*/
             {
                 path: 'admin',
                 data: {
@@ -460,11 +147,89 @@ export const PAGES_MENU = [
                 },
                 children: [
                     {
-                        path: 'settings',
+                        path: 'news',
                         data: {
                             menu: {
-                                title: 'Settings',
-                                icon: 'home',
+                                title: 'News',
+                                icon: 'info',
+                                iconClass: 'material-icons',
+                                selected: false,
+                                expanded: false,
+                                order: 0
+                            }
+                        }
+                    },
+                    {
+                        path: 'download',
+                        data: {
+                            menu: {
+                                title: 'Download',
+                                icon: 'file_download',
+                                iconClass: 'material-icons',
+                                selected: false,
+                                expanded: false,
+                                order: 0
+                            }
+                        }
+                    },
+                    {
+                        path: 'server',
+                        data: {
+                            menu: {
+                                title: 'Server',
+                                icon: 'dns',
+                                iconClass: 'material-icons',
+                                selected: false,
+                                expanded: false,
+                                order: 0
+                            }
+                        }
+                    },
+                    {
+                        path: 'event',
+                        data: {
+                            menu: {
+                                title: 'Event',
+                                icon: 'event',
+                                iconClass: 'material-icons',
+                                selected: false,
+                                expanded: false,
+                                order: 0
+                            }
+                        }
+                    },
+                    {
+                        path: 'user',
+                        data: {
+                            menu: {
+                                title: 'Member',
+                                icon: 'person',
+                                iconClass: 'material-icons',
+                                selected: false,
+                                expanded: false,
+                                order: 0
+                            }
+                        }
+                    },
+                    {
+                        path: 'catering',
+                        data: {
+                            menu: {
+                                title: 'Catering',
+                                icon: 'restaurant',
+                                iconClass: 'material-icons',
+                                selected: false,
+                                expanded: false,
+                                order: 0
+                            }
+                        }
+                    },
+                    {
+                        path: 'tournament',
+                        data: {
+                            menu: {
+                                title: 'Turnier',
+                                icon: 'games',
                                 iconClass: 'material-icons',
                                 selected: false,
                                 expanded: false,
@@ -472,6 +237,7 @@ export const PAGES_MENU = [
                             }
                         }
                     }
+
                 ]
             }
         ]

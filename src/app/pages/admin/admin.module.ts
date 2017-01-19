@@ -1,25 +1,48 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgaModule } from '../../theme/nga.module';
 
 import { routing }       from './admin.routing';
 import { AdminComponent } from './admin.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { AdminNewsComponent } from "./components/news/news.component";
+import { AdminServerComponent } from "./components/server/server.component";
+import { AdminEventComponent } from "./components/event/event.component";
+import { AdminDownloadComponent } from "./components/download/download.component";
+import { UiSwitchModule } from "angular2-ui-switch";
+import { AdminMemberComponent } from "./components/member/member.component";
+import { Ng2SmartTableModule } from "ng2-smart-table";
+import { SmartTablesService } from "./components/member/smartTables.service";
+import { SimpleNotificationsModule } from "angular2-notifications";
+
+
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    NgaModule,
-    routing
-  ],
-  declarations: [
-    AdminComponent,
-    SettingsComponent,
-  ],
-  providers: [
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        NgaModule,
+        routing,
+        UiSwitchModule,
+        ReactiveFormsModule,
+        Ng2SmartTableModule,
+        SimpleNotificationsModule
+
+    ],
+    declarations: [
+        AdminComponent,
+        SettingsComponent,
+        AdminNewsComponent,
+        AdminServerComponent,
+        AdminEventComponent,
+        AdminDownloadComponent,
+        AdminMemberComponent
+    ],
+    providers: [
+        SmartTablesService
+    ]
 })
-export default class AdminModule {}
+export default class AdminModule {
+}

@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Http, Response, Headers} from "@angular/http";
 import { Observable } from 'rxjs/Rx';
-import {NotificationsService} from "angular2-notifications/src/notifications.service";
 
 @Injectable()
 export class MemberlistService {
 
-    constructor(private http: Http, private _toastService:NotificationsService) {
+    constructor(private http: Http) {
     }
 
     // Uses http.get() to load a single JSON file
