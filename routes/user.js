@@ -502,7 +502,7 @@ router.post('/del', function (req, res, next) {
                                     }
                                 });
                         } else {
-                            /!** drop user from clan **!/
+                            /** drop user from clan **/
                             console.log('no admin');
                             Clan.findByIdAndUpdate(clan._id, {$pull: {user: req.body.userId}},
                                 function (err, clan) {
