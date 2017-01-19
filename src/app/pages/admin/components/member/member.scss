@@ -61,3 +61,14 @@ nav.ng2-smart-pagination-nav {
   display: flex;
   justify-content: center;
 }
+
+.memberList{
+  height: 60px;
+  > td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  .switch{
+    vertical-align: middle;
+  }
+}

@@ -3,11 +3,40 @@
 
   <div class="row">
     <ba-card title="Basic Example" baCardClass="with-scroll">
-      <ng2-smart-table class='form-control' [settings]="settings" [source]="source"
-                       (deleteConfirm)="onDeleteConfirm($event)"
-                       (editConfirm)="onSaveConfirm($event)"
-                       (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+      <table class="table">
+        <thead class="thead-inverse">
+        <tr>
+          <th>Name</th>
+          <th>Alter</th>
+          <th>LAN Manager</th>
+          <th>Benutzerrolle</th>
+          <th>LAN Packet</th>
+          <th>LAN Kosten</th>
+          <th>Essen</th>
+
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users" class="memberList" valign="middle">
+            <td>{{user.name}}</td>
+            <td>{{user.age}}</td>
+            <td><ui-switch [(ngModel)]="user.lock" (change)="switchSave('lock',$event, user.id)"></ui-switch></td>
+            <td>
+              <select class="form-control" (change)="switchSave('role',$event.srcElement.value, user.id)">
+                <option value="0" [selected]="user.role == 0 ? true : null">User</option>
+                <option value="1" [selected]="user.role == 1? true : null">ORGA</option>
+                <option value="2" [selected]="user.role == 2? true : null">Admin</option>
+              </select>
+            </td>
+            <td><ui-switch [(ngModel)]="user.packetPaid" (change)="switchSave('packetPaid',$event, user.id)"></ui-switch></td>
+            <td><ui-switch [(ngModel)]="user.lanPaid" (change)="switchSave('lanPaid',$event, user.id)"></ui-switch></td>
+            <td>Essen</td>
+          </tr>
+        </tbody>
+      </table>
+
     </ba-card>
   </div>
+
 
 </div>

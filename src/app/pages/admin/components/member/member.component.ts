@@ -14,7 +14,7 @@ import { NotificationsService } from "angular2-notifications";
     template: require('./member.component.html')
 
 })
-export class AdminMemberComponent implements OnInit{
+export class AdminMemberComponent implements OnInit {
 
     users = [];
     public options = {
@@ -22,29 +22,42 @@ export class AdminMemberComponent implements OnInit{
         timeOut: 5000
     };
 
-    constructor(protected service: SmartTablesService, private _sanitizer: DomSanitizer, private _toastService: NotificationsService) {
+    constructor(protected service: SmartTablesService, private _toastService: NotificationsService) {
 
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.service.getUserMemberlist().subscribe(
             // the first argument is a function which runs on success
             data => {
-                console.log(data.obj);
-                for(let key in data.obj){
+
+                for (let key in data.obj) {
+                    /** Variable **/
+                    let birth, lock;
+
+                    if (data.obj[key].lock == true) {
+                        lock = true;
+                    } else {
+                        lock = false;
+                    }
+
+
+                    /** Change to String Data **/
+                    birth = new Date(data.obj[key].birth);
+
                     this.users[key] =
                         {
-                            "name": data.obj[key].firstName +" '"+ data.obj[key].nickName +"' "+ data.obj[key].lastName,
-                            "age": data.obj[key].birth,
-                            "lock": data.obj[key].lock,
+                            "name": data.obj[key].firstName + " '" + data.obj[key].nickName + "' " + data.obj[key].lastName,
+                            "age": birth.getDate() + '.' + (birth.getMonth() + 1) + '.' + birth.getFullYear(),
+                            "lock": lock,
                             "role": data.obj[key].role,
                             "packetPaid": data.obj[key].lan.packet.paid,
                             "lanPaid": data.obj[key].lan.paid,
-                            "changeFood": data.obj[key].lan.food
+                            "changeFood": data.obj[key].lan.food,
+                            "id": data.obj[key]._id
                         }
                 }
                 console.log(this.users);
-                this.source.load(this.users);
 
             },
             // the second argument is a function which runs on error
@@ -54,60 +67,11 @@ export class AdminMemberComponent implements OnInit{
         );
     }
 
-    settings = {
-        noDataMessage: 'Keine Daten Vorhanden',
-        edit: {
-            editButtonContent: '<i class="ion-edit"></i>',
-            saveButtonContent: '<i class="ion-checkmark"></i>',
-            cancelButtonContent: '<i class="ion-close"></i>',
-            confirmSave: true
-        },
-        delete: {
-            deleteButtonContent: '<i class="ion-trash-a"></i>',
-            confirmDelete: true
-        },
-        columns: {
-            name: {
-                title: 'Name',
-                type: 'String',
-                editable: false
-            },
-            age: {
-                title: 'Alter',
-                type: 'String',
-                class: 'age',
-                editable: false
-            },
-            lock: {
-                title: 'LAN-Manager',
-                type: 'String'
-            },
-            role: {
-                title: 'Rolle',
-                type: 'String'
-            },
-            packetPaid: {
-                title: 'LAN-Paket',
-                type: 'String'
-            },
-            lanPaid: {
-                title: 'LAN-Kosten',
-                type: 'String'
-            },
-            changeFood: {
-                title: 'Lan Essen',
-                type: 'String'
-            }
-
-        }
-    };
-
-    source: LocalDataSource = new LocalDataSource();
 
     /** Delete methode to delete a user **/
     onDeleteConfirm(event): void {
-        if (window.confirm('Willst du '+event.data.name + ' wirklich löschen?')) {
-            this._toastService.success('Erfolgreich', 'Du hast erfoglreich ' +event.data.name+ ' gelöscht');
+        if (window.confirm('Willst du ' + event.data.name + ' wirklich löschen?')) {
+            this._toastService.success('Erfolgreich', 'Du hast erfoglreich ' + event.data.name + ' gelöscht');
             event.confirm.resolve();
         } else {
             this._toastService.info('Info', 'Es wurde nichts gelöscht');
@@ -115,16 +79,44 @@ export class AdminMemberComponent implements OnInit{
         }
     }
 
-    /** change methode to change a current user **/
-    onSaveConfirm(event): void {
-        console.log(event);
-        event.confirm.resolve();
-    }
 
-    /** create methode to create a new user **/
-    onCreateConfirm(event): void {
-        console.log(event);
-        event.confirm.resolve();
-    }
+    switchSave(eventName ,event, id) {
+        let data = {
+            _id: id,
+            lock: null,
+            role: null,
+            packetPaid: null,
+            paid: null
+        };
 
+        if(eventName == 'lock'){
+            data.lock = event;
+        }
+        if(eventName == 'role'){
+            data.role = event;
+        }
+        if(eventName == 'packetPaid'){
+            data.packetPaid = event;
+        }
+        if(eventName == 'lanPaid'){
+            data.paid = event;
+        }
+
+        console.log(data);
+        this.service.changeUser(data).subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                console.log(data);
+
+            },
+            // the second argument is a function which runs on error
+            err => console.error(err),
+            // the third argument is a function which runs on completion
+            () => console.log('done update User')
+        );
+
+        console.log('Die User ID => ' + id);
+        console.log(event);
+
+    }
 }

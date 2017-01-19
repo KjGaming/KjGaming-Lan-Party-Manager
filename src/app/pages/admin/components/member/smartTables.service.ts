@@ -25,12 +25,13 @@ export class SmartTablesService {
   }
 
   /** save the current user, with the changing data **/
-  changeUser(){
+  changeUser(data){
+    const body = JSON.stringify(data);
     const headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('id_token')
     });
-    return this.http.get('/api/user/all', {headers: headers})
+    return this.http.put('/api/user/changeAdmin', body, {headers: headers})
         .map((res: Response) => res.json())
         .catch((err: Response)=> {
           return Observable.throw(err.json());

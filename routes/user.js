@@ -244,48 +244,56 @@ router.post('/changeUser', function (req, res, next) {
 
 });
 
+/** admin only **/
 /** change user data admin function **/
-router.post('/changeAdmin', function (req, res, next) {
-    var decoded = jwt.decode(req.get('Authorization'));
-    User.findById(decoded.user._id, function (err, user) {
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred',
-                error: err
+router.put('/changeAdmin', function (req, res, next) {
+    jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.Admin.17', function (err3, decoded3) {
+        if (err3) {
+            res.status(401).json({
+                title: 'Not Authenticated'
             });
         }
-
-        if(req.body.packetPaid){
-            user.lan.packet.paid = req.body.packetPaid;
-        }
-        if(req.body.food){
-            user.lan.food = req.body.food;
-        }
-        if(req.body.paid){
-            user.lan.paid = req.body.paid;
-        }
-        if(req.body.role){
-            user.role = req.body.role;
-        }
-        if(req.body.lock){
-            user.lock = req.body.lock;
-        }
-
-        user.save(function (err, updatedUser) {
-            if (err){
+        User.findById(req.body._id, function (err, user) {
+            if (err) {
                 return res.status(500).json({
-                    title: 'Ein Fehler ist aufgetreten',
+                    title: 'An error occurred',
                     error: err
                 });
             }
-            res.status(201).json({
-                message: 'User bearbeitet',
-                obj: updatedUser
+            console.log(req.body);
+
+            if(req.body.packetPaid != null){
+                user.lan.packet.paid = req.body.packetPaid;
+            }
+            if(req.body.food != null){
+                user.lan.food = req.body.food;
+            }
+            if(req.body.paid != null){
+                user.lan.paid = req.body.paid;
+            }
+            if(req.body.role != null) {
+                user.role = req.body.role;
+            }
+            if(req.body.lock != null){
+                user.lock = req.body.lock;
+            }
+
+            user.save(function (err, updatedUser) {
+                if (err){
+                    return res.status(500).json({
+                        title: 'Ein Fehler ist aufgetreten',
+                        error: err
+                    });
+                }
+                res.status(201).json({
+                    message: 'User bearbeitet',
+                    obj: updatedUser
+                });
             });
+
         });
 
     });
-
 
 });
 
