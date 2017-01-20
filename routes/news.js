@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 var News = require('../models/news');
 
 router.get('/', function (req, res, next) {
@@ -39,8 +40,35 @@ router.use('/', function (req, res, next) {
 });
 
 /** Create a new news **/
-router.post('/', function (res, req) {
+router.post('/', function (req, res) {
+    var news = new News({
+        title: req.body.title,
+        content: req.body.content,
+        icon:{
+            look: req.body.look,
+            color: req.body.color
+        }
+    });
 
+
+    news.save(function (err, news) {
+        if(err){
+            return res.status(500).json({
+                title: 'Hier ist ein Fehler aufgetreten',
+                error: err
+            });
+        }
+        if(news == null){
+            return res.status(500).json({
+                title: 'Die erstellte News war leer',
+                error: err
+            });
+        }
+        return res.status(201).json({
+            title: 'News erstellt',
+            error: news
+        });
+    });
 });
 
 /** Update a news **/

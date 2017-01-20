@@ -8,6 +8,11 @@ import {NotificationsService} from "angular2-notifications";
   template: require('./news.component.html'),
 })
 export class AdminNewsComponent{
+  public options = {
+    position: ["top", "center"],
+    timeOut: 5000
+  };
+
   public ckeditorNewsCreate:string = '<p>Hello CKEditor</p>';
   public ckeditorNewsEdit:string;
 
@@ -48,11 +53,11 @@ export class AdminNewsComponent{
       color: this.createColor
     };
 
-    this._newsService.changeNews(data).subscribe(
+    this._newsService.createNews(data).subscribe(
         // the first argument is a function which runs on success
         data => {
           console.log(data);
-          this._toastService.success('Erstellt', 'Du hast erfoglreich eine News erstellt');
+          this._toastService.success(data.title, '');
 
         },
         // the second argument is a function which runs on error
