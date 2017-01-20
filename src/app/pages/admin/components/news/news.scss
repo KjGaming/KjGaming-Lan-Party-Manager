@@ -1,4 +1,6 @@
-.google-maps {
-  width: 100%;
-  height: calc(100vh - 283px);
+div.btnSaveNews{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 20px;
 }

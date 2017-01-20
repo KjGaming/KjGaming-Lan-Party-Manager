@@ -15,6 +15,8 @@ import { AdminMemberComponent } from "./components/member/member.component";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 import { SmartTablesService } from "./components/member/smartTables.service";
 import { SimpleNotificationsModule } from "angular2-notifications";
+import { CKEditorModule } from 'ng2-ckeditor';
+import {NewsService} from "../news/news.service";
 
 
 
@@ -28,7 +30,8 @@ import { SimpleNotificationsModule } from "angular2-notifications";
         UiSwitchModule,
         ReactiveFormsModule,
         Ng2SmartTableModule,
-        SimpleNotificationsModule
+        SimpleNotificationsModule,
+        CKEditorModule
 
     ],
     declarations: [
@@ -41,7 +44,8 @@ import { SimpleNotificationsModule } from "angular2-notifications";
         AdminMemberComponent
     ],
     providers: [
-        SmartTablesService
+        SmartTablesService,
+        NewsService
     ]
 })
 export default class AdminModule {

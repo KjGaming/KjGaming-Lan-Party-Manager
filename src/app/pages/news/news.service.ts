@@ -19,5 +19,48 @@ export class NewsService {
             .map((res: Response) => res.json());
 
     }
+
+    /** save the current news, with the changing data **/
+    changeNews(data){
+        const body = JSON.stringify(data);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+        return this.http.put('/api/news', body, {headers: headers})
+            .map((res: Response) => res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+    }
+
+    /** create a new news **/
+    createNews(data){
+        const body = JSON.stringify(data);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+        return this.http.post('/api/news', body ,{headers: headers})
+            .map((res: Response) => res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+
+    }
+
+    /** delete the current news **/
+    delNews(){
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+        return this.http.delete('/api/news', {headers: headers})
+            .map((res: Response) => res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+
+    }
 }
 

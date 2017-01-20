@@ -1,3 +1,49 @@
-<ba-card title="News">
+<ba-card title="News erstellen">
+    <div class="form-group">
+        <label for="createTitle">Titel</label>
+        <input type="text" class="form-control" id="createTitle" placeholder="news title" [(ngModel)]="createTitle">
+    </div>
+    <div class="form-group form-inline row">
+        <div class="form-group col-md-6">
+            <label for="createIcon">Icon</label>
+            <select class="form-control" id="createIcon" [(ngModel)]="createIcon">
+                <option value="envelope">Brief</option>
+                <option value="comments">Sprechblasen</option>
+                <option value="user">User</option>
+                <option value="camera">Kamera</option>
+                <option value="video-camera">Videocamera</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="createColor">Farbe</label>
+            <select class="form-control" id="createColor" [(ngModel)]="createColor">
+                <option value="red">Rot</option>
+                <option value="blue">Blau</option>
+                <option value="green">Grün</option>
+                <option value="yellow">Gelb</option>
+            </select>
+        </div>
+    </div>
+
+    <ckeditor  [(ngModel)]="ckeditorNewsCreate"
+               [config]="config"
+               debounce="500"
+               defaultLanguage="de"
+            >
+    </ckeditor>
+    <div class="btnSaveNews">
+        <button type="button" (click)="creatNews()" class="btn btn-success">Press me</button>
+    </div>
+
+</ba-card>
+<ba-card title="News bearbeiten">
+    <ckeditor  [(ngModel)]="ckeditorNewsEdit"
+               [config]="config"
+               debounce="500"
+               defaultLanguage="de"
+    >
+    </ckeditor>
+</ba-card>
+<ba-card title="News löschen">
 
 </ba-card>
