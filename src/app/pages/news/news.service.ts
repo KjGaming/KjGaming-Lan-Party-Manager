@@ -27,7 +27,7 @@ export class NewsService {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('id_token')
         });
-        return this.http.put('/api/news', body, {headers: headers})
+        return this.http.put('/api/admin/news', body, {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
@@ -41,7 +41,7 @@ export class NewsService {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('id_token')
         });
-        return this.http.post('/api/news', body ,{headers: headers})
+        return this.http.post('/api/admin/news', body ,{headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
@@ -50,12 +50,13 @@ export class NewsService {
     }
 
     /** delete the current news **/
-    delNews(){
+    delNews(data){
+        const body = JSON.stringify(data);
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('id_token')
         });
-        return this.http.delete('/api/news', {headers: headers})
+        return this.http.delete('/api/admin/news/' + data.id, {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
