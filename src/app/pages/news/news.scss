@@ -33,6 +33,10 @@
     &:after {
       clear: both;
     }
+    .bg-color-red{background-color: red !important; color: white !important; }
+    .bg-color-green{background-color: green !important; color: white !important;}
+    .bg-color-blue{background-color: blue !important; color: white !important;}
+    .bg-color-yellow{background-color: orange !important;color: white !important;}
 
     > .timeline-item {
       -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
