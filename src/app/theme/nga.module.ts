@@ -47,7 +47,9 @@ import {
     BaThemePreloader,
     BaThemeSpinner,
     AuthService,
-    SendMailService
+    KjgServerService,
+    SendMailService,
+
 
 } from './services';
 
@@ -92,7 +94,9 @@ const NGA_SERVICES = [
     BaImageLoaderService,
     BaThemePreloader,
     BaThemeSpinner,
-    AuthService
+    AuthService,
+    KjgServerService,
+    SendMailService
 ];
 
 const NGA_VALIDATORS = [

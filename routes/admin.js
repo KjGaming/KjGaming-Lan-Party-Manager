@@ -3,7 +3,6 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 
 var newsRoutes = require('./admin/news');
-var downloadRoutes = require('./admin/download');
 var serverRoutes = require('./admin/server');
 var eventRoutes = require('./admin/event');
 
@@ -23,7 +22,6 @@ router.use('/', function (req, res, next) {
 
 /** routes that can only use admins **/
 router.use('/news', newsRoutes);
-router.use('/download', downloadRoutes);
 router.use('/server', serverRoutes);
 router.use('/event', eventRoutes);
 

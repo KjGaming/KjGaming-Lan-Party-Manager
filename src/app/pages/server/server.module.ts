@@ -5,7 +5,6 @@ import { NgaModule } from '../../theme/nga.module';
 
 import { routing }       from './server.routing';
 import { ServerComponent } from './server.component';
-import { ServerService } from "./server.service";
 import { HttpModule } from "@angular/http";
 
 
@@ -19,9 +18,6 @@ import { HttpModule } from "@angular/http";
     ],
     declarations: [
         ServerComponent
-    ],
-    providers: [
-        ServerService
     ]
 })
 export default class ServerModule {

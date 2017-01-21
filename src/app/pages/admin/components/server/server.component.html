@@ -1,99 +1,82 @@
-<!--
-<ba-card title="Server hinzufügen" class="col-xl-4">
-    <form [formGroup]="formAdd" (ngSubmit)="addServer(formAdd.value)" class="form-horizontal">
-        <div class="form-group row">
-            <label for="addTitle" class="col-xs-3 col-form-label">Titel</label>
-            <div class="col-xs-9">
-                <input [formControl]="title" type="text" class="form-control" id="addTitle" placeholder="Teamspeak 3">
-            </div>
+<simple-notifications [options]="options"></simple-notifications>
+<ba-card title="Server erstellen">
+    <div class="form-group">
+        <label for="createTitle">Titel</label>
+        <input type="text" class="form-control" id="createTitle" placeholder="server title" [(ngModel)]="createTitle">
+    </div>
+    <div class="form-group">
+        <label for="createTitle">Text</label>
+        <input type="text" class="form-control" id="createTitle" placeholder="server text" [(ngModel)]="createContent">
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="createTitle">IP-Adresse</label>
+            <input type="url" class="form-control" id="createTitle" placeholder="server ip" [(ngModel)]="createIp">
         </div>
-        <div class="form-group row">
-            <label for="addContent" class="col-xs-3 col-form-label">Beschreibung</label>
-            <div class="col-xs-9">
-                <input [formControl]="content" type="text" class="form-control" id="addContent"
-                       placeholder="Eine kleine Beschreibung">
-            </div>
+        <div class="form-group col-md-6">
+            <label for="createTitle">Server Modus</label>
+            <input type="url" class="form-control" id="createTitle" placeholder="server mode" [(ngModel)]="createMode">
         </div>
-        <div class="form-group row">
-            <label for="addMode" class="col-xs-3 col-form-label">Modus</label>
-            <div class="col-xs-9">
-                <input [formControl]="mode" type="text" class="form-control" id="addMode"
-                       placeholder="Spiel, Voice usw.">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="addIp" class="col-xs-3 col-form-label">IP</label>
-            <div class="col-xs-9">
-                <input [formControl]="ip" type="text" class="form-control" id="addIp" placeholder="192.168.1.1">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="addIp" class="col-xs-8 col-form-label">Status</label>
-            <div class="col-xs-4">
-                <ui-switch [formControl]="status" color="green"></ui-switch>
-            </div>
-        </div>
-        <div class="form-group row">
-            <button type="submit" class="btn btn-primary btn-mm pull-right">Server erstellen</button>
-        </div>
+    </div>
 
-    </form>
+    <div class="btnDownload">
+        <button type="button" (click)="create()" class="btn btn-success">Server erstellen</button>
+    </div>
+
 </ba-card>
-<ba-card title="Server bearbeiten" class="col-xl-4">
-    <form [formGroup]="formEdit" (ngSubmit)="addServer(formEdit.value)" class="form-horizontal">
-        &lt;!&ndash;<div class="form-group row">
-            <label for="exampleSelect2" class="col-xs-3">Server</label>
-            <div class="col-xs-9">
-                <select [formControl]="server" class="form-control" id="editServer">
-                    <option *ngIf="let server of allServer">{{server}}</option>
-                </select>
-            </div>
-        </div>&ndash;&gt;
-        <div class="form-group row">
-            <label for="editTitle" class="col-xs-3 col-form-label">Titel</label>
-            <div class="col-xs-9">
-                <input [formControl]="title" type="text" class="form-control" id="editTitle" placeholder="Teamspeak 3">
-            </div>
+<ba-card title="Server bearbeiten">
+    <div class="form-group">
+        <label for="editChooseDownload">Server auswählen</label>
+        <select class="form-control" id="editChooseDownload" [(ngModel)]="id" (ngModelChange)="onChange()">
+            <option *ngFor="let server of servers" [ngValue]="server._id">{{server.title}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="createTitle">Titel</label>
+        <input type="text" class="form-control" id="createTitle" placeholder="server title" [(ngModel)]="editTitle">
+    </div>
+    <div class="form-group">
+        <label for="createTitle">Text</label>
+        <input type="text" class="form-control" id="createTitle" placeholder="server content" [(ngModel)]="editContent">
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="createTitle">IP-Adresse</label>
+            <input type="url" class="form-control" id="createTitle" placeholder="server ip" [(ngModel)]="editIp">
         </div>
-        <div class="form-group row">
-            <label for="editContent" class="col-xs-3 col-form-label">Beschreibung</label>
-            <div class="col-xs-9">
-                <input [formControl]="content" type="text" class="form-control" id="editContent"
-                       placeholder="Eine kleine Beschreibung">
-            </div>
+        <div class="form-group col-md-6">
+            <label for="createTitle">Server Modus</label>
+            <input type="url" class="form-control" id="createTitle" placeholder="server mode" [(ngModel)]="editMode">
         </div>
-        <div class="form-group row">
-            <label for="editMode" class="col-xs-3 col-form-label">Modus</label>
-            <div class="col-xs-9">
-                <input [formControl]="mode" type="text" class="form-control" id="editMode"
-                       placeholder="Spiel, Voice usw.">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="editIp" class="col-xs-3 col-form-label">IP</label>
-            <div class="col-xs-9">
-                <input [formControl]="ip" type="text" class="form-control" id="editIp" placeholder="192.168.1.1">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="editStatus" class="col-xs-8 col-form-label">Status</label>
-            <div class="col-xs-4">
-                <ui-switch [formControl]="status" color="green" id="editStatus"></ui-switch>
-            </div>
-        </div>
-        <div class="form-group row">
-            <button type="submit" class="btn btn-primary btn-mm pull-right">Server erstellen</button>
-        </div>
-
-    </form>
+    </div>
+    <div class="btnNews">
+        <button type="button" (click)="del()" class="btn btn-danger">Server löschen</button>
+        <button type="button" (click)="update()" class="btn btn-success">Server bearbeiten</button>
+    </div>
 </ba-card>
-<ba-card title="Server löschen" class="col-xl-4">
-    <form [formGroup]="formDel" (ngSubmit)="addServer(formDel.value)" class="form-horizontal">
-
-        <div class="form-group row">
-            <button type="submit" class="btn btn-primary btn-mm pull-right">Server erstellen</button>
-        </div>
-
-    </form>
+<ba-card title="Server status">
+    <table class="table table-hover">
+        <thead>
+        <tr class="black-muted-bg">
+            <th>#</th>
+            <th class="align-left">Titel</th>
+            <th class="align-left">Text</th>
+            <th class="align-left">IP</th>
+            <th class="align-left">Mode</th>
+            <th class="align-left">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let server of servers; let key = index;" class="no-top-border">
+            <td class="align-left">{{key + 1}}</td>
+            <td class="align-left">{{server.title}}</td>
+            <td class="align-left">{{server.content}}</td>
+            <td class="align-left">{{server.server.ip}}</td>
+            <td class="align-left">{{server.server.mode}}</td>
+            <td class="align-left"><ui-switch [(ngModel)]="server.status"
+                                              (change)="switchSave(server._id, $event)"></ui-switch></td>
+        </tr>
+        </tbody>
+    </table>
 </ba-card>
--->
+

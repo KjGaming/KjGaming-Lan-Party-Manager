@@ -39,7 +39,7 @@
 </ba-card>
 <ba-card title="News bearbeiten">
     <div class="form-group">
-        <label for="editChooseNews">Example select</label>
+        <label for="editChooseNews">News auswählen</label>
         <select class="form-control" id="editChooseNews" [(ngModel)]="id" (ngModelChange)="onChange()">
             <option *ngFor="let data of news" [ngValue]="data._id">{{data.title}}</option>
         </select>

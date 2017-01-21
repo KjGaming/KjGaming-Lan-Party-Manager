@@ -66,7 +66,6 @@ router.delete('/:id', function (req, res, next) {
             error: err
         });
     }
-    console.log(req.params.id);
     News.findByIdAndRemove(req.params.id, function (err, result) {
         if (err) {
             return res.status(500).json({

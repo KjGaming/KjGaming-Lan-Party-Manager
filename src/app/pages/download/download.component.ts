@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DownloadService } from "./download.service";
-import { User } from "../../theme/model";
+import {KjgServerService} from "../../theme/services/kjgServer/kjgServer.service";
 
 
 @Component({
@@ -14,7 +13,7 @@ export class DownloadComponent implements OnInit {
     public downloads;
 
 
-    constructor(private _memberService: DownloadService) {
+    constructor(private _serverService: KjgServerService) {
     }
 
     ngOnInit() {
@@ -23,7 +22,7 @@ export class DownloadComponent implements OnInit {
 
 
     getDownloads() {
-        this._memberService.getNews().subscribe(
+        this._serverService.get().subscribe(
             // the first argument is a function which runs on success
             data => {
                 this.downloads = data.obj;
