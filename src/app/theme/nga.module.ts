@@ -49,6 +49,7 @@ import {
     AuthService,
     KjgServerService,
     SendMailService,
+    KjgEventService
 
 
 } from './services';
@@ -96,7 +97,8 @@ const NGA_SERVICES = [
     BaThemeSpinner,
     AuthService,
     KjgServerService,
-    SendMailService
+    SendMailService,
+    KjgEventService
 ];
 
 const NGA_VALIDATORS = [

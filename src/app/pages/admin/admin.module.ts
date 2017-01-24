@@ -17,6 +17,7 @@ import {SmartTablesService} from "./components/member/smartTables.service";
 import {SimpleNotificationsModule} from "angular2-notifications";
 import {CKEditorModule} from 'ng2-ckeditor';
 import {NewsService} from "../news/news.service";
+import {AdminProductComponent} from "./components/product/product.component";
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {NewsService} from "../news/news.service";
         AdminServerComponent,
         AdminEventComponent,
         AdminDownloadComponent,
-        AdminMemberComponent
+        AdminMemberComponent,
+        AdminProductComponent
     ],
     providers: [
         SmartTablesService,
