@@ -1,3 +1,83 @@
-<ba-card title="News">
+<simple-notifications [options]="options"></simple-notifications>
+<ba-card title="News erstellen">
+    <div class="form-group">
+        <label for="createTitle">Titel</label>
+        <input type="text" class="form-control" id="createTitle" placeholder="news title" [(ngModel)]="createTitle">
+    </div>
+    <div class="form-group form-inline row">
+        <div class="form-group col-md-6">
+            <label for="createIcon">Icon</label>
+            <select class="form-control" id="createIcon" [(ngModel)]="createIcon">
+                <option value="envelope">Brief</option>
+                <option value="comments">Sprechblasen</option>
+                <option value="user">User</option>
+                <option value="camera">Kamera</option>
+                <option value="video-camera">Videocamera</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="createColor">Farbe</label>
+            <select class="form-control" id="createColor" [(ngModel)]="createColor">
+                <option value="red">Rot</option>
+                <option value="blue">Blau</option>
+                <option value="green">Grün</option>
+                <option value="yellow">Gelb</option>
+            </select>
+        </div>
+    </div>
+
+    <ckeditor  [(ngModel)]="ckeditorNewsCreate"
+               [config]="config"
+               debounce="500"
+               defaultLanguage="de"
+            >
+    </ckeditor>
+    <div class="btnNews">
+        <button type="button" (click)="creatNews()" class="btn btn-success">News erstellen</button>
+    </div>
 
 </ba-card>
+<ba-card title="News bearbeiten">
+    <div class="form-group">
+        <label for="editChooseNews">News auswählen</label>
+        <select class="form-control" id="editChooseNews" [(ngModel)]="id" (ngModelChange)="onChange()">
+            <option *ngFor="let data of news" [ngValue]="data._id">{{data.title}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="createTitle">Titel</label>
+        <input type="text" class="form-control" id="createTitle" placeholder="news title" [(ngModel)]="editTitle">
+    </div>
+    <div class="form-group form-inline row">
+        <div class="form-group col-md-6">
+            <label for="createIcon">Icon</label>
+            <select class="form-control" id="createIcon" [(ngModel)]="editIcon">
+                <option value="envelope">Brief</option>
+                <option value="comments">Sprechblasen</option>
+                <option value="user">User</option>
+                <option value="camera">Kamera</option>
+                <option value="video-camera">Videocamera</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="createColor">Farbe</label>
+            <select class="form-control" id="createColor" [(ngModel)]="editColor">
+                <option value="red">Rot</option>
+                <option value="blue">Blau</option>
+                <option value="green">Grün</option>
+                <option value="yellow">Gelb</option>
+            </select>
+        </div>
+    </div>
+    <ckeditor  [(ngModel)]="ckeditorNewsEdit"
+               [config]="config"
+               debounce="500"
+               defaultLanguage="de"
+    >
+    </ckeditor>
+    <div class="btnNews">
+        <button type="button" (click)="delNews()" class="btn btn-danger">News löschen</button>
+        <button type="button" (click)="updateNews()" class="btn btn-success">News bearbeiten</button>
+    </div>
+</ba-card>
+

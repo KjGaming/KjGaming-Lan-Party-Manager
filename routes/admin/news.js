@@ -2,23 +2,7 @@ var express = require('express');
 var router = express.Router();
 var News = require('../../models/news');
 
-router.get('/', function (req, res, next) {
-    News.find()
-        .exec(function (err, news) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
-                });
-            }
-            res.status(200).json({
-                message: 'Success',
-                obj: news
-            });
-        });
-});
-
-router.post('/add', function (req, res, next) {
+router.post('/', function (req, res, next) {
     var news = new News({
         title: req.body.title,
         content: req.body.content,
@@ -29,20 +13,27 @@ router.post('/add', function (req, res, next) {
     });
 
     news.save(function (err, result) {
-        if (err) {
+        if(err){
             return res.status(500).json({
                 title: 'Hier ist ein Fehler aufgetreten',
                 error: err
             });
         }
+        if(news == null){
+            return res.status(500).json({
+                title: 'Die erstellte News war leer',
+                error: err
+            });
+        }
         res.status(201).json({
-            message: 'News erstellt',
+            title: 'News erstellt',
+            message: 'Die News wurde erfoglreich erstellt',
             obj: result
         });
     });
 });
 
-router.put('/edit', function (req, res, next) {
+router.put('/', function (req, res, next) {
     var updateObject = {
         $set:{
             title: req.body.title,
@@ -68,8 +59,14 @@ router.put('/edit', function (req, res, next) {
     });
 });
 
-router.delete('/del', function (req, res, next) {
-    News.findByIdAndRemove(req.body.id, function (err, result) {
+router.delete('/:id', function (req, res, next) {
+    if (!req.params.id) {
+        return res.status(400).json({
+            title: 'No news selected',
+            error: err
+        });
+    }
+    News.findByIdAndRemove(req.params.id, function (err, result) {
         if (err) {
             return res.status(500).json({
                 title: 'Hier ist ein Fehler aufgetreten',

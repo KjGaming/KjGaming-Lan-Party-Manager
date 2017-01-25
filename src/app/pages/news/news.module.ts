@@ -9,6 +9,7 @@ import { NewsComponent } from './news.component';
 import { News } from "./news.model";*/
 import { HttpModule } from "@angular/http";
 import { NewsService } from "./news.service";
+import {ChangeArrayDirectionPipe} from "../../theme/pipes/changeArrayDirection/changeArrayDirection.pipe";
 
 
 @NgModule({

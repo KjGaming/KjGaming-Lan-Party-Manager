@@ -1,4 +1,7 @@
-.google-maps {
-  width: 100%;
-  height: calc(100vh - 283px);
+div.btnNews{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 20px;
+  color: black;
 }

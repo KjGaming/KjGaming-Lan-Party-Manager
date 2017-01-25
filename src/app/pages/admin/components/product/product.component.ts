@@ -4,10 +4,10 @@ import {KjgServerService} from "../../../../theme/services/kjgServer/kjgServer.s
 
 @Component({
     selector: 'admin-download',
-    styles: [require('./download.scss')],
-    template: require('./download.component.html'),
+    styles: [require('./product.scss')],
+    template: require('./product.component.html'),
 })
-export class AdminDownloadComponent implements OnInit {
+export class AdminProductComponent implements OnInit {
     public options = {
         position: ["top", "center"],
         timeOut: 5000
@@ -16,11 +16,12 @@ export class AdminDownloadComponent implements OnInit {
     constructor(protected _downloadService: KjgServerService, private _toastService: NotificationsService) {
     }
 
-    downloads: any[] = [];
+    products;
 
-    createTitle: string = '';
-    createContent: string = '';
-    createPath: string = '';
+    createName;
+    createPrice;
+    createNumber;
+    createInfo;
 
     id: string = '';
     editTitle: string = '';
@@ -32,39 +33,16 @@ export class AdminDownloadComponent implements OnInit {
     }
 
     onChange() {
-        for (let download of this.downloads) {
-            if (download._id == this.id) {
-                this.editTitle = download.title;
-                this.editContent = download.content;
-                this.editPath = download.download.path;
-            }
-        }
+
     }
 
     getDownload() {
-        this._downloadService.get().subscribe(
-            // the first argument is a function which runs on success
-            data => {
-                let keyNumber = 0;
-                for (let key in data.obj) {
-                    if (data.obj[key].download) {
-                        this.downloads[keyNumber] = data.obj[key];
-                        keyNumber++;
-                    }
-                }
-            },
-            // the second argument is a function which runs on error
-            err => console.error(err),
-            // the third argument is a function which runs on completion
-            () => console.log('done loading downloads')
-        );
+
     }
 
     createDonwload() {
         const data = {
-            title: this.createTitle,
-            content: this.createContent,
-            path: this.createPath
+
         };
 
         this._downloadService.create(data).subscribe(

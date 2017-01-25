@@ -2,32 +2,27 @@ var express = require('express');
 var router = express.Router();
 var Server = require('../../models/server');
 
-router.get('/', function (req, res, next) {
-    Server.find()
-        .exec(function (err, result) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
-                });
+router.post('/', function (req, res, next) {
+    if (req.body.ip) {
+        server = new Server({
+            title: req.body.title,
+            content: req.body.content,
+            status: false,
+            server: {
+                mode: req.body.mode,
+                ip: req.body.ip
             }
-            res.status(200).json({
-                message: 'Success',
-                obj: result
-            });
         });
-});
+    } else {
+        server = new Server({
+            title: req.body.title,
+            content: req.body.content,
+            download: {
+                path: req.body.path
+            }
+        });
+    }
 
-router.post('/add', function (req, res, next) {
-    var server = new Server({
-        title: req.body.title,
-        content: req.body.content,
-        status: req.body.status,
-        server: {
-            mode: req.body.mode,
-            ip: req.body.ip
-        }
-    });
 
     server.save(function (err, result) {
         if (err) {
@@ -37,24 +32,37 @@ router.post('/add', function (req, res, next) {
             });
         }
         res.status(201).json({
-            message: 'News erstellt',
+            title: 'Erfoglreich',
+            message: 'Download/Server erstellt',
             obj: result
         });
     });
 });
 
-router.put('/edit', function (req, res, next) {
-    var updateObject = {
-        $set:{
-            title: req.body.title,
-            content: req.body.content,
-            status: req.body.status,
-            server: {
-                mode: req.body.mode,
-                ip: req.body.ip
+router.put('/', function (req, res, next) {
+    if (req.body.ip) {
+        updateObject = {
+            $set: {
+                title: req.body.title,
+                content: req.body.content,
+                server: {
+                    mode: req.body.mode,
+                    ip: req.body.ip
+                }
             }
-        }
-    };
+        };
+    } else {
+        updateObject = {
+            $set: {
+                title: req.body.title,
+                content: req.body.content,
+                download: {
+                    path: req.body.path
+                }
+            }
+        };
+    }
+
 
     Server.findByIdAndUpdate(req.body.id, updateObject, function (err, result) {
         if (err) {
@@ -64,14 +72,22 @@ router.put('/edit', function (req, res, next) {
             });
         }
         res.status(201).json({
-            message: 'News wurde geändert',
+            title: 'Erfoglreich',
+            message: 'Download/Server wurde geändert',
             obj: result
         });
     });
 });
 
-router.delete('/del', function (req, res, next) {
-    Server.findByIdAndRemove(req.body.id, function (err, result) {
+router.delete('/:id', function (req, res, next) {
+    if (!req.params.id) {
+        return res.status(400).json({
+            title: 'No news selected',
+            error: err
+        });
+    }
+    console.log(req.params.id);
+    Server.findByIdAndRemove(req.params.id, function (err, result) {
         if (err) {
             return res.status(500).json({
                 title: 'Hier ist ein Fehler aufgetreten',
@@ -79,10 +95,35 @@ router.delete('/del', function (req, res, next) {
             });
         }
         res.status(201).json({
-            message: 'News wurde gelöscht',
+            title: 'Erfolgreich',
+            message: 'Download/Server wurde gelöscht',
             obj: result
         });
     });
 });
+
+router.put('/status', function (req, res, next) {
+    var updateObject = {
+        $set: {
+            status: req.body.status
+        }
+    };
+
+
+    Server.findByIdAndUpdate(req.body.id, updateObject, function (err, result) {
+        if (err) {
+            return res.status(500).json({
+                title: 'Hier ist ein Fehler aufgetreten',
+                error: err
+            });
+        }
+        res.status(201).json({
+            title: 'Erfoglreich',
+            message: 'Server Status wurde geändert',
+            obj: result
+        });
+    });
+});
+
 
 module.exports = router;

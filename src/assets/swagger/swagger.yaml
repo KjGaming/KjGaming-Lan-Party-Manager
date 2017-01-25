@@ -1,0 +1,161 @@
+# Documentation for the OEE backend api
+swagger: '2.0'
+info:
+  title: OEE API
+  description: The OEE backend api
+  version: "0.0.1"
+# the domain of the service
+host: localhost:3000
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /api
+produces:
+  - application/json
+paths:
+#
+  /getMachines:
+    get:
+      summary: All Machines
+      description: Get all the machines from the OEE app.
+      tags:
+        - Machines
+      responses:
+        200:
+          description: An array of all machines
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Machine'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+
+definitions:
+# data model machine
+
+
+
+  Machine:
+    type: object
+    properties:
+      id:
+        type: number
+        description: the machine ID
+      name:
+        type: string
+        description: the name of the machine
+      status:
+        type: string
+        description: the status of the machine
+      orders:
+        type: array
+        items:
+          $ref: '#/definitions/Order'
+
+# data model order
+  Order:
+    type: object
+    properties:
+      name:
+        type: string
+        description: the order name
+      id:
+        type: string
+        description: the order ID
+      user:
+        type: object
+        properties:
+          name:
+            type: string
+            description: the user name for this order
+          role:
+            type: string
+            description: the user role
+            enum:
+              - Admin
+              - Worker1
+              - Worker2
+
+      units:
+        type: string
+        description: how many units must do the worker
+      periods:
+        type: array
+        description: the periods array, with all periods in this order
+        items:
+          $ref: '#/definitions/Period'
+      machine:
+        type: number
+        description: this order belongs this maschin id
+
+# data model period
+  Period:
+    type: object
+    properties:
+      start:
+        type: string
+        description: start time of this period
+      stop:
+        type: string
+        description: end time of this period
+      mainCode:
+        type: number
+        description: error code fot this period
+        enum:
+          - 100
+          - 200
+          - 300
+          - 400
+          - 500
+          - 600
+          - 700
+          - 800
+      subCode:
+        type: number
+        description: error subCode for more Information
+      pieces:
+        type: array
+        description: alle Pieces in this Period
+        items:
+          $ref: '#/definitions/Pieces'
+      order:
+        type: number
+        description: this period belongs this order id
+
+# data model pieces
+  Pieces:
+    type: object
+    properties:
+      goods:
+        type: string
+        description: the state of the piece
+        enum:
+          - good
+          - bad
+      kind:
+        type: string
+        description: which kinde of piece
+      timestamp:
+        type: string
+        description: the timestamp for the piece
+      period:
+        type: number
+        description: this piece belongs this period id
+
+# error handling
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string

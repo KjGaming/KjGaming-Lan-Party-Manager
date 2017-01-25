@@ -3,45 +3,50 @@ import {Http, Response, Headers} from "@angular/http";
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
-export class NewsService {
+export class KjgEventService {
 
     constructor(private http: Http) {
     }
 
-    // Uses http.get() to load a single JSON file
-    getNews(): Observable<any> {
-        const headers = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('id_token')
-        });
-
-        return this.http.get('/api/news', {headers: headers})
-            .map((res: Response) => res.json());
-
+    sortDay(a,b){
+        if (a.day < b.day && a.month <= b.month && a.year <= b.year)
+            return -1;
+        if (a.day > b.day && a.month >= b.month && a.year >= b.year)
+            return 1;
+        return 0;
     }
 
-    /** save the current news, with the changing data **/
-    changeNews(data){
-        const body = JSON.stringify(data);
+    sortTime(a,b){
+        if (a.timeStart < b.timeStart)
+            return -1;
+        if (a.timeStart > b.timeStart)
+            return 1;
+        return 0;
+    }
+
+    // Uses http.get() to load a single JSON file
+    get(): Observable<any> {
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('id_token')
         });
-        return this.http.put('/api/admin/news', body, {headers: headers})
+
+        return this.http.get('/api/event', {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
             });
+
     }
 
     /** create a new news **/
-    createNews(data){
+    create(data){
         const body = JSON.stringify(data);
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('id_token')
         });
-        return this.http.post('/api/admin/news', body ,{headers: headers})
+        return this.http.post('/api/admin/event', body ,{headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
@@ -50,18 +55,17 @@ export class NewsService {
     }
 
     /** delete the current news **/
-    delNews(data){
-        const body = JSON.stringify(data);
+    del(data){
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('id_token')
         });
-        return this.http.delete('/api/admin/news/' + data.id, {headers: headers})
+        return this.http.delete('/api/admin/event/' + data.id, {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
             });
 
     }
-}
 
+}

@@ -1,3 +1,44 @@
-<ba-card title="Event">
+<simple-notifications [options]="options"></simple-notifications>
+<ba-card title="Event erstellen">
+    <div class="form-group">
+        <label for="createTitle">Titel</label>
+        <input type="text" class="form-control" id="createTitle" placeholder="event title" [(ngModel)]="createTitle">
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="createTitle">Startzeit</label>
+            <input type="datetime-local" class="form-control" id="createStartTime" [(ngModel)]="createStartTime">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="createTitle">Endzeit</label>
+            <input type="datetime-local" class="form-control" id="createEndTime" [(ngModel)]="createEndTime">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="createTitle">Event Modus</label>
+            <select class="form-control" id="createMode" [(ngModel)]="createMode">
+                <option value="0">Lanparty</option>
+                <option value="1">Turnier</option>
+                <option value="2">Sonstiges</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="createTitle">Content</label>
+        <input type="text" class="form-control" id="createContent" placeholder="event content" [(ngModel)]="createContent">
+    </div>
+    <div class="btnDownload">
+        <button type="button" (click)="create()" class="btn btn-success">Event erstellen</button>
+    </div>
 
+</ba-card>
+<ba-card title="Event löschen">
+    <div class="form-group">
+        <label for="createTitle">Event Modus</label>
+        <select class="form-control" id="delChooseEvent" [(ngModel)]="id">
+            <option *ngFor="let event of events" [ngValue]="event._id">{{event.title}}</option>
+        </select>
+    </div>
+    <div class="btnDownload">
+        <button type="button" (click)="del()" class="btn btn-danger">Event löschen</button>
+    </div>
 </ba-card>

@@ -236,6 +236,32 @@ export const PAGES_MENU = [
                                 order: 0
                             }
                         }
+                    },
+                    {
+                        path: 'product',
+                        data: {
+                            menu: {
+                                title: 'Produkte',
+                                icon: 'local_bar',
+                                iconClass: 'material-icons',
+                                selected: false,
+                                expanded: false,
+                                order: 0
+                            }
+                        }
+                    },
+                    {
+                        path: 'statistic',
+                        data: {
+                            menu: {
+                                title: 'Statistik',
+                                icon: 'insert_chart',
+                                iconClass: 'material-icons',
+                                selected: false,
+                                expanded: false,
+                                order: 0
+                            }
+                        }
                     }
 
                 ]

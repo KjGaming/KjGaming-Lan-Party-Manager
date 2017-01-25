@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { TimetableService } from "./timetable.service";
 import { NotificationsService } from "angular2-notifications/src/notifications.service";
+import {KjgEventService} from "../../theme/services/kjgEventService/kjgEvent.service";
 
 
 @Component({
@@ -17,7 +17,7 @@ export class TimetableComponent implements OnInit {
     eventTime = null;
     watch = null;
 
-    constructor(private _timeService: TimetableService, private _toastService: NotificationsService) {
+    constructor(private _timeService: KjgEventService, private _toastService: NotificationsService) {
     }
 
     ngOnInit() {
@@ -158,7 +158,7 @@ export class TimetableComponent implements OnInit {
     }
 
     getEvents() {
-        this._timeService.getEvent().subscribe(
+        this._timeService.get().subscribe(
             // the first argument is a function which runs on success
             data => {
                 this.sortEvent(data.obj);
@@ -176,19 +176,4 @@ export class TimetableComponent implements OnInit {
         );
     }
 
-    creatEvent() {
-        this._timeService.creatEvent().subscribe(
-            // the first argument is a function which runs on success
-            data => {
-
-            },
-            // the second argument is a function which runs on error
-            error => {
-                this._toastService.error(error.title, error.error.message);
-                console.error(error);
-            },
-            // the third argument is a function which runs on completion
-            () => console.log('creat event')
-        );
-    }
 }
