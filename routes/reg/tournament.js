@@ -1,33 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var Tournament = require('../models/tournament');
+var Tournament = require('../../models/tournament');
 var jwt = require('jsonwebtoken');
-
-router.use('/', function (req, res, next) {
-    jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.17', function (err, decoded) {
-        if (err) {
-            jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.Creator.17', function (err2, decoded2) {
-                if (err2) {
-                    jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.Admin.17', function (err3, decoded3) {
-                        if (err3) {
-                            res.status(401).json({
-                                title: 'Not Authenticated'
-                            });
-                        }else{
-                            next();
-                        }
-
-                    });
-
-                }else{
-                    next();
-                }
-            });
-        }else{
-            next();
-        }
-    });
-});
 
 router.get('/', function (req, res, next) {
     Tournament.find()
@@ -84,7 +58,7 @@ router.post('/saveResult', function (req, res, next) {
                 var looserTeam = null;
 
 
-                // Check if user and clan. Also check if user or clan in this game
+                // Check if reg and clan. Also check if reg or clan in this game
                 if (tournament.playerMode == 'Clan') {
                     for (var key in decoded.user.clan) {
                         if (decoded.user.clan[key].name == team1) {

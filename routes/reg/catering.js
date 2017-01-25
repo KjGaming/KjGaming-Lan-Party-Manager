@@ -1,34 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var Catering = require('../models/catering');
-var Products = require('../models/product');
+var Catering = require('../../models/catering');
+var Products = require('../../models/product');
 var jwt = require('jsonwebtoken');
-
-router.use('/', function (req, res, next) {
-    jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.17', function (err, decoded) {
-        if (err) {
-            jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.Creator.17', function (err2, decoded2) {
-                if (err2) {
-                    jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.Admin.17', function (err3, decoded3) {
-                        if (err3) {
-                            res.status(401).json({
-                                title: 'Not Authenticated'
-                            });
-                        }else{
-                            next();
-                        }
-
-                    });
-
-                }else{
-                    next();
-                }
-            });
-        }else{
-            next();
-        }
-    });
-});
 
 router.get('/', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
@@ -162,7 +136,7 @@ router.get('/deleteOrdered', function (req, res, next) {
 
 });
 
-// For the admin Routes, only to test the user catering
+// For the admin Routes, only to test the reg catering
 router.post('/products', function (req, res, next) {
     var product = new Products({
         name: req.body.name,

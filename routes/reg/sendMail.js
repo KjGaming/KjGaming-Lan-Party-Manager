@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Server = require('../models/server');
+var Server = require('../../models/server');
 var jwt = require('jsonwebtoken');
 var nodemailer = require('nodemailer');
 

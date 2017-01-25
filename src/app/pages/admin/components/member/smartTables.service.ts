@@ -31,7 +31,7 @@ export class SmartTablesService {
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('id_token')
     });
-    return this.http.put('/api/user/changeAdmin', body, {headers: headers})
+    return this.http.put('/api/reg/changeAdmin', body, {headers: headers})
         .map((res: Response) => res.json())
         .catch((err: Response)=> {
           return Observable.throw(err.json());

@@ -7,7 +7,7 @@ var serverRoutes = require('./admin/server');
 var eventRoutes = require('./admin/event');
 
 
-/** check if user is admin **/
+/** check if reg is admin **/
 router.use('/', function (req, res, next) {
     jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.Admin.17', function (err3, decoded3) {
         if (err3) {

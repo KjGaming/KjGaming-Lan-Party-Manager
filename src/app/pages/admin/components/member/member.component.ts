@@ -68,7 +68,7 @@ export class AdminMemberComponent implements OnInit {
     }
 
 
-    /** Delete methode to delete a user **/
+    /** Delete methode to delete a reg **/
     onDeleteConfirm(event): void {
         if (window.confirm('Willst du ' + event.data.name + ' wirklich löschen?')) {
             this._toastService.success('Erfolgreich', 'Du hast erfoglreich ' + event.data.name + ' gelöscht');

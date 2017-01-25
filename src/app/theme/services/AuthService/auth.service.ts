@@ -16,7 +16,7 @@ export class AuthService {
     signup(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('/api/user', body, {headers: headers})
+        return this.http.post('/api/reg', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
@@ -26,7 +26,7 @@ export class AuthService {
     signin(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('/api/user/signin', body, {headers: headers})
+        return this.http.post('/api/reg/signin', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());

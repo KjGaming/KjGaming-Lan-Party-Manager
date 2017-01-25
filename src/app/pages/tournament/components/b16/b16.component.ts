@@ -113,7 +113,7 @@ export class B16Component implements OnInit {
         this.gameMap = game.map;
         this.inGamen = null;
 
-        //Check if user is in this game
+        //Check if reg is in this game
         if (this.tournament.playerMode == "Clan") {
             //get the clan of the User
             var clans = JSON.parse(localStorage.getItem('clans'));

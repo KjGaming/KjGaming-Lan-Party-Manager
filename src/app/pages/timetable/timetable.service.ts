@@ -45,7 +45,7 @@ export class TimetableService {
             'Authorization': localStorage.getItem('id_token')
         });
 
-        return this.http.get('/api/user', {headers: headers})
+        return this.http.get('/api/reg', {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());

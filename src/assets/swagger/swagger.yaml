@@ -1,161 +1,330 @@
-# Documentation for the OEE backend api
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
 swagger: '2.0'
 info:
-  title: OEE API
-  description: The OEE backend api
-  version: "0.0.1"
+  title: KjGaming LAN Manager API
+  description: The API interface for the KjGaming LAN Party
+  version: "0.0.2"
 # the domain of the service
-host: localhost:3000
+host: lan.kjgaming.de
 # array of all schemes that your API supports
 schemes:
-  - http
+  - https
 # will be prefixed to all paths
 basePath: /api
 produces:
   - application/json
 paths:
-#
-  /getMachines:
-    get:
-      summary: All Machines
-      description: Get all the machines from the OEE app.
-      tags:
-        - Machines
-      responses:
-        200:
-          description: An array of all machines
+  /registration:
+    put:
+      summary: Register a new User
+      description: |
+        With this path you can register a new user.
+      parameters:
+        - name: body
+          in: body
+          description: User Object for a new User
+          required: true
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Machine'
+            $ref: '#/definitions/regUser'
+      tags:
+        - user
+        - register
+      responses:
+        201:
+          description: An array of products
+          schema:
+              $ref: '#/definitions/user'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /signin:
+    post:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/user:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/user/all:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/user/change:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/user/seat:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /admin/user:
+     get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /admin/user/:id:
+     get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
 
-
-
-
+  /reg/news:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/server:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/sendMail:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/event:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/clan:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/catering:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/tournament:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
 definitions:
-# data model machine
-
-
-
-  Machine:
+  regUser:
     type: object
     properties:
-      id:
+      nickName:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      birth:
+        type: string
+      password:
+        type: string
+      email:
+        type: string
+      role:
+        type: string
+      agb:
+        type: string
+      street:
+        type: string
+      city:
+        type: string
+      nr:
         type: number
-        description: the machine ID
-      name:
+      postalCode:
+        type: number
+      packetId:
+        type: number
+      lanFood:
         type: string
-        description: the name of the machine
-      status:
-        type: string
-        description: the status of the machine
-      orders:
-        type: array
-        items:
-          $ref: '#/definitions/Order'
+      lanVegi:
+        type: boolean
+      packetPaid:
+        type: boolean
+      packetPrice:
+        type: number
 
-# data model order
-  Order:
+  user:
     type: object
     properties:
-      name:
+      nickName:
         type: string
-        description: the order name
-      id:
+      firstName:
         type: string
-        description: the order ID
-      user:
+      lastName:
+        type: string
+      birth:
+        type: string
+      email:
+        type: string
+      seat:
+        type: number
+      password:
+        type: string
+      role:
+        type: number
+      lock:
+        type: boolean
+      agb:
+        type: boolean
+      address:
         type: object
         properties:
-          name:
+          street:
             type: string
-            description: the user name for this order
-          role:
+          nr:
+            type: number
+          postalCode:
+            type: number
+          city:
             type: string
-            description: the user role
-            enum:
-              - Admin
-              - Worker1
-              - Worker2
-
-      units:
-        type: string
-        description: how many units must do the worker
-      periods:
+      clan:
         type: array
-        description: the periods array, with all periods in this order
         items:
-          $ref: '#/definitions/Period'
-      machine:
-        type: number
-        description: this order belongs this maschin id
+          "$ref": "#/definitions/clan"
+      lan:
+        type: object
+        properties:
+          packet:
+            type: object
+            properties:
+              id:
+                type: number
+              paid:
+                type: boolean
+              price:
+                type: number
+          food:
+            type: string
+          vegi:
+            type: boolean
+          sum:
+            type: number
+          paid:
+            type: boolean
 
-# data model period
-  Period:
+  clan:
     type: object
     properties:
-      start:
+      name:
         type: string
-        description: start time of this period
-      stop:
+      shortName:
         type: string
-        description: end time of this period
-      mainCode:
-        type: number
-        description: error code fot this period
-        enum:
-          - 100
-          - 200
-          - 300
-          - 400
-          - 500
-          - 600
-          - 700
-          - 800
-      subCode:
-        type: number
-        description: error subCode for more Information
-      pieces:
-        type: array
-        description: alle Pieces in this Period
-        items:
-          $ref: '#/definitions/Pieces'
-      order:
-        type: number
-        description: this period belongs this order id
+      password:
+        type: string
+      user:
+        type: string
+        description: User ID Array
+      admin:
+        type: string
+        description: User Admin ID
 
-# data model pieces
-  Pieces:
-    type: object
-    properties:
-      goods:
-        type: string
-        description: the state of the piece
-        enum:
-          - good
-          - bad
-      kind:
-        type: string
-        description: which kinde of piece
-      timestamp:
-        type: string
-        description: the timestamp for the piece
-      period:
-        type: number
-        description: this piece belongs this period id
-
-# error handling
   Error:
     type: object
     properties:
-      code:
-        type: integer
-        format: int32
-      message:
+      title:
         type: string
-      fields:
-        type: string
+      error:
+        properties:
+          message:
+            type: string
