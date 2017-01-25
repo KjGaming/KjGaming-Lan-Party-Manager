@@ -177,10 +177,7 @@ module.exports = function (options) {
           test: /\.(ttf|eot|svg)(\?v=.+)?$/, loader: 'file-loader'
         },
 
-        {
-          test: /bootstrap\/dist\/js\/umd\//,
-          loader: 'imports?jQuery=jquery'
-        },
+        { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' },
 
         /* Raw loader support for *.html
          * Returns file content as string
@@ -291,9 +288,11 @@ module.exports = function (options) {
       }),
 
       new webpack.ProvidePlugin({
-        jQuery: 'jquery',
-        'Tether': 'tether',
-        'window.Tether': 'tether'
+          jQuery: 'jquery',
+          $: 'jquery',
+          jquery: 'jquery',
+          "Tether": 'tether',
+          "window.Tether": "tether",
       }),
 
       /*
