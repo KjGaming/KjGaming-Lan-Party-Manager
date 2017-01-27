@@ -85,7 +85,7 @@ export class CateringComponent implements OnInit {
             data => {
                 console.log(data);
                 this.getCatering();
-                this._toastService.success(data.message, '');
+                this._toastService.success(data.title, data.message);
             },
             // the second argument is a function which runs on error
             err => console.error(err)
@@ -127,7 +127,7 @@ export class CateringComponent implements OnInit {
         this._cateringService.sendOrdered(shoppingCard).subscribe(
             // the first argument is a function which runs on success
             data => {
-                this._toastService.success(data.message, '');
+                this._toastService.success(data.title, data.message);
                 this.ngOnInit();
                 console.log(this.products);
             },

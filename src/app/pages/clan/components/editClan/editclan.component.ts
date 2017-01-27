@@ -65,7 +65,7 @@ export class EditClanComponent implements OnInit {
                 this._clanService.editClan(clan)
                     .subscribe(
                         data => {
-                            this._toastService.success(data.message, '');
+                            this._toastService.success(data.title, data.message);
                             this.pushData();
                         },
                         error => {
@@ -83,7 +83,7 @@ export class EditClanComponent implements OnInit {
                 this._clanService.clanOut(clan)
                     .subscribe(
                         data => {
-                            this._toastService.success(data.message, '');
+                            this._toastService.success(data.title, data.message);
                             this.pushData();
                         },
                         error => {
@@ -102,7 +102,7 @@ export class EditClanComponent implements OnInit {
                 this._clanService.clanIn(clan)
                     .subscribe(
                         data => {
-                            this._toastService.success(data.message, '');
+                            this._toastService.success(data.title, data.message);
                             this.pushData();
                         },
                         error => {
@@ -139,7 +139,7 @@ export class EditClanComponent implements OnInit {
             // the second argument is a function which runs on error
             err => console.error(err),
             // the third argument is a function which runs on completion
-            () => console.log('done loading news')
+            () => console.log('done loading clan')
         );
     }
 
@@ -152,7 +152,7 @@ export class EditClanComponent implements OnInit {
             .subscribe(
                 data => {
                     this.getClanList();
-                    this._toastService.success(data.message, '');
+                    this._toastService.success(data.title, data.message);
                     this._clanService.getClanList().subscribe(
                         data=> this._clanService.newClanList(data.obj)
                     );

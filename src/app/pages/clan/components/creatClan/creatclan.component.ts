@@ -52,7 +52,7 @@ export class CreatClanComponent {
             this._clanService.creatClan(clan)
                 .subscribe(
                     data => {
-                        this._toastService.success(data.message, '');
+                        this._toastService.success(data.title, data.message);
                         this._clanService.getClanList().subscribe(
                             data=> this._clanService.newClanList(data.obj)
                         );

@@ -5,6 +5,7 @@ var User = require('../../models/user');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 
+/** Get all clans **/
 router.get('/', function (req, res, next) {
     Clan.find()
         .populate('user', 'nickName firstName lastName')
@@ -23,6 +24,7 @@ router.get('/', function (req, res, next) {
         });
 });
 
+/** create new clan **/
 router.post('/', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
     User.findById(decoded.user._id, function (err, user) {
@@ -54,7 +56,8 @@ router.post('/', function (req, res, next) {
             user.clan.push(result);
             user.save();
             res.status(201).json({
-                message: 'Server/Download created',
+                title: 'Erfolgreich',
+                message: 'Clan '+ result.name +' wurde erstellt.',
                 obj: result
             });
         });
@@ -62,6 +65,7 @@ router.post('/', function (req, res, next) {
 
 });
 
+/** update clan **/
 router.post('/edit', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
     Clan.findById(req.body.clanId, function (err, dbClan) {
@@ -113,13 +117,15 @@ router.post('/edit', function (req, res, next) {
                 }
 
                 res.status(201).json({
-                    message: 'Clan gespeichert',
+                    title: 'Erfolgreich',
+                    message: 'Clan '+ result.name +' wurde erstellt.',
                     obj: result
                 });
             });
     });
 });
 
+/** go out of the clan **/
 router.post('/out', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
     Clan.findById(req.body.clanId, function (err, dbClan) {
@@ -155,7 +161,8 @@ router.post('/out', function (req, res, next) {
                                 });
                             }
                             return res.status(201).json({
-                                message: 'ausgetreten',
+                                title: 'Erfolgreich',
+                                message: 'Du hast '+ clanResult.name +' verlassen',
                                 objUser: userResult,
                                 objClan: clanResult
                             });
@@ -168,6 +175,7 @@ router.post('/out', function (req, res, next) {
     });
 });
 
+/** join the clan **/
 router.post('/in', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
     var password = req.body.password;
@@ -226,8 +234,8 @@ router.post('/in', function (req, res, next) {
                         });
                     }
                     return res.status(201).json({
-                        title: 'Erfolg!',
-                        message: 'Sie sind erfolgreich diesem Clan beigetreten.',
+                        title: 'Erfolgreich',
+                        message: 'Du bist erfolgreich '+ clanResult.name +' beigetreten.',
                         objUser: userResult,
                         objClan: clanResult
                     });
@@ -241,6 +249,7 @@ router.post('/in', function (req, res, next) {
 
 });
 
+/** delete clan **/
 router.post('/del', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
     var bulkArray;
@@ -255,7 +264,7 @@ router.post('/del', function (req, res, next) {
         if (clan.admin != decoded.user._id) {
             return res.status(500).json({
                 title: 'Fehler!',
-                error: {massage: 'Sie sind kein Admin!'}
+                error: {massage: 'Du bist kein Admin!'}
             });
         }
         for (var i = 0; clan.user.length > i ; i++) {
@@ -279,7 +288,8 @@ router.post('/del', function (req, res, next) {
             }
 
             res.status(201).json({
-                message: 'Erfolgreich gelöscht',
+                title: 'Erfolgreich',
+                message: 'Du hast '+ clan.name +' gelöscht.',
                 obj: clan
             });
         });

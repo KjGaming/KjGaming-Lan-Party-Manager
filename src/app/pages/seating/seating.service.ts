@@ -16,7 +16,7 @@ export class SeatingService {
             'Authorization': localStorage.getItem('id_token')
         });
 
-        return this.http.get('/api/reg/seat', {headers: headers})
+        return this.http.get('/api/reg/user/seat', {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());

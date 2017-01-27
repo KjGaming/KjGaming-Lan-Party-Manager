@@ -16,7 +16,7 @@ export class BaAuthService {
     signup(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('/api/registration', body, {headers: headers})
+        return this.http.put('/api/registration', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
