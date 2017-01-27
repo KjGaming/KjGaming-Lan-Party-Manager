@@ -164,7 +164,7 @@ export class SeatingComponent implements OnInit {
     reserve(id) {
         this._seatingService.postSeat(id).subscribe(
             data => {
-                this._toastService.success(data.message, '');
+                this._toastService.success(data.title, data.message);
                 this.getSeat();
                 console.log(data);
             },
@@ -178,7 +178,7 @@ export class SeatingComponent implements OnInit {
     releaseReserve(){
         this._seatingService.postSeat(null).subscribe(
             data => {
-                this._toastService.success(data.message, '');
+                this._toastService.success(data.title, data.message);
                 this.getSeat();
                 console.log(data);
             },
