@@ -14,6 +14,9 @@
   .dropdown-toggle::after {
     display: none;
   }
+  .signout{
+    cursor: pointer;
+  }
 }
 
 .blur {
@@ -48,19 +51,25 @@ a.al-logo {
   margin-right: 12px;
   transition: all .15s ease-in-out;
   padding: 0;
-  width: 36px;
-  height: 36px;
+  width: 200px;
+  height: 66px;
   border: 0;
   opacity: 1;
   position: relative;
-  a {
+  >a {
+    float: right;
     display: block;
+    color: $sidebar-text;
+    font-size: 18px;
+    line-height: 66px;
+    padding-left: 10px;
+    padding-right: 10px;
+    &:hover {
+      background: #444444;
+    }
   }
-  img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-  }
+
+
 }
 
 a.refresh-data {
@@ -161,7 +170,7 @@ a.collapse-menu-link {
 }
 
 @media (max-width: $resXXS) {
-  .user-profile{
+  .user-profile {
     min-width: 136px;
   }
   a.refresh-data {
@@ -174,9 +183,15 @@ a.collapse-menu-link {
   .al-skin-dropdown {
     display: none;
   }
+  .al-user-profile {
+    width: 130px;
+    >a {
+      font-size: 15px;
+    }
+  }
 }
 
-.profile-toggle-link{
+.profile-toggle-link {
   cursor: pointer;
 }
 

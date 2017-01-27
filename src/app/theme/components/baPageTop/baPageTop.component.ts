@@ -14,6 +14,7 @@ export class BaPageTop {
 
   public isScrolled:boolean = false;
   public isMenuCollapsed:boolean = false;
+  nickName = localStorage.getItem('nickName');
 
   constructor(private _state:GlobalState, private authService: BaAuthService, private router:Router) {
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
