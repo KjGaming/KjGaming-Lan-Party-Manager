@@ -11,7 +11,7 @@
                             <th class="align-left">Vorname</th>
                             <th class="align-left">Platznummer</th>
                             <th class="align-left">Clan</th>
-                            <th class="align-left">Rolle</th>
+                            <th class="align-left">Spiele</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -26,7 +26,9 @@
                                 </div>
                             </td>
                             <td class="align-left" *ngIf="!user.clan">-</td>
-                            <td class="align-left">{{user.role}}</td>
+                            <td class="align-left">
+                                <span *ngFor="let game of user.games">{{game}} | </span>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

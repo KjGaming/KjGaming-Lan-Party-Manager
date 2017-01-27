@@ -20,6 +20,7 @@ var schema = new Schema({
     lock: {type: Boolean, default: false},// User lock or unlock for The LAN MANAGER
     agb: {type: Boolean, default: false},// AGB
     clan: [{type: Schema.Types.ObjectId, ref: "clan"}],
+    games:[{type: String}],
     lan: {
         packet: {
             id: {type: Number, default: 0},// Packet id (LAN Packet | 0 = spar, 1 = complete, 2 = individually)

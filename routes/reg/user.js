@@ -25,7 +25,8 @@ router.get('/', function (req, res, next) {
                     nickName: user[i].nickName,
                     seat: user[i].seat,
                     role: user[i].role,
-                    clan: user[i].clan
+                    clan: user[i].clan,
+                    games: user[i].games
                 }
             }
 
