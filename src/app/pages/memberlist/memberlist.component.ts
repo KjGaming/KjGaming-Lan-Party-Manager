@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MemberlistService } from "./memberlist.service";
 import { User } from "../../theme/model";
+import {BaUserService} from "../../theme/services/baUser/baUser.service";
 
 
 @Component({
@@ -14,7 +14,7 @@ export class MemberlistComponent implements OnInit {
     public users: User[];
 
 
-    constructor(private _memberService: MemberlistService) {
+    constructor(private _memberService: BaUserService) {
     }
 
     ngOnInit() {
@@ -23,7 +23,7 @@ export class MemberlistComponent implements OnInit {
 
 
     getMember() {
-        this._memberService.getUserMemberlist().subscribe(
+        this._memberService.getMinimalUserMemberlist().subscribe(
             // the first argument is a function which runs on success
             data => {
                 this.users = data.obj;
@@ -32,7 +32,7 @@ export class MemberlistComponent implements OnInit {
             // the second argument is a function which runs on error
             err => console.error(err),
             // the third argument is a function which runs on completion
-            () => console.log('done loading news')
+            () => console.log('done loading users')
         );
     }
 }

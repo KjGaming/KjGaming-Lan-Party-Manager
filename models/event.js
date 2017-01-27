@@ -10,5 +10,5 @@ var schema = new Schema({
     content: {type: String}
 });
 
-module.exports = mongoose.model('timetable', schema);
+module.exports = mongoose.model('event', schema);
 

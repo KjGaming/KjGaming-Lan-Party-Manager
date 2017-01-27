@@ -5,6 +5,8 @@ var jwt = require('jsonwebtoken');
 var newsRoutes = require('./admin/news');
 var serverRoutes = require('./admin/server');
 var eventRoutes = require('./admin/event');
+var productRoutes = require('./admin/product');
+var userRoutes = require('./admin/user');
 
 
 /** check if reg is admin **/
@@ -24,6 +26,8 @@ router.use('/', function (req, res, next) {
 router.use('/news', newsRoutes);
 router.use('/server', serverRoutes);
 router.use('/event', eventRoutes);
+router.use('/product', productRoutes);
+router.use('/user', userRoutes);
 
 
 module.exports = router;

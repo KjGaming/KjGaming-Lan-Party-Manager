@@ -23,7 +23,6 @@ import { SimpleNotificationsModule } from "angular2-notifications";
         CateringComponent
     ],
     providers: [
-        CateringService,
     ]
 })
 export default class CateringModule {

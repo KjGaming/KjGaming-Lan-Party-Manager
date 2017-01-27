@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { AuthService } from "../../../../services/AuthService/auth.service";
+import { BaAuthService } from "../../../../services/baAuth/baAuth.service";
 
 @Component({
     selector: 'ba-menu-item',
@@ -17,7 +17,7 @@ export class BaMenuItem implements OnInit{
 
     admin: boolean;
 
-    constructor(private authService: AuthService){}
+    constructor(private authService: BaAuthService){}
 
     public onHoverItem($event): void {
         this.itemHover.emit($event);

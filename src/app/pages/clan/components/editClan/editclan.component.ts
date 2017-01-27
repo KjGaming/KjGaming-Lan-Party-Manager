@@ -5,6 +5,7 @@ import { NotificationsService } from "angular2-notifications/src/notifications.s
 import { FormBuilder, FormGroup, AbstractControl, Validators } from "@angular/forms";
 import { ClanService } from "../../clan.service";
 import { BaThemeConfigProvider } from "../../../../theme/theme.configProvider";
+import {BaClanService} from "../../../../theme/services/baClan/baClan.service";
 
 @Component({
     selector: 'clan-edit',
@@ -33,9 +34,7 @@ export class EditClanComponent implements OnInit {
 
     constructor(fb: FormBuilder,
                 private _toastService: NotificationsService,
-                private _editClanService: EditClanService,
-                private _clanService: ClanService,
-                private _baConfig: BaThemeConfigProvider) {
+                private _clanService: BaClanService) {
 
 
         this.form = fb.group({
@@ -51,7 +50,7 @@ export class EditClanComponent implements OnInit {
         this.password = this.form.controls['password'];
     }
 
-    public onSubmit(values: Object): void {
+    onSubmit(values: Object): void {
 
         if (this.form.valid) {
 
@@ -67,7 +66,7 @@ export class EditClanComponent implements OnInit {
                     .subscribe(
                         data => {
                             this._toastService.success(data.message, '');
-                            this.getClanList();
+                            this.pushData();
                         },
                         error => {
                             console.error(error);
@@ -85,7 +84,7 @@ export class EditClanComponent implements OnInit {
                     .subscribe(
                         data => {
                             this._toastService.success(data.message, '');
-                            this.getClanList();
+                            this.pushData();
                         },
                         error => {
                             console.error(error);
@@ -104,7 +103,7 @@ export class EditClanComponent implements OnInit {
                     .subscribe(
                         data => {
                             this._toastService.success(data.message, '');
-                            this.getClanList();
+                            this.pushData();
                         },
                         error => {
                             console.error(error);
@@ -116,8 +115,17 @@ export class EditClanComponent implements OnInit {
         }
     }
 
+    pushData(){
+        this._clanService.getClanList().subscribe(
+            data=> this._clanService.newClanList(data.obj)
+        );
+    }
+
     ngOnInit() {
         this.getClanList();
+        this._clanService.newData.subscribe(
+            data => this.clanListDate = data
+        )
     }
 
     getClanList() {
@@ -126,6 +134,7 @@ export class EditClanComponent implements OnInit {
             // the first argument is a function which runs on success
             data => {
                 this.clanListDate = data.obj;
+
             },
             // the second argument is a function which runs on error
             err => console.error(err),
@@ -144,6 +153,9 @@ export class EditClanComponent implements OnInit {
                 data => {
                     this.getClanList();
                     this._toastService.success(data.message, '');
+                    this._clanService.getClanList().subscribe(
+                        data=> this._clanService.newClanList(data.obj)
+                    );
                 },
                 error => {
                     console.error(error);

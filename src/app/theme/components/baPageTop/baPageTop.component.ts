@@ -1,7 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 
 import {GlobalState} from '../../../global.state';
-import { AuthService } from "../../services/AuthService/auth.service";
+import { BaAuthService } from "../../services/baAuth/baAuth.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -15,7 +15,7 @@ export class BaPageTop {
   public isScrolled:boolean = false;
   public isMenuCollapsed:boolean = false;
 
-  constructor(private _state:GlobalState, private authService: AuthService, private router:Router) {
+  constructor(private _state:GlobalState, private authService: BaAuthService, private router:Router) {
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
       this.isMenuCollapsed = isCollapsed;
     });

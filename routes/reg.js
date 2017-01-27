@@ -1,13 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
+var nodemailer = require('nodemailer');
+var bcrypt = require('bcryptjs');
+
+var User = require('../models/user');
 
 var userRoutes = require('./reg/user');
 var newsRoutes = require('./reg/news');
 var sendMailRoutes = require('./reg/sendMail');
 var serverRoutes = require('./reg/server');
 var clanRoutes = require('./reg/clan');
-var timetableRoutes = require('./reg/timetable');
+var timetableRoutes = require('./reg/event');
 var cateringRoutes = require('./reg/catering');
 var tournamentRoutes = require('./reg/tournament');
 
@@ -305,14 +309,14 @@ router.use('/', function (req, res, next) {
 });
 
 /** routes that can only use reg user **/
-app.use('/reg/user', userRoutes);
-app.use('/reg/news', newsRoutes);
-app.use('/reg/server', serverRoutes);
-app.use('/reg/sendMail', sendMailRoutes);
-app.use('/reg/event', timetableRoutes);
-app.use('/reg/clan', clanRoutes);
-app.use('/reg/catering', cateringRoutes);
-app.use('/reg/tournament', tournamentRoutes);
+router.use('/reg/user', userRoutes);
+router.use('/reg/news', newsRoutes);
+router.use('/reg/server', serverRoutes);
+router.use('/reg/sendMail', sendMailRoutes);
+router.use('/reg/event', timetableRoutes);
+router.use('/reg/clan', clanRoutes);
+router.use('/reg/catering', cateringRoutes);
+router.use('/reg/tournament', tournamentRoutes);
 
 
 module.exports = router;

@@ -23,7 +23,7 @@ router.get('/', function (req, res, next) {
         });
 });
 
-router.post('/creat', function (req, res, next) {
+router.post('/', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
     User.findById(decoded.user._id, function (err, user) {
         if (err) {
@@ -71,8 +71,6 @@ router.post('/edit', function (req, res, next) {
                 error: err
             });
         }
-
-
         if (decoded.user._id != dbClan.admin) {
             return res.status(403).json({
                 title: 'Du bis kein Admin!',

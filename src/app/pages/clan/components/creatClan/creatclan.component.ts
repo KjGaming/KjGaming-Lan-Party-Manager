@@ -1,15 +1,15 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from "@angular/forms";
 import { CreatClanService } from './creatclan.service';
 import { NotificationsService } from "angular2-notifications/src/notifications.service";
 import { EqualPasswordsValidator } from "../../../../theme/validators/equalPasswords.validator";
-import { ClanService } from "../../clan.service";
+import {BaClanService} from "../../../../theme/services/baClan/baClan.service";
 
 @Component({
     selector: 'clan-creat',
     encapsulation: ViewEncapsulation.None,
     styles: [require('./creatclan.scss')],
-    template: require('./creatclan.component.html')
+    template: require('./creatclan.component.html'),
 })
 export class CreatClanComponent {
 
@@ -21,7 +21,7 @@ export class CreatClanComponent {
     public passwords: FormGroup;
     public submitted: boolean = false;
 
-    constructor(fb: FormBuilder, private _toastService: NotificationsService, private _clanService: ClanService) {
+    constructor(fb: FormBuilder, private _toastService: NotificationsService, private _clanService: BaClanService) {
         this.form = fb.group({
             'clanName': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
             'clanShortName': ['', Validators.required],
@@ -38,7 +38,7 @@ export class CreatClanComponent {
         this.repeatPassword = this.passwords.controls['repeatPassword'];
     }
 
-    public onSubmit(values: Object): void {
+    onSubmit(values: Object): void {
         this.submitted = true;
 
         if (this.form.valid) {
@@ -53,6 +53,9 @@ export class CreatClanComponent {
                 .subscribe(
                     data => {
                         this._toastService.success(data.message, '');
+                        this._clanService.getClanList().subscribe(
+                            data=> this._clanService.newClanList(data.obj)
+                        );
                     },
                     error => {
                         console.error(error);

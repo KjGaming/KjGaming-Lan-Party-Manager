@@ -1,8 +1,27 @@
 var express = require('express');
 var router = express.Router();
 
-var User = require('../models/reg');
-var Clan = require('../models/clan');
+var User = require('../../models/user');
+var Clan = require('../../models/clan');
+
+/** Get alle Users with all Information **/
+router.get('/', function (req, res, next) {
+    User.find()
+        .populate('clan', 'shortName name')
+        .exec(function (err, user) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+
+            res.status(200).json({
+                message: 'Success',
+                obj: user
+            });
+        });
+});
 
 /** change reg user data ==> admin **/
 router.put('/', function (req, res, next) {
@@ -48,6 +67,50 @@ router.put('/', function (req, res, next) {
 
 });
 
+/** creat a new User **/
+/** Not ready to use **/
+router.post('/', function (req, res, next) {
+    User.findById(req.body._id, function (err, user) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        console.log(req.body);
+
+        if (req.body.packetPaid != null) {
+            user.lan.packet.paid = req.body.packetPaid;
+        }
+        if (req.body.food != null) {
+            user.lan.food = req.body.food;
+        }
+        if (req.body.paid != null) {
+            user.lan.paid = req.body.paid;
+        }
+        if (req.body.role != null) {
+            user.role = req.body.role;
+        }
+        if (req.body.lock != null) {
+            user.lock = req.body.lock;
+        }
+
+        user.save(function (err, updatedUser) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'Ein Fehler ist aufgetreten',
+                    error: err
+                });
+            }
+            res.status(201).json({
+                message: 'User bearbeitet',
+                obj: updatedUser
+            });
+        });
+
+    });
+
+});
 
 /** delete a user **/
 router.delete('/:id', function (req, res, next) {
@@ -147,6 +210,5 @@ router.delete('/:id', function (req, res, next) {
 
 
 });
-
 
 module.exports = router;

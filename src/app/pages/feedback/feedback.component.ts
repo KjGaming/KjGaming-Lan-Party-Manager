@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { SendMailService } from "../../theme/services";
+import { BaSendMailService } from "../../theme/services";
 import { Mail } from "../../theme/model";
 import {NotificationsService} from "angular2-notifications/src/notifications.service";
 
@@ -25,7 +25,7 @@ export class FeedbackComponent {
     public text: AbstractControl;
     public submitted: boolean = false;
 
-    constructor(fb: FormBuilder, private router: Router, private sendMailService: SendMailService, private _toastService: NotificationsService) {
+    constructor(fb: FormBuilder, private router: Router, private sendMailService: BaSendMailService, private _toastService: NotificationsService) {
         this.form = fb.group({
             'subject': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z0-9 \\.\\,\\!\\?\\-\\+]+')])],
             'text': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z0-9 \\.\\,\\!\\?\\-\\+]+')])]

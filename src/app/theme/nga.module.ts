@@ -46,10 +46,14 @@ import {
     BaImageLoaderService,
     BaThemePreloader,
     BaThemeSpinner,
-    AuthService,
-    KjgServerService,
-    SendMailService,
-    KjgEventService
+    BaAuthService,
+    BaServerService,
+    BaSendMailService,
+    BaEventService,
+    BaNewsService,
+    BaCateringService,
+    BaUserService,
+    BaClanService
 
 
 } from './services';
@@ -95,10 +99,14 @@ const NGA_SERVICES = [
     BaImageLoaderService,
     BaThemePreloader,
     BaThemeSpinner,
-    AuthService,
-    KjgServerService,
-    SendMailService,
-    KjgEventService
+    BaAuthService,
+    BaServerService,
+    BaSendMailService,
+    BaEventService,
+    BaNewsService,
+    BaCateringService,
+    BaUserService,
+    BaClanService
 ];
 
 const NGA_VALIDATORS = [

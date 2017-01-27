@@ -1,10 +1,6 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-
-import { SmartTablesService } from './smartTables.service';
-import { LocalDataSource } from 'ng2-smart-table';
-import { DomSanitizer } from "@angular/platform-browser";
-import { NotificationsService } from "angular2-notifications";
-
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {NotificationsService} from "angular2-notifications";
+import {BaUserService} from "../../../../theme/services/baUser/baUser.service";
 
 
 @Component({
@@ -22,12 +18,12 @@ export class AdminMemberComponent implements OnInit {
         timeOut: 5000
     };
 
-    constructor(protected service: SmartTablesService, private _toastService: NotificationsService) {
-
+    constructor(protected _userService: BaUserService, private _toastService: NotificationsService) {
     }
 
+    /** Get all user information **/
     ngOnInit() {
-        this.service.getUserMemberlist().subscribe(
+        this._userService.getUserMemberlist().subscribe(
             // the first argument is a function which runs on success
             data => {
 
@@ -63,10 +59,9 @@ export class AdminMemberComponent implements OnInit {
             // the second argument is a function which runs on error
             err => console.error(err),
             // the third argument is a function which runs on completion
-            () => console.log('done loading news')
+            () => console.log('done loading users')
         );
     }
-
 
     /** Delete methode to delete a reg **/
     onDeleteConfirm(event): void {
@@ -79,8 +74,8 @@ export class AdminMemberComponent implements OnInit {
         }
     }
 
-
-    switchSave(eventName ,event, id) {
+    /** Change user by change one thing in the table **/
+    switchSave(eventName, event, id) {
         let data = {
             _id: id,
             lock: null,
@@ -89,21 +84,21 @@ export class AdminMemberComponent implements OnInit {
             paid: null
         };
 
-        if(eventName == 'lock'){
+        if (eventName == 'lock') {
             data.lock = event;
         }
-        if(eventName == 'role'){
+        if (eventName == 'role') {
             data.role = event;
         }
-        if(eventName == 'packetPaid'){
+        if (eventName == 'packetPaid') {
             data.packetPaid = event;
         }
-        if(eventName == 'lanPaid'){
+        if (eventName == 'lanPaid') {
             data.paid = event;
         }
 
         console.log(data);
-        this.service.changeUser(data).subscribe(
+        this._userService.changeUser(data).subscribe(
             // the first argument is a function which runs on success
             data => {
                 console.log(data);

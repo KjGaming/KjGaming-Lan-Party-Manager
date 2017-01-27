@@ -6,7 +6,7 @@ import { NgaModule } from '../../theme/nga.module';
 import { routing }       from './feedback.routing';
 import { FeedbackComponent } from './feedback.component';
 import { HttpModule } from "@angular/http";
-import {SendMailService} from "../../theme/services/SendMailService/sendMail.service";
+import {BaSendMailService} from "../../theme/services/baSendMail/baSendMail.service";
 import {SimpleNotificationsModule} from "angular2-notifications/src/simple-notifications.module";
 
 
@@ -24,7 +24,7 @@ import {SimpleNotificationsModule} from "angular2-notifications/src/simple-notif
         FeedbackComponent
     ],
     providers: [
-        SendMailService
+        BaSendMailService
     ]
 })
 export default class FeedbackModule {

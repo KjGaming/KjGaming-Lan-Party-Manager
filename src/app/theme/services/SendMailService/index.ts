@@ -1,1 +1,0 @@
-export * from './sendMail.service';

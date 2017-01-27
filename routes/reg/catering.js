@@ -114,7 +114,7 @@ router.post('/ordered', function (req, res, next) {
 
 });
 
-router.get('/deleteOrdered', function (req, res, next) {
+router.delete('/ordered', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
     var userId = decoded.user._id;
     Catering.find({user: decoded.user._id, status: 'ordered'})

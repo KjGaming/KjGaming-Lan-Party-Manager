@@ -16,7 +16,7 @@ export class TournamentService {
             'Authorization': localStorage.getItem('id_token')
         });
 
-        return this.http.get('/api/tournament', {headers: headers})
+        return this.http.get('/api/reg/tournament', {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
@@ -31,7 +31,7 @@ export class TournamentService {
 
         });
 
-        return this.http.get('/api/tournament/selected?id='+ id, {headers: headers})
+        return this.http.get('/api/reg/tournament/selected?id='+ id, {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
@@ -45,7 +45,7 @@ export class TournamentService {
             'Authorization': localStorage.getItem('id_token')
         });
 
-        return this.http.post('/api/tournament/saveResult', body, {headers: headers})
+        return this.http.post('/api/reg/tournament/saveResult', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());

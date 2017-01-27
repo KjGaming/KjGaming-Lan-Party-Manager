@@ -13,10 +13,8 @@ import {AdminDownloadComponent} from "./components/download/download.component";
 import {UiSwitchModule} from "angular2-ui-switch";
 import {AdminMemberComponent} from "./components/member/member.component";
 import {Ng2SmartTableModule} from "ng2-smart-table";
-import {SmartTablesService} from "./components/member/smartTables.service";
 import {SimpleNotificationsModule} from "angular2-notifications";
 import {CKEditorModule} from 'ng2-ckeditor';
-import {NewsService} from "../news/news.service";
 import {AdminProductComponent} from "./components/product/product.component";
 
 
@@ -44,8 +42,6 @@ import {AdminProductComponent} from "./components/product/product.component";
         AdminProductComponent
     ],
     providers: [
-        SmartTablesService,
-        NewsService
     ]
 })
 export default class AdminModule {

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {NewsService} from "../../../news/news.service";
 import {NotificationsService} from "angular2-notifications";
+import {BaNewsService} from "../../../../theme/services/baNews/baNews.service";
 
 @Component({
     selector: 'admin-news',
@@ -60,7 +60,7 @@ export class AdminNewsComponent implements OnInit {
         ]
     };
 
-    constructor(protected _newsService: NewsService, private _toastService: NotificationsService) {
+    constructor(protected _newsService: BaNewsService, private _toastService: NotificationsService) {
     }
 
     ngOnInit() {

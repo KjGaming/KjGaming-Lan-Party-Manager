@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationsService} from "angular2-notifications";
-import {KjgServerService} from "../../../../theme/services/kjgServer/kjgServer.service";
+import {BaServerService} from "../../../../theme/services/baServer/baServer.service";
 
 @Component({
     selector: 'admin-download',
@@ -13,7 +13,7 @@ export class AdminDownloadComponent implements OnInit {
         timeOut: 5000
     };
 
-    constructor(protected _downloadService: KjgServerService, private _toastService: NotificationsService) {
+    constructor(protected _downloadService: BaServerService, private _toastService: NotificationsService) {
     }
 
     downloads: any[] = [];

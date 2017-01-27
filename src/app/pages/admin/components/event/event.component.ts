@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationsService} from "angular2-notifications";
-import {KjgEventService} from "../../../../theme/services/kjgEventService/kjgEvent.service";
+import {BaEventService} from "../../../../theme/services/baEvent/baEvent.service";
 
 @Component({
   selector: 'admin-event',
@@ -14,7 +14,7 @@ export class AdminEventComponent implements OnInit {
     timeOut: 5000
   };
 
-  constructor(private _toastService: NotificationsService, private _eventService: KjgEventService) {
+  constructor(private _toastService: NotificationsService, private _eventService: BaEventService) {
   }
   events;
   id;
@@ -67,7 +67,7 @@ export class AdminEventComponent implements OnInit {
           console.error(error);
         },
         // the third argument is a function which runs on completion
-        () => console.log('creat event')
+        () => console.log('create event')
     );
   }
 
@@ -86,7 +86,7 @@ export class AdminEventComponent implements OnInit {
           console.error(error);
         },
         // the third argument is a function which runs on completion
-        () => console.log('creat event')
+        () => console.log('delete event')
     );
 
   }

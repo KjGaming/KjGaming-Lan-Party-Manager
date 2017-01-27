@@ -3,7 +3,7 @@ import {Http, Response, Headers} from "@angular/http";
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
-export class KjgEventService {
+export class BaEventService {
 
     constructor(private http: Http) {
     }
@@ -24,14 +24,14 @@ export class KjgEventService {
         return 0;
     }
 
-    // Uses http.get() to load a single JSON file
+    /** get all events **/
     get(): Observable<any> {
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('id_token')
         });
 
-        return this.http.get('/api/event', {headers: headers})
+        return this.http.get('/api/reg/event', {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
@@ -39,7 +39,7 @@ export class KjgEventService {
 
     }
 
-    /** create a new news **/
+    /** create a new event **/
     create(data){
         const body = JSON.stringify(data);
         const headers = new Headers({
@@ -54,7 +54,7 @@ export class KjgEventService {
 
     }
 
-    /** delete the current news **/
+    /** delete the current event **/
     del(data){
         const headers = new Headers({
             'Content-Type': 'application/json',

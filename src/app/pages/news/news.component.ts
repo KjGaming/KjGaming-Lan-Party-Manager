@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsService } from "./news.service";
 import { News } from "./news.model";
+import {BaNewsService} from "../../theme/services/baNews/baNews.service";
 
 
 @Component({
@@ -13,7 +13,7 @@ import { News } from "./news.model";
 export class NewsComponent implements OnInit{
     public news:News[] = [];
 
-    constructor(private _newsService: NewsService) {
+    constructor(private _newsService: BaNewsService) {
     }
 
     ngOnInit() {

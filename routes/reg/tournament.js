@@ -36,7 +36,7 @@ router.get('/selected', function (req, res, next) {
 });
 
 // save/update one Game Result
-router.post('/saveResult', function (req, res, next) {
+router.post('/save', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
     var whichTeam = null;
 
@@ -184,7 +184,7 @@ router.post('/saveResult', function (req, res, next) {
     });
 });
 
-router.post('/creat', function (req, res, next) {
+router.post('/create', function (req, res, next) {
     var tournament = new Tournament({
         name: req.body.name,
         gameName: req.body.gameName,
@@ -208,7 +208,7 @@ router.post('/creat', function (req, res, next) {
     });
 });
 
-router.post('/creatGames', function (req, res, next) {
+router.post('/createGames', function (req, res, next) {
     var tournament = {
         gameId: req.body.gameId,
         team1: req.body.team1,

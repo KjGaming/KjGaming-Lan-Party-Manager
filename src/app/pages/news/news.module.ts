@@ -5,10 +5,7 @@ import { NgaModule } from '../../theme/nga.module';
 
 import { routing }       from './news.routing';
 import { NewsComponent } from './news.component';
-/*import { NewsService } from "./news.service";
-import { News } from "./news.model";*/
 import { HttpModule } from "@angular/http";
-import { NewsService } from "./news.service";
 import {ChangeArrayDirectionPipe} from "../../theme/pipes/changeArrayDirection/changeArrayDirection.pipe";
 
 
@@ -24,7 +21,6 @@ import {ChangeArrayDirectionPipe} from "../../theme/pipes/changeArrayDirection/c
         NewsComponent
     ],
     providers: [
-        NewsService
     ]
 })
 export default class NewsModule {

@@ -10,11 +10,7 @@ import { CreatClanComponent } from "./components/creatClan/creatclan.component";
 import { EditClanComponent } from "./components/editClan/editclan.component";
 import { ShowClanComponent } from "./components/showClan/showclan.component";
 import { ShowClanService } from "./components/showClan/showclan.service";
-import { CreatClanService } from "./components/creatClan/creatclan.service";
-import { EditClanService } from "./components/editClan/editclan.service";
-import { NotificationsService } from "angular2-notifications/src/notifications.service";
 import { SimpleNotificationsModule } from "angular2-notifications/src/simple-notifications.module";
-import { ClanService } from "./clan.service";
 
 
 @NgModule({
@@ -34,13 +30,6 @@ import { ClanService } from "./clan.service";
         ShowClanComponent
     ],
     providers: [
-        CreatClanService,
-        EditClanService,
-        ShowClanService,
-        ClanService,
-        NotificationsService
-
-
     ]
 })
 export default class ClanModule {

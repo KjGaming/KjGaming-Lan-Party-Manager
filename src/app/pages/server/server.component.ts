@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {KjgServerService} from "../../theme/services/kjgServer/kjgServer.service";
+import {BaServerService} from "../../theme/services/baServer/baServer.service";
 
 
 @Component({
@@ -14,7 +14,7 @@ export class ServerComponent implements OnInit {
     serverIndex = 1;
 
 
-    constructor(private _serverService: KjgServerService) {
+    constructor(private _serverService: BaServerService) {
     }
 
     ngOnInit() {

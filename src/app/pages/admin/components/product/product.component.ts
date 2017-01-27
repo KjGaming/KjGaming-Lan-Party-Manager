@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationsService} from "angular2-notifications";
-import {KjgServerService} from "../../../../theme/services/kjgServer/kjgServer.service";
+import {BaCateringService} from "../../../../theme/services/baCatering/baCatering.service";
 
 @Component({
     selector: 'admin-download',
@@ -13,7 +13,7 @@ export class AdminProductComponent implements OnInit {
         timeOut: 5000
     };
 
-    constructor(protected _downloadService: KjgServerService, private _toastService: NotificationsService) {
+    constructor(protected _cateringService: BaCateringService, private _toastService: NotificationsService) {
     }
 
     products;
@@ -23,29 +23,51 @@ export class AdminProductComponent implements OnInit {
     createNumber;
     createInfo;
 
-    id: string = '';
-    editTitle: string = '';
-    editContent: string = '';
-    editPath: string = '';
+    id: string;
+    editName: string;
+    editPrice: number;
+    editNumber: number;
+    editInfo: string;
 
     ngOnInit() {
-        this.getDownload();
+        this.get();
     }
 
     onChange() {
-
+        for(let product of this.products){
+            if(product._id == this.id){
+                this.editName = product.name;
+                this.editPrice = product.price;
+                this.editNumber = product.number;
+                this.editInfo = product.info;
+                break;
+            }
+        }
     }
 
-    getDownload() {
-
+    get() {
+        this._cateringService.getProducts().subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                this.products = data.obj;
+                console.log(this.products);
+            },
+            // the second argument is a function which runs on error
+            err => console.error(err),
+            // the third argument is a function which runs on completion
+            () => console.log('load products')
+        );
     }
 
-    createDonwload() {
+    create() {
         const data = {
-
+            name: this.createName,
+            price: this.createPrice,
+            number: this.createNumber,
+            info: this.createInfo
         };
 
-        this._downloadService.create(data).subscribe(
+        this._cateringService.creatProduct(data).subscribe(
             // the first argument is a function which runs on success
             data => {
                 this._toastService.success(data.title, data.message);
@@ -58,15 +80,16 @@ export class AdminProductComponent implements OnInit {
         );
     }
 
-    updateDonwload() {
+    update() {
         const data = {
             id: this.id,
-            title: this.editTitle,
-            content: this.editContent,
-            path: this.editPath
+            name: this.editName,
+            price: this.editPrice,
+            number: this.editNumber,
+            info: this.editInfo
         };
 
-        this._downloadService.change(data).subscribe(
+        this._cateringService.changeProduct(data).subscribe(
             // the first argument is a function which runs on success
             data => {
                 this._toastService.success(data.title, data.message);
@@ -79,11 +102,11 @@ export class AdminProductComponent implements OnInit {
         );
     }
 
-    delDonwload() {
+    del() {
         const data = {
             id: this.id,
         };
-        this._downloadService.del(data).subscribe(
+        this._cateringService.deleteProduct(data).subscribe(
             // the first argument is a function which runs on success
             data => {
                 this._toastService.success(data.title, data.message);

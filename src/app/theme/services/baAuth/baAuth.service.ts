@@ -9,14 +9,14 @@ import {NotificationsService} from "angular2-notifications/src/notifications.ser
 
 
 @Injectable()
-export class AuthService {
+export class BaAuthService {
     constructor(private http: Http, private _toastService: NotificationsService, private router: Router) {
     }
 
     signup(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('/api/reg', body, {headers: headers})
+        return this.http.post('/api/registration', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
@@ -26,7 +26,7 @@ export class AuthService {
     signin(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('/api/reg/signin', body, {headers: headers})
+        return this.http.post('/api/signin', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());

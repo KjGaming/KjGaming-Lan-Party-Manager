@@ -132,7 +132,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
   /reg/news:
     get:
       summary: Signin in the LAN Manager
@@ -155,11 +154,24 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /reg/sendMail:
-    get:
+    post:
       summary: Signin in the LAN Manager
       description: |
         With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/sendMail:
+    post:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
       responses:
         default:
           description: Unexpected error
@@ -185,6 +197,63 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+    post:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/clan/edit:
+    post:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/clan/out:
+    post:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/clan/in:
+    post:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/clan/del:
+    post:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      tags:
+        - news
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
   /reg/catering:
     get:
       summary: Signin in the LAN Manager
@@ -195,8 +264,77 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+  /reg/catering/products:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/catering/ordered:
+    post:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
   /reg/tournament:
     get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/tournament/selected:
+    get:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/tournament/save:
+    post:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/tournament/create:
+    post:
+      summary: Signin in the LAN Manager
+      description: |
+        With this path you can register a new user.
+      responses:
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /reg/tournament/createGames:
+    post:
       summary: Signin in the LAN Manager
       description: |
         With this path you can register a new user.

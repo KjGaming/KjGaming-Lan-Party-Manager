@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationsService} from "angular2-notifications";
-import {KjgServerService} from "../../../../theme/services/kjgServer/kjgServer.service";
+import {BaServerService} from "../../../../theme/services/baServer/baServer.service";
 
 @Component({
     selector: 'admin-news',
@@ -13,7 +13,7 @@ export class AdminServerComponent implements OnInit {
         timeOut: 5000
     };
 
-    constructor(protected _serverService: KjgServerService, private _toastService: NotificationsService) {
+    constructor(protected _serverService: BaServerService, private _toastService: NotificationsService) {
     }
 
     servers: any[] = [];

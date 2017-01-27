@@ -5,7 +5,6 @@ import { NgaModule } from '../../theme/nga.module';
 
 import { routing }       from './memberlist.routing';
 import { MemberlistComponent } from './memberlist.component';
-import { MemberlistService } from "./memberlist.service";
 import { HttpModule } from "@angular/http";
 
 
@@ -21,7 +20,6 @@ import { HttpModule } from "@angular/http";
         MemberlistComponent
     ],
     providers: [
-        MemberlistService
     ]
 })
 export default class MemberlistModule {

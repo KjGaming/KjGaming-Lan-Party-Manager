@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
-import {AuthService} from "../../theme/services";
+import {BaAuthService} from "../../theme/services";
 import {User} from "../../theme/model";
 import {Router} from "@angular/router";
 import {NotificationsService} from "angular2-notifications/src/notifications.service";
@@ -23,7 +23,7 @@ export class Login {
     public password: AbstractControl;
     public submitted: boolean = false;
 
-    constructor(fb: FormBuilder, private authService: AuthService, private router: Router, private _toastService: NotificationsService) {
+    constructor(fb: FormBuilder, private authService: BaAuthService, private router: Router, private _toastService: NotificationsService) {
         this.form = fb.group({
             'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
             'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]

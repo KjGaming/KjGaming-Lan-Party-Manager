@@ -5,7 +5,6 @@ import { NgaModule } from '../../theme/nga.module';
 
 import { routing }       from './timetable.routing';
 import { TimetableComponent } from './timetable.component';
-import { TimetableService } from "./timetable.service";
 import { HttpModule } from "@angular/http";
 import {dayeventComponent} from "./component/dayEvent";
 
@@ -22,7 +21,6 @@ import {dayeventComponent} from "./component/dayEvent";
         TimetableComponent
     ],
     providers: [
-        TimetableService
     ]
 })
 export default class TimetableModule {

@@ -9,4 +9,5 @@ import {Component, ViewEncapsulation, ViewChild, Input} from '@angular/core';
 export class BaCard {
   @Input() title:String;
   @Input() baCardClass:String;
+
 }

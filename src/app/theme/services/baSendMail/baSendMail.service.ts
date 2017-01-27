@@ -7,7 +7,7 @@ import { Mail } from "../../model/mail.model";
 
 
 @Injectable()
-export class SendMailService {
+export class BaSendMailService {
     constructor(private http: Http) {
     }
 
@@ -18,7 +18,7 @@ export class SendMailService {
             'Authorization': localStorage.getItem('id_token')
         });
 
-        return this.http.post('/api/sendMail', body, {headers: headers})
+        return this.http.post('/api/reg/sendMail', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=>{
                 return Observable.throw(err.json());

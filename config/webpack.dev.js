@@ -139,8 +139,8 @@ module.exports = function(options) {
 
     /**
      * Webpack Development Server configuration
-     * Description: The webpack-dev-server is a little node.js Express server.
-     * The server emits information about the compilation state to the client,
+     * Description: The webpack-dev-baServer is a little node.js Express baServer.
+     * The baServer emits information about the compilation state to the client,
      * which reacts to those events.
      *
      * See: https://webpack.github.io/docs/webpack-dev-server.html

@@ -35,7 +35,7 @@ export class SeatingService {
             'Authorization': localStorage.getItem('id_token')
         });
 
-        return this.http.post('/api/user/seat', body, {headers: headers})
+        return this.http.post('/api/reg/user/seat', body, {headers: headers})
             .map((res: Response)=> res.json())
             .catch((err: Response)=> {
                 return Observable.throw(err.json());

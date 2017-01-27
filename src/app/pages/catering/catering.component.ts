@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CateringService } from "./catering.service";
 import { NotificationsService } from "angular2-notifications";
+import {BaCateringService} from "../../theme/services/baCatering/baCatering.service";
 
 
 @Component({
@@ -22,7 +22,7 @@ export class CateringComponent implements OnInit {
     };
 
 
-    constructor(private _cateringService: CateringService, private _toastService: NotificationsService) {
+    constructor(private _cateringService: BaCateringService, private _toastService: NotificationsService) {
     }
 
     ngOnInit() {

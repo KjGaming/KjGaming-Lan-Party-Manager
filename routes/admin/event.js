@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Event = require('../../models/timetable');
-var time = require('time');
+var Event = require('../../models/event');
 
 
 router.post('/', function (req, res, next) {
@@ -19,14 +18,14 @@ router.post('/', function (req, res, next) {
     event.save(function (err, result) {
         if(err){
             return res.status(500).json({
-                title: 'Hier ist ein Fehler aufgetreten',
-                error: err
+                title: 'Fehler',
+                error: {message: 'Hier ist ein Fehler aufgetreten'}
             });
         }
         if(event == null){
             return res.status(500).json({
-                title: 'Das erstellte Event war leer',
-                error: err
+                title: 'Fehler',
+                error: {message: 'Das erstellte Event war leer'}
             });
         }
         res.status(201).json({
@@ -40,14 +39,16 @@ router.post('/', function (req, res, next) {
 router.delete('/:id', function (req, res, next) {
     if (!req.params.id) {
         return res.status(400).json({
-            title: 'No news selected',
-            error: err
+            title: 'Fehler',
+            error: {message: 'Kein Event ausgewählt'}
+
         });
     }
     Event.findByIdAndRemove(req.params.id, function (err, result) {
         if (err) {
             return res.status(500).json({
-                title: 'Hier ist ein Fehler aufgetreten',
+                title: 'Fehler',
+                message: 'Hier ist ein Fehler aufgetreten',
                 error: err
             });
         }

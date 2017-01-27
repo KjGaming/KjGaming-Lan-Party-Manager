@@ -14,6 +14,4 @@ export class ClanComponent {
         position: ["top", "center"],
         timeOut: 5000
     };
-
-
 }
