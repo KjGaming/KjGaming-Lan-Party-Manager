@@ -1,1 +1,18 @@
 @import '../../theme/sass/auth';
+
+#birth {
+    input {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #DDD;
+    }
+
+    .selectiongroup{
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .btnpicker, .btnclear{
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #DDD;
+    }
+
+}

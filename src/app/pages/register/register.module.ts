@@ -7,6 +7,8 @@ import { Register } from './register.component';
 import { routing }       from './register.routing';
 import { ReCaptchaModule } from 'angular2-recaptcha';
 import {SimpleNotificationsModule} from "angular2-notifications/src/simple-notifications.module";
+import { MyDatePickerModule } from 'mydatepicker';
+
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import {SimpleNotificationsModule} from "angular2-notifications/src/simple-notif
     NgaModule,
     routing,
     ReCaptchaModule,
-    SimpleNotificationsModule
+    SimpleNotificationsModule,
+    MyDatePickerModule
   ],
   declarations: [
     Register

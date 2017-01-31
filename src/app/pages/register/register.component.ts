@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, ViewChild} from '@angular/core';
 import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {EmailValidator, EqualPasswordsValidator, DateValidator} from '../../theme/validators';
 import {PostalCodeValidator} from "../../theme/validators/postalCode.validator";
@@ -6,6 +6,7 @@ import {BaAuthService} from "../../theme/services";
 import {User} from "../../theme/model";
 import {Router} from "@angular/router";
 import {NotificationsService} from "angular2-notifications/src/notifications.service";
+import {IMyOptions, IMyDateModel} from 'mydatepicker';
 
 @Component({
     selector: 'register',
@@ -14,6 +15,12 @@ import {NotificationsService} from "angular2-notifications/src/notifications.ser
     template: require('./register.html'),
 })
 export class Register {
+
+    private myDatePickerOptions: IMyOptions = {
+        // other options...
+        dateFormat: 'dd.mm.yyyy',
+    };
+
     public lanPacketData = [
         {value: 0, display: 'Wähle ein Paket'},
         {value: 0, display: 'Sparpaket (15€)'},
@@ -33,9 +40,9 @@ export class Register {
     ];
 
     public options = {
-        position: ["top", "center"],
+        position: ['top', 'center'],
         timeOut: 5000
-    }
+    };
 
     error;
 
@@ -63,7 +70,10 @@ export class Register {
 
     public submitted: boolean = false;
 
-    constructor(fb: FormBuilder, private authService: BaAuthService, private router: Router, private _toastService: NotificationsService) {
+    constructor(fb: FormBuilder,
+                private authService: BaAuthService,
+                private router: Router,
+                private _toastService: NotificationsService) {
 
         this.form = fb.group({
             'lanPacket': ['', Validators.required],

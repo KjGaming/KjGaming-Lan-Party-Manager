@@ -96,7 +96,11 @@
                 <label for="birth" class="col-sm-2 control-label">Geburtstag</label>
 
                 <div class="col-sm-10">
-                    <input [formControl]="birth" type="date" class="form-control" id="birth">
+                    <my-date-picker id="birth"
+                                    name="birth"
+                                    [options]="myDatePickerOptions"
+                                    formControlName="birth"></my-date-picker>
+                   <!-- <input [formControl]="birth" type="date" class="form-control" id="birth">-->
                 </div>
             </div>
 

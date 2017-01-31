@@ -3,12 +3,17 @@ import { AbstractControl } from '@angular/forms';
 export class DateValidator {
 
     public static validate(c: AbstractControl) {
-        var data = c.value.split("-");
-
-        if (2017 - data[0] >= 16) {
+        if(!c.value){
+            return {
+                validateDate: {
+                    valid: false
+                }
+            }
+        }
+        if (2017 - c.value.date.year >= 16) {
             return null;
 
-        } else if (2017 - data[0] == 15 && data[1] <= 4 && data[2] <= 20) {
+        } else if (2017 - c.value.date.year == 15 && c.value.date.month <= 4 && c.value.date.day <= 20) {
             return null;
 
         } else {
