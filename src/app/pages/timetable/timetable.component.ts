@@ -25,53 +25,89 @@ export class TimetableComponent implements OnInit {
         this.getEvents();
     }
 
+    getEvents() {
+        this._timeService.get().subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                this.events = data.obj;
+                this.sortEvent(data.obj);
+                /* console.log(this.events);*/
+
+            },
+            // the second argument is a function which runs on error
+            error => {
+                this._toastService.error(error.title, error.error.message);
+                console.error(error);
+            },
+            // the third argument is a function which runs on completion
+            () => console.log('loading baEvent')
+        );
+    }
+
     sortEvent(events) {
+
+
         for (let event of events) {
-            var eventTime = new Date(+event.timeStart);
+
+            let eventTime = new Date(+event.timeStart);
+            let timeChange = 60;
+            let timeDurationMin = (event.timeDuration / (60 * 1000)) % timeChange;
+            let timeDurationHour = Math.floor(event.timeDuration / (60*60*1000) % 24);
+            let dayTime;
+            let isDayInList: boolean = false;
 
 
-            if ((((event.timeEnd - event.timeStart) / (60 * 1000)) % 60) < 10) {
-                event['durationMin'] = '0' + ((event.timeEnd - event.timeStart) / (60 * 1000)) % 60;
-            }else{
-                event['durationMin'] = ((event.timeEnd - event.timeStart) / (60 * 1000)) % 60;
+            console.log(timeDurationHour);
+            /** calculate the minits duration from the duration time**/
+            if(timeDurationMin < 10){
+                event['durationMin'] = '0' + timeDurationMin;
+            }else {
+                event['durationMin'] = timeDurationMin;
             }
 
+            /** calculate the hours duration from the duration time**/
+            if(timeDurationHour < 10){
+                event['durationHour'] = '0' + timeDurationHour;
+            }else {
+                event['durationHour'] = timeDurationHour;
+            }
 
-            event['durationHour'] = ((event.timeEnd - event.timeStart) / (60 * 60 * 1000));
-
-
-
+            /** calculate the hours from the time**/
             if (eventTime.getHours() < 10) {
                 event['timeHour'] = '0' + eventTime.getHours();
             } else {
                 event['timeHour'] = '' + eventTime.getHours();
             }
 
+            /** calculate the minits from the time**/
             if (eventTime.getMinutes() < 10) {
                 event['timeMinits'] = '0' + eventTime.getMinutes();
             } else {
                 event['timeMinits'] = '' + eventTime.getMinutes();
             }
 
-
+            /** If there a day in the list array**/
             if (this.listDays.length != 0) {
-                var isDayInList: boolean = true;
+
+                /** If the same date exist, it push to the array **/
                 for (let index in this.listDays) {
                     if (eventTime.getDate() == this.listDays[index].day) {
                         if (eventTime.getMonth() == this.listDays[index].month) {
                             if (eventTime.getFullYear() == this.listDays[index].year) {
-                                isDayInList = false;
+                                isDayInList = true;
                                 this.listDays[index].events.push(event);
                                 break;
                             }
                         }
                     }
                 }
-                if (isDayInList === true) {
+
+                /** Set a new date to the listDays array **/
+                if (isDayInList === false) {
                     if (eventTime.getHours() == 0 && eventTime.getMinutes() == 0 && eventTime.getSeconds() == 0) {
-                        var dayTime = this.getDayName(eventTime.getUTCDay() + 1);
+                        dayTime = this.getDayName(eventTime.getUTCDay() + 1);
                     } else {
-                        var dayTime = this.getDayName(eventTime.getUTCDay());
+                        dayTime = this.getDayName(eventTime.getUTCDay());
                     }
 
                     this.listDays.push({
@@ -85,9 +121,9 @@ export class TimetableComponent implements OnInit {
                 }
             } else {
                 if (eventTime.getHours() == 0 && eventTime.getMinutes() == 0 && eventTime.getSeconds() == 0) {
-                    var dayTime = this.getDayName(eventTime.getUTCDay() + 1);
+                    dayTime = this.getDayName(eventTime.getUTCDay() + 1);
                 } else {
-                    var dayTime = this.getDayName(eventTime.getUTCDay());
+                    dayTime = this.getDayName(eventTime.getUTCDay());
                 }
                 this.listDays[0] = {
                     'day': eventTime.getDate(),
@@ -101,6 +137,7 @@ export class TimetableComponent implements OnInit {
 
             console.log(this.listDays);
         }
+
         //Sort the date
         this.listDays.sort(this._timeService.sortDay);
 
@@ -112,32 +149,24 @@ export class TimetableComponent implements OnInit {
 
     };
 
-    getDayName(dayNumber) {
+    getDayName(dayNumber):string {
         var dayName;
         switch (dayNumber) {
             case 1:
-                dayName = 'Montag';
-                break;
+                return dayName = 'Montag';
             case 2:
-                dayName = 'Dienstag';
-                break;
+                return dayName = 'Dienstag';
             case 3:
-                dayName = 'Mittwoch';
-                break;
+                return dayName = 'Mittwoch';
             case 4:
-                dayName = 'Donnerstag';
-                break;
+                return dayName = 'Donnerstag';
             case 5:
-                dayName = 'Freitag';
-                break;
+                return dayName = 'Freitag';
             case 6:
-                dayName = 'Samstag';
-                break;
+                return dayName = 'Samstag';
             case 0:
-                dayName = 'Sonntag';
-                break;
+                return dayName = 'Sonntag';
         }
-        return dayName;
     }
 
     watchDay(hour, minits) {
@@ -157,23 +186,6 @@ export class TimetableComponent implements OnInit {
         }
     }
 
-    getEvents() {
-        this._timeService.get().subscribe(
-            // the first argument is a function which runs on success
-            data => {
-                this.sortEvent(data.obj);
-                this.events = data.obj;
-                console.log(this.events);
 
-            },
-            // the second argument is a function which runs on error
-            error => {
-                this._toastService.error(error.title, error.error.message);
-                console.error(error);
-            },
-            // the third argument is a function which runs on completion
-            () => console.log('loading baEvent')
-        );
-    }
 
 }

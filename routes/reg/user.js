@@ -25,7 +25,8 @@ router.get('/', function (req, res, next) {
                     nickName: user[i].nickName,
                     seat: user[i].seat,
                     role: user[i].role,
-                    clan: user[i].clan
+                    clan: user[i].clan,
+                    games: user[i].games
                 }
             }
 
@@ -121,24 +122,26 @@ router.post('/seat', function (req, res, next) {
     User.findOne({'seat': req.body.seat}, function (err, user) {
         if (err) {
             return res.status(500).json({
-                title: 'Die Platzreservierung hat nicht funktioniert',
-                error: err
+                title: 'Fehler',
+                error: {message: 'Die Platzreservierung hat nicht funktioniert'}
             });
         }
         if (!user || req.body.seat === null) {
             User.findOneAndUpdate({_id: req.body.id}, {'$set': {'seat': req.body.seat}}, function (err, user) {
                 if (err) {
                     return res.status(500).json({
-                        title: 'Die Platzreservierung hat nicht funktioniert',
-                        error: err
+                        title: 'Fehler',
+                        error: {message: 'Die Platzreservierung hat nicht funktioniert'}
                     });
                 }
                 if (req.body.seat == null) {
                     res.status(200).json({
+                        title:'Erfolgreich:',
                         message: 'Platz wurde freigegeben'
                     });
                 } else {
                     res.status(200).json({
+                        title:'Erfolgreich:',
                         message: 'Platz ' + req.body.seat + ' wurde für dich reserviert'
                     });
                 }
