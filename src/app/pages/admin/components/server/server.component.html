@@ -1,59 +1,65 @@
 <simple-notifications [options]="options"></simple-notifications>
-<ba-card title="Server erstellen">
-    <div class="form-group">
-        <label for="createTitle">Titel</label>
-        <input type="text" class="form-control" id="createTitle" placeholder="server title" [(ngModel)]="createTitle">
-    </div>
-    <div class="form-group">
-        <label for="createTitle">Text</label>
-        <input type="text" class="form-control" id="createContent" placeholder="server text" [(ngModel)]="createContent">
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label for="createTitle">IP-Adresse</label>
-            <input type="url" class="form-control" id="createIp" placeholder="server ip" [(ngModel)]="createIp">
+<div class="row">
+    <ba-card title="Server erstellen" class="col-md-6">
+        <div class="form-group">
+            <label for="createTitle">Titel</label>
+            <input type="text" class="form-control" id="createTitle" placeholder="server title"
+                   [(ngModel)]="createTitle">
         </div>
-        <div class="form-group col-md-6">
-            <label for="createTitle">Server Modus</label>
-            <input type="url" class="form-control" id="createMode" placeholder="server mode" [(ngModel)]="createMode">
+        <div class="form-group">
+            <label for="createTitle">Text</label>
+            <input type="text" class="form-control" id="createContent" placeholder="server text"
+                   [(ngModel)]="createContent">
         </div>
-    </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="createTitle">IP-Adresse</label>
+                <input type="url" class="form-control" id="createIp" placeholder="server ip" [(ngModel)]="createIp">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="createTitle">Server Modus</label>
+                <input type="url" class="form-control" id="createMode" placeholder="server mode"
+                       [(ngModel)]="createMode">
+            </div>
+        </div>
 
-    <div class="btnDownload">
-        <button type="button" (click)="create()" class="btn btn-success">Server erstellen</button>
-    </div>
+        <div class="btnDownload">
+            <button type="button" (click)="create()" class="btn btn-success">Server erstellen</button>
+        </div>
 
-</ba-card>
-<ba-card title="Server bearbeiten">
-    <div class="form-group">
-        <label for="editChooseDownload">Server auswählen</label>
-        <select class="form-control" id="editChooseDownload" [(ngModel)]="id" (ngModelChange)="onChange()">
-            <option *ngFor="let server of servers" [ngValue]="server._id">{{server.title}}</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="createTitle">Titel</label>
-        <input type="text" class="form-control" id="editTitle" placeholder="server title" [(ngModel)]="editTitle">
-    </div>
-    <div class="form-group">
-        <label for="createTitle">Text</label>
-        <input type="text" class="form-control" id="editContent" placeholder="server content" [(ngModel)]="editContent">
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label for="createTitle">IP-Adresse</label>
-            <input type="url" class="form-control" id="editIp" placeholder="server ip" [(ngModel)]="editIp">
+    </ba-card>
+    <ba-card title="Server bearbeiten" class="col-md-6">
+        <div class="form-group">
+            <label for="editChooseDownload">Server auswählen</label>
+            <select class="form-control" id="editChooseDownload" [(ngModel)]="id" (ngModelChange)="onChange()">
+                <option *ngFor="let server of servers" [ngValue]="server._id">{{server.title}}</option>
+            </select>
         </div>
-        <div class="form-group col-md-6">
-            <label for="createTitle">Server Modus</label>
-            <input type="url" class="form-control" id="editMode" placeholder="server mode" [(ngModel)]="editMode">
+        <div class="form-group">
+            <label for="createTitle">Titel</label>
+            <input type="text" class="form-control" id="editTitle" placeholder="server title" [(ngModel)]="editTitle">
         </div>
-    </div>
-    <div class="btnNews">
-        <button type="button" (click)="del()" class="btn btn-danger">Server löschen</button>
-        <button type="button" (click)="update()" class="btn btn-success">Server bearbeiten</button>
-    </div>
-</ba-card>
+        <div class="form-group">
+            <label for="createTitle">Text</label>
+            <input type="text" class="form-control" id="editContent" placeholder="server content"
+                   [(ngModel)]="editContent">
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="createTitle">IP-Adresse</label>
+                <input type="url" class="form-control" id="editIp" placeholder="server ip" [(ngModel)]="editIp">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="createTitle">Server Modus</label>
+                <input type="url" class="form-control" id="editMode" placeholder="server mode" [(ngModel)]="editMode">
+            </div>
+        </div>
+        <div class="btnNews">
+            <button type="button" (click)="del()" class="btn btn-danger">Server löschen</button>
+            <button type="button" (click)="update()" class="btn btn-success">Server bearbeiten</button>
+        </div>
+    </ba-card>
+</div>
 <ba-card title="Server status">
     <table class="table table-hover">
         <thead>
@@ -73,8 +79,10 @@
             <td class="align-left">{{server.content}}</td>
             <td class="align-left">{{server.server.ip}}</td>
             <td class="align-left">{{server.server.mode}}</td>
-            <td class="align-left"><ui-switch [(ngModel)]="server.status"
-                                              (change)="switchSave(server._id, $event)"></ui-switch></td>
+            <td class="align-left">
+                <ui-switch [(ngModel)]="server.status"
+                           (change)="switchSave(server._id, $event)"></ui-switch>
+            </td>
         </tr>
         </tbody>
     </table>

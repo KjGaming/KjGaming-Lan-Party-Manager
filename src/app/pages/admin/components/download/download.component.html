@@ -1,44 +1,50 @@
 <simple-notifications [options]="options"></simple-notifications>
-<ba-card title="Download erstellen">
-    <div class="form-group">
-        <label for="createTitle">Titel</label>
-        <input type="text" class="form-control" id="createTitle" placeholder="download title" [(ngModel)]="createTitle">
-    </div>
-    <div class="form-group">
-        <label for="createTitle">Text</label>
-        <input type="text" class="form-control" id="createTitle" placeholder="download text" [(ngModel)]="createContent">
-    </div>
-    <div class="form-group">
-        <label for="createTitle">Pfad</label>
-        <input type="url" class="form-control" id="createTitle" placeholder="download pfad" [(ngModel)]="createPath">
-    </div>
-    <div class="btnDownload">
-        <button type="button" (click)="createDonwload()" class="btn btn-success">Download erstellen</button>
-    </div>
-
-</ba-card>
-<ba-card title="Download bearbeiten">
-    <div class="form-group">
-        <label for="editChooseDownload">Download auswählen</label>
-        <select class="form-control" id="editChooseDownload" [(ngModel)]="id" (ngModelChange)="onChange()">
-            <option *ngFor="let download of downloads" [ngValue]="download._id">{{download.title}}</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="createTitle">Titel</label>
-        <input type="text" class="form-control" id="createTitle" placeholder="download title" [(ngModel)]="editTitle">
-    </div>
-    <div class="form-group">
-        <label for="createTitle">Text</label>
-        <input type="text" class="form-control" id="createTitle" placeholder="download content" [(ngModel)]="editContent">
-    </div>
-    <div class="form-group">
-        <label for="createTitle">Pfad</label>
-        <input type="url" class="form-control" id="createTitle" placeholder="download path" [(ngModel)]="editPath">
-    </div>
-    <div class="btnNews">
-        <button type="button" (click)="delDonwload()" class="btn btn-danger">Download löschen</button>
-        <button type="button" (click)="updateDonwload()" class="btn btn-success">Download bearbeiten</button>
-    </div>
-</ba-card>
+<div class="row">
+    <ba-card title="Download erstellen" class="col-md-6">
+        <div class="form-group">
+            <label for="createTitle">Titel</label>
+            <input type="text" class="form-control" id="createTitle" placeholder="download title"
+                   [(ngModel)]="createTitle">
+        </div>
+        <div class="form-group">
+            <label for="createTitle">Text</label>
+            <input type="text" class="form-control" id="createTitle" placeholder="download text"
+                   [(ngModel)]="createContent">
+        </div>
+        <div class="form-group">
+            <label for="createTitle">Pfad</label>
+            <input type="url" class="form-control" id="createTitle" placeholder="download pfad"
+                   [(ngModel)]="createPath">
+        </div>
+        <div class="btnDownload">
+            <button type="button" (click)="createDonwload()" class="btn btn-success">Download erstellen</button>
+        </div>
+    </ba-card>
+    <ba-card title="Download bearbeiten" class="col-md-6">
+        <div class="form-group">
+            <label for="editChooseDownload">Download auswählen</label>
+            <select class="form-control" id="editChooseDownload" [(ngModel)]="id" (ngModelChange)="onChange()">
+                <option *ngFor="let download of downloads" [ngValue]="download._id">{{download.title}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="createTitle">Titel</label>
+            <input type="text" class="form-control" id="createTitle" placeholder="download title"
+                   [(ngModel)]="editTitle">
+        </div>
+        <div class="form-group">
+            <label for="createTitle">Text</label>
+            <input type="text" class="form-control" id="createTitle" placeholder="download content"
+                   [(ngModel)]="editContent">
+        </div>
+        <div class="form-group">
+            <label for="createTitle">Pfad</label>
+            <input type="url" class="form-control" id="createTitle" placeholder="download path" [(ngModel)]="editPath">
+        </div>
+        <div class="btnNews">
+            <button type="button" (click)="delDonwload()" class="btn btn-danger">Download löschen</button>
+            <button type="button" (click)="updateDonwload()" class="btn btn-success">Download bearbeiten</button>
+        </div>
+    </ba-card>
+</div>
 
