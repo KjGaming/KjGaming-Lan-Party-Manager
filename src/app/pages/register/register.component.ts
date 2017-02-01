@@ -137,9 +137,11 @@ export class Register {
     }
 
     public onSubmit(values: Object): void {
+
         this.submitted = true;
         if (this.form.valid) {
-            let date = new Date(values['birth']);
+            let date = new Date(values['birth'].jsdate).toString();
+
 
             let lanFoodString = this.lanFood.toString();
             lanFoodString = lanFoodString.replace(/,/g, "");
@@ -170,6 +172,7 @@ export class Register {
 
 
             );
+            console.log(user);
 
             this.authService.signup(user)
                 .subscribe(
