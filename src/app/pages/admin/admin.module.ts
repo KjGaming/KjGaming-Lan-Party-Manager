@@ -16,6 +16,8 @@ import {Ng2SmartTableModule} from "ng2-smart-table";
 import {SimpleNotificationsModule} from "angular2-notifications";
 import {CKEditorModule} from 'ng2-ckeditor';
 import {AdminProductComponent} from "./components/product/product.component";
+import {AdminStatisticsComponent} from "./components/statistics/statistics.component";
+import {ChartsModule} from "ng2-charts/ng2-charts";
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import {AdminProductComponent} from "./components/product/product.component";
         ReactiveFormsModule,
         Ng2SmartTableModule,
         SimpleNotificationsModule,
-        CKEditorModule
+        CKEditorModule,
+        ChartsModule
 
     ],
     declarations: [
@@ -39,7 +42,8 @@ import {AdminProductComponent} from "./components/product/product.component";
         AdminEventComponent,
         AdminDownloadComponent,
         AdminMemberComponent,
-        AdminProductComponent
+        AdminProductComponent,
+        AdminStatisticsComponent
     ],
     providers: [
     ]
