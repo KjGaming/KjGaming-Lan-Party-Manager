@@ -7,6 +7,7 @@ import { AdminServerComponent } from "./components/server/server.component";
 import { AdminEventComponent } from "./components/event/event.component";
 import { AdminMemberComponent } from "./components/member/member.component";
 import {AdminProductComponent} from "./components/product/product.component";
+import {AdminStatisticsComponent} from "./components/statistics/statistics.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
       { path: 'catering', component: AdminNewsComponent },
       { path: 'tournament', component: AdminNewsComponent },
       { path: 'product', component: AdminProductComponent },
-      { path: 'statistic', component: AdminNewsComponent },
+      { path: 'statistic', component: AdminStatisticsComponent },
     ]
   }
 ];

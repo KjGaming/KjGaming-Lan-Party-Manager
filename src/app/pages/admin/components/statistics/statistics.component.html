@@ -1,7 +1,55 @@
-<base-chart
-        class="chart"
-        [datasets]="datasets"
-        [labels]="labels"
-        [options]="options"
-        [chartType]="'line'">
-</base-chart>
+<div class="row">
+    <div class="col-md-4">
+        <ba-card title="Anmeldungen">
+                <canvas baseChart
+                        [data]="userRegData"
+                        [labels]="userRegLabels"
+                        [chartType]="doughnutChartType"
+                        [options]="doughnutChartOptions"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+
+        </ba-card>
+    </div>
+    <div class="col-md-4">
+        <ba-card title="LAN Packete">
+                <canvas baseChart
+                        [data]="packetData"
+                        [labels]="packetLabels"
+                        [chartType]="doughnutChartType"
+                        [options]="doughnutChartOptions"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+
+        </ba-card>
+    </div>
+    <div class="col-md-4">
+        <ba-card title="Vegitariere">
+            <canvas baseChart
+                    [data]="vegiData"
+                    [labels]="vegiLabels"
+                    [chartType]="doughnutChartType"
+                    [options]="doughnutChartOptions"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+
+        </ba-card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <ba-card title="Essen">
+            <canvas baseChart
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+
+        </ba-card>
+    </div>
+</div>
+
+

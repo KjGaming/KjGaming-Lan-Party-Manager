@@ -17,7 +17,7 @@ import {SimpleNotificationsModule} from "angular2-notifications";
 import {CKEditorModule} from 'ng2-ckeditor';
 import {AdminProductComponent} from "./components/product/product.component";
 import {AdminStatisticsComponent} from "./components/statistics/statistics.component";
-import {ChartsModule} from "ng2-charts/ng2-charts";
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({

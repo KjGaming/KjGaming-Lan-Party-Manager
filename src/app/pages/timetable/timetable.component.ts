@@ -147,7 +147,7 @@ export class TimetableComponent implements OnInit {
         }
 
 
-    };
+    }
 
     getDayName(dayNumber):string {
         var dayName;
