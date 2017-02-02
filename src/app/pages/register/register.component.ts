@@ -117,12 +117,16 @@ export class Register {
         if (lanNumber == 0) {
             this.amount = 15;
             this.packetId = 0;
+            this.lanFood = [0,0,0,0,0,0,0,0];
         } else if (lanNumber == 1) {
             this.amount = 30;
             this.packetId = 1;
+            this.lanFood = [1,1,1,1,1,1,1,1];
+
         } else {
             this.amount = 15;
             this.packetId = 2;
+            this.lanFood = [0,0,0,0,0,0,0,0];
         }
     }
 

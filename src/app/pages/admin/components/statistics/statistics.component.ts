@@ -30,7 +30,10 @@ export class AdminStatisticsComponent implements OnInit {
         }
     };
 
-    public barChartLabels: string[] = ['Do Abendessen', 'Fr Frühstück', 'Fr Mittagessen',
+    public barChartLabels: string[] = [
+        'Do Abendessen',
+        'Fr Frühstück',
+        'Fr Mittagessen',
         'Fr Abendessen',
         'Sa Frühstück',
         'Sa Mittagessen',
@@ -40,7 +43,7 @@ export class AdminStatisticsComponent implements OnInit {
     public barChartType: string = 'bar';
     public barChartLegend: boolean = false;
 
-    public barChartData:any[] = [{data: [65, 59, 80, 81, 56, 55, 50, 80], label: 'User'}];
+    public barChartData: any[] = [{data: [1,1,1], label: 'User'}];
 
 
     public doughnutChartType: string = 'doughnut';
@@ -86,6 +89,10 @@ export class AdminStatisticsComponent implements OnInit {
                     "eins": 0,
                     "zwei": 0,
                 };
+
+                let foodArray:any[] = [0,0,0,0,0,0,0,0] ;
+                let clone = JSON.parse(JSON.stringify(this.barChartData));
+
                 for (let user of data.obj) {
                     //How many user ar register
                     if (user.role < 1) {
@@ -108,8 +115,44 @@ export class AdminStatisticsComponent implements OnInit {
                         vegi["no"]++
                     }
 
+                    //LAN Food
+                    let food = user.lan.food;
+                    console.log(food.length);
+
+                    for (let i = 0; i < food.length; i++) {
+                        switch(i){
+                            case 0:
+                                if(food[i] == 1){foodArray[0] += 1}
+                                break;
+                            case 1:
+                                if(food[i] == 1){foodArray[1] += 1}
+                                break;
+                            case 2:
+                                if(food[i] == 1){foodArray[2] += 1}
+                                break;
+                            case 3:
+                                if(food[i] == 1){foodArray[3] += 1}
+                                break;
+                            case 4:
+                                if(food[i] == 1){foodArray[4] += 1}
+                                break;
+                            case 5:
+                                if(food[i] == 1){foodArray[5] += 1}
+                                break;
+                            case 6:
+                                if(food[i] == 1){foodArray[6] += 1}
+                                break;
+                            case 7:
+                                if(food[i] == 1){foodArray[7] += 1}
+                                break;
+                        }
+                    }
                 }
-                this.userRegData = [registerUser, registerCap];
+                clone[0].data = foodArray;
+                console.log(this.barChartData);
+                this.barChartData = clone;
+                console.log(this.barChartData);
+                this.userRegData = [registerUser, (registerCap - registerUser)];
                 this.packetData = [lanPacket['null'], lanPacket['eins'], lanPacket['zwei']];
                 this.vegiData = [vegi['yes'], vegi['no']];
 
