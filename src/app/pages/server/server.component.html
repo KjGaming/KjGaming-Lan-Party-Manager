@@ -11,7 +11,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let server of servers; let i = index" class="no-top-border tableRow" [ngClass]="isClassVisible(server.status)">
+        <tr *ngFor="let server of servers; let i = index" class="no-top-border tableRow"
+            [ngClass]="isClassVisible(server.status)">
             <td *ngIf="server.server" class="align-left">{{i}}</td>
             <td *ngIf="server.server" class="align-left">{{server.title}}</td>
             <td *ngIf="server.server" class="align-left">{{server.content}}</td>

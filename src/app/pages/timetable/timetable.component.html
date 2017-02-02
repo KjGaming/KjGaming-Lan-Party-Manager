@@ -5,9 +5,12 @@
                      baCardClass="with-scroll table-panel">
 
                 <div *ngFor="let pieceEvent of date.events" class="event-container">
-                    <div class="event-time">
-                        <div>
+                    <div class="event-time" [ngClass]="addClass(pieceEvent.mode)">
+                        <div style="margin-bottom: 15px;">
                             {{pieceEvent.timeHour}}:{{pieceEvent.timeMinits}}
+                        </div>
+                        <div class="eventTimeMode">
+                            {{(pieceEvent.mode == 0? 'LAN':(pieceEvent.mode == 1 ? 'Turniere':'Sonstiges'))}}
                         </div>
                     </div>
                     <div class="event-item">
@@ -22,15 +25,9 @@
                             <div class="event-content">
                                 {{pieceEvent.content}}
                             </div>
-
                         </div>
-
                     </div>
-
-
                 </div>
-
-
             </ba-card>
         </div>
     </div>

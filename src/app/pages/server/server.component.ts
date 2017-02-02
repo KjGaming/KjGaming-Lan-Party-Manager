@@ -38,9 +38,9 @@ export class ServerComponent implements OnInit {
 
     isClassVisible(status){
         if(status == true){
-            return 'table-success';
+            return 'bg-success';
         }else{
-            return 'table-danger';
+            return 'bg-danger';
         }
     }
 }

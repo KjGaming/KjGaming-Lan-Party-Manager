@@ -1,9 +1,9 @@
 module.exports = {
-    adminSecret: "a",
-    orgaSecret: "b",
-    userSecret: "c",
-    adminTokenSecret: "1",
-    orgaTokenSecret: "2",
+    adminSecret: "20Kj!G!aming?Rock.Admin.17",
+    orgaSecret: "20Kj!G!aming?Rock.Creator.17",
+    userSecret: "20Kj!G!aming?Rock.17",
+    adminTokenSecret: "481",
+    orgaTokenSecret: "153",
     userTokenSecret: "0",
-    passwordEmail: 'asd'
+    passwordEmail: '9kD%DGTb$Rtp'
 };
