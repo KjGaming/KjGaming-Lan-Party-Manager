@@ -15,7 +15,7 @@ var timetableRoutes = require('./reg/event');
 var cateringRoutes = require('./reg/catering');
 var tournamentRoutes = require('./reg/tournament');
 
-var secret = require('./secret');
+var secret = require('./secret/secret');
 
 /** Register route **/
 router.put('/registration', function (req, res, next) {

@@ -8,7 +8,7 @@ var eventRoutes = require('./admin/event');
 var productRoutes = require('./admin/product');
 var userRoutes = require('./admin/user');
 
-var secret = require('./secret');
+var secret = require('./secret/secret');
 
 
 /** check if reg is admin **/

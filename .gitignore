@@ -71,4 +71,5 @@ npm-debug.log
 /src/app/pages/ui/
 /src/app/pages/components/
 
-/routes/secret.js
+/routes/secret/secret.js
+/routes/secret/

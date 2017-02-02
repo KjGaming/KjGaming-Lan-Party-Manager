@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
 
-var secret = require('../secret');
+var secret = require('../secret/secret');
 
 
 router.post('/', function (req, res, next) {
