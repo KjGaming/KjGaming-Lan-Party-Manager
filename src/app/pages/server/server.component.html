@@ -11,13 +11,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let server of servers;" class="no-top-border">
-            <td *ngIf="server.server" class="align-left">{{serverIndex}}</td>
+        <tr *ngFor="let server of servers; let i = index" class="no-top-border tableRow" [ngClass]="isClassVisible(server.status)">
+            <td *ngIf="server.server" class="align-left">{{i}}</td>
             <td *ngIf="server.server" class="align-left">{{server.title}}</td>
             <td *ngIf="server.server" class="align-left">{{server.content}}</td>
             <td *ngIf="server.server" class="align-left">{{server.server.ip}}</td>
             <td *ngIf="server.server" class="align-left">{{server.server.mode}}</td>
-            <td *ngIf="server.server" class="align-left">{{server.status}}</td>
+            <td *ngIf="server.server" class="align-left">{{(server.status == true? "ON":"OFF")}}</td>
         </tr>
         </tbody>
     </table>
