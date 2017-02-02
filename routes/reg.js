@@ -15,6 +15,8 @@ var timetableRoutes = require('./reg/event');
 var cateringRoutes = require('./reg/catering');
 var tournamentRoutes = require('./reg/tournament');
 
+var secret = require('./secret');
+
 /** Register route **/
 router.put('/registration', function (req, res, next) {
     console.log(req.body);
@@ -191,7 +193,7 @@ router.put('/registration', function (req, res, next) {
             service: '1und1',
             auth: {
                 user: 'presse@kjgaming.de',
-                pass: 'password'
+                pass: secret.passwordEmail
             }
         };
         var transporter = nodemailer.createTransport(kjgSmtpConfig);
@@ -266,14 +268,14 @@ router.post('/signin', function (req, res, next) {
             var token;
             var adminToken;
             if (user.role == 2) {
-                token = jwt.sign({user: user}, '20Kj!G!aming?Rock.Admin.17', {expiresIn: 7200});
-                adminToken = 481;
+                token = jwt.sign({user: user}, secret.adminSecret, {expiresIn: 7200});
+                adminToken = secret.adminTokenSecret;
             } else if (user.role == 1) {
-                token = jwt.sign({user: user}, '20Kj!G!aming?Rock.Creator.17', {expiresIn: 7200});
-                adminToken = 153;
+                token = jwt.sign({user: user}, secret.orgaSecret, {expiresIn: 7200});
+                adminToken = secret.orgaTokenSecret;
             } else {
-                token = jwt.sign({user: user}, '20Kj!G!aming?Rock.17', {expiresIn: 7200});
-                adminToken = 0;
+                token = jwt.sign({user: user}, secret.userSecret, {expiresIn: 7200});
+                adminToken = secret.userTokenSecret;
             }
 
             res.status(200).json({
@@ -290,11 +292,11 @@ router.post('/signin', function (req, res, next) {
 
 /** Check if it a reg user **/
 router.use('/', function (req, res, next) {
-    jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.17', function (err, decoded) {
+    jwt.verify(req.get('Authorization'), secret.userSecret, function (err, decoded) {
         if (err) {
-            jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.Creator.17', function (err2, decoded2) {
+            jwt.verify(req.get('Authorization'), secret.orgaSecret, function (err2, decoded2) {
                 if (err2) {
-                    jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.Admin.17', function (err3, decoded3) {
+                    jwt.verify(req.get('Authorization'), secret.adminSecret, function (err3, decoded3) {
                         if (err3) {
                             res.status(401).json({
                                 title: 'Not Authenticated'

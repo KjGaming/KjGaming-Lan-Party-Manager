@@ -8,10 +8,12 @@ var eventRoutes = require('./admin/event');
 var productRoutes = require('./admin/product');
 var userRoutes = require('./admin/user');
 
+var secret = require('./secret');
+
 
 /** check if reg is admin **/
 router.use('/', function (req, res, next) {
-    jwt.verify(req.get('Authorization'), '20Kj!G!aming?Rock.Admin.17', function (err3, decoded3) {
+    jwt.verify(req.get('Authorization'), secret.adminSecret, function (err3, decoded3) {
         if (err3) {
             res.status(401).json({
                 title: 'Not Authenticated'

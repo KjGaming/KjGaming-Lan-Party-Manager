@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
 
+var secret = require('../secret');
+
 
 router.post('/', function (req, res, next) {
     var smtpConfig = {
         service: '1und1',
         auth: {
             user: 'presse@kjgaming.de',
-            pass: 'passwort'
+            pass: secret.passwordEmail
         }
     };
     var transporter = nodemailer.createTransport(smtpConfig);
