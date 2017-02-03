@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TournamentService } from "./tournament.service";
-import { User } from "../../theme/model";
 
 
 @Component({
@@ -38,5 +37,18 @@ export class TournamentComponent implements OnInit {
 
     openAlert(tournamentData){
         alert(tournamentData);
+    }
+
+    statusChange(status){
+        switch(status){
+            case 'on':
+                return '{"color" : "green"}';
+            case 'off':
+                return '{"color" : "red"}';
+            case 'reg':
+                return '{"color" : "orange"}';
+            case 'end':
+                return '{"color" : "blue"}';
+        }
     }
 }

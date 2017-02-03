@@ -137,7 +137,7 @@ export const PAGES_MENU = [
                 data: {
                     menu: {
                         title: 'Admin',
-                        icon: 'home',
+                        icon: 'settings',
                         iconClass: 'material-icons',
                         selected: false,
                         expanded: false,
