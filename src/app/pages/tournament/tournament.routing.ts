@@ -3,6 +3,8 @@ import {AuthGuard, RegGuard} from "../theme/guard";
 
 import {TournamentComponent} from './tournament.component';
 import {B16Component} from "./components/b16/b16.component";
+import {TournamentRegisterComponent} from "./components/register/register.component";
+import {TournamentEndComponent} from "./components/end/end.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -13,6 +15,14 @@ const routes: Routes = [
     {
         path: 'b16',
         component: B16Component
+    },
+    {
+        path: 'register',
+        component: TournamentRegisterComponent
+    },
+    {
+        path: 'end',
+        component: TournamentEndComponent
     }
 
 ];

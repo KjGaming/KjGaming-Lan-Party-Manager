@@ -24,9 +24,9 @@ export class B16Component implements OnInit {
 
     /** For the bracket **/
     public row1 = [];
-    public row2 = []
-    public row3 = []
-    public row4 = []
+    public row2 = [];
+    public row3 = [];
+    public row4 = [];
     repeat4 = [1, 2, 3, 4];
 
 

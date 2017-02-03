@@ -15,6 +15,23 @@
     position: relative;
     overflow: visible;
     background: rgba(0, 0, 0, 0.5);
+
+    .statusOn{
+      color: green;
+    }
+
+    .statusOff{
+      color: red;
+    }
+
+    .statusReg{
+      color: orange;
+    }
+
+    .statusEnd{
+      color: blue;
+    }
+
     .fa-circle{
       margin-right: 2px;
     }

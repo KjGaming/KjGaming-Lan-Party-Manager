@@ -7,7 +7,8 @@ var schema = new Schema({
         mode: {type: String, required: true, enum: ['b16', 'b8', 'b4', 'lb8', 'lb4', 'swiss']}, // Game mode
         size: {type: Number, required: true}, // Game player size
         playerMode: {type: String, required: true, enum: ['User', 'Clan']}, // Game mode Clan or User
-        status: {type: String, required: true, enum: ['on', 'off', 'reg', 'end']},
+        status: {type: String, required: true, enum: ['on', 'off', 'end']},
+        statusUser: {type: String, required: true, enum: ['kjg', 'user']},
         games: [{
             gameId: {type: Number}, // Game id
             team1: {type: String},

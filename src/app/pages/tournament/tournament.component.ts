@@ -39,16 +39,75 @@ export class TournamentComponent implements OnInit {
         alert(tournamentData);
     }
 
-    statusChange(status){
-        switch(status){
-            case 'on':
-                return '{"color" : "green"}';
-            case 'off':
-                return '{"color" : "red"}';
-            case 'reg':
-                return '{"color" : "orange"}';
-            case 'end':
-                return '{"color" : "blue"}';
+    statusChange(status, mode){
+        if(mode == 'text'){
+            switch(status){
+                case 'on':
+                    return 'Live';
+                case 'off':
+                    return 'OFF';
+                case 'reg':
+                    return 'Registration';
+                case 'end':
+                    return 'End';
+            }
+        }else{
+            switch(status){
+                case 'on':
+                    return 'statusOn';
+                case 'off':
+                    return 'statusOff';
+                case 'reg':
+                    return 'statusReg';
+                case 'end':
+                    return 'statusEnd';
+            }
+        }
+
+    }
+
+    imgChange(statusUser, game){
+        if(statusUser == 'user'){
+            return {'background-image': 'url(/assets/img/t-user.jpg)'};
+        }else{
+            if(game == 'Counter Strike : Global Offensive'){
+                return {'background-image': 'url(/assets/img/t-csgo.jpg)'};
+            }else if(game == 'League of Legends'){
+                return {'background-image': 'url(/assets/img/t-lol.jpg)'};
+            }else if(game == 'Trackmania Nation'){
+                return {'background-image': 'url(/assets/img/t-track.jpg)'};
+            }else{
+                return {'background-image': 'url(/assets/img/t-user.jpg)'};
+            }
+        }
+    }
+
+    tRegUser(tournament){
+        if(tournament.playerMode == 'Clan'){
+            return tournament.clan.length;
+        }else{
+            return tournament.player.length;
+        }
+    }
+
+    chooseMode(tournament, mode){
+        if(mode == 'router'){
+            console.log(tournament);
+            if(tournament.status == 'off'){
+                return 'register'
+            }else if(tournament.status == 'on'){
+                return tournament
+            }else{
+                return 'end'
+            }
+        }else{
+            if(tournament.status == 'off'){
+                return 'Anmelden'
+            }else if(tournament.status == 'on'){
+                return 'zum Turnier'
+            }else{
+                return 'Ergebnis'
+            }
         }
     }
 }

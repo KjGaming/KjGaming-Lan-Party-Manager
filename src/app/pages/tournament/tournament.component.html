@@ -1,18 +1,20 @@
-<div *ngFor="let tournament of tournaments">
+<!--<div *ngFor="let tournament of tournaments">
 	<button [routerLink]="[tournament.mode,{tournamentId: tournament._id}]" class="btn btn-success">{{tournament.name}}</button>
-</div>
+</div>-->
 <div class="row">
 	<div class="col-md-6" *ngFor="let tournament of tournaments">
-		<div class="tournament" style="background-image: url(/assets/img/t-csgo.jpg); background-size: 100%;">
+		<div class="tournament" style="background-size: 100%;" [ngStyle]="imgChange(tournament.statusUser, tournament.gameName)">
 			<div class="status">
-				<i class="fa fa-circle" [ngStyle]="statusChange(tournament.status)"></i>{{}}
+				<i class="fa fa-circle" [ngClass]="statusChange(tournament.status, 'color')"></i>{{statusChange(tournament.status,'text')}}
 			</div>
 			<div class="title">{{tournament.name}}</div>
 			<div class="subTitle">{{tournament.gameName}}</div>
 			<div class="content">
-				<div class="places"><b>{{tournament.size}}/{{tournament.size}}</b></div>
+				<div class="places"><b>{{tRegUser(tournament)}}/{{tournament.size}}</b></div>
 			</div>
-			<a class="smallBox">zum Turnier <i class="fa fa-arrow-circle-right"></i></a>
+			<a class="smallBox" [routerLink]="[chooseMode(tournament, 'router'),{tournamentId: tournament._id}]">
+				{{chooseMode(tournament, 'text')}} <i class="fa fa-arrow-circle-right"></i>
+			</a>
 		</div>
 	</div>
 </div>

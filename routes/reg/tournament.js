@@ -190,8 +190,8 @@ router.post('/create', function (req, res, next) {
         gameName: req.body.gameName,
         mode: req.body.mode,
         size: req.body.size,
-        playerMode: req.body.playerMode
-
+        playerMode: req.body.playerMode,
+        status : 'off'
     });
 
     tournament.save(function (err, result) {
