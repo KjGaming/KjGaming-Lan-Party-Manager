@@ -12,9 +12,26 @@
 			<div class="content">
 				<div class="places"><b>{{tRegUser(tournament)}}/{{tournament.size}}</b></div>
 			</div>
-			<a class="smallBox" [routerLink]="[chooseMode(tournament, 'router'),{tournamentId: tournament._id}]">
+			<a class="smallBox" *ngIf="tournament.status != 'on'" (click)="openRegister(tournament)">
+				{{chooseMode(tournament, 'text')}} <i class="fa fa-arrow-circle-right"></i>
+			</a>
+			<a class="smallBox" *ngIf="tournament.status == 'on'" [routerLink]="[chooseMode(tournament, 'router'),{tournamentId: tournament._id}]">
 				{{chooseMode(tournament, 'text')}} <i class="fa fa-arrow-circle-right"></i>
 			</a>
 		</div>
 	</div>
 </div>
+
+<modal #register>
+	<modal-header [show-close]="true">
+		<h4 class="modal-title">{{focusTournament.name}}</h4>
+	</modal-header>
+	<modal-footer style="background-color: #7d7d7d">
+		<select *ngIf="focusTournament.playerMode == 'Clan'" class="form-control" id="exampleSelect1" [(ngModel)]="choosenUserClan" (change)="checkClanStatus(focusTournament, $event)">
+			<option *ngFor="let chooseClan of userClans" [ngValue]="chooseClan._id">{{chooseClan.name}}</option>
+		</select>
+		<button type="button" class="btn btn-default" (click)="register.dismiss()">Cancel</button>
+		<button *ngIf="focusTournament.inTournament == false" type="button" class="btn btn-success" (click)="saveRegister(focusTournament)">Anmelden</button>
+		<button *ngIf="focusTournament.inTournament == true" type="button" class="btn btn-danger" (click)="delRegister(focusTournament)">Abmelden</button>
+	</modal-footer>
+</modal>

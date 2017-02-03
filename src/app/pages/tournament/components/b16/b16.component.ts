@@ -1,10 +1,10 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 
 import {SmartTablesService} from './smartTables.service';
-import {TournamentService} from "../../tournament.service";
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {NotificationsService} from "angular2-notifications/src/notifications.service";
+import {BaTournamentService} from "../../../../theme/services/baTournament/baTournament.service";
 
 @Component({
     selector: 'bracket-16',
@@ -47,7 +47,7 @@ export class B16Component implements OnInit {
     public resultForm: FormGroup;
 
 
-    constructor(private _tournamentService: TournamentService,
+    constructor(private _tournamentService: BaTournamentService,
                 private route: ActivatedRoute,
                 public fb: FormBuilder,
                 private _toastService: NotificationsService) {

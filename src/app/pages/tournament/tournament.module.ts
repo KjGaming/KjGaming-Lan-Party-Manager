@@ -12,6 +12,7 @@ import {PopoverModule} from "ng2-popover";
 import {SimpleNotificationsModule} from "angular2-notifications/src/simple-notifications.module";
 import {TournamentRegisterComponent} from "./components/register/register.component";
 import {TournamentEndComponent} from "./components/end/end.component";
+import {ModalModule} from 'ng2-bs4-modal/ng2-bs4-modal';
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import {TournamentEndComponent} from "./components/end/end.component";
         HttpModule,
         PopoverModule,
         ReactiveFormsModule,
-        SimpleNotificationsModule
+        SimpleNotificationsModule,
+        ModalModule
+
 
     ],
     declarations: [
@@ -33,7 +36,6 @@ import {TournamentEndComponent} from "./components/end/end.component";
         TournamentEndComponent
     ],
     providers: [
-        TournamentService
     ]
 })
 export default class TournamentModule {

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { ErrorService } from "../../theme/components/errors/error.service";
 
 @Injectable()
-export class TournamentService {
+export class BaTournamentService {
 
     constructor(private http: Http) {
     }
