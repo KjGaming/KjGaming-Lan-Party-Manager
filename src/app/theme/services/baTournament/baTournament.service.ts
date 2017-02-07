@@ -53,5 +53,33 @@ export class BaTournamentService {
 
     }
 
+    registration(event){
+        const body = JSON.stringify(event);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.put('/api/reg/tournament/registration', body, {headers: headers})
+            .map((res: Response)=> res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+    }
+
+    registrationDelete(event){
+        const body = JSON.stringify(event);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.post('/api/reg/tournament/registration', body, {headers: headers})
+            .map((res: Response)=> res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+    }
+
 }
 

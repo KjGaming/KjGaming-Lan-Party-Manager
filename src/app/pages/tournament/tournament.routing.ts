@@ -5,6 +5,7 @@ import {TournamentComponent} from './tournament.component';
 import {B16Component} from "./components/b16/b16.component";
 import {TournamentRegisterComponent} from "./components/register/register.component";
 import {TournamentEndComponent} from "./components/end/end.component";
+import {SwissComponent} from "./components/swiss/swiss.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
         path: 'b16',
         component: B16Component
+    },
+    {
+        path: 'swiss',
+        component: SwissComponent
     },
     {
         path: 'register',

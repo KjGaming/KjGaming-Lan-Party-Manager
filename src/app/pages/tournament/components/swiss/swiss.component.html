@@ -1,0 +1,49 @@
+<simple-notifications [options]="options"></simple-notifications>
+<div class="row">
+	<ba-card *ngFor="let round of swissRound" title="{{round}}" class="col-md-6">
+		<table class="table table-hover">
+			<thead>
+				<tr class="black-muted-bg">
+					<th>#</th>
+					<th>Team 1</th>
+					<th></th>
+					<th>Team 2</th>
+					<th>Ergebnis</th>
+					<th>S-N</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="swissTableRow" *ngFor="let match of swissMatch[round]; let index = index"
+					(click)="openMatchInfo(match)">
+					<td>{{index + 1}}</td>
+					<td>{{match.team1}}</td>
+					<td>vs</td>
+					<td>{{match.team2}}</td>
+					<td>{{match.result}}</td>
+					<td>{{match.rounds}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</ba-card>
+</div>
+
+<modal #match>
+	<modal-header [show-close]="true">
+		<h4 class="modal-title">Tada</h4>
+	</modal-header>
+	<modal-footer style="background-color: #7d7d7d">
+		<!--<select *ngIf="focusTournament.playerMode == 'Clan'" class="form-control" id="exampleSelect1" [(ngModel)]="choosenUserClan" (change)="checkClanStatus(focusTournament, $event)">
+			<option *ngFor="let chooseClan of userClans" value="{{chooseClan._id}}">{{chooseClan
+				.name}}</option>
+		</select>
+		<button type="button" class="btn btn-default" (click)="register.dismiss()">Cancel</button>
+		<button *ngIf="focusTournament.inTournament == 0" type="button" class="btn btn-success"
+				(click)="saveRegister(focusTournament)">Anmelden</button>
+		<button *ngIf="focusTournament.inTournament == 1" type="button" class="btn btn-danger"
+				(click)="delRegister(focusTournament)">Abmelden</button>
+		<button *ngIf="focusTournament.inTournament == 2" type="button" class="btn btn-danger"
+				(click)="delRegister(focusTournament)" disabled="disabled">Kein Admin</button>-->
+	</modal-footer>
+</modal>
+
+

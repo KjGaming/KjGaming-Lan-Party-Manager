@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {BaTournamentService} from "../../theme/services/baTournament/baTournament.service";
 import {ModalComponent} from "ng2-bs4-modal/components/modal";
+import {BaTournamentService} from "../../theme/services/baTournament/baTournament.service";
+import {BaClanService} from "../../theme/services/baClan/baClan.service";
+import {NotificationsService} from "../../../../node_modules/angular2-notifications/src/notifications.service";
 
 
 @Component({
@@ -11,6 +13,11 @@ import {ModalComponent} from "ng2-bs4-modal/components/modal";
 
 
 export class TournamentComponent implements OnInit {
+    public options = {
+        position: ["top", "center"],
+        timeOut: 5000
+    };
+
     public tournaments;
     focusTournament = '';
     userClans = [];
@@ -19,7 +26,7 @@ export class TournamentComponent implements OnInit {
     @ViewChild('register') register: ModalComponent;
 
 
-    constructor(private _tournamentService: BaTournamentService) {
+    constructor(private _tournamentService: BaTournamentService, private _clanService: BaClanService, private _toastService: NotificationsService) {
     }
 
     ngOnInit() {
@@ -101,7 +108,7 @@ export class TournamentComponent implements OnInit {
             if (tournament.status == 'off') {
                 return 'register'
             } else if (tournament.status == 'on') {
-                return tournament
+                return tournament.mode
             } else {
                 return 'end'
             }
@@ -154,20 +161,81 @@ export class TournamentComponent implements OnInit {
     }
 
     saveRegister(tournament) {
-        this.register.close();
+        let regEvent = {
+            mode: tournament.playerMode,
+            id: tournament._id,
+            clanId: tournament.newClanId
+        };
+
+        this._tournamentService.registration(regEvent).subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                this._toastService.success(data.title, data.message);
+                this.register.close();
+                this.ngOnInit();
+            },
+            // the second argument is a function which runs on error
+            err => console.error(err),
+            // the third argument is a function which runs on completion
+            () => console.log('reg Clan')
+        );
+    }
+
+    delRegister(tournament) {
+        let regEvent = {
+            mode: tournament.playerMode,
+            id: tournament._id,
+            clanId: tournament.newClanId
+        };
+
+        this._tournamentService.registrationDelete(regEvent).subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                this._toastService.success(data.title, data.message);
+                this.register.close();
+                this.ngOnInit();
+            },
+            // the second argument is a function which runs on error
+            err => console.error(err),
+            // the third argument is a function which runs on completion
+            () => console.log('reg Clan')
+        );
     }
 
     checkClanStatus(tournament, event) {
-        let clanId = event.target.value;
+        let focusClanId = event.target.value;
+        let allClans = null;
 
-        for (let focusClan of tournament.clan) {
-            if (clanId == focusClan) {
-                tournament.inTournament = true;
-                break;
-            } else {
-                tournament.inTournament = false;
-            }
-        }
-        this.focusTournament = tournament;
+        this._clanService.getClanList().subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                allClans = data.obj;
+                for (let tClan of tournament.clan) {
+                    if (tClan == focusClanId) {
+                        for(let clan of allClans) {
+                            if (focusClanId == clan._id && clan.admin._id == localStorage.getItem('userId')) {
+                                tournament.inTournament = 1;
+                                break;
+                            } else {
+                                tournament.inTournament = 2;
+                            }
+                        }
+                    }else {
+                        for (let clan of allClans) {
+                            if (focusClanId == clan._id && clan.admin._id == localStorage.getItem('userId')) {
+                                tournament.inTournament = 0;
+                                break;
+                            } else {
+                                tournament.inTournament = 2;
+                            }
+                        }
+                    }
+                }
+                tournament.newClanId = focusClanId;
+                this.focusTournament = tournament;
+            },
+            // the second argument is a function which runs on error
+            err => console.error(err)
+        );
     }
 }

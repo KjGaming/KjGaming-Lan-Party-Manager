@@ -1,6 +1,7 @@
 <!--<div *ngFor="let tournament of tournaments">
 	<button [routerLink]="[tournament.mode,{tournamentId: tournament._id}]" class="btn btn-success">{{tournament.name}}</button>
 </div>-->
+<simple-notifications [options]="options"></simple-notifications>
 <div class="row">
 	<div class="col-md-6" *ngFor="let tournament of tournaments">
 		<div class="tournament" style="background-size: 100%;" [ngStyle]="imgChange(tournament.statusUser, tournament.gameName)">
@@ -28,10 +29,15 @@
 	</modal-header>
 	<modal-footer style="background-color: #7d7d7d">
 		<select *ngIf="focusTournament.playerMode == 'Clan'" class="form-control" id="exampleSelect1" [(ngModel)]="choosenUserClan" (change)="checkClanStatus(focusTournament, $event)">
-			<option *ngFor="let chooseClan of userClans" [ngValue]="chooseClan._id">{{chooseClan.name}}</option>
+			<option *ngFor="let chooseClan of userClans" value="{{chooseClan._id}}">{{chooseClan
+				.name}}</option>
 		</select>
 		<button type="button" class="btn btn-default" (click)="register.dismiss()">Cancel</button>
-		<button *ngIf="focusTournament.inTournament == false" type="button" class="btn btn-success" (click)="saveRegister(focusTournament)">Anmelden</button>
-		<button *ngIf="focusTournament.inTournament == true" type="button" class="btn btn-danger" (click)="delRegister(focusTournament)">Abmelden</button>
+		<button *ngIf="focusTournament.inTournament == 0" type="button" class="btn btn-success"
+				(click)="saveRegister(focusTournament)">Anmelden</button>
+		<button *ngIf="focusTournament.inTournament == 1" type="button" class="btn btn-danger"
+				(click)="delRegister(focusTournament)">Abmelden</button>
+		<button *ngIf="focusTournament.inTournament == 2" type="button" class="btn btn-danger"
+				(click)="delRegister(focusTournament)" disabled="disabled">Kein Admin</button>
 	</modal-footer>
 </modal>

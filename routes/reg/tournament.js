@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Tournament = require('../../models/tournament');
+var Clan = require('../../models/clan');
 var jwt = require('jsonwebtoken');
 
 router.get('/', function (req, res, next) {
@@ -33,6 +34,165 @@ router.get('/selected', function (req, res, next) {
             obj: event
         });
     });
+});
+
+/** Clans and users can register  **/
+/** PARAMS: **/
+/** -> mode, id, clanId || userId  **/
+router.put('/registration', function (req, res, next){
+    if(req.body.mode == null || req.body.id == null){
+        return res.status(500).json({
+            title: 'Fehler',
+            error: {'message':'Es wurde kein Inhalt mitgeschickt'}
+        });
+    }
+    var decoded = jwt.decode(req.get('Authorization'));
+
+    if(req.body.mode == 'Clan'){
+        if(req.body.clanId == null){
+            return res.status(500).json({
+                title: 'Fehler',
+                error: {'message':'Es wurde kein ClanId mitgeschickt'}
+            });
+        }
+        Clan.findById(req.body.clanId, function (err, clan) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            if(clan.admin == decoded.user._id){
+                Tournament.findByIdAndUpdate(req.body.id,
+                    { $push: { clan: req.body.clanId } },
+                    function (err, tournament) {
+                        if (err) {
+                            return res.status(500).json({
+                                title: 'Fehler beim Turnier',
+                                error: err
+                            });
+                        }
+                        return res.status(201).json({
+                            title: 'Erfolgreich',
+                            message: 'Du hast deinen Clan angemeldet',
+                            obj: tournament
+                        });
+                    });
+            }else{
+                return res.status(500).json({
+                    title: 'Fehler',
+                    error: {'message': 'Sie sind kein Clan Admin'}
+                });
+            }
+        });
+    }else{
+        if(req.body.userId == null){
+            return res.status(500).json({
+                title: 'Fehler',
+                error: {'message':'Es wurde kein UserId mitgeschickt'}
+            });
+        }
+        if(req.body.userId != decoded.user._id){
+            return res.status(500).json({
+                title: 'Fehler',
+                error: {'message':'Sie sind nicht dieser User'}
+            });
+        }
+        Tournament.findByIdAndUpdate(req.body.id,
+            { $push: { player: req.body.userId } },
+            function (err, tournament) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'Fehler beim Turnier',
+                        error: err
+                    });
+                }
+                return res.status(201).json({
+                    title: 'Erfolgreich',
+                    message: 'Du hast dich angemeldet',
+                    obj: tournament
+                });
+            });
+    }
+});
+
+/** Clans and users can delete register  **/
+router.post('/registration', function (req, res, next){
+    if(req.body.mode == null || req.body.id == null){
+        return res.status(500).json({
+            title: 'Fehler',
+            error: {'message':'Es wurde kein Inhalt mitgeschickt'}
+        });
+    }
+    var decoded = jwt.decode(req.get('Authorization'));
+
+    if(req.body.mode == 'Clan'){
+        if(req.body.clanId == null){
+            return res.status(500).json({
+                title: 'Fehler',
+                error: {'message':'Es wurde kein ClanId mitgeschickt'}
+            });
+        }
+        Clan.findById(req.body.clanId, function (err, clan) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            if(clan.admin == decoded.user._id){
+                Tournament.findByIdAndUpdate(req.body.id,
+                    { $pull: { clan: req.body.clanId } },
+                    function (err, tournament) {
+                        if (err) {
+                            return res.status(500).json({
+                                title: 'Fehler beim Turnier',
+                                error: err
+                            });
+                        }
+                        return res.status(201).json({
+                            title: 'Erfolgreich',
+                            message: 'Du hast deinen Clan abgemeldet',
+                            obj: tournament
+                        });
+                    });
+            }else{
+                return res.status(500).json({
+                    title: 'Fehler',
+                    error: {'message': 'Sie sind kein Clan Admin'}
+                });
+            }
+        });
+
+    }else{
+        if(req.body.userId == null){
+            return res.status(500).json({
+                title: 'Fehler',
+                error: {'message':'Es wurde kein ClanId mitgeschickt'}
+            });
+        }
+        if(req.body.userId != decoded.user._id){
+            return res.status(500).json({
+                title: 'Fehler',
+                error: {'message':'Sie sind nicht dieser User'}
+            });
+        }
+        Tournament.findByIdAndUpdate(req.body.id,
+            { $pull: { player: req.body.userId } },
+            function (err, tournament) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'Fehler beim Turnier',
+                        error: err
+                    });
+                }
+                return res.status(201).json({
+                    title: 'Erfolgreich',
+                    message: 'Du hast dich abgemeldet',
+                    obj: tournament
+                });
+            });
+    }
 });
 
 // save/update one Game Result

@@ -13,6 +13,7 @@ import {SimpleNotificationsModule} from "angular2-notifications/src/simple-notif
 import {TournamentRegisterComponent} from "./components/register/register.component";
 import {TournamentEndComponent} from "./components/end/end.component";
 import {ModalModule} from 'ng2-bs4-modal/ng2-bs4-modal';
+import {SwissComponent} from "./components/swiss/swiss.component";
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {ModalModule} from 'ng2-bs4-modal/ng2-bs4-modal';
         TournamentComponent,
         B16Component,
         TournamentRegisterComponent,
-        TournamentEndComponent
+        TournamentEndComponent,
+        SwissComponent
     ],
     providers: [
     ]
