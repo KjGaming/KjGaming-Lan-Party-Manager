@@ -21,7 +21,67 @@ export class SwissComponent implements OnInit {
     @ViewChild('match') match: ModalComponent;
 
     swissSubscriber:number  = 16;
-    swissRound:Object  = ['Runde 1','Runde 2','Runde 3','Runde 4','Runde 5'];
+    swissResult = [2,1,0,2,3,4,5,1];
+    swissResultTable = [
+        {
+            'name' : 'Team1',
+            'win' : 2,
+            'loose' : 1,
+            'points': 1.5,
+            'qualified' : 0
+        },
+        {
+            'name' : 'Team2',
+            'win' : 0,
+            'loose' : 0,
+            'points': 0,
+            'qualified' : 0
+        },
+        {
+            'name' : 'Team3',
+            'win' : 1,
+            'loose' : 0,
+            'points': 1,
+            'qualified' : 0
+        },
+        {
+            'name' : 'Team4',
+            'win' : 2,
+            'loose' : 0,
+            'points': 2,
+            'qualified' : 0
+        },
+        {
+            'name' : 'Team5',
+            'win' : 1,
+            'loose' : 1,
+            'points': 0.5,
+            'qualified' : 0
+        },
+        {
+            'name' : 'Team6',
+            'win' : 0,
+            'loose' : 0,
+            'points': 0,
+            'qualified' : 0
+        },
+        {
+            'name' : 'Team7',
+            'win' : 1,
+            'loose' : 2,
+            'points': 0,
+            'qualified' : 0
+        },
+        {
+            'name' : 'Team8',
+            'win' : 0,
+            'loose' : 2,
+            'points': -1,
+            'qualified' : 0
+        }
+
+    ];
+    swissRound:Object  = ['Runde 1','Runde 2','Runde 3'];
     swissMatch:Object = {
         "Runde 1":[
             {
@@ -47,36 +107,10 @@ export class SwissComponent implements OnInit {
                 "team2": "Team 8",
                 "result": "0:0",
                 "rounds": "0-0",
-            },
-            {
-                "team1": "Team 9",
-                "team2": "Team 10",
-                "result": "0:0",
-                "rounds": "0-0",
-            },
-            {
-                "team1": "Team 11",
-                "team2": "Team 12",
-                "result": "0:0",
-                "rounds": "0-0",
-            },
-            {
-                "team1": "Team 13",
-                "team2": "Team 14",
-                "result": "0:0",
-                "rounds": "0-0",
-            },
-            {
-                "team1": "Team 15",
-                "team2": "Team 16",
-                "result": "0:0",
-                "rounds": "0-0",
             }
         ],
         "Runde 2":[],
-        "Runde 3":[],
-        "Runde 4":[],
-        "Runde 5":[]
+        "Runde 3":[]
 
     };
 

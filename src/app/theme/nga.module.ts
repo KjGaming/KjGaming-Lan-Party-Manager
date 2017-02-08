@@ -39,7 +39,9 @@ import {
 import {
     BaAppPicturePipe,
     BaKameleonPicturePipe,
-    BaProfilePicturePipe
+    BaProfilePicturePipe,
+    BaOrderSwissSystemPipe
+
 } from './pipes';
 
 import {
@@ -93,7 +95,8 @@ const NGA_DIRECTIVES = [
 const NGA_PIPES = [
     BaAppPicturePipe,
     BaKameleonPicturePipe,
-    BaProfilePicturePipe
+    BaProfilePicturePipe,
+    BaOrderSwissSystemPipe
 ];
 
 const NGA_SERVICES = [
