@@ -1,11 +1,279 @@
-.swissTableRow{
+.swissTableRow {
   cursor: pointer;
 }
 
-.table-qualified{
+.table-qualified {
   background-color: #22AA22;
 }
 
-.table-eliminated{
+.table-eliminated {
   background-color: #AA2222;
 }
+
+/** Tournament Bracket **/
+
+.table-bracket {
+  >tbody {
+    >tr {
+      >td {
+        border: 1px solid #AEAEAE;
+        color: black;
+      }
+
+    }
+  }
+}
+
+
+
+.label-bracket {
+  background-color: #3c8dbc;
+}
+
+.table-bordered {
+  border: 1px solid #eceeef;
+  >tbody{
+    >tr{
+      >td{
+        border: 1px solid #ddd;
+      }
+    }
+  }
+}
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+.bracket_first_col {
+  height: auto;
+  width: 200px;
+  padding-right: 0;
+  float: left;
+  margin-left: 25px;
+}
+
+.bracket_row {
+  float: left;
+  height: auto;
+  width: 215px;
+  padding: 0;
+}
+
+.bracket_header_box {
+  width: 100%;
+  line-height: 40px;
+  font-weight: bold;
+  background-color: #367fa9;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 5px;
+}
+
+.bracket_line {
+  height: auto;
+  padding: 0;
+  float: left;
+  width: 50px;
+}
+
+.bracket_table {
+  width: 100%;
+}
+
+.bracket_col {
+  border: 1px solid #000000;
+}
+
+.bracket_body {
+  width: 100%;
+}
+
+.bracket_name_cell {
+  padding-left: 5px;
+  height: 30px;
+  width: 80%;
+  color: black;
+  background-color: rgb(255, 255, 255);
+}
+
+.bracket_result_cell {
+  width: 20%;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+}
+
+.tcolorR {
+  background-color: red;
+}
+
+.tcolorG {
+  background-color: green;
+}
+
+
+.line-top-4{
+  margin-right: 25px;
+  height: 60px;
+  border-top: 3px solid #112c3d;
+  border-right: 3px solid #1b445e;
+}
+.line-mid-4{
+  margin-left: 23px;
+  height: 3px;
+  border-top: 3px solid #112c3d;
+}
+.line-bot-4{
+  height: 48px;
+  margin-right: 25px;
+  border-bottom: 3px solid #112c3d;
+  border-right: 3px solid #1b445e;
+}
+
+/** Match Modal **/
+.modal-header{
+  background-color: #272a33;
+  border-bottom: 1px solid #31333c !important;
+  color: white;
+  .close{
+    color: white;
+  }
+}
+.matchModalBody{
+  background-color: #272a33;
+  color: white;
+
+  .looserText{
+    font-size: 12px;
+    color: white;
+    text-align: center;
+  }
+  .submitButton{
+    text-align: center;
+  }
+
+  .table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #292e3a;
+  }
+
+  .table{
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    td {
+      padding: 8px;
+      line-height: 1.42857143;
+      vertical-align: top;
+      text-align: left !important;
+      border: 1px solid #343946;
+
+    }
+  }
+  .matchInput{
+    width: 45px;
+    padding-left: 5px;
+    padding-right: 3px;
+  }
+}
+
+.matchModalResult{
+  border-bottom: 1px solid #343946;
+  padding-bottom: 10px;
+}
+
+.matchModalInfo{
+  margin-top: 10px;
+}
+
+.matchup{
+  clear: both;
+  .infoTeam{
+    width: 45%;
+    float: left;
+    text-align: center;
+    .contents{
+      background-color: #23252d;
+      border: 1px solid #1c1e25;
+      padding: 10px 5px;
+    }
+    .winner{
+      border-top-color: #ff7324;
+    }
+    .teamName{
+      display: inline-block;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .infoVersus{
+    width: 10%;
+    padding-top: 13px;
+    font-weight: bold;
+    color: #999;
+    float: left;
+    text-align: center;
+  }
+}
+
+.overallScore{
+  clear: both;
+  .score{
+    width: 45%;
+    float: left;
+    text-align: center;
+    .contents{
+      background-color: #393d4a;
+      font-size: 16px;
+      line-height: 13px;
+      padding: 8px 0;
+      border: 1px solid #1c1e25;
+      border-top: 0;
+    }
+  }
+  .divider{
+    width: 10%;
+    float: left;
+    text-align: center;
+    color: #666;
+  }
+}
+
+.matchInfo{
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  .info{
+    clear: both;
+    width: 100%;
+    .infoTitle{
+      float: left;
+      width: 20%;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .infoContent{
+      float: left;
+      width: 80%;
+      font-size: 16px;
+    }
+  }
+
+}
+
+
+
+
+

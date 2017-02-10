@@ -1,73 +1,263 @@
 <simple-notifications [options]="options"></simple-notifications>
 <div class="row">
-	<ba-card *ngFor="let round of swissRound" title="{{round}}" class="col-md-6">
-		<table class="table table-hover">
-			<thead>
-				<tr class="black-muted-bg">
-					<th>#</th>
-					<th>Team 1</th>
-					<th></th>
-					<th>Team 2</th>
-					<th>Ergebnis</th>
-					<th>S-N</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="swissTableRow" *ngFor="let match of swissMatch[round]; let index = index"
-					(click)="openMatchInfo(match)">
-					<td>{{index + 1}}</td>
-					<td>{{match.team1}}</td>
-					<td>vs</td>
-					<td>{{match.team2}}</td>
-					<td>{{match.result}}</td>
-					<td>{{match.rounds}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</ba-card>
-	<ba-card title="Tabelle" class="col-md-6">
-		<table class="table table-hover">
-			<thead>
-			<tr class="black-muted-bg">
-				<th>Rank</th>
-				<th>Team</th>
-				<th>Match S-N</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr class="swissTableRow" *ngFor="let team of swissResultTable | orderBySwiss; let i = index"
-				[ngClass]="team.qualified == 0 ? '' : team.qualified == 1 ? 'table-qualified':'table-eliminated'">
-				<td>{{i + 1}}</td>
-				<td>{{team.name}}</td>
-				<td>{{team.win}} - {{team.loose}}</td>
-			</tr>
-			<!--<tr class="swissTableRow" *ngFor="let team of swissResult | orderBySwiss;">
-				<td></td>
-				<td></td>
-				<td>{{team}}</td>
-			</tr>-->
-			</tbody>
-		</table>
-	</ba-card>
+    <ba-card *ngFor="let round of swissRound" title="{{round}}" class="col-md-6">
+        <table class="table table-hover">
+            <thead>
+            <tr class="black-muted-bg">
+                <th>#</th>
+                <th>Team 1</th>
+                <th></th>
+                <th>Team 2</th>
+                <th>Ergebnis</th>
+                <th>S-N</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="swissTableRow" *ngFor="let match of swissMatch[round]; let index = index"
+                (click)="openMatchInfo(match)">
+                <td>{{index + 1}}</td>
+                <td>{{match.team1}}</td>
+                <td>vs</td>
+                <td>{{match.team2}}</td>
+                <td>{{match.result}}</td>
+                <td>{{match.rounds}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </ba-card>
+    <ba-card title="Tabelle" class="col-md-6">
+        <table class="table table-hover">
+            <thead>
+            <tr class="black-muted-bg">
+                <th>Rank</th>
+                <th>Team</th>
+                <th>Match S-N</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="swissTableRow" *ngFor="let team of swissResultTable | orderBySwiss; let i = index"
+                [ngClass]="team.qualified == 0 ? '' : team.qualified == 1 ? 'table-qualified':'table-eliminated'">
+                <td>{{i + 1}}</td>
+                <td>{{team.name}}</td>
+                <td>{{team.win}} - {{team.loose}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </ba-card>
+    <ba-card title="Final Bracket" class="col-md-6">
+        <div class="bracket_row">
+            <div class="bracket_body">
+                <div class="label label-bracket">Game 7</div>
+                <table class="table-bordered bracket_table" id="match_1">
+                    <tbody (click)="openMatchInfo(swissMatch['Runde 8'])">
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 8'].team1}}</td>
+                        <td class="bracket_result_cell">
+                            <span class="badge tcolorR">0</span>
+                        </td>
+                    </tr>
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 8'].team2}}</td>
+                        <td class="bracket_result_cell">
+                            <span class="badge tcolorG">0</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bracket_body" style="margin-top: 30px;">
+                <div class="label label-bracket">Game 7</div>
+                <table class="table-bordered bracket_table" id="match_2">
+                    <tbody (click)="openMatchInfo(swissMatch['Runde 9'])">
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 9'].team1}}</td>
+                        <td class="bracket_result_cell">
+						<span class="badge tcolorR">
+                            6</span>
+                        </td>
+                    </tr>
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 9'].team2}}</td>
+                        <td class="bracket_result_cell">
+						<span class="badge tcolorG">
+                            16</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="bracket_line">
+            <div class="line-top-4" style="margin-top: 45px;"></div>
+            <div class="line-mid-4"></div>
+            <div class="line-bot-4"></div>
+        </div>
+        <div class="bracket_row">
+            <div class="bracket_body" style="margin-top: 60px;">
+                <div class="label label-bracket">Finale</div>
+                <table class="table-bordered bracket_table" id="match_3">
+                    <tbody (click)="openMatchInfo(swissMatch['Runde 10'])">
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 10'].team1}}</td>
+                        <td class="bracket_result_cell">
+						<span class="badge tcolorR">
+                            6</span>
+                        </td>
+                    </tr>
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 10'].team2}}</td>
+                        <td class="bracket_result_cell">
+						<span class="badge tcolorG">
+                            16</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </ba-card>
+    <ba-card title="Spiel um Platz 5" class="col-md-6">
+        <div class="bracket_row">
+            <div class="bracket_body">
+                <div class="label label-bracket">Spiel um Platz 7-8</div>
+                <table class="table-bordered bracket_table" id="match_1">
+                    <tbody (click)="openMatchInfo(swissMatch['Runde 5'])">
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 5'].team1}}</td>
+                        <td class="bracket_result_cell">
+                            <span class="badge tcolorR">0</span>
+                        </td>
+                    </tr>
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 5'].team2}}</td>
+                        <td class="bracket_result_cell">
+                            <span class="badge tcolorG">0</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bracket_body" style="margin-top: 30px;">
+                <div class="label label-bracket">Spiel um Platz 7-8</div>
+                <table class="table-bordered bracket_table" id="match_2">
+                    <tbody (click)="openMatchInfo(swissMatch['Runde 6'])">
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 6'].team1}}</td>
+                        <td class="bracket_result_cell">
+                            <span class="badge tcolorR">
+                                6</span>
+                        </td>
+                    </tr>
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 6'].team2}}</td>
+                        <td class="bracket_result_cell">
+                            <span class="badge tcolorG">
+                                16</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="bracket_line">
+            <div class="line-top-4" style="margin-top: 45px;"></div>
+            <div class="line-mid-4"></div>
+            <div class="line-bot-4"></div>
+        </div>
+        <div class="bracket_row">
+            <div class="bracket_body" style="margin-top: 60px;">
+                <div class="label label-bracket">Spiel um Platz 5</div>
+                <table class="table-bordered bracket_table" id="match_3">
+                    <tbody (click)="openMatchInfo(swissMatch['Runde 7'])">
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 7'].team1}}</td>
+                        <td class="bracket_result_cell">
+						<span class="badge tcolorR">
+                            6</span>
+                        </td>
+                    </tr>
+                    <tr class="bracket_col">
+                        <td class="bracket_name_cell">{{swissMatch['Runde 7'].team2}}</td>
+                        <td class="bracket_result_cell">
+						<span class="badge tcolorG">
+                            16</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </ba-card>
 </div>
 
 <modal #match>
-	<modal-header [show-close]="true">
-		<h4 class="modal-title">Tada</h4>
-	</modal-header>
-	<modal-footer style="background-color: #7d7d7d">
-		<!--<select *ngIf="focusTournament.playerMode == 'Clan'" class="form-control" id="exampleSelect1" [(ngModel)]="choosenUserClan" (change)="checkClanStatus(focusTournament, $event)">
-			<option *ngFor="let chooseClan of userClans" value="{{chooseClan._id}}">{{chooseClan
-				.name}}</option>
-		</select>
-		<button type="button" class="btn btn-default" (click)="register.dismiss()">Cancel</button>
-		<button *ngIf="focusTournament.inTournament == 0" type="button" class="btn btn-success"
-				(click)="saveRegister(focusTournament)">Anmelden</button>
-		<button *ngIf="focusTournament.inTournament == 1" type="button" class="btn btn-danger"
-				(click)="delRegister(focusTournament)">Abmelden</button>
-		<button *ngIf="focusTournament.inTournament == 2" type="button" class="btn btn-danger"
-				(click)="delRegister(focusTournament)" disabled="disabled">Kein Admin</button>-->
-	</modal-footer>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">Spiel {{selectMatch.game}}</h4>
+    </modal-header>
+    <modal-body class="matchModalBody">
+        <div class="matchModalResult"
+             *ngIf="userAdminId == 481 || (selectMatch.isInClan == true && selectMatch.result == '0:0')">
+            <table class="table table-striped table-bordered">
+                <tbody>
+                <tr>
+                    <td>{{selectMatch.team1}}</td>
+                    <td style="width: 50px;">
+                        <input value="{{selectMatch.team1}}" class="matchInput" type="number" autocomplete="off">
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{selectMatch.team2}}</td>
+                    <td style="width: 50px;">
+                        <input class="matchInput" type="number" autocomplete="off">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="looserText">Nur der Verlierer kann das Ergebnis eintragen!</p>
+            <div class="submitButton">
+                <button type="button" class="btn btn-success">Submit Scores</button>
+            </div>
+        </div>
+        <div class="matchModalInfo" *ngIf="selectMatch.isInClan != true || selectMatch.result != '0:0'">
+            <div class="matchup">
+                <div class="infoTeam">
+                    <div class="contents winner">
+                        <div class="teamName">{{selectMatch.team1}}</div>
+                    </div>
+                </div>
+                <div class="infoVersus">vs</div>
+                <div class="infoTeam">
+                    <div class="contents">
+                        <div class="teamName">{{selectMatch.team2}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="overallScore">
+                <div class="score">
+                    <div class="contents">{{selectMatch.resultT1}}</div>
+                </div>
+                <div class="divider">&nbsp;</div>
+                <div class="score">
+                    <div class="contents">{{selectMatch.resultT2}}</div>
+                </div>
+            </div>
+            <div class="matchInfo">
+                <div class="info">
+                    <div class="infoTitle">Zeit:</div>
+                    <div class="infoContent">20.04.2017 18:00 Uhr</div>
+                </div>
+                <div class="info">
+                    <div class="infoTitle">Map:</div>
+                    <div class="infoContent">de_dust2</div>
+                </div>
+            </div>
+        </div>
+    </modal-body>
 </modal>
+
 
 
