@@ -3,6 +3,7 @@ var router = express.Router();
 var Tournament = require('../../models/tournament');
 var Clan = require('../../models/clan');
 var jwt = require('jsonwebtoken');
+var shuffle = require('shuffle-array')
 
 /** Get all tournaments **/
 router.get('/', function (req, res, next) {
@@ -41,20 +42,20 @@ router.get('/selected', function (req, res, next) {
 /** Clans and users can register  **/
 /** PARAMS: **/
 /** -> mode, id, clanId || userId  **/
-router.put('/registration', function (req, res, next){
-    if(req.body.mode == null || req.body.id == null){
+router.put('/registration', function (req, res, next) {
+    if (req.body.mode == null || req.body.id == null) {
         return res.status(500).json({
             title: 'Fehler',
-            error: {'message':'Es wurde kein Inhalt mitgeschickt'}
+            error: {'message': 'Es wurde kein Inhalt mitgeschickt'}
         });
     }
     var decoded = jwt.decode(req.get('Authorization'));
 
-    if(req.body.mode == 'Clan'){
-        if(req.body.clanId == null){
+    if (req.body.mode == 'Clan') {
+        if (req.body.clanId == null) {
             return res.status(500).json({
                 title: 'Fehler',
-                error: {'message':'Es wurde kein ClanId mitgeschickt'}
+                error: {'message': 'Es wurde kein ClanId mitgeschickt'}
             });
         }
         Clan.findById(req.body.clanId, function (err, clan) {
@@ -64,9 +65,9 @@ router.put('/registration', function (req, res, next){
                     error: err
                 });
             }
-            if(clan.admin == decoded.user._id){
+            if (clan.admin == decoded.user._id) {
                 Tournament.findByIdAndUpdate(req.body.id,
-                    { $push: { clan: req.body.clanId } },
+                    {$push: {clan: req.body.clanId}},
                     function (err, tournament) {
                         if (err) {
                             return res.status(500).json({
@@ -80,28 +81,28 @@ router.put('/registration', function (req, res, next){
                             obj: tournament
                         });
                     });
-            }else{
+            } else {
                 return res.status(500).json({
                     title: 'Fehler',
                     error: {'message': 'Sie sind kein Clan Admin'}
                 });
             }
         });
-    }else{
-        if(req.body.userId == null){
+    } else {
+        if (req.body.userId == null) {
             return res.status(500).json({
                 title: 'Fehler',
-                error: {'message':'Es wurde kein UserId mitgeschickt'}
+                error: {'message': 'Es wurde kein UserId mitgeschickt'}
             });
         }
-        if(req.body.userId != decoded.user._id){
+        if (req.body.userId != decoded.user._id) {
             return res.status(500).json({
                 title: 'Fehler',
-                error: {'message':'Sie sind nicht dieser User'}
+                error: {'message': 'Sie sind nicht dieser User'}
             });
         }
         Tournament.findByIdAndUpdate(req.body.id,
-            { $push: { player: req.body.userId } },
+            {$push: {player: req.body.userId}},
             function (err, tournament) {
                 if (err) {
                     return res.status(500).json({
@@ -119,20 +120,20 @@ router.put('/registration', function (req, res, next){
 });
 
 /** Clans and users can delete register  **/
-router.post('/registration', function (req, res, next){
-    if(req.body.mode == null || req.body.id == null){
+router.post('/registration', function (req, res, next) {
+    if (req.body.mode == null || req.body.id == null) {
         return res.status(500).json({
             title: 'Fehler',
-            error: {'message':'Es wurde kein Inhalt mitgeschickt'}
+            error: {'message': 'Es wurde kein Inhalt mitgeschickt'}
         });
     }
     var decoded = jwt.decode(req.get('Authorization'));
 
-    if(req.body.mode == 'Clan'){
-        if(req.body.clanId == null){
+    if (req.body.mode == 'Clan') {
+        if (req.body.clanId == null) {
             return res.status(500).json({
                 title: 'Fehler',
-                error: {'message':'Es wurde kein ClanId mitgeschickt'}
+                error: {'message': 'Es wurde kein ClanId mitgeschickt'}
             });
         }
         Clan.findById(req.body.clanId, function (err, clan) {
@@ -142,9 +143,9 @@ router.post('/registration', function (req, res, next){
                     error: err
                 });
             }
-            if(clan.admin == decoded.user._id){
+            if (clan.admin == decoded.user._id) {
                 Tournament.findByIdAndUpdate(req.body.id,
-                    { $pull: { clan: req.body.clanId } },
+                    {$pull: {clan: req.body.clanId}},
                     function (err, tournament) {
                         if (err) {
                             return res.status(500).json({
@@ -158,7 +159,7 @@ router.post('/registration', function (req, res, next){
                             obj: tournament
                         });
                     });
-            }else{
+            } else {
                 return res.status(500).json({
                     title: 'Fehler',
                     error: {'message': 'Sie sind kein Clan Admin'}
@@ -166,21 +167,21 @@ router.post('/registration', function (req, res, next){
             }
         });
 
-    }else{
-        if(req.body.userId == null){
+    } else {
+        if (req.body.userId == null) {
             return res.status(500).json({
                 title: 'Fehler',
-                error: {'message':'Es wurde kein ClanId mitgeschickt'}
+                error: {'message': 'Es wurde kein ClanId mitgeschickt'}
             });
         }
-        if(req.body.userId != decoded.user._id){
+        if (req.body.userId != decoded.user._id) {
             return res.status(500).json({
                 title: 'Fehler',
-                error: {'message':'Sie sind nicht dieser User'}
+                error: {'message': 'Sie sind nicht dieser User'}
             });
         }
         Tournament.findByIdAndUpdate(req.body.id,
-            { $pull: { player: req.body.userId } },
+            {$pull: {player: req.body.userId}},
             function (err, tournament) {
                 if (err) {
                     return res.status(500).json({
@@ -239,10 +240,10 @@ router.post('/save', function (req, res, next) {
                     }
                 }
 
-                if(req.body.result1 > req.body.result2){
+                if (req.body.result1 > req.body.result2) {
                     winningTeam = team1;
                     looserTeam = team2;
-                }else if(req.body.result1 < req.body.result2){
+                } else if (req.body.result1 < req.body.result2) {
                     winningTeam = team2;
                     looserTeam = team1;
                 }
@@ -274,33 +275,39 @@ router.post('/save', function (req, res, next) {
                     }
                 }
 
-                Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.gameId },
-                    {$set:{'games.$.result1': req.body.result1 ,'games.$.result2': req.body.result2}},
-                    function(err, result){
-                        if(err){
+                Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.gameId},
+                    {$set: {'games.$.result1': req.body.result1, 'games.$.result2': req.body.result2}},
+                    function (err, result) {
+                        if (err) {
                             return res.status(500).json({
                                 title: 'Fehler beim speichern',
                                 error: err
                             });
                         }
-                        if(req.body.winnerGame){
+                        if (req.body.winnerGame) {
 
-                            if(req.body.gameId % 2 == 0){
-                                Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.winnerGame },
-                                    {$set:{'games.$.team2': winningTeam}},
-                                    function(err, result) {
-                                        if(err){
+                            if (req.body.gameId % 2 == 0) {
+                                Tournament.findOneAndUpdate({
+                                        "_id": req.body.tournamentId,
+                                        'games.gameId': req.body.winnerGame
+                                    },
+                                    {$set: {'games.$.team2': winningTeam}},
+                                    function (err, result) {
+                                        if (err) {
                                             return res.status(500).json({
                                                 title: 'Fehler beim speichern',
                                                 error: err
                                             });
                                         }
                                     });
-                            }else{
-                                Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.winnerGame },
-                                    {$set:{'games.$.team1': winningTeam}},
-                                    function(err, result) {
-                                        if(err){
+                            } else {
+                                Tournament.findOneAndUpdate({
+                                        "_id": req.body.tournamentId,
+                                        'games.gameId': req.body.winnerGame
+                                    },
+                                    {$set: {'games.$.team1': winningTeam}},
+                                    function (err, result) {
+                                        if (err) {
                                             return res.status(500).json({
                                                 title: 'Fehler beim speichern',
                                                 error: err
@@ -311,23 +318,29 @@ router.post('/save', function (req, res, next) {
 
                         }
 
-                        if(req.body.looserGame){
-                            if(req.body.gameId % 2 == 0){
-                                Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.looserGame },
-                                    {$set:{'games.$.team2': looserTeam}},
-                                    function(err, result) {
-                                        if(err){
+                        if (req.body.looserGame) {
+                            if (req.body.gameId % 2 == 0) {
+                                Tournament.findOneAndUpdate({
+                                        "_id": req.body.tournamentId,
+                                        'games.gameId': req.body.looserGame
+                                    },
+                                    {$set: {'games.$.team2': looserTeam}},
+                                    function (err, result) {
+                                        if (err) {
                                             return res.status(500).json({
                                                 title: 'Fehler beim speichern',
                                                 error: err
                                             });
                                         }
                                     });
-                            }else{
-                                Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.looserGame },
-                                    {$set:{'games.$.team1': looserTeam}},
-                                    function(err, result) {
-                                        if(err){
+                            } else {
+                                Tournament.findOneAndUpdate({
+                                        "_id": req.body.tournamentId,
+                                        'games.gameId': req.body.looserGame
+                                    },
+                                    {$set: {'games.$.team1': looserTeam}},
+                                    function (err, result) {
+                                        if (err) {
                                             return res.status(500).json({
                                                 title: 'Fehler beim speichern',
                                                 error: err
@@ -340,7 +353,7 @@ router.post('/save', function (req, res, next) {
                             message: 'Ergebnis gespeichert',
                             obj: result
                         });
-                });
+                    });
             }
         }
     });
@@ -354,7 +367,8 @@ router.post('/create', function (req, res, next) {
         mode: req.body.mode,
         size: req.body.size,
         playerMode: req.body.playerMode,
-        status : 'off'
+        statusUser: req.body.statusUser,
+        status: 'off'
     });
 
     tournament.save(function (err, result) {
@@ -365,40 +379,127 @@ router.post('/create', function (req, res, next) {
             });
         }
         res.status(201).json({
-            message: 'Neues Tournament erstellt',
+            title: 'Erfolgreich',
+            message: 'Das Turnier wurde erstellt',
             obj: result
         });
     });
 });
 
-/** create games for the tournament **/
+/** create games for the tournament and set the player **/
 router.put('/createGames', function (req, res, next) {
-    var tournament = {
-        gameId: req.body.gameId,
-        team1: req.body.team1,
-        team2: req.body.team2,
-        result1: req.body.result1,
-        result2: req.body.result2
-    };
+    Tournament.findByIdAndUpdate(req.body.id,
+        {
+            $set: {
+                'name': req.body.name,
+                'gameName': req.body.gameName,
+                'mode': req.body.mode,
+                'size': req.body.size,
+                'playerMode': req.body.playerMode,
+                'status': req.body.status
+            }
+        },
+        function (err, saveT) {
+            var games = [];
+            var databaseName;
+            var databaseValues;
 
-    Tournament.findByIdAndUpdate(req.body.id, {$push: {'games': tournament}}, function (err, result) {
-        if (err) {
-            return res.status(500).json({
-                title: 'Hier ist ein Fehler aufgetreten',
-                error: err
-            });
-        }
-        res.status(201).json({
-            message: 'Neues Game erstellt',
-            obj: result
+            if (err) {
+                return res.status(500).json({
+                    title: 'Hier ist ein Fehler aufgetreten',
+                    error: err
+                });
+            }
+            for(var i = 0; i < req.body.size; i++){
+                games[i] = {
+                    gameId: i + 1,
+                    team1: 'tba',
+                    team2: 'tba',
+                    result1: 0,
+                    result2: 0
+                };
+            }
+            if(req.body.playerMode == 'User'){
+                databaseName = 'users';
+                databaseValues = 'nickName';
+            }else{
+                databaseName = 'clan';
+                databaseValues = 'name';
+            }
+
+            Tournament.findById(req.body.id)
+                .populate(databaseName, databaseValues)
+                .exec(function (err, selectTournament) {
+                    if(err) {
+                        return res.status(500).json({
+                            title: 'An error occurred',
+                            error: err
+                        });
+                    }
+                    var member = [];
+
+
+                    if(req.body.playerMode == 'User'){
+                        for(var key in selectTournament.player){
+                            member[key] = selectTournament.player[key].nickName;
+                        }
+                    }else{
+                        for(var key in selectTournament.clan){
+
+                            member[key] = selectTournament.clan[key].name;
+                        }
+                    }
+
+                    if(member.length != req.body.size && member.length < req.body.size){
+                        for(var i = member.length; i <= req.body.size; i++){
+                            member[i] = "Freilos";
+                        }
+                    }
+
+                    member = shuffle(member);
+
+                    for(var i = 0; i< (member.length/2); i++){
+                        for(var j = i; j< i+2; j++){
+                            if((j+1)%2 == 1){
+                                games[i].team1 = member[j];
+                            }else{
+                                games[i].team2 = member[j];
+                            }
+
+                        }
+                    }
+
+                    console.log(games);
+
+                    res.status(201).json({
+                        title: 'Erfolgreich',
+                        message: 'Das Turnier wurde online gesetzt',
+                        obj: selectTournament
+                    });
+
+
+
+                    /*Tournament.findByIdAndUpdate(req.body.id, {$push: {'games': games}}, function (err, result) {
+                        if (err) {
+                            return res.status(500).json({
+                                title: 'Hier ist ein Fehler aufgetreten',
+                                error: err
+                            });
+                        }
+                        res.status(201).json({
+                            title: 'Erfolgreich',
+                            message: 'Das Turnier wurde online gesetzt',
+                            obj: result
+                        });
+                    });*/
+
+                });
+
         });
-    });
-});
 
-/** set player to the games for the tournament **/
-router.put('/setGames', function (req, res, next){
 
 });
+
 
 module.exports = router;
 

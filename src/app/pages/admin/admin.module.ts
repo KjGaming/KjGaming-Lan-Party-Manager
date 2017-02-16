@@ -18,6 +18,7 @@ import {CKEditorModule} from 'ng2-ckeditor';
 import {AdminProductComponent} from "./components/product/product.component";
 import {AdminStatisticsComponent} from "./components/statistics/statistics.component";
 import { ChartsModule } from 'ng2-charts';
+import {AdminTournamentComponent} from "./components/tournament/tournament.component";
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ChartsModule } from 'ng2-charts';
         AdminDownloadComponent,
         AdminMemberComponent,
         AdminProductComponent,
-        AdminStatisticsComponent
+        AdminStatisticsComponent,
+        AdminTournamentComponent
     ],
     providers: [
     ]

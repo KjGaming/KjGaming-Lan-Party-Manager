@@ -81,5 +81,61 @@ export class BaTournamentService {
             });
     }
 
+    createTournament(event){
+        const body = JSON.stringify(event);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.post('/api/reg/tournament/create', body, {headers: headers})
+            .map((res: Response)=> res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+
+    }
+
+    setTournamentOnline(event){
+        const body = JSON.stringify(event);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.put('/api/reg/tournament/createGames', body, {headers: headers})
+            .map((res: Response)=> res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+    }
+
+    setTournamentOffline(event){
+        const body = JSON.stringify(event);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.post('/api/reg/tournament/resetGames', body, {headers: headers})
+            .map((res: Response)=> res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+    }
+
+    setTournamentEnd(event){
+        const body = JSON.stringify(event);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.post('/api/reg/tournament/endTournament', body, {headers: headers})
+            .map((res: Response)=> res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+    }
 }
 
