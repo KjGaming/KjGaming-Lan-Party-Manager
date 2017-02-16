@@ -89,6 +89,8 @@ export class SwissComponent implements OnInit {
                 "team1": "Team 1",
                 "team2": "ORGA",
                 "result": "0:0",
+                "result1": 0,
+                "result2": 0,
                 "rounds": "0-0",
                 "game": 1
             },
@@ -96,6 +98,8 @@ export class SwissComponent implements OnInit {
                 "team1": "Team 3",
                 "team2": "Team 4",
                 "result": "0:0",
+                "result1": 0,
+                "result2": 0,
                 "rounds": "0-0",
                 "game": 2
             },
@@ -103,6 +107,8 @@ export class SwissComponent implements OnInit {
                 "team1": "Team 5",
                 "team2": "Team 6",
                 "result": "0:0",
+                "result1": 0,
+                "result2": 0,
                 "rounds": "0-0",
                 "game": 3
             },
@@ -110,6 +116,8 @@ export class SwissComponent implements OnInit {
                 "team1": "Team 7",
                 "team2": "Team 8",
                 "result": "0:0",
+                "result1": 0,
+                "result2": 0,
                 "rounds": "0-0",
                 "game": 4
             }
@@ -119,6 +127,8 @@ export class SwissComponent implements OnInit {
         "Runde 5": {
             "team1": "Team 7",
             "team2": "Team 8",
+            "result1": 0,
+            "result2": 0,
             "result": "0:0",
             "rounds": "0-0",
             "game": 11
@@ -126,6 +136,8 @@ export class SwissComponent implements OnInit {
         "Runde 6": {
             "team1": "Team 7",
             "team2": "Team 8",
+            "result1": 0,
+            "result2": 0,
             "result": "0:0",
             "rounds": "0-0",
             "game": 12
@@ -133,6 +145,8 @@ export class SwissComponent implements OnInit {
         "Runde 7": {
             "team1": "Team 7",
             "team2": "Team 8",
+            "result1": 0,
+            "result2": 0,
             "result": "0:0",
             "rounds": "0-0",
             "game": 13
@@ -140,6 +154,8 @@ export class SwissComponent implements OnInit {
         "Runde 8": {
             "team1": "Team 7",
             "team2": "Team 8",
+            "result1": 0,
+            "result2": 0,
             "result": "0:0",
             "rounds": "0-0",
             "game": 14
@@ -147,6 +163,8 @@ export class SwissComponent implements OnInit {
         "Runde 9": {
             "team1": "Team 7",
             "team2": "Team 8",
+            "result1": 0,
+            "result2": 0,
             "result": "0:0",
             "rounds": "0-0",
             "game": 15
@@ -154,6 +172,8 @@ export class SwissComponent implements OnInit {
         "Runde 10": {
             "team1": "LALA",
             "team2": "LOPLOP",
+            "result1": 0,
+            "result2": 0,
             "result": "0:0",
             "rounds": "0-0",
             "game": 16
@@ -243,6 +263,26 @@ export class SwissComponent implements OnInit {
         this.match.open();
         this.selectMatch = match;
         console.log(this.selectMatch);
+    }
+
+    whoIsWinner(match, team) {
+        if (match.result1 || match.result2) {
+            if (team == "team1") {
+                if (match.res1 > match.res2) {
+                    return {'winner': true};
+                } else {
+                    return {'winner': false};
+                }
+            } else if (team == "team2") {
+                if (match.result1 < match.result2) {
+                    return {'winner': true};
+                } else {
+                    return {'winner': false};
+                }
+            }
+        }else{
+            return {'winner': false};
+        }
     }
 
 }

@@ -1,7 +1,103 @@
 <simple-notifications [options]="options"></simple-notifications>
 <div class="bracket">
     <div id="row1">
-        <div *ngFor="let row_1 of row1, let i = index" [attr.id]="'game' + row_1.gameId">
+		<div class="tournamentRow">
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px" y="0px"
+                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    preserveAspectRatio="xMaxYMax">
+				<rect class="team1"  y="0" fill="none" width="224" height="40" />
+				<g class="text">
+					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
+						Rip in Peace
+					</text>
+				</g>
+				<rect class="team2" y="38" fill="none" width="224" height="40"/>
+				<g class="text">
+					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
+						Konfukanaltanga
+					</text>
+				</g>
+                    <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
+                    <g class="text">
+                        <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
+                            16
+                        </text>
+                    </g>
+
+                    <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
+                    <g class="text">
+                        <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
+                            10
+                        </text>
+                    </g>
+					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
+
+				<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1292.9006" x2="-431.0098" y2="1292.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_1_)" stroke-miterlimit="10" x1="0" y1="40.5" x2="108" y2="40.5"/>
+				<rect x="109.52" y="27.77" fill="none" width="8.46" height="5.46"/>
+				<text transform="matrix(1 0 0 1 108.5215 40.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+				<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="0" x2="224.5" y2="81"/>
+
+				<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1292.9016" x2="-419.0107" y2="1292.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="40.5" x2="224" y2="40.5"/>
+				</svg>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px" y="0px"
+                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    preserveAspectRatio="xMaxYMax">
+				<rect class="team1"  y="0" fill="none" width="224" height="40" />
+				<g class="text">
+					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
+						Rip in Peace
+					</text>
+				</g>
+				<rect class="team2" y="38" fill="none" width="224" height="40"/>
+				<g class="text">
+					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
+						Konfukanaltanga
+					</text>
+				</g>
+                    <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
+                    <g class="text">
+                        <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
+                            16
+                        </text>
+                    </g>
+
+                    <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
+                    <g class="text">
+                        <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
+                            10
+                        </text>
+                    </g>
+					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
+
+				<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1292.9006" x2="-431.0098" y2="1292.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_1_)" stroke-miterlimit="10" x1="0" y1="40.5" x2="108" y2="40.5"/>
+				<rect x="109.52" y="27.77" fill="none" width="8.46" height="5.46"/>
+				<text transform="matrix(1 0 0 1 108.5215 40.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+				<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="0" x2="224.5" y2="81"/>
+
+				<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1292.9016" x2="-419.0107" y2="1292.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="40.5" x2="224" y2="40.5"/>
+				</svg>
+		</div>
+        <!--<div *ngFor="let row_1 of row1, let i = index" [attr.id]="'game' + row_1.gameId">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
 					  x="0px" y="0px"
@@ -63,7 +159,7 @@
 				</linearGradient>
 				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="30.5" x2="224" y2="30.5"/>
 				</svg>
-        </div>
+        </div>-->
     </div>
     <div class="divBorder">
         <div class="borderRow1" *ngFor="let key of repeat4">

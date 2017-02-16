@@ -4,6 +4,7 @@ var Tournament = require('../../models/tournament');
 var Clan = require('../../models/clan');
 var jwt = require('jsonwebtoken');
 
+/** Get all tournaments **/
 router.get('/', function (req, res, next) {
     Tournament.find()
         .exec(function (err, event) {
@@ -20,6 +21,7 @@ router.get('/', function (req, res, next) {
         });
 });
 
+/** Get the selected tournament **/
 router.get('/selected', function (req, res, next) {
     var tournamentId = req.query.id;
     Tournament.findById(tournamentId, function (err, event) {
@@ -344,6 +346,7 @@ router.post('/save', function (req, res, next) {
     });
 });
 
+/** create Tournament **/
 router.post('/create', function (req, res, next) {
     var tournament = new Tournament({
         name: req.body.name,
@@ -368,7 +371,8 @@ router.post('/create', function (req, res, next) {
     });
 });
 
-router.post('/createGames', function (req, res, next) {
+/** create games for the tournament **/
+router.put('/createGames', function (req, res, next) {
     var tournament = {
         gameId: req.body.gameId,
         team1: req.body.team1,
@@ -389,6 +393,11 @@ router.post('/createGames', function (req, res, next) {
             obj: result
         });
     });
+});
+
+/** set player to the games for the tournament **/
+router.put('/setGames', function (req, res, next){
+
 });
 
 module.exports = router;
