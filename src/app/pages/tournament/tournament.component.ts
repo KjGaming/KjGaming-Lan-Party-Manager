@@ -38,7 +38,7 @@ export class TournamentComponent implements OnInit {
             // the first argument is a function which runs on success
             data => {
                 this.tournaments = data.obj;
-                console.log(this.tournaments);
+               /* console.log(this.tournaments);*/
             },
             // the second argument is a function which runs on error
             err => console.error(err),
@@ -104,7 +104,7 @@ export class TournamentComponent implements OnInit {
 
     chooseMode(tournament, mode) {
         if (mode == 'router') {
-            console.log(tournament);
+            /*console.log(tournament);*/
             if (tournament.status == 'off') {
                 return 'register'
             } else if (tournament.status == 'on') {
@@ -155,7 +155,7 @@ export class TournamentComponent implements OnInit {
         }
 
 
-        console.log(tournament);
+       /* console.log(tournament);*/
         this.focusTournament = tournament;
         this.register.open();
     }

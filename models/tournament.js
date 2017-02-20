@@ -15,9 +15,14 @@ var schema = new Schema({
             team2: {type: String},
             result1: {type: Number},
             result2: {type: Number},
+            rounds: {type: String},
             timeStart: {type: String},
             timeDuration: {type: String},
             map: {type: String}
+        }],
+        placement : [{
+            number: {type: Number},
+            team: {type: String}
         }],
         player: [{type: Schema.Types.ObjectId, ref: "users"}],
         clan: [{type: Schema.Types.ObjectId, ref: "clan"}]

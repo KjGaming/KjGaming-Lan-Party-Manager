@@ -152,22 +152,8 @@ export class AdminTournamentComponent implements OnInit {
             status : this.editTournamentStatus
         };
 
-        if(this.editTournamentStatus == 'on'){
-            this._tournamentService.setTournamentOnline(data).subscribe(
-                // the first argument is a function which runs on success
-                data => {
-                    this._toastService.success(data.title, data.message);
-                    this.ngOnInit();
-                },
-                // the second argument is a function which runs on error
-                err => {
-                    this._toastService.success(err.title, err.err.message);
-                },
-                // the third argument is a function which runs on completion
-                () => console.log('done delete download')
-            );
-        }else if(this.editTournamentStatus == 'off'){
-            this._tournamentService.setTournamentOffline(data).subscribe(
+        if(this.selectTournament.status == this.editTournamentStatus){
+            this._tournamentService.saveTournament(data).subscribe(
                 // the first argument is a function which runs on success
                 data => {
                     this._toastService.success(data.title, data.message);
@@ -181,20 +167,53 @@ export class AdminTournamentComponent implements OnInit {
                 () => console.log('done delete download')
             );
         }else{
-            this._tournamentService.setTournamentEnd(data).subscribe(
-                // the first argument is a function which runs on success
-                data => {
-                    this._toastService.success(data.title, data.message);
-                    this.ngOnInit();
-                },
-                // the second argument is a function which runs on error
-                err => {
-                    this._toastService.success(err.title, err.err.message);
-                },
-                // the third argument is a function which runs on completion
-                () => console.log('done delete download')
-            );
+            if(this.editTournamentStatus == 'on'){
+                this._tournamentService.setTournamentOnline(data).subscribe(
+                    // the first argument is a function which runs on success
+                    data => {
+                        this._toastService.success(data.title, data.message);
+                        this.ngOnInit();
+                    },
+                    // the second argument is a function which runs on error
+                    err => {
+                        this._toastService.success(err.title, err.err.message);
+                    },
+                    // the third argument is a function which runs on completion
+                    () => console.log('done delete download')
+                );
+            }else if(this.editTournamentStatus == 'off'){
+                this._tournamentService.setTournamentOffline(data).subscribe(
+                    // the first argument is a function which runs on success
+                    data => {
+                        this._toastService.success(data.title, data.message);
+                        this.ngOnInit();
+                    },
+                    // the second argument is a function which runs on error
+                    err => {
+                        this._toastService.success(err.title, err.err.message);
+                    },
+                    // the third argument is a function which runs on completion
+                    () => console.log('done delete download')
+                );
+            }else{
+                this._tournamentService.setTournamentEnd(data).subscribe(
+                    // the first argument is a function which runs on success
+                    data => {
+                        this._toastService.success(data.title, data.message);
+                        this.ngOnInit();
+                    },
+                    // the second argument is a function which runs on error
+                    err => {
+                        this._toastService.success(err.title, err.err.message);
+                    },
+                    // the third argument is a function which runs on completion
+                    () => console.log('done delete download')
+                );
+            }
+
         }
+
+
 
 
     }

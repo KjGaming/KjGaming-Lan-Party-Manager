@@ -359,6 +359,63 @@ router.post('/save', function (req, res, next) {
     });
 });
 
+/** save the changes of a tournament **/
+router.put('/save', function (req, res, next) {
+    Tournament.findByIdAndUpdate(req.body.id,
+        {
+            $set: {
+                'name': req.body.name,
+                'gameName': req.body.gameName,
+                'mode': req.body.mode,
+                'size': req.body.size,
+                'playerMode': req.body.playerMode,
+            }
+        },
+        function (err, result) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'Hier ist ein Fehler aufgetreten',
+                    error: err
+                });
+            }
+            res.status(201).json({
+                title: 'Erfolgreich',
+                message: 'Das Turnier wurde geändert',
+                obj: result
+            });
+
+        });
+});
+
+/** set tournament offline**/
+router.put('/offline', function (req, res, next) {
+    Tournament.findByIdAndUpdate(req.body.id,
+        {
+            $set: {
+                'name': req.body.name,
+                'gameName': req.body.gameName,
+                'mode': req.body.mode,
+                'size': req.body.size,
+                'playerMode': req.body.playerMode,
+                'status': 'off'
+            }
+        },
+        function (err, result) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'Hier ist ein Fehler aufgetreten',
+                    error: err
+                });
+            }
+            res.status(201).json({
+                title: 'Erfolgreich',
+                message: 'Das Turnier ist jetzt offline',
+                obj: result
+            });
+
+        });
+});
+
 /** create Tournament **/
 router.post('/create', function (req, res, next) {
     var tournament = new Tournament({
@@ -403,6 +460,7 @@ router.put('/createGames', function (req, res, next) {
             var games = [];
             var databaseName;
             var databaseValues;
+            var gameSize;
 
             if (err) {
                 return res.status(500).json({
@@ -410,13 +468,30 @@ router.put('/createGames', function (req, res, next) {
                     error: err
                 });
             }
-            for(var i = 0; i < req.body.size; i++){
+
+            switch(req.body.mode){
+                case 'swiss':
+                    gameSize = 16;
+                    break;
+                case 'b16':
+                    gameSize = 15;
+                    break;
+                case 'b8':
+                    gameSize = 7;
+                    break;
+                case 'b4':
+                    gameSize = 3;
+                    break;
+            }
+
+            for(var i = 0; i < gameSize; i++){
                 games[i] = {
                     gameId: i + 1,
                     team1: 'tba',
                     team2: 'tba',
                     result1: 0,
-                    result2: 0
+                    result2: 0,
+                    rounds : '0-0'
                 };
             }
             if(req.body.playerMode == 'User'){
@@ -451,7 +526,7 @@ router.put('/createGames', function (req, res, next) {
                     }
 
                     if(member.length != req.body.size && member.length < req.body.size){
-                        for(var i = member.length; i <= req.body.size; i++){
+                        for(var i = member.length; i < req.body.size; i++){
                             member[i] = "Freilos";
                         }
                     }
@@ -459,27 +534,18 @@ router.put('/createGames', function (req, res, next) {
                     member = shuffle(member);
 
                     for(var i = 0; i< (member.length/2); i++){
-                        for(var j = i; j< i+2; j++){
-                            if((j+1)%2 == 1){
-                                games[i].team1 = member[j];
+                        for(var j = 0; j< 2; j++){
+                            if(j == 0){
+                                games[i].team1 = member[i + i + j];
                             }else{
-                                games[i].team2 = member[j];
+                                games[i].team2 = member[i + i + j];
                             }
-
                         }
                     }
 
                     console.log(games);
 
-                    res.status(201).json({
-                        title: 'Erfolgreich',
-                        message: 'Das Turnier wurde online gesetzt',
-                        obj: selectTournament
-                    });
-
-
-
-                    /*Tournament.findByIdAndUpdate(req.body.id, {$push: {'games': games}}, function (err, result) {
+                    Tournament.findByIdAndUpdate(req.body.id, {$set: {'games': games}}, function (err, result) {
                         if (err) {
                             return res.status(500).json({
                                 title: 'Hier ist ein Fehler aufgetreten',
@@ -491,7 +557,7 @@ router.put('/createGames', function (req, res, next) {
                             message: 'Das Turnier wurde online gesetzt',
                             obj: result
                         });
-                    });*/
+                    });
 
                 });
 

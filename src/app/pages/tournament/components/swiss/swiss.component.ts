@@ -124,7 +124,7 @@ export class SwissComponent implements OnInit {
         ],
         "Runde 2": [],
         "Runde 3": [],
-        "Runde 5": {
+        "Runde 4": {
             "team1": "Team 7",
             "team2": "Team 8",
             "result1": 0,
@@ -133,7 +133,7 @@ export class SwissComponent implements OnInit {
             "rounds": "0-0",
             "game": 11
         },
-        "Runde 6": {
+        "Runde 5": {
             "team1": "Team 7",
             "team2": "Team 8",
             "result1": 0,
@@ -142,7 +142,7 @@ export class SwissComponent implements OnInit {
             "rounds": "0-0",
             "game": 12
         },
-        "Runde 7": {
+        "Runde 6": {
             "team1": "Team 7",
             "team2": "Team 8",
             "result1": 0,
@@ -151,7 +151,7 @@ export class SwissComponent implements OnInit {
             "rounds": "0-0",
             "game": 13
         },
-        "Runde 8": {
+        "Runde 7": {
             "team1": "Team 7",
             "team2": "Team 8",
             "result1": 0,
@@ -160,7 +160,7 @@ export class SwissComponent implements OnInit {
             "rounds": "0-0",
             "game": 14
         },
-        "Runde 9": {
+        "Runde 8": {
             "team1": "Team 7",
             "team2": "Team 8",
             "result1": 0,
@@ -169,7 +169,7 @@ export class SwissComponent implements OnInit {
             "rounds": "0-0",
             "game": 15
         },
-        "Runde 10": {
+        "Runde 9": {
             "team1": "LALA",
             "team2": "LOPLOP",
             "result1": 0,
@@ -210,7 +210,7 @@ export class SwissComponent implements OnInit {
         this.getTournament(this.tournamentId);
         this.userAdminId = localStorage.getItem('blackWidow');
         this.getUserClanName();
-        console.log(this.swissMatch);
+       /* console.log(this.swissMatch);*/
     }
 
     getTournament(id) {
@@ -218,8 +218,41 @@ export class SwissComponent implements OnInit {
             // the first argument is a function which runs on success
             data => {
                 this.tournament = data.obj;
-                this.games = data.obj.games;
-                console.log(data);
+
+                for(let i = 1; i <= 3; i++){
+                    switch(i){
+                        case 1:
+                            this.swissMatch['Runde ' + i] = [
+                                data.obj.games[i-1],
+                                data.obj.games[i],
+                                data.obj.games[i+1],
+                                data.obj.games[i+2],
+                            ];
+                            break;
+                        case 2:
+                            this.swissMatch['Runde ' + i] = [
+                                data.obj.games[i+2],
+                                data.obj.games[i+3],
+                                data.obj.games[i+4],
+                                data.obj.games[i+5],
+                            ];
+                            break;
+                        case 3:
+                            this.swissMatch['Runde ' + i] = [
+                                data.obj.games[i+5],
+                                data.obj.games[i+6],
+                            ];
+                            break;
+                    }
+
+                }
+
+
+                for(let i = 4; i < 10; i++){
+                    this.swissMatch['Runde ' + i] = data.obj.games[i+6];
+                }
+                console.log(this.swissMatch);
+
             },
             // the second argument is a function which runs on error
             err => console.error(err),
@@ -255,14 +288,9 @@ export class SwissComponent implements OnInit {
             }
         }
 
-
-        splitResult = match.result.split(":");
-        match["resultT1"] = splitResult[0];
-        match["resultT2"] = splitResult[1];
-
         this.match.open();
         this.selectMatch = match;
-        console.log(this.selectMatch);
+        /*console.log(this.selectMatch);*/
     }
 
     whoIsWinner(match, team) {

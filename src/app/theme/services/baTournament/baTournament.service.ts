@@ -96,6 +96,20 @@ export class BaTournamentService {
 
     }
 
+    saveTournament(event){
+        const body = JSON.stringify(event);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.put('/api/reg/tournament/save', body, {headers: headers})
+            .map((res: Response)=> res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+    }
+
     setTournamentOnline(event){
         const body = JSON.stringify(event);
         const headers = new Headers({
