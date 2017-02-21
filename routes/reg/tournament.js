@@ -28,12 +28,13 @@ router.get('/selected', function (req, res, next) {
     Tournament.findById(tournamentId, function (err, event) {
         if (err) {
             return res.status(500).json({
-                title: 'An error occurred',
-                error: err
+                title: 'Fehler',
+                error: {message: 'Hier ist etwas falsch gelaufen!'}
             });
         }
         res.status(200).json({
-            message: 'Success',
+            title: 'Erfolgreich',
+            message: 'alle Informationen sind vorhanden',
             obj: event
         });
     });
@@ -198,22 +199,34 @@ router.post('/registration', function (req, res, next) {
     }
 });
 
-// save/update one Game Result
-router.post('/save', function (req, res, next) {
+/** Save/Update one Game Result **/
+router.put('/game/save', function (req, res, next) {
     var decoded = jwt.decode(req.get('Authorization'));
     var whichTeam = null;
-
+    var firstResult = false;
+    var foundGame = false;
+    var firstResult1;
+    var firstResult2;
 
     Tournament.findById(req.body.tournamentId, function (err, tournament) {
         if (err) {
             return res.status(500).json({
-                title: 'Fehler beim Turnier',
-                error: err
+                title: 'Fehler',
+                error: {message: 'Turnier wurde nicht gefunden'}
             });
         }
+        if(!tournament.games){
+            return res.status(500).json({
+                title: 'Fehler',
+                error: {message: 'Keine Spiele vorhanden!'}
+            });
+        }
+
         for (var key in tournament.games) {
 
             if (tournament.games[key].gameId == req.body.gameId) {
+                firstResult1 = tournament.games[key]['result1'];
+                firstResult2 = tournament.games[key]['result2'];
 
                 var team1 = tournament.games[key]['team1'];
                 var team2 = tournament.games[key]['team2'];
@@ -254,8 +267,8 @@ router.post('/save', function (req, res, next) {
                     // User are not in the game
                     if (!whichTeam) {
                         return res.status(500).json({
-                            title: 'Keine Berechtigung',
-                            error: err
+                            title: 'Fehler',
+                            error: {message: 'Keine Berechtigung'}
                         });
                     }
 
@@ -263,99 +276,118 @@ router.post('/save', function (req, res, next) {
                     if (req.body.result1 > req.body.result2 && whichTeam != "team2") {
                         return res.status(500).json({
                             title: 'Fehler',
-                            error: {error: 'Du bist nicht der Verlierer'}
+                            error: {message: 'Du bist nicht der Verlierer'}
                         });
                     }
 
                     if (req.body.result1 < req.body.result2 && whichTeam != "team1") {
                         return res.status(500).json({
                             title: 'Fehler',
-                            error: {error: 'Du bist nicht der Verlierer'}
+                            error: {message: 'Du bist nicht der Verlierer'}
                         });
                     }
                 }
+
+                console.log(firstResult1);
+                if(firstResult1 == 0 && firstResult2 == 0){
+                    firstResult = true;
+                }
+                console.log(firstResult);
 
                 Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.gameId},
                     {$set: {'games.$.result1': req.body.result1, 'games.$.result2': req.body.result2}},
                     function (err, result) {
                         if (err) {
                             return res.status(500).json({
-                                title: 'Fehler beim speichern',
-                                error: err
+                                title: 'Fehler',
+                                error: {message: 'Beim speichern ist was schief gelaufen'}
                             });
                         }
-                        if (req.body.winnerGame) {
 
-                            if (req.body.gameId % 2 == 0) {
-                                Tournament.findOneAndUpdate({
-                                        "_id": req.body.tournamentId,
-                                        'games.gameId': req.body.winnerGame
-                                    },
-                                    {$set: {'games.$.team2': winningTeam}},
-                                    function (err, result) {
-                                        if (err) {
-                                            return res.status(500).json({
-                                                title: 'Fehler beim speichern',
-                                                error: err
-                                            });
-                                        }
-                                    });
-                            } else {
-                                Tournament.findOneAndUpdate({
-                                        "_id": req.body.tournamentId,
-                                        'games.gameId': req.body.winnerGame
-                                    },
-                                    {$set: {'games.$.team1': winningTeam}},
-                                    function (err, result) {
-                                        if (err) {
-                                            return res.status(500).json({
-                                                title: 'Fehler beim speichern',
-                                                error: err
-                                            });
-                                        }
-                                    });
-                            }
+                        /*if(tournament.mode != 'swiss'){
+                         if (req.body.winner) {
 
-                        }
+                         if (req.body.gameId % 2 == 0) {
+                         Tournament.findOneAndUpdate({
+                         "_id": req.body.tournamentId,
+                         'games.gameId': req.body.winner
+                         },
+                         {$set: {'games.$.team2': winningTeam}},
+                         function (err, res1) {
+                         if (err) {
+                         return res.status(500).json({
+                         title: 'Fehler',
+                         error: {message: 'Beim speichern ist was schief gelaufen'}
+                         });
+                         }
+                         });
+                         } else {
+                         Tournament.findOneAndUpdate({
+                         "_id": req.body.tournamentId,
+                         'games.gameId': req.body.winner
+                         },
+                         {$set: {'games.$.team1': winningTeam}},
+                         function (err, res2) {
+                         if (err) {
+                         return res.status(500).json({
+                         title: 'Fehler',
+                         error: {message: 'Beim speichern ist was schief gelaufen'}
+                         });
+                         }
+                         });
+                         }
 
-                        if (req.body.looserGame) {
-                            if (req.body.gameId % 2 == 0) {
-                                Tournament.findOneAndUpdate({
-                                        "_id": req.body.tournamentId,
-                                        'games.gameId': req.body.looserGame
-                                    },
-                                    {$set: {'games.$.team2': looserTeam}},
-                                    function (err, result) {
-                                        if (err) {
-                                            return res.status(500).json({
-                                                title: 'Fehler beim speichern',
-                                                error: err
-                                            });
-                                        }
-                                    });
-                            } else {
-                                Tournament.findOneAndUpdate({
-                                        "_id": req.body.tournamentId,
-                                        'games.gameId': req.body.looserGame
-                                    },
-                                    {$set: {'games.$.team1': looserTeam}},
-                                    function (err, result) {
-                                        if (err) {
-                                            return res.status(500).json({
-                                                title: 'Fehler beim speichern',
-                                                error: err
-                                            });
-                                        }
-                                    });
-                            }
-                        }
+                         }
+
+                         if (req.body.looserGame) {
+                         if (req.body.gameId % 2 == 0) {
+                         Tournament.findOneAndUpdate({
+                         "_id": req.body.tournamentId,
+                         'games.gameId': req.body.looserGame
+                         },
+                         {$set: {'games.$.team2': looserTeam}},
+                         function (err, res3) {
+                         if (err) {
+                         return res.status(500).json({
+                         title: 'Fehler',
+                         error: {message: 'Beim speichern ist was schief gelaufen'}
+                         });
+                         }
+                         });
+                         } else {
+                         Tournament.findOneAndUpdate({
+                         "_id": req.body.tournamentId,
+                         'games.gameId': req.body.looserGame
+                         },
+                         {$set: {'games.$.team1': looserTeam}},
+                         function (err, res4) {
+                         if (err) {
+                         return res.status(500).json({
+                         title: 'Fehler',
+                         error: {message: 'Beim speichern ist was schief gelaufen'}
+                         });
+                         }
+                         });
+                         }
+                         }
+                         }*/
+
                         return res.status(201).json({
+                            title: 'Erflogreich',
                             message: 'Ergebnis gespeichert',
-                            obj: result
+                            obj: result,
+                            swiss: {
+                                id : result._id,
+                                winner: req.body.winner,
+                                looser: req.body.looser,
+                                gameId : req.body.gameId,
+                                firstResult : firstResult
+                            }
                         });
                     });
             }
         }
+
     });
 });
 
@@ -443,10 +475,156 @@ router.post('/create', function (req, res, next) {
     });
 });
 
+/** create swiss values **/
+router.post('/swiss/createResult', function (req, res, next) {
+    var insert = [];
+
+    if (!req.body._id) {
+        return res.status(500).json({
+            title: 'Fehler',
+            error: {message: 'Keine Turnier ID vorhanden'}
+        });
+    }
+
+    Tournament.findById(req.body._id)
+        .populate('clan', 'name shortName')
+        .populate('users', 'nickName email')
+        .exec(function (err, tournament) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'Fehler',
+                    error: {message: 'Hier ist ein Fehler aufgetreten'}
+                });
+            }
+
+            if (tournament.playerMode == 'Clan') {
+                for (var i = 0; i < tournament.clan.length; i++) {
+                    insert.push({
+                        name: tournament.clan[i].name,
+                        win: 0,
+                        lose: 0,
+                        qualified: 0
+                    });
+                }
+            } else {
+                for (var i = 0; i < tournament.player.length; i++) {
+                    insert.push({
+                        name: tournament.player[i].nickName,
+                        win: 0,
+                        lose: 0,
+                        qualified: 0
+                    });
+                }
+            }
+
+            var lengthInsert = insert.length;
+
+            for (var j = insert.length; j < tournament.size; j++) {
+                    insert.push({
+                        name: 'Freilos_' + (j - lengthInsert + 1),
+                        win: 0,
+                        lose: 0,
+                        qualified: 0
+                    });
+
+            }
+
+            Tournament.findByIdAndUpdate(req.body._id,
+                {
+                    $set: {
+                        "swiss.results": insert
+                    }
+                }
+                ,
+                function (err, result) {
+                    if (err) {
+                        return res.status(500).json({
+                            title: 'Hier ist ein Fehler aufgetreten',
+                            error: {message: 'Hier ist ein Fehler aufgetreten'}
+                        });
+                    }
+
+                    res.status(201).json({
+                        title: 'Erfolgreich',
+                        message: 'Den Spielern wurde das SwissSystem zugewiesen',
+                        obj: result
+                    });
+                });
+        });
+});
+
+/** update the swiss result **/
+router.put('/swiss/saveResult', function (req, res, next) {
+
+    Tournament.findById(req.body.id, function (err, tournament) {
+        if (err) {
+            return res.status(500).json({
+                title: 'Fehler',
+                error: {message: 'Hier ist ein Fehler aufgetreten'}
+            });
+        }
+
+        if(req.body.firstResult){
+            for (var i = 0; i < tournament.swiss.results.length; i++) {
+
+                if (tournament.swiss.results[i].name == req.body.winner) {
+                    tournament.swiss.results[i].win += 1;
+                }
+                if (tournament.swiss.results[i].name == req.body.looser) {
+                    tournament.swiss.results[i].lose += 1;
+                }
+            }
+        }
+
+        Tournament.findByIdAndUpdate(req.body.id,
+            {
+                $set:{
+                    'swiss.results': tournament.swiss.results
+                }
+            }
+            ,function (err, updateT) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'Fehler',
+                        error: {message: 'Hier ist ein Fehler aufgetreten'}
+                    });
+                }
+
+                res.status(201).json({
+                    title: 'Erfolgreich',
+                    message: 'Ergebnis erfoglreich geändert',
+                    obj: updateT
+                });
+
+        });
+    });
+});
+
+/** set the new games **/
+router.put('/swiss/setNewRound', function (req, res) {
+
+});
+
 /** create games for the tournament and set the player **/
 router.put('/createGames', function (req, res, next) {
-    Tournament.findByIdAndUpdate(req.body.id,
-        {
+    var setInput;
+    if (req.body.mode == 'swiss') {
+        setInput = {
+            $set: {
+                'name': req.body.name,
+                'gameName': req.body.gameName,
+                'mode': req.body.mode,
+                'size': req.body.size,
+                'playerMode': req.body.playerMode,
+                'status': req.body.status,
+                'swiss': {
+                    'secondRound': false,
+                    'thirdRound': false
+                }
+            }
+        }
+    } else {
+        setInput = {
             $set: {
                 'name': req.body.name,
                 'gameName': req.body.gameName,
@@ -455,7 +633,9 @@ router.put('/createGames', function (req, res, next) {
                 'playerMode': req.body.playerMode,
                 'status': req.body.status
             }
-        },
+        }
+    }
+    Tournament.findByIdAndUpdate(req.body.id, setInput,
         function (err, saveT) {
             var games = [];
             var databaseName;
@@ -469,7 +649,7 @@ router.put('/createGames', function (req, res, next) {
                 });
             }
 
-            switch(req.body.mode){
+            switch (req.body.mode) {
                 case 'swiss':
                     gameSize = 16;
                     break;
@@ -484,20 +664,30 @@ router.put('/createGames', function (req, res, next) {
                     break;
             }
 
-            for(var i = 0; i < gameSize; i++){
+            var rounds;
+            for (var i = 0; i < gameSize; i++) {
+                if(i < 4){
+                    rounds = '0-0'
+                }else if(i < 6){
+                    rounds = '1-0'
+                }else if(i < 8){
+                    rounds = '0-1'
+                }else{
+                    rounds = '1-1'
+                }
                 games[i] = {
                     gameId: i + 1,
                     team1: 'tba',
                     team2: 'tba',
                     result1: 0,
                     result2: 0,
-                    rounds : '0-0'
+                    rounds: rounds
                 };
             }
-            if(req.body.playerMode == 'User'){
+            if (req.body.playerMode == 'User') {
                 databaseName = 'users';
                 databaseValues = 'nickName';
-            }else{
+            } else {
                 databaseName = 'clan';
                 databaseValues = 'name';
             }
@@ -505,7 +695,7 @@ router.put('/createGames', function (req, res, next) {
             Tournament.findById(req.body.id)
                 .populate(databaseName, databaseValues)
                 .exec(function (err, selectTournament) {
-                    if(err) {
+                    if (err) {
                         return res.status(500).json({
                             title: 'An error occurred',
                             error: err
@@ -514,30 +704,31 @@ router.put('/createGames', function (req, res, next) {
                     var member = [];
 
 
-                    if(req.body.playerMode == 'User'){
-                        for(var key in selectTournament.player){
+                    if (req.body.playerMode == 'User') {
+                        for (var key in selectTournament.player) {
                             member[key] = selectTournament.player[key].nickName;
                         }
-                    }else{
-                        for(var key in selectTournament.clan){
+                    } else {
+                        for (var key in selectTournament.clan) {
 
                             member[key] = selectTournament.clan[key].name;
                         }
                     }
 
-                    if(member.length != req.body.size && member.length < req.body.size){
-                        for(var i = member.length; i < req.body.size; i++){
-                            member[i] = "Freilos";
+                    if (member.length != req.body.size && member.length < req.body.size) {
+                        var lengthMember = member.length;
+                        for (var i = member.length; i < req.body.size; i++) {
+                            member[i] = "Freilos_"+ (i - lengthMember + 1);
                         }
                     }
 
                     member = shuffle(member);
 
-                    for(var i = 0; i< (member.length/2); i++){
-                        for(var j = 0; j< 2; j++){
-                            if(j == 0){
+                    for (var i = 0; i < (member.length / 2); i++) {
+                        for (var j = 0; j < 2; j++) {
+                            if (j == 0) {
                                 games[i].team1 = member[i + i + j];
-                            }else{
+                            } else {
                                 games[i].team2 = member[i + i + j];
                             }
                         }

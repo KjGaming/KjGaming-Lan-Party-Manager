@@ -6,6 +6,7 @@ import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {NotificationsService} from "angular2-notifications/src/notifications.service";
 import {BaTournamentService} from "../../../../theme/services/baTournament/baTournament.service";
 import {BaClanService} from "../../../../theme/services/baClan/baClan.service";
+import {error} from "util";
 
 @Component({
     selector: 'swiss',
@@ -23,65 +24,7 @@ export class SwissComponent implements OnInit {
 
     swissSubscriber: number = 16;
     swissResult = [2, 1, 0, 2, 3, 4, 5, 1];
-    swissResultTable = [
-        {
-            'name': 'Team1',
-            'win': 2,
-            'loose': 1,
-            'points': 1.5,
-            'qualified': 0
-        },
-        {
-            'name': 'Team2',
-            'win': 0,
-            'loose': 0,
-            'points': 0,
-            'qualified': 0
-        },
-        {
-            'name': 'Team3',
-            'win': 1,
-            'loose': 0,
-            'points': 1,
-            'qualified': 0
-        },
-        {
-            'name': 'Team4',
-            'win': 2,
-            'loose': 0,
-            'points': 2,
-            'qualified': 0
-        },
-        {
-            'name': 'Team5',
-            'win': 1,
-            'loose': 1,
-            'points': 0.5,
-            'qualified': 0
-        },
-        {
-            'name': 'Team6',
-            'win': 0,
-            'loose': 0,
-            'points': 0,
-            'qualified': 0
-        },
-        {
-            'name': 'Team7',
-            'win': 1,
-            'loose': 2,
-            'points': 0,
-            'qualified': 0
-        },
-        {
-            'name': 'Team8',
-            'win': 0,
-            'loose': 2,
-            'points': -1,
-            'qualified': 0
-        }
-
-    ];
+    swissResultTable = [];
     swissRound: Object = ['Runde 1', 'Runde 2', 'Runde 3'];
     swissMatch: Object = {
         "Runde 1": [
@@ -210,7 +153,7 @@ export class SwissComponent implements OnInit {
         this.getTournament(this.tournamentId);
         this.userAdminId = localStorage.getItem('blackWidow');
         this.getUserClanName();
-       /* console.log(this.swissMatch);*/
+        /* console.log(this.swissMatch);*/
     }
 
     getTournament(id) {
@@ -218,29 +161,40 @@ export class SwissComponent implements OnInit {
             // the first argument is a function which runs on success
             data => {
                 this.tournament = data.obj;
+                console.log(data.obj.swiss.results);
+                this.swissResultTable = [];
+                for(let player of data.obj.swiss.results){
+                    this.swissResultTable.push({
+                        name: player.name,
+                        win: player.win,
+                        lose: player.lose,
+                        qualified: player.qualified
+                    })
+                }
 
-                for(let i = 1; i <= 3; i++){
-                    switch(i){
+                console.log(this.swissResultTable);
+                for (let i = 1; i <= 3; i++) {
+                    switch (i) {
                         case 1:
                             this.swissMatch['Runde ' + i] = [
-                                data.obj.games[i-1],
+                                data.obj.games[i - 1],
                                 data.obj.games[i],
-                                data.obj.games[i+1],
-                                data.obj.games[i+2],
+                                data.obj.games[i + 1],
+                                data.obj.games[i + 2],
                             ];
                             break;
                         case 2:
                             this.swissMatch['Runde ' + i] = [
-                                data.obj.games[i+2],
-                                data.obj.games[i+3],
-                                data.obj.games[i+4],
-                                data.obj.games[i+5],
+                                data.obj.games[i + 2],
+                                data.obj.games[i + 3],
+                                data.obj.games[i + 4],
+                                data.obj.games[i + 5],
                             ];
                             break;
                         case 3:
                             this.swissMatch['Runde ' + i] = [
-                                data.obj.games[i+5],
-                                data.obj.games[i+6],
+                                data.obj.games[i + 5],
+                                data.obj.games[i + 6],
                             ];
                             break;
                     }
@@ -248,16 +202,18 @@ export class SwissComponent implements OnInit {
                 }
 
 
-                for(let i = 4; i < 10; i++){
-                    this.swissMatch['Runde ' + i] = data.obj.games[i+6];
+                for (let i = 4; i < 10; i++) {
+                    this.swissMatch['Runde ' + i] = data.obj.games[i + 6];
                 }
                 console.log(this.swissMatch);
 
             },
             // the second argument is a function which runs on error
-            err => console.error(err),
+            err => {
+                this._toastService.error(err.title, err.error.message);
+            },
             // the third argument is a function which runs on completion
-            () => console.log('done loading news')
+            () => console.log('loading clan')
         );
     }
 
@@ -270,7 +226,9 @@ export class SwissComponent implements OnInit {
                 }
             },
             // the second argument is a function which runs on error
-            err => console.error(err),
+            err => {
+                this._toastService.error(err.title, err.error.message);
+            },
             // the third argument is a function which runs on completion
             () => console.log('loading clan')
         );
@@ -286,6 +244,12 @@ export class SwissComponent implements OnInit {
             } else {
                 match["isInClan"] = false;
             }
+        }
+
+        if (match.result1 > 0 || match.result2 > 0) {
+            match["resultSave"] = true;
+        } else {
+            match["resultSave"] = false;
         }
 
         this.match.open();
@@ -308,9 +272,58 @@ export class SwissComponent implements OnInit {
                     return {'winner': false};
                 }
             }
-        }else{
+        } else {
             return {'winner': false};
         }
+    }
+
+    saveGameResult(match) {
+        this.match.close();
+        let winner;
+        let looser;
+
+        if (match.result1 > match.result2) {
+            winner = match.team1;
+            looser = match.team2;
+        } else {
+            winner = match.team2;
+            looser = match.team1;
+        }
+
+        let input = {
+            "gameId": match.gameId,
+            "tournamentId": this.tournamentId,
+            "result1": match.result1,
+            "result2": match.result2,
+            "winner": winner,
+            "looser": looser
+        };
+
+
+        this._tournamentService.saveGameResult(input).subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                /*console.log(data.swiss);*/
+                this._tournamentService.swissSaveResult(data.swiss).subscribe(
+                    data2 => {
+                        this._toastService.success(data2.title, data2.message);
+                        this.ngOnInit();
+                    },
+                    // the second argument is a function which runs on error
+                    err => {
+                        console.error(err);
+                    },
+                    // the third argument is a function which runs on completion
+                    () => console.log('save Game')
+                );
+            },
+            // the second argument is a function which runs on error
+            err => {
+                console.error(err);
+            },
+            // the third argument is a function which runs on completion
+            () => console.log('save Game')
+        );
     }
 
 }

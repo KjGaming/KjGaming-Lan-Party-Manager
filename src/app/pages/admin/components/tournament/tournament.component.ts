@@ -142,7 +142,7 @@ export class AdminTournamentComponent implements OnInit {
                 size = 8;
         }
 
-        const data = {
+        const input = {
             id : this.selectTournament._id,
             name: this.editTournamentName,
             gameName:this.editTournamentGame,
@@ -153,7 +153,7 @@ export class AdminTournamentComponent implements OnInit {
         };
 
         if(this.selectTournament.status == this.editTournamentStatus){
-            this._tournamentService.saveTournament(data).subscribe(
+            this._tournamentService.saveTournament(input).subscribe(
                 // the first argument is a function which runs on success
                 data => {
                     this._toastService.success(data.title, data.message);
@@ -168,21 +168,35 @@ export class AdminTournamentComponent implements OnInit {
             );
         }else{
             if(this.editTournamentStatus == 'on'){
-                this._tournamentService.setTournamentOnline(data).subscribe(
+                this._tournamentService.setTournamentOnline(input).subscribe(
                     // the first argument is a function which runs on success
                     data => {
-                        this._toastService.success(data.title, data.message);
-                        this.ngOnInit();
+                        if(data.obj.mode == 'swiss'){
+                            this._tournamentService.swissCreateResult(data.obj).subscribe(
+                                data2 => {
+                                    this._toastService.success(data2.title, data2.message);
+                                    this.ngOnInit();
+                                },
+                                err => {
+                                    console.log(err);
+                                    this._toastService.success(err.title, err);
+                                },
+                                () => console.log('create Swiss Result')
+                            );
+                        }else{
+                            this._toastService.success(data.title, data.message);
+                            this.ngOnInit();
+                        }
                     },
                     // the second argument is a function which runs on error
                     err => {
-                        this._toastService.success(err.title, err.err.message);
+                        this._toastService.success(err.title, err);
                     },
                     // the third argument is a function which runs on completion
                     () => console.log('done delete download')
                 );
             }else if(this.editTournamentStatus == 'off'){
-                this._tournamentService.setTournamentOffline(data).subscribe(
+                this._tournamentService.setTournamentOffline(input).subscribe(
                     // the first argument is a function which runs on success
                     data => {
                         this._toastService.success(data.title, data.message);
@@ -196,7 +210,7 @@ export class AdminTournamentComponent implements OnInit {
                     () => console.log('done delete download')
                 );
             }else{
-                this._tournamentService.setTournamentEnd(data).subscribe(
+                this._tournamentService.setTournamentEnd(input).subscribe(
                     // the first argument is a function which runs on success
                     data => {
                         this._toastService.success(data.title, data.message);

@@ -20,13 +20,23 @@ var schema = new Schema({
             timeDuration: {type: String},
             map: {type: String}
         }],
+        swiss : {
+            secondRound : {type: Boolean},
+            thirdRound : {type: Boolean},
+            results: [{
+                name: {type: String},
+                win : {type: Number},
+                lose: {type: Number},
+                qualified : {type: Number}
+            }]
+        },
+
         placement : [{
             number: {type: Number},
             team: {type: String}
         }],
         player: [{type: Schema.Types.ObjectId, ref: "users"}],
         clan: [{type: Schema.Types.ObjectId, ref: "clan"}]
-    })
-    ;
+    });
 
 module.exports = mongoose.model('tournament', schema);
