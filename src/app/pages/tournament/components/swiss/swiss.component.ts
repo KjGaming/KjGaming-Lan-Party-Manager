@@ -260,7 +260,7 @@ export class SwissComponent implements OnInit {
     whoIsWinner(match, team) {
         if (match.result1 || match.result2) {
             if (team == "team1") {
-                if (match.res1 > match.res2) {
+                if (match.result1 > match.result2) {
                     return {'winner': true};
                 } else {
                     return {'winner': false};
@@ -281,6 +281,7 @@ export class SwissComponent implements OnInit {
         this.match.close();
         let winner;
         let looser;
+        let input
 
         if (match.result1 > match.result2) {
             winner = match.team1;
@@ -290,7 +291,7 @@ export class SwissComponent implements OnInit {
             looser = match.team1;
         }
 
-        let input = {
+        input = {
             "gameId": match.gameId,
             "tournamentId": this.tournamentId,
             "result1": match.result1,
@@ -299,6 +300,7 @@ export class SwissComponent implements OnInit {
             "looser": looser
         };
 
+        let round = 0;
 
         this._tournamentService.saveGameResult(input).subscribe(
             // the first argument is a function which runs on success
@@ -307,7 +309,51 @@ export class SwissComponent implements OnInit {
                 this._tournamentService.swissSaveResult(data.swiss).subscribe(
                     data2 => {
                         this._toastService.success(data2.title, data2.message);
+
+                        if(data2.obj.swiss.secondRound){
+                            if(data2.obj.swiss.thirdRound){
+                                round = 4;
+                            }else{
+                                round = 3;
+                            }
+                        }else{
+                            round = 2;
+                        }
+
+                        let dataInside = {
+                            id: data2.obj._id,
+                            rounds: round,
+                            gameId : input.gameId,
+                            winningTeam: input.winner
+                        };
                         this.ngOnInit();
+
+                        if(data2.obj.swiss.bracketRound){
+                            this._tournamentService.swissSaveBracket(dataInside).subscribe(
+                                data3 => {
+                                    this.ngOnInit();
+                                },
+                                // the second argument is a function which runs on error
+                                err => {
+                                    console.error(err);
+                                },
+                                // the third argument is a function which runs on completion
+                                () => console.log('save Game')
+                            );
+                        }else{
+                            this._tournamentService.swissSetNewRound(dataInside).subscribe(
+                                data3 => {
+                                    this.ngOnInit();
+                                },
+                                // the second argument is a function which runs on error
+                                err => {
+                                    console.error(err);
+                                },
+                                // the third argument is a function which runs on completion
+                                () => console.log('save Game')
+                            );
+                        }
+
                     },
                     // the second argument is a function which runs on error
                     err => {

@@ -215,7 +215,7 @@ router.put('/game/save', function (req, res, next) {
                 error: {message: 'Turnier wurde nicht gefunden'}
             });
         }
-        if(!tournament.games){
+        if (!tournament.games) {
             return res.status(500).json({
                 title: 'Fehler',
                 error: {message: 'Keine Spiele vorhanden!'}
@@ -289,7 +289,7 @@ router.put('/game/save', function (req, res, next) {
                 }
 
                 console.log(firstResult1);
-                if(firstResult1 == 0 && firstResult2 == 0){
+                if (firstResult1 == 0 && firstResult2 == 0) {
                     firstResult = true;
                 }
                 console.log(firstResult);
@@ -304,84 +304,16 @@ router.put('/game/save', function (req, res, next) {
                             });
                         }
 
-                        /*if(tournament.mode != 'swiss'){
-                         if (req.body.winner) {
-
-                         if (req.body.gameId % 2 == 0) {
-                         Tournament.findOneAndUpdate({
-                         "_id": req.body.tournamentId,
-                         'games.gameId': req.body.winner
-                         },
-                         {$set: {'games.$.team2': winningTeam}},
-                         function (err, res1) {
-                         if (err) {
-                         return res.status(500).json({
-                         title: 'Fehler',
-                         error: {message: 'Beim speichern ist was schief gelaufen'}
-                         });
-                         }
-                         });
-                         } else {
-                         Tournament.findOneAndUpdate({
-                         "_id": req.body.tournamentId,
-                         'games.gameId': req.body.winner
-                         },
-                         {$set: {'games.$.team1': winningTeam}},
-                         function (err, res2) {
-                         if (err) {
-                         return res.status(500).json({
-                         title: 'Fehler',
-                         error: {message: 'Beim speichern ist was schief gelaufen'}
-                         });
-                         }
-                         });
-                         }
-
-                         }
-
-                         if (req.body.looserGame) {
-                         if (req.body.gameId % 2 == 0) {
-                         Tournament.findOneAndUpdate({
-                         "_id": req.body.tournamentId,
-                         'games.gameId': req.body.looserGame
-                         },
-                         {$set: {'games.$.team2': looserTeam}},
-                         function (err, res3) {
-                         if (err) {
-                         return res.status(500).json({
-                         title: 'Fehler',
-                         error: {message: 'Beim speichern ist was schief gelaufen'}
-                         });
-                         }
-                         });
-                         } else {
-                         Tournament.findOneAndUpdate({
-                         "_id": req.body.tournamentId,
-                         'games.gameId': req.body.looserGame
-                         },
-                         {$set: {'games.$.team1': looserTeam}},
-                         function (err, res4) {
-                         if (err) {
-                         return res.status(500).json({
-                         title: 'Fehler',
-                         error: {message: 'Beim speichern ist was schief gelaufen'}
-                         });
-                         }
-                         });
-                         }
-                         }
-                         }*/
-
                         return res.status(201).json({
                             title: 'Erflogreich',
                             message: 'Ergebnis gespeichert',
                             obj: result,
                             swiss: {
-                                id : result._id,
+                                id: result._id,
                                 winner: req.body.winner,
                                 looser: req.body.looser,
-                                gameId : req.body.gameId,
-                                firstResult : firstResult
+                                gameId: req.body.gameId,
+                                firstResult: firstResult
                             }
                         });
                     });
@@ -520,12 +452,12 @@ router.post('/swiss/createResult', function (req, res, next) {
             var lengthInsert = insert.length;
 
             for (var j = insert.length; j < tournament.size; j++) {
-                    insert.push({
-                        name: 'Freilos_' + (j - lengthInsert + 1),
-                        win: 0,
-                        lose: 0,
-                        qualified: 0
-                    });
+                insert.push({
+                    name: 'Freilos_' + (j - lengthInsert + 1),
+                    win: 0,
+                    lose: 0,
+                    qualified: 0
+                });
 
             }
 
@@ -564,7 +496,7 @@ router.put('/swiss/saveResult', function (req, res, next) {
             });
         }
 
-        if(req.body.firstResult){
+        if (req.body.firstResult && !tournament.swiss.bracketRound) {
             for (var i = 0; i < tournament.swiss.results.length; i++) {
 
                 if (tournament.swiss.results[i].name == req.body.winner) {
@@ -573,16 +505,24 @@ router.put('/swiss/saveResult', function (req, res, next) {
                 if (tournament.swiss.results[i].name == req.body.looser) {
                     tournament.swiss.results[i].lose += 1;
                 }
+
+                if (tournament.swiss.results[i].win >= 2) {
+                    tournament.swiss.results[i].qualified = 1;
+                }
+
+                if (tournament.swiss.results[i].lose >= 2) {
+                    tournament.swiss.results[i].qualified = 2;
+                }
             }
         }
 
         Tournament.findByIdAndUpdate(req.body.id,
             {
-                $set:{
+                $set: {
                     'swiss.results': tournament.swiss.results
                 }
             }
-            ,function (err, updateT) {
+            , function (err, updateT) {
                 if (err) {
                     return res.status(500).json({
                         title: 'Fehler',
@@ -596,13 +536,321 @@ router.put('/swiss/saveResult', function (req, res, next) {
                     obj: updateT
                 });
 
-        });
+            });
     });
 });
 
 /** set the new games **/
 router.put('/swiss/setNewRound', function (req, res) {
+    var games = [];
 
+    console.log(req.body.rounds);
+    if (req.body.rounds == 2) {
+        Tournament.findById(req.body.id, function (err, tournament) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'Fehler',
+                    error: {message: 'Hier ist ein Fehler aufgetreten'}
+                });
+            }
+
+            if (tournament.swiss.secondRound) {
+                return res.status(500).json({
+                    title: 'Fehler',
+                    error: {message: 'Runde 2 wurde schon erstellt'}
+                });
+            }
+
+            for (var k = 0; k < 4; k++) {
+                if (tournament.games[k].result1 == 0 && tournament.games[k].result2 == 0) {
+                    return res.status(500).json({
+                        title: 'Fehler',
+                        error: {message: 'Es wurden noch nicht alle Spiele ausgespielt'}
+                    });
+                }
+            }
+
+            games = tournament.games;
+            var winner = [];
+            var looser = [];
+
+            for (var i = 0; i < tournament.swiss.results.length; i++) {
+                if (tournament.swiss.results[i].win == 1) {
+                    winner.push(tournament.swiss.results[i].name);
+                } else {
+                    looser.push(tournament.swiss.results[i].name);
+                }
+            }
+
+            winner = shuffle(winner);
+            looser = shuffle(looser);
+
+            for (var j = 4; j < 8; j++) {
+                if (j == 4) {
+                    games[j].team1 = winner[j - j];
+                    games[j].team2 = winner[j - j + 1];
+                } else if (j == 5) {
+                    games[j].team1 = winner[j - j + 2];
+                    games[j].team2 = winner[j - j + 3];
+                } else if (j == 6) {
+                    games[j].team1 = looser[j - j];
+                    games[j].team2 = looser[j - j + 1];
+                } else if (j == 7) {
+                    games[j].team1 = looser[j - j + 2];
+                    games[j].team2 = looser[j - j + 3];
+                }
+            }
+
+            Tournament.findByIdAndUpdate(req.body.id, {
+                $set: {
+                    'games': games,
+                    'swiss.secondRound': true
+                }
+            }, function (err, updateT) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'Fehler',
+                        error: {message: 'Hier ist ein Fehler aufgetreten'}
+                    });
+                }
+                res.status(201).json({
+                    title: 'Erfolgreich',
+                    message: 'Ergebnis erfoglreich geändert',
+                    winner: winner,
+                    looser: looser
+                });
+            });
+        });
+    }
+    else if (req.body.rounds == 3) {
+        Tournament.findById(req.body.id, function (err, tournament) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'Fehler',
+                    error: {message: 'Hier ist ein Fehler aufgetreten'}
+                });
+            }
+
+            if (tournament.swiss.thirdRound) {
+                return res.status(500).json({
+                    title: 'Fehler',
+                    error: {message: 'Runde 3 wurde schon erstellt'}
+                });
+            }
+
+            for (var k = 4; k < 8; k++) {
+                if (tournament.games[k].result1 == 0 && tournament.games[k].result2 == 0) {
+                    return res.status(500).json({
+                        title: 'Fehler',
+                        error: {message: 'Es wurden noch nicht alle Spiele ausgespielt'}
+                    });
+                }
+            }
+
+            games = tournament.games;
+            var round3 = [];
+
+            for (var i = 0; i < tournament.swiss.results.length; i++) {
+                if (tournament.swiss.results[i].win == 1) {
+                    round3.push(tournament.swiss.results[i].name);
+                }
+            }
+
+            round3 = shuffle(round3);
+
+            for (var j = 8; j < 10; j++) {
+                if (j == 8) {
+                    games[j].team1 = round3[j - j];
+                    games[j].team2 = round3[j - j + 1];
+                } else if (j == 9) {
+                    games[j].team1 = round3[j - j + 2];
+                    games[j].team2 = round3[j - j + 3];
+                }
+            }
+
+            Tournament.findByIdAndUpdate(req.body.id, {
+                $set: {
+                    'games': games,
+                    'swiss.thirdRound': true
+                }
+            }, function (err, updateT) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'Fehler',
+                        error: {message: 'Hier ist ein Fehler aufgetreten'}
+                    });
+                }
+                res.status(201).json({
+                    title: 'Erfolgreich',
+                    message: 'Ergebnis erfoglreich geändert',
+                    obj: updateT
+                });
+            });
+        });
+    }
+    else {
+        Tournament.findById(req.body.id, function (err, tournament) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'Fehler',
+                    error: {message: 'Hier ist ein Fehler aufgetreten'}
+                });
+            }
+
+            if (tournament.swiss.bracketRound) {
+                return res.status(500).json({
+                    title: 'Fehler',
+                    error: {message: 'Brackets wurden schon erstellt'}
+                });
+            }
+
+            for (var k = 8; k < 10; k++) {
+                if (tournament.games[k].result1 == 0 && tournament.games[k].result2 == 0) {
+                    return res.status(500).json({
+                        title: 'Fehler',
+                        error: {message: 'Es wurden noch nicht alle Spiele ausgespielt'}
+                    });
+                }
+            }
+
+            games = tournament.games;
+            var final1 = [];
+            var final2 = [];
+            var place5_1 = [];
+            var place5_2 = [];
+
+            for (var i = 0; i < tournament.swiss.results.length; i++) {
+                if (tournament.swiss.results[i].win == 2) {
+                    if (tournament.swiss.results[i].lose == 0) {
+                        if (!final1[0]) {
+                            final1[0] = tournament.swiss.results[i].name;
+                        } else {
+                            final1[1] = tournament.swiss.results[i].name;
+                        }
+
+                    } else {
+                        if (!final2[0]) {
+                            final2[0] = tournament.swiss.results[i].name;
+                        } else {
+                            final2[1] = tournament.swiss.results[i].name;
+                        }
+                    }
+
+                }
+                if (tournament.swiss.results[i].lose == 2) {
+                    if (tournament.swiss.results[i].win == 0) {
+                        if (!place5_1[0]) {
+                            place5_1[0] = tournament.swiss.results[i].name;
+                        } else {
+                            place5_1[1] = tournament.swiss.results[i].name;
+                        }
+
+                    } else {
+                        if (!place5_2[0]) {
+                            place5_2[0] = tournament.swiss.results[i].name;
+                        } else {
+                            place5_2[1] = tournament.swiss.results[i].name;
+                        }
+                    }
+                }
+            }
+
+            final1 = shuffle(final1);
+            final2 = shuffle(final2);
+            place5_1 = shuffle(place5_1);
+            place5_2 = shuffle(place5_2);
+
+            games[10].team1 = place5_1[0];
+            games[10].team2 = place5_2[0];
+            games[11].team1 = place5_1[1];
+            games[11].team2 = place5_2[1];
+
+            games[13].team1 = final1[0];
+            games[13].team2 = final2[0];
+            games[14].team1 = final1[1];
+            games[14].team2 = final2[1];
+
+            Tournament.findByIdAndUpdate(req.body.id, {
+                $set: {
+                    'games': games,
+                    'swiss.bracketRound': true
+                }
+            }, function (err, updateT) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'Fehler',
+                        error: {message: 'Hier ist ein Fehler aufgetreten'}
+                    });
+                }
+
+                res.status(201).json({
+                    title: 'Erfolgreich',
+                    message: 'Ergebnis erfolgreich eingereicht',
+                    obj: updateT
+                });
+            });
+        });
+    }
+
+});
+
+/** set the swiss bracket  **/
+router.put('/swiss/bracket', function (req, res) {
+    console.log(req.body);
+    var gameId = 0;
+
+    if(req.body.gameId == 16 || req.body.gameId == 13){
+        return res.status(500).json({
+            title: 'Fehler',
+            error: {message: 'Keine weiteren Spiele'}
+        });
+    }
+
+    if(req.body.gameId == 11 || req.body.gameId == 12){
+        gameId = 13
+    }else{
+        gameId = 16
+    }
+
+    if (req.body.gameId % 2 != 0) {
+        Tournament.findOneAndUpdate({
+                "_id": req.body.id,
+                'games.gameId': gameId
+            },
+            {$set: {'games.$.team2': req.body.winningTeam}},
+            function (err, res1) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'Fehler',
+                        error: {message: 'Beim speichern ist was schief gelaufen'}
+                    });
+                }
+                res.status(201).json({
+                    title: 'Erfolgreich',
+                    message: 'Das Bracket wurde aktualiesiert',
+                    obj: res1
+                });
+            });
+    } else {
+        Tournament.findOneAndUpdate({
+                "_id": req.body.id,
+                'games.gameId': gameId
+            },
+            {$set: {'games.$.team1': req.body.winningTeam}},
+            function (err, res2) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'Fehler',
+                        error: {message: 'Beim speichern ist was schief gelaufen'}
+                    });
+                }
+                res.status(201).json({
+                    title: 'Erfolgreich',
+                    message: 'Das Bracket wurde aktualiesiert',
+                    obj: res2
+                });
+            });
+    }
 });
 
 /** create games for the tournament and set the player **/
@@ -619,7 +867,8 @@ router.put('/createGames', function (req, res, next) {
                 'status': req.body.status,
                 'swiss': {
                     'secondRound': false,
-                    'thirdRound': false
+                    'thirdRound': false,
+                    'bracketRound': false
                 }
             }
         }
@@ -666,13 +915,13 @@ router.put('/createGames', function (req, res, next) {
 
             var rounds;
             for (var i = 0; i < gameSize; i++) {
-                if(i < 4){
+                if (i < 4) {
                     rounds = '0-0'
-                }else if(i < 6){
+                } else if (i < 6) {
                     rounds = '1-0'
-                }else if(i < 8){
+                } else if (i < 8) {
                     rounds = '0-1'
-                }else{
+                } else {
                     rounds = '1-1'
                 }
                 games[i] = {
@@ -718,7 +967,7 @@ router.put('/createGames', function (req, res, next) {
                     if (member.length != req.body.size && member.length < req.body.size) {
                         var lengthMember = member.length;
                         for (var i = member.length; i < req.body.size; i++) {
-                            member[i] = "Freilos_"+ (i - lengthMember + 1);
+                            member[i] = "Freilos_" + (i - lengthMember + 1);
                         }
                     }
 

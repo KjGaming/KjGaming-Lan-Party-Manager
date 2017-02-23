@@ -201,5 +201,37 @@ export class BaTournamentService {
             });
     }
 
+    swissSetNewRound(event) {
+        const body = JSON.stringify(event);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        console.log(body);
+
+        return this.http.put('/api/reg/tournament/swiss/setNewRound', body, {headers: headers})
+            .map((res: Response) => res.json())
+            .catch((err: Response) => {
+                return Observable.throw(err.json());
+            });
+    }
+
+    swissSaveBracket(event) {
+        const body = JSON.stringify(event);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        console.log(body);
+
+        return this.http.put('/api/reg/tournament/swiss/bracket', body, {headers: headers})
+            .map((res: Response) => res.json())
+            .catch((err: Response) => {
+                return Observable.throw(err.json());
+            });
+    }
+
 }
 

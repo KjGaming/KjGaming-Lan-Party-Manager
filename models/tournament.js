@@ -23,6 +23,7 @@ var schema = new Schema({
         swiss : {
             secondRound : {type: Boolean},
             thirdRound : {type: Boolean},
+            bracketRound : {type: Boolean},
             results: [{
                 name: {type: String},
                 win : {type: Number},
