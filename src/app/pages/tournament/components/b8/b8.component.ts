@@ -1,25 +1,22 @@
-import {Component, ViewEncapsulation, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 
 import {SmartTablesService} from './smartTables.service';
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {NotificationsService} from "angular2-notifications/src/notifications.service";
 import {BaTournamentService} from "../../../../theme/services/baTournament/baTournament.service";
-import {ModalComponent} from "ng2-bs4-modal/components/modal";
 
 @Component({
-    selector: 'bracket-16',
+    selector: 'bracket-8',
     encapsulation: ViewEncapsulation.None,
-    styles: [require('./b16.scss')],
-    template: require('./b16.component.html')
+    styles: [require('./b8.scss')],
+    template: require('./b8.component.html')
 })
-export class B16Component implements OnInit {
+export class B8Component implements OnInit {
     public options = {
         position: ["top", "center"],
         timeOut: 5000
     };
-
-    @ViewChild('match') match: ModalComponent;
 
     tournament; // The whole tournament
     tournamentId; // The tournament ID
@@ -29,8 +26,7 @@ export class B16Component implements OnInit {
     public row1 = [];
     public row2 = [];
     public row3 = [];
-    public row4 = [];
-    repeat4 = [1, 2, 3, 4];
+    repeat4 = [1, 2];
 
 
     //Variable for input the Value
@@ -74,21 +70,26 @@ export class B16Component implements OnInit {
         this._tournamentService.getTournamentInfos(id).subscribe(
             // the first argument is a function which runs on success
             data => {
-                console.log(data);
-
                 this.tournament = data.obj;
                 this.games = data.obj.games;
                 for (let game of this.games) {
-                    if (game.gameId <= 8) {
+                    if (game.gameId <= 4) {
                         this.row1.push(game);
-                    } else if (game.gameId <= 12 && game.gameId >= 9) {
+                    } else if (game.gameId <= 5 && game.gameId >= 6) {
                         this.row2.push(game);
-                    } else if (game.gameId == 13 || game.gameId == 14) {
+                    } else if (game.gameId == 7) {
                         this.row3.push(game);
-                    } else if (game.gameId == 15 || game.gameId == 16) {
-                        this.row4.push(game);
                     }
                 }
+
+                if (data.obj.playerMode == "Clan") {
+
+                } else {
+
+                }
+
+                console.log(this.games);
+                console.log(this.row1);
 
             },
             // the second argument is a function which runs on error
@@ -98,12 +99,8 @@ export class B16Component implements OnInit {
         );
     }
 
-    openMatchInfo(match) {
-
-        this.match.open();
-        console.log(match);
-
-        /*this.gameGameId = game.gameId;
+    clickIt(game) {
+        this.gameGameId = game.gameId;
         this.gameTeam1 = game.team1;
         this.gameTeam2 = game.team2;
         this.gameResult1 = game.result1;
@@ -138,7 +135,7 @@ export class B16Component implements OnInit {
         if (JSON.parse(localStorage.getItem('blackWidow')) == 481) {
             this.inGamen = "admin";
         }
-*/
+
     }
 
     saveResult(event) {

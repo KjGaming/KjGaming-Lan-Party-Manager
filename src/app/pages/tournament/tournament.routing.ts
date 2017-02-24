@@ -3,6 +3,8 @@ import {AuthGuard, RegGuard} from "../theme/guard";
 
 import {TournamentComponent} from './tournament.component';
 import {B16Component} from "./components/b16/b16.component";
+import {B4Component} from "./components/b4/b4.component";
+import {B8Component} from "./components/b8/b8.component";
 import {TournamentRegisterComponent} from "./components/register/register.component";
 import {TournamentEndComponent} from "./components/end/end.component";
 import {SwissComponent} from "./components/swiss/swiss.component";
@@ -12,6 +14,14 @@ const routes: Routes = [
     {
         path: '',
         component: TournamentComponent
+    },
+    {
+        path: 'b4',
+        component: B4Component
+    },
+    {
+        path: 'b8',
+        component: B8Component
     },
     {
         path: 'b16',

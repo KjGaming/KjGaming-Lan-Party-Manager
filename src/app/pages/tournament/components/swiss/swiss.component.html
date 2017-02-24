@@ -388,7 +388,7 @@
                 <button type="button" class="btn btn-success" (click)="saveGameResult(selectMatch)">Submit Scores</button>
             </div>
         </div>
-        <div class="matchModalInfo" *ngIf="selectMatch.isInClan != true || selectMatch.resultSave == true">
+        <div class="matchModalInfo">
             <div class="matchup">
                 <div class="infoTeam">
                     <div class="contents" [ngClass]="whoIsWinner(selectMatch, 'team1')">

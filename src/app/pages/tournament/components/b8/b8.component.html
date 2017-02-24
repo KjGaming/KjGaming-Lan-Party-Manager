@@ -1,35 +1,34 @@
 <simple-notifications [options]="options"></simple-notifications>
 <div class="bracket">
     <div id="row1">
-		<div *ngFor="let row_1 of row1, let i = index" [attr.id]="'game' + row_1.gameId">
 			<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px"
                     viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(row_1)" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" />
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						{{row_1.team1}}
+						Rip in Peace
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(row_1)" />
+				<rect class="team2" y="38" fill="none" width="224" height="40"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						{{row_1.team2}}
+						Konfukanaltanga
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                            {{row_1.result1}}
+                            16
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                            {{row_1.result2}}
+                            10
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -49,7 +48,147 @@
 				</linearGradient>
 				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="40.5" x2="224" y2="40.5"/>
 				</svg>
-		</div>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px" y="0px"
+                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    preserveAspectRatio="xMaxYMax">
+				<rect class="team1"  y="0" fill="none" width="224" height="40" />
+				<g class="text">
+					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
+						Rip in Peace
+					</text>
+				</g>
+				<rect class="team2" y="38" fill="none" width="224" height="40"/>
+				<g class="text">
+					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
+						Konfukanaltanga
+					</text>
+				</g>
+                    <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
+                    <g class="text">
+                        <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
+                            16
+                        </text>
+                    </g>
+
+                    <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
+                    <g class="text">
+                        <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
+                            10
+                        </text>
+                    </g>
+					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
+
+				<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1292.9006" x2="-431.0098" y2="1292.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_1_)" stroke-miterlimit="10" x1="0" y1="40.5" x2="108" y2="40.5"/>
+				<rect x="109.52" y="27.77" fill="none" width="8.46" height="5.46"/>
+				<text transform="matrix(1 0 0 1 108.5215 40.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+				<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="0" x2="224.5" y2="81"/>
+
+				<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1292.9016" x2="-419.0107" y2="1292.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="40.5" x2="224" y2="40.5"/>
+				</svg>
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px" y="0px"
+                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    preserveAspectRatio="xMaxYMax">
+				<rect class="team1"  y="0" fill="none" width="224" height="40" />
+				<g class="text">
+					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
+						Rip in Peace
+					</text>
+				</g>
+				<rect class="team2" y="38" fill="none" width="224" height="40"/>
+				<g class="text">
+					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
+						Konfukanaltanga
+					</text>
+				</g>
+                    <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
+                    <g class="text">
+                        <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
+                            16
+                        </text>
+                    </g>
+
+                    <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
+                    <g class="text">
+                        <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
+                            10
+                        </text>
+                    </g>
+					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
+
+				<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1292.9006" x2="-431.0098" y2="1292.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_1_)" stroke-miterlimit="10" x1="0" y1="40.5" x2="108" y2="40.5"/>
+				<rect x="109.52" y="27.77" fill="none" width="8.46" height="5.46"/>
+				<text transform="matrix(1 0 0 1 108.5215 40.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+				<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="0" x2="224.5" y2="81"/>
+
+				<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1292.9016" x2="-419.0107" y2="1292.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="40.5" x2="224" y2="40.5"/>
+				</svg>
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px" y="0px"
+                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    preserveAspectRatio="xMaxYMax">
+				<rect class="team1"  y="0" fill="none" width="224" height="40" />
+				<g class="text">
+					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
+						Rip in Peace
+					</text>
+				</g>
+				<rect class="team2" y="38" fill="none" width="224" height="40"/>
+				<g class="text">
+					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
+						Konfukanaltanga
+					</text>
+				</g>
+                    <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
+                    <g class="text">
+                        <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
+                            16
+                        </text>
+                    </g>
+
+                    <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
+                    <g class="text">
+                        <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
+                            10
+                        </text>
+                    </g>
+					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
+
+				<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1292.9006" x2="-431.0098" y2="1292.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_1_)" stroke-miterlimit="10" x1="0" y1="40.5" x2="108" y2="40.5"/>
+				<rect x="109.52" y="27.77" fill="none" width="8.46" height="5.46"/>
+				<text transform="matrix(1 0 0 1 108.5215 40.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
+				<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="0" x2="224.5" y2="81"/>
+
+				<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1292.9016" x2="-419.0107" y2="1292.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
+				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
+				<stop  offset="0.7422" style="stop-color:#000000"/>
+				</linearGradient>
+				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="40.5" x2="224" y2="40.5"/>
+				</svg>
     </div>
     <div class="divBorder">
         <div class="borderRow1" *ngFor="let key of repeat4">
@@ -64,29 +203,29 @@
                     x="0px" y="0px"
                     viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(row_2)" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" />
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						{{row_2.team1}}
+						Rip in Peace
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(row_2)" />
+				<rect class="team2" y="38" fill="none" width="224" height="40"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						{{row_2.team2}}
+						Konfukanaltanga
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                            {{row_2.result1}}
+                            16
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                            {{row_2.result2}}
+                            10
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -125,29 +264,29 @@
                     x="0px" y="0px"
                     viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(row_3)" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" />
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						{{row_3.team1}}
+						Rip in Peace
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(row_3)" />
+				<rect class="team2" y="38" fill="none" width="224" height="40"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						{{row_3.team2}}
+						Konfukanaltanga
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                           {{row_3.result1}}
+                            16
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                           {{row_3.result2}}
+                            10
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -168,131 +307,45 @@
 				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="40.5" x2="224" y2="40.5"/>
 				</svg>
 		</div>
-    </div>
-    <div class="divBorder">
-        <div class="borderRow3">
-            <div class="firstBorderRow3"></div>
-            <div class="secondBorderRow3"></div>
-        </div>
-    </div>
-    <div id="row4">
-        <div *ngFor="let row_4 of row4, let i = index" [attr.id]="'game' + row_4.gameId">
-			<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px" y="0px"
-                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
-                    preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(row_4)" />
-				<g class="text">
-					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						{{row_4.team1}}
-					</text>
-				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(row_4)" />
-				<g class="text">
-					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						{{row_4.team2}}
-					</text>
-				</g>
-                    <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
-                    <g class="text">
-                        <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                            {{row_4.result1}}
-                        </text>
-                    </g>
-
-                    <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
-                    <g class="text">
-                        <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                            {{row_4.result2}}
-                        </text>
-                    </g>
-					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
-
-				<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-539.0098" y1="1292.9006" x2="-431.0098" y2="1292.9006" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-				<stop  offset="0.7422" style="stop-color:#000000"/>
-				</linearGradient>
-				<line fill="none" stroke="url(#SVGID_1_)" stroke-miterlimit="10" x1="0" y1="40.5" x2="108" y2="40.5"/>
-				<rect x="109.52" y="27.77" fill="none" width="8.46" height="5.46"/>
-				<text transform="matrix(1 0 0 1 108.5215 40.1047)" font-family="'Calibri-Bold'" font-size="7.8674">VS</text>
-				<line fill="none" stroke="#000000" stroke-miterlimit="1" stroke-dasharray="2,2" x1="224.5" y1="0" x2="224.5" y2="81"/>
-
-				<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-315.0107" y1="1292.9016" x2="-419.0107" y2="1292.9016" gradientTransform="matrix(1 0 0 -1 539.0098 1323.4009)">
-				<stop  offset="0.1277" style="stop-color:#000000;stop-opacity:0"/>
-				<stop  offset="0.7422" style="stop-color:#000000"/>
-				</linearGradient>
-				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="40.5" x2="224" y2="40.5"/>
-				</svg>
-        </div>
-
     </div>
 </div>
 
 
-<modal #match>
-	<modal-header [show-close]="true">
-		<h4 class="modal-title">Spiel {{selectMatch.gameId}}</h4>
-	</modal-header>
-	<modal-body class="matchModalBody">
-		<div class="matchModalResult"
-			 *ngIf="userAdminId == 481 || (selectMatch.isInClan == true && selectMatch.resultSave == false)">
-			<table class="table table-striped table-bordered">
-				<tbody>
-				<tr>
-					<td>{{selectMatch.team1}}</td>
-					<td style="width: 50px;">
-						<input [(ngModel)]="selectMatch.result1" class="matchInput" type="number" autocomplete="off">
-					</td>
-				</tr>
-				<tr>
-					<td>{{selectMatch.team2}}</td>
-					<td style="width: 50px;">
-						<input [(ngModel)]="selectMatch.result2" class="matchInput" type="number" autocomplete="off">
-					</td>
-				</tr>
-				</tbody>
-			</table>
-			<p class="looserText">Nur der Verlierer kann das Ergebnis eintragen!</p>
-			<div class="submitButton">
-				<button type="button" class="btn btn-success" (click)="saveGameResult(selectMatch)">Submit Scores</button>
-			</div>
-		</div>
-		<div class="matchModalInfo">
-			<div class="matchup">
-				<div class="infoTeam">
-					<div class="contents" [ngClass]="whoIsWinner(selectMatch, 'team1')">
-						<div class="teamName">{{selectMatch.team1}}</div>
-					</div>
-				</div>
-				<div class="infoVersus">vs</div>
-				<div class="infoTeam">
-					<div class="contents" [ngClass]="whoIsWinner(selectMatch, 'team2')">
-						<div class="teamName">{{selectMatch.team2}}</div>
-					</div>
-				</div>
-			</div>
-			<div class="overallScore">
-				<div class="score">
-					<div class="contents">{{selectMatch.result1}}</div>
-				</div>
-				<div class="divider">&nbsp;</div>
-				<div class="score">
-					<div class="contents">{{selectMatch.result2}}</div>
-				</div>
-			</div>
-			<div class="matchInfo">
-				<div class="info">
-					<div class="infoTitle">Zeit:</div>
-					<div class="infoContent">20.04.2017 18:00 Uhr</div>
-				</div>
-				<div class="info">
-					<div class="infoTitle">Map:</div>
-					<div class="infoContent">de_dust2</div>
-				</div>
-			</div>
-		</div>
-	</modal-body>
-</modal>
+<popover-content #myPopover
+                 title="Übersicht Spiel {{gameGameId}}"
+                 placement="bottom"
+                 [closeOnClickOutside]="true">
+    <form [formGroup]="resultForm" (ngSubmit)="saveResult(resultForm.value)">
+        <table class="popoverOverviewTable" width="100%" style="text-align: center">
+            <tr class="t_info">
+                <td width="40%">{{gameTeam1}}</td>
+                <td *ngIf="(userStatus == 481 || inGamen) && (!gameResult1 && !gameResult2) "
+                    width="20%" class="t_input">
+                    <input formControlName="result1" type="number" value="{{gameResult1}}"/>
+                    <span>:</span>
+                    <input formControlName="result2" type="number" value="{{gameResult2}}"/>
+                </td>
+                <td *ngIf="(userStatus != 481 && !inGamen)  && (!gameResult1 && !gameResult2)"
+                    width="20%">
+                    -
+                </td>
+                <td *ngIf="gameResult1 || gameResult2" width="20%">{{gameResult1}} : {{gameResult2}}</td>
+                <td width="40%">{{gameTeam2}}</td>
+            </tr>
+        </table>
+        <hr>
+        <div>
+            Startzeit: {{gameTimeStart}} (Dauer: {{gameTimeDuration}})
+        </div>
+        <div>
+            Map: {{gameMap}}
+        </div>
+        <div style="text-align: center;" *ngIf="(userStatus == 481 || inGamen) && (!gameResult1 && !gameResult2)">
+            <button class="btn btn-success" type="submit" (click)="myPopover.hide()">Ergebnis Speichern</button>
+            <p style="font-size: 10px;">Nur der Verlierer kann das Ergebnis eintragen!!</p>
+        </div>
+    </form>
+
+</popover-content>
 
 

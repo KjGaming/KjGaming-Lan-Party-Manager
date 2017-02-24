@@ -235,8 +235,6 @@ export class SwissComponent implements OnInit {
     }
 
     openMatchInfo(match) {
-        let splitResult;
-
         for (let userClan of this.userClanName) {
             if (userClan == match.team1 || userClan == match.team2) {
                 match["isInClan"] = true;
@@ -254,7 +252,6 @@ export class SwissComponent implements OnInit {
 
         this.match.open();
         this.selectMatch = match;
-        /*console.log(this.selectMatch);*/
     }
 
     whoIsWinner(match, team) {
