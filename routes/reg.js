@@ -14,6 +14,7 @@ var clanRoutes = require('./reg/clan');
 var timetableRoutes = require('./reg/event');
 var cateringRoutes = require('./reg/catering');
 var tournamentRoutes = require('./reg/tournament');
+var sidesRoutes = require('./reg/sides');
 
 
 var secret = require('./secret/secret');
@@ -328,6 +329,7 @@ router.use('/reg/event', timetableRoutes);
 router.use('/reg/clan', clanRoutes);
 router.use('/reg/catering', cateringRoutes);
 router.use('/reg/tournament', tournamentRoutes);
+router.use('/reg/sides', sidesRoutes);
 
 
 

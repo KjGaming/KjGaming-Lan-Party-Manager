@@ -11,8 +11,10 @@ import {BaUserService} from "../../../../theme/services/baUser/baUser.service";
 
 })
 export class AdminMemberComponent implements OnInit {
-
+    csvData = [];
     users = [];
+    allUserData = [];
+
     public options = {
         position: ["top", "center"],
         timeOut: 5000
@@ -40,6 +42,8 @@ export class AdminMemberComponent implements OnInit {
 
                     /** Change to String Data **/
                     birth = new Date(data.obj[key].birth);
+
+                    this.allUserData = data.obj;
 
                     this.users[key] =
                         {
@@ -113,5 +117,85 @@ export class AdminMemberComponent implements OnInit {
         console.log('Die User ID => ' + id);
         console.log(event);
 
+    }
+
+    /** CSV Export **/
+    userDataToCsv () {
+        let users = [];
+        let day, month, year;
+        console.log(this.allUserData);
+        for(let user of this.allUserData){
+            let birth = new Date(user.birth);
+            day = birth.getDate();
+            month = birth.getMonth()+1;
+            year = birth.getFullYear();
+            users.push({
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                nickName: user.nickName,
+                birth: day+'.'+month+'.'+year,
+                LanPreis: user.lan.packet.price,
+                city: user.address.city,
+                plz: user.address.postalCode,
+                nr: user.address.nr,
+                street: user.address.street,
+            })
+        }
+
+        return users;
+
+    }
+
+    convertArrayOfObjectsToCSV(args) {
+        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+        data = args.data || null;
+        if (data == null || !data.length) {
+            return null;
+        }
+
+        columnDelimiter = args.columnDelimiter || ',';
+        lineDelimiter = args.lineDelimiter || '\n';
+
+        keys = Object.keys(data[0]);
+
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
+
+        data.forEach(function (item) {
+            ctr = 0;
+            keys.forEach(function (key) {
+                if (ctr > 0) result += columnDelimiter;
+
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
+
+        return result;
+    }
+
+    downloadCSV(args) {
+        let data, filename, link;
+
+        let csv = this.convertArrayOfObjectsToCSV({
+            data: this.userDataToCsv()
+        });
+        if (csv == null) return;
+
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
     }
 }

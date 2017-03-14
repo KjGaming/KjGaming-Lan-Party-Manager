@@ -1,6 +1,7 @@
 <simple-notifications [options]="options"></simple-notifications>
 <div class="widgets">
     <ba-card title="Userliste" baCardClass="with-scroll">
+        <a style="cursor: pointer" (click)='downloadCSV({ filename: "kjgaming-Userlist.csv" });'>Download CSV</a>
         <table class="table">
             <thead class="thead-inverse">
             <tr>
