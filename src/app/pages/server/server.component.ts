@@ -35,4 +35,12 @@ export class ServerComponent implements OnInit {
             () => console.log('done loading news')
         );
     }
+
+    isClassVisible(status){
+        if(status == true){
+            return 'bg-success';
+        }else{
+            return 'bg-danger';
+        }
+    }
 }

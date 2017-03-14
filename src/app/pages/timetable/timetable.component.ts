@@ -186,6 +186,17 @@ export class TimetableComponent implements OnInit {
         }
     }
 
+    addClass(status){
+        switch(status){
+            case 0:
+                return 'bg-info';
+            case 1:
+                return 'bg-success';
+            case 2:
+                return 'bg-warning';
+        }
+    }
+
 
 
 }
