@@ -262,6 +262,19 @@ export const PAGES_MENU = [
                                 order: 0
                             }
                         }
+                    },
+                    {
+                        path: 'sides',
+                        data: {
+                            menu: {
+                                title: 'Seiten',
+                                icon: 'menu',
+                                iconClass: 'material-icons',
+                                selected: false,
+                                expanded: false,
+                                order: 0
+                            }
+                        }
                     }
 
                 ]

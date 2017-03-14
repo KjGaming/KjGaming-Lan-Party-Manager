@@ -10,3 +10,4 @@ export * from './baCatering';
 export * from './baUser';
 export * from './baClan';
 export * from './baTournament';
+export * from './baRouting';

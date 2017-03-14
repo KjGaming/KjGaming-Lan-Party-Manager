@@ -20,6 +20,7 @@ import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 import { AuthGuard, RegGuard } from "./theme/guard";
 import { AdminGuard } from "./theme/guard/admin.guard";
+import {SideGuard} from "./theme/guard/side.guard";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -27,7 +28,8 @@ const APP_PROVIDERS = [
     GlobalState,
     AuthGuard,
     RegGuard,
-    AdminGuard
+    AdminGuard,
+    SideGuard
 ];
 
 type StoreType = {

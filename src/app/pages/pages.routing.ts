@@ -2,6 +2,7 @@ import { Routes, RouterModule }  from '@angular/router';
 import { Pages } from './pages.component';
 import { AuthGuard, RegGuard } from "../theme/guard";
 import { AdminGuard } from "../theme/guard/admin.guard";
+import {SideGuard} from "../theme/guard/side.guard";
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
     {
@@ -29,40 +30,40 @@ const routes: Routes = [
             {
                 path: 'timetable',
                 loadChildren: () => System.import('./timetable/timetable.module'),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, SideGuard]
             },
             {
                 path: 'memberlist',
                 loadChildren: () => System.import('./memberlist/memberlist.module'),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, SideGuard]
             },
-            {path: 'clan', loadChildren: () => System.import('./clan/clan.module'), canActivate: [AuthGuard]},
-            {path: 'server', loadChildren: () => System.import('./server/server.module'), canActivate: [AuthGuard]},
+            {path: 'clan', loadChildren: () => System.import('./clan/clan.module'), canActivate: [AuthGuard, SideGuard]},
+            {path: 'server', loadChildren: () => System.import('./server/server.module'), canActivate: [AuthGuard, SideGuard]},
             {
                 path: 'tournament',
                 loadChildren: () => System.import('./tournament/tournament.module'),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, SideGuard]
             },
             {
                 path: 'download',
                 loadChildren: () => System.import('./download/download.module'),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, SideGuard]
             },
             {
                 path: 'catering',
                 loadChildren: () => System.import('./catering/catering.module'),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, SideGuard]
             },
             {
                 path: 'feedback',
                 loadChildren: () => System.import('./feedback/feedback.module'),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, SideGuard]
             },
             {path: 'seating', loadChildren: () => System.import('./seating/seating.module'), canActivate: [AuthGuard]},
             {path: 'ui', loadChildren: () => System.import('./ui/ui.module'), canActivate: [AuthGuard]},
             {path: 'forms', loadChildren: () => System.import('./forms/forms.module'), canActivate: [AuthGuard]},
             {path: 'tables', loadChildren: () => System.import('./tables/tables.module'), canActivate: [AuthGuard]},
-            {path: 'maps', loadChildren: () => System.import('./maps/maps.module'), canActivate: [AuthGuard]},
+            {path: 'maps', loadChildren: () => System.import('./maps/maps.module'), canActivate: [AuthGuard,]},
             {path: 'admin', loadChildren: () => System.import('./admin/admin.module'), canActivate: [AuthGuard, AdminGuard]}
         ]
     }

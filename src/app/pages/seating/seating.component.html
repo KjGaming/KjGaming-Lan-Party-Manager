@@ -11,6 +11,7 @@
         <rect *ngFor="let seat of seats" [attr.x]="seat.x" [attr.y]="seat.y" [ngClass]="showClass(seat.id)"
               [attr.id]="seat.id" (click)="clickIt(seat.id)"
               [popover]="myPopover"
+              width="75px" height="75px"
         />
         <rect x="636" y="262" fill="#8CC63F" width="1047" height="46"/>
         <rect x="636" y="499" fill="#8CC63F" width="1047" height="46"/>

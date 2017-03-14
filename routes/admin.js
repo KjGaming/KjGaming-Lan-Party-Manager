@@ -7,6 +7,7 @@ var serverRoutes = require('./admin/server');
 var eventRoutes = require('./admin/event');
 var productRoutes = require('./admin/product');
 var userRoutes = require('./admin/user');
+var sidesRoutes = require('./admin/sides');
 
 var secret = require('./secret/secret');
 
@@ -30,6 +31,7 @@ router.use('/server', serverRoutes);
 router.use('/event', eventRoutes);
 router.use('/product', productRoutes);
 router.use('/user', userRoutes);
+router.use('/sides', sidesRoutes);
 
 
 module.exports = router;

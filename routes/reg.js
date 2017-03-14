@@ -15,6 +15,7 @@ var timetableRoutes = require('./reg/event');
 var cateringRoutes = require('./reg/catering');
 var tournamentRoutes = require('./reg/tournament');
 
+
 var secret = require('./secret/secret');
 
 /** Register route **/
@@ -318,6 +319,7 @@ router.use('/', function (req, res, next) {
 });
 
 /** routes that can only use reg user **/
+
 router.use('/reg/user', userRoutes);
 router.use('/reg/news', newsRoutes);
 router.use('/reg/server', serverRoutes);
@@ -326,6 +328,7 @@ router.use('/reg/event', timetableRoutes);
 router.use('/reg/clan', clanRoutes);
 router.use('/reg/catering', cateringRoutes);
 router.use('/reg/tournament', tournamentRoutes);
+
 
 
 module.exports = router;

@@ -19,6 +19,7 @@ import {AdminProductComponent} from "./components/product/product.component";
 import {AdminStatisticsComponent} from "./components/statistics/statistics.component";
 import { ChartsModule } from 'ng2-charts';
 import {AdminTournamentComponent} from "./components/tournament/tournament.component";
+import {AdminSidesComponent} from "./components/sides/sides.component";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {AdminTournamentComponent} from "./components/tournament/tournament.compo
         AdminMemberComponent,
         AdminProductComponent,
         AdminStatisticsComponent,
-        AdminTournamentComponent
+        AdminTournamentComponent,
+        AdminSidesComponent
     ],
     providers: [
     ]

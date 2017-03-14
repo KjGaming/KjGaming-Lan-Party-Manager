@@ -56,7 +56,8 @@ import {
     BaCateringService,
     BaUserService,
     BaClanService,
-    BaTournamentService
+    BaTournamentService,
+    BaRoutingService
 
 
 } from './services';
@@ -111,7 +112,8 @@ const NGA_SERVICES = [
     BaCateringService,
     BaUserService,
     BaClanService,
-    BaTournamentService
+    BaTournamentService,
+    BaRoutingService
 ];
 
 const NGA_VALIDATORS = [

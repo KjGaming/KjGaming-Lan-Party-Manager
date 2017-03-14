@@ -9,6 +9,7 @@ import { AdminMemberComponent } from "./components/member/member.component";
 import {AdminProductComponent} from "./components/product/product.component";
 import {AdminStatisticsComponent} from "./components/statistics/statistics.component";
 import {AdminTournamentComponent} from "./components/tournament/tournament.component";
+import {AdminSidesComponent} from "./components/sides/sides.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'tournament', component: AdminTournamentComponent },
       { path: 'product', component: AdminProductComponent },
       { path: 'statistic', component: AdminStatisticsComponent },
+      { path: 'sides', component: AdminSidesComponent },
     ]
   }
 ];
