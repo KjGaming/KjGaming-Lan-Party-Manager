@@ -4,16 +4,17 @@
         <a style="cursor: pointer" (click)='downloadCSV({ filename: "kjgaming-Userlist.csv" });'>Download CSV</a>
         <table class="table">
             <thead class="thead-inverse">
-            <tr>
-                <th>Name</th>
-                <th>Alter</th>
-                <th>LAN Manager</th>
-                <th>Benutzerrolle</th>
-                <th>LAN Packet</th>
-                <th>LAN Kosten</th>
-                <th>Essen</th>
+                <tr>
+                    <th>Name</th>
+                    <th>Alter</th>
+                    <th>LAN Manager</th>
+                    <th>Benutzerrolle</th>
+                    <th>LAN Packet</th>
+                    <th></th>
+                    <th>LAN Kosten</th>
+                    <th></th>
 
-            </tr>
+                </tr>
             </thead>
             <tbody>
             <tr *ngFor="let user of users" class="memberList" valign="middle">
@@ -33,10 +34,11 @@
                     <ui-switch [(ngModel)]="user.packetPaid"
                                (change)="switchSave('packetPaid',$event, user.id)"></ui-switch>
                 </td>
+                <td>{{user.packetSum}} €</td>
                 <td>
                     <ui-switch [(ngModel)]="user.lanPaid" (change)="switchSave('lanPaid',$event, user.id)"></ui-switch>
                 </td>
-                <td>Essen</td>
+                <td>{{user.lanSum}} €</td>
             </tr>
             </tbody>
         </table>

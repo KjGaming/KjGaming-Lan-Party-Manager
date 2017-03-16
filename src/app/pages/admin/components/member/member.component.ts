@@ -54,7 +54,9 @@ export class AdminMemberComponent implements OnInit {
                             "packetPaid": data.obj[key].lan.packet.paid,
                             "lanPaid": data.obj[key].lan.paid,
                             "changeFood": data.obj[key].lan.food,
-                            "id": data.obj[key]._id
+                            "id": data.obj[key]._id,
+                            "lanSum" : data.obj[key].lan.sum,
+                            "packetSum": data.obj[key].lan.packet.price
                         }
                 }
                 console.log(this.users);
