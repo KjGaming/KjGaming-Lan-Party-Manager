@@ -3,6 +3,7 @@ import { Pages } from './pages.component';
 import { AuthGuard, RegGuard } from "../theme/guard";
 import { AdminGuard } from "../theme/guard/admin.guard";
 import {SideGuard} from "../theme/guard/side.guard";
+import {ChatComponent} from "./chat/chat.component";
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
     {
@@ -13,10 +14,15 @@ const routes: Routes = [
         path: 'register',
         loadChildren: () => System.import('./register/register.module')
     },
+
     {
         path: 'confirmReg',
         loadChildren: () => System.import('./confirmReg/confirmReg.module'),
         canActivate: [RegGuard]
+    },
+    {
+        path: 'chat',
+        loadChildren: () => System.import('./chat/chat.module')
     },
     {
         path: 'pages',
@@ -27,6 +33,7 @@ const routes: Routes = [
             {path: 'editors', loadChildren: () => System.import('./editors/editors.module'), canActivate: [AuthGuard]},
             {path: 'charts', loadChildren: () => System.import('./charts/charts.module'), canActivate: [AuthGuard]},
             {path: 'news', loadChildren: () => System.import('./news/news.module'), canActivate: [AuthGuard]},
+            {path: 'chat', loadChildren: () => System.import('./chat/chat.module'), canActivate: [AuthGuard, SideGuard]},
             {
                 path: 'timetable',
                 loadChildren: () => System.import('./timetable/timetable.module'),

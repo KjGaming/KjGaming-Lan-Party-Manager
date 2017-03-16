@@ -12,6 +12,7 @@ const HtmlElementsPlugin = require('./html-elements-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+//const ProvidePlugin = webpack.ProvidePlugin;
 
 /*
  * Webpack Constants
@@ -226,6 +227,10 @@ module.exports = function (options) {
         filename: 'webpack-assets.json',
         prettyPrint: true
       }),
+
+      //new ProvidePlugin({
+      //    io: 'socket.io-client'
+      //}),
 
       /*
        * Plugin: ForkCheckerPlugin

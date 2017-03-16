@@ -120,6 +120,19 @@ export const PAGES_MENU = [
                 }
             },
             {
+                path: 'chat',
+                data: {
+                    menu: {
+                        title: 'Chat',
+                        icon: 'chat',
+                        iconClass: 'material-icons',
+                        selected: false,
+                        expanded: false,
+                        order: 91,
+                    }
+                }
+            },
+            {
                 path: 'feedback',
                 data: {
                     menu: {

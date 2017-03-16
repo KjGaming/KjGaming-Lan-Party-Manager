@@ -1,0 +1,30 @@
+<ba-card class="col-sm-12">
+    <div #scrollMe class="col-sm-12" id="chatContainer">
+        <ul *ngFor="let msg of conversation">
+            <li>
+                <div *ngIf="!isNewUserAlert(msg)">
+                    <span class="userTime">{{msg.time}}</span>
+                    <span class="userLabel"><{{msg.userName}}></span>
+                    <span class="userText">{{msg.text}}</span>
+                </div>
+                <div *ngIf="isNewUserAlert(msg)">
+                    <span class="userJoin">{{msg.text}}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</ba-card>
+<ba-card class="col-sm-12">
+    <div class="row" id="inputContainer">
+        <div class="col-sm-9">
+            <input id="country" type="text" id="inputSendText" class="form-control"
+                   [(ngModel)]="message"
+                   (keypress)="keypressHandler($event)">
+        </div>
+        <button (click)="send()" type="submit" id="btnSendText"
+                class="btn btn-success waves-effect waves-light s2" name="action">Senden
+        </button>
+    </div>
+</ba-card>
+
+
