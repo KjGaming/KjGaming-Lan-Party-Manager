@@ -31,7 +31,6 @@ export class BaAuthService {
             .catch((err: Response)=> {
                 return Observable.throw(err.json());
             });
-
     }
 
     logout() {
@@ -81,6 +80,26 @@ export class BaAuthService {
         }
         this.router.navigate(['/']);
         return false;
+    }
+
+    forgotPassword(data){
+        const body = JSON.stringify(data);
+        const headers = new Headers({'Content-Type': 'application/json'});
+        return this.http.post('/api/forgotPassword', body, {headers: headers})
+            .map((res: Response)=> res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+    }
+
+    setNewPassword(data){
+        const body = JSON.stringify(data);
+        const headers = new Headers({'Content-Type': 'application/json'});
+        return this.http.post('/api/setNewPassword', body, {headers: headers})
+            .map((res: Response)=> res.json())
+            .catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
     }
 
 

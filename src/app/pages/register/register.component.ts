@@ -182,8 +182,7 @@ export class Register {
                 .subscribe(
                     data => {
                         localStorage.setItem('regToken', 'LoggedInSuccessfully');
-                        console.log(data);
-                        this.router.navigateByUrl('/confirmReg');
+                        this.router.navigate(['confirmReg'], {queryParams: {'choose':'register'}});
                     },
                     error => {
                         this._toastService.error(error.title, error.error.message);

@@ -14,11 +14,14 @@ const routes: Routes = [
         path: 'register',
         loadChildren: () => System.import('./register/register.module')
     },
+    {
+        path: 'passwortForgot',
+        loadChildren: () => System.import('./passwordForgot/pf.module')
+    },
 
     {
         path: 'confirmReg',
-        loadChildren: () => System.import('./confirmReg/confirmReg.module'),
-        canActivate: [RegGuard]
+        loadChildren: () => System.import('./confirmReg/confirmReg.module')
     },
     {
         path: 'pages',

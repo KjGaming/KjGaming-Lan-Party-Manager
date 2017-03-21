@@ -1,7 +1,23 @@
-<div class="auth-main">
+<div class="auth-main" *ngIf="chooser == 'register'">
     <div class="auth-block" style="text-align: center;">
         <h1>Anmeldung erfolgreich</h1>
         <p>Sie erhalten in demnächst eine E-Mail mit weiteren Informationen!</p>
+        <p>Sie werden in <strong>{{units}}s</strong> weitergeleitet.</p>
+
+    </div>
+</div>
+<div class="auth-main" *ngIf="chooser == 'change'">
+    <div class="auth-block" style="text-align: center;">
+        <h1>Passwort wurde geändert</h1>
+        <p>Sie werden in <strong>{{units}}s</strong> weitergeleitet.</p>
+
+    </div>
+</div>
+
+<div class="auth-main" *ngIf="chooser == 'send'">
+    <div class="auth-block" style="text-align: center;">
+        <h1>Sie haben eine E-Mail erhalten!</h1>
+        <p>In dieser E-Mail sind Link und Pin enthalten, um das Passwort zu ändern.</p>
         <p>Sie werden in <strong>{{units}}s</strong> weitergeleitet.</p>
 
     </div>
