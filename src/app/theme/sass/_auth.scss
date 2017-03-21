@@ -19,6 +19,7 @@ $text-color: #ffffff;
   border-radius: 5px;
   @media (max-width : 480px) {
     margin-top: auto;
+    margin-bottom: auto;
   }
   @include bg-translucent-dark(0.55);
   color: #fff;
