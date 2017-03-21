@@ -216,8 +216,7 @@ router.post('/forgotPassword', function (req, res, next) {
             token = jwt.sign({email: user.email}, secret.passwordSecret + pin, {expiresIn: 600});
             console.log(token);
 
-            /*var link = 'http://lan.kjgaming.de/#/passwortForgot?token=' + token;*/
-            var link = 'http://localhost:8080/#/passwortForgot?token=' + token;
+            var link = 'https://lan.kjgaming.de/#/passwortForgot?token=' + token;
 
             //Send Mail
 

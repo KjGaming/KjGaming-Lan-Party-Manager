@@ -48,8 +48,6 @@ export class PasswordForgotComponent implements OnInit, OnDestroy {
                 this.token = params['token'];
             });
 
-        console.log('TOKENNNNNE => ' + this.token);
-
         this.pReset = this.fb.group({
             'pin': ['', Validators.compose([Validators.required])],
             'passwords': this.fb.group({
