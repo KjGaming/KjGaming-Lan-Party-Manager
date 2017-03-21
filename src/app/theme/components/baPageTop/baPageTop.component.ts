@@ -31,6 +31,10 @@ export class BaPageTop {
     this.isScrolled = isScrolled;
   }
 
+  onSettings(){
+    this.router.navigate(['/pages/userEdit']);
+  }
+
   onLogout(){
     this.authService.logout();
     this.router.navigate(['/login']);

@@ -78,6 +78,31 @@ export class BaUserService {
             .catch((err: Response) => {
                 return Observable.throw(err.json());
             });
+    }
 
+    getUserInformation(){
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.get('/api/reg/user/info', {headers: headers})
+            .map((res: Response) => res.json())
+            .catch((err: Response) => {
+                return Observable.throw(err.json());
+            });
+    }
+    setUserInformation(data){
+        const body = JSON.stringify(data);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.put('/api/reg/user/info',body, {headers: headers})
+            .map((res: Response) => res.json())
+            .catch((err: Response) => {
+                return Observable.throw(err.json());
+            });
     }
 }

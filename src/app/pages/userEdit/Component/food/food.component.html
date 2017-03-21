@@ -1,0 +1,31 @@
+<div class="row">
+    <ba-card class="col-sm-12" title="Essen bearbeiten!">
+        <div class="row">
+            <div *ngFor="let food of foods; let i = index" class="col-sm-3 foodCard" (click)="addFood(i, food.bought)">
+                <div class="foodImage" [ngStyle]="{'background-image': 'url(' + food.img + ')'}">
+                    <div class="foodTitle">{{food.day + ' ' + food.eat }}</div>
+                    <div *ngIf="food.bought == 0" class="btnFood">buchen</div>
+                    <div *ngIf="food.bought == 1" class="btnFood foodBought">gebucht</div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row" id="vegiCard">
+            <p class="col-md-2">
+                Vegetarische:
+            </p>
+            <div class="col-md-2">
+                <ui-switch [(ngModel)]="vegi"
+                           (change)="addFood($event, 'vegi')"></ui-switch>
+            </div>
+        </div>
+
+        <!--<div *ngIf="food.packet != 1">
+
+        </div>-->
+    </ba-card>
+</div>
+
+
+
+

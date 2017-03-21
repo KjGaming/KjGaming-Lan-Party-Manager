@@ -70,6 +70,7 @@
     "ng2-datepicker": "^1.4.10",
     "ng2-popover": "~0.0.14",
     "ng2-smart-table": "^0.4.0-5",
+    "ng2-tag-input": "^0.9.6",
     "ng2-tree": "^0.0.2-7",
     "ng2-uploader": "^1.1.0",
     "nodemailer": "^2.6.4",

@@ -21,10 +21,6 @@ const routes: Routes = [
         canActivate: [RegGuard]
     },
     {
-        path: 'chat',
-        loadChildren: () => System.import('./chat/chat.module')
-    },
-    {
         path: 'pages',
         component: Pages,
         canActivate: [AuthGuard],
@@ -34,6 +30,7 @@ const routes: Routes = [
             {path: 'charts', loadChildren: () => System.import('./charts/charts.module'), canActivate: [AuthGuard]},
             {path: 'news', loadChildren: () => System.import('./news/news.module'), canActivate: [AuthGuard]},
             {path: 'chat', loadChildren: () => System.import('./chat/chat.module'), canActivate: [AuthGuard, SideGuard]},
+            {path: 'userEdit', loadChildren: () => System.import('./userEdit/userEdit.module'), canActivate: [AuthGuard]},
             {
                 path: 'timetable',
                 loadChildren: () => System.import('./timetable/timetable.module'),

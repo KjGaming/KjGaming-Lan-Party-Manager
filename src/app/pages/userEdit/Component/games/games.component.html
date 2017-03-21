@@ -1,0 +1,12 @@
+<simple-notifications [options]="options"></simple-notifications>
+<ba-card title="Deine Spiele">
+    <tag-input [(ngModel)]='games'
+               theme='dark'
+               (onAdd)="saveTags()"
+               (onRemove)="saveTags()"
+    ></tag-input>
+</ba-card>
+
+
+
+
