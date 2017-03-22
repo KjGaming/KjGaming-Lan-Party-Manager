@@ -29,7 +29,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     ngOnInit() {
-        this.socket = io('https://localhost:8080');
+        let url = window.location.host;
+        this.socket = io(url);
         this.socket.emit('newUser', localStorage.getItem('nickName'));
         this.socket.on('chatUpdate', function (data) {
             this.conversation.push(data);
