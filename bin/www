@@ -25,18 +25,17 @@ var server = http.createServer(app);
 io = io.listen(server)
 
 /**
+ * Socket.io
+ */
+require('../bin/socket')(io);
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
-/**
- * Socket.io
- */
-require('../bin/socket')(io);
-
 
 
 /**

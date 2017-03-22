@@ -1,7 +1,6 @@
 module.exports = function (io) {
     'use strict';
-    io.set("origins", "*:*");
-    io.on('connection', function (socket) {
+    io.sockets.on('connection', function (socket) {
         // Send message
         socket.on('newMessage', function (data) {
             socket.emit('chatUpdate', data);
