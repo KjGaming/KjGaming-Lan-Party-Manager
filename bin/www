@@ -6,8 +6,9 @@
 
 var app = require('../app');
 var debug = require('debug')('node-rest:server');
+var io = require('socket.io');
 var http = require('http');
-var socketApi = require('../bin/socket');
+
 
 /**
  * Get port from environment and store in Express.
@@ -21,6 +22,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+io = io.listen(server)
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -33,9 +35,9 @@ server.on('listening', onListening);
 /**
  * Socket.io
  */
+require('../bin/socket')(io);
 
-var io = socketApi.io;
-io.attach(server);
+
 
 /**
  * Normalize a port into a number, string, or false.
