@@ -12,9 +12,7 @@ var adminRoutes = require('./routes/admin');
 var regRoutes = require('./routes/reg');
 
 var app = express();
-var socketServer = require('./bin/socket');
 
-socketServer.start();
 mongoose.connect('localhost:27017/kjgaming');
 
 // view engine setup
