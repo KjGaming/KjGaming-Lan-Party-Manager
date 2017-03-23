@@ -1,19 +1,26 @@
-<ba-card class="col-sm-12">
-    <div #scrollMe class="col-sm-12" id="chatContainer">
-        <ul *ngFor="let msg of conversation">
-            <li>
-                <div *ngIf="!isNewUserAlert(msg)">
-                    <span class="userTime">{{msg.time}}</span>
-                    <span class="userLabel"><{{msg.userName}}></span>
-                    <span class="userText">{{msg.text}}</span>
-                </div>
-                <div *ngIf="isNewUserAlert(msg)">
-                    <span class="userJoin">{{msg.text}}</span>
-                </div>
-            </li>
+<div class="row">
+    <ba-card class="col-sm-12 col-md-10">
+        <div #scrollMe class="col-sm-12" id="chatContainer">
+            <ul *ngFor="let msg of conversation">
+                <li>
+                    <div *ngIf="!isNewUserAlert(msg)">
+                        <span class="userTime">{{msg.time}}</span>
+                        <span class="userLabel"><{{msg.userName}}></span>
+                        <span class="userText">{{msg.text}}</span>
+                    </div>
+                    <div *ngIf="isNewUserAlert(msg)">
+                        <span class="userJoin">{{msg.text}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </ba-card>
+    <ba-card class="col-sm-12 col-md-2 hidden-sm-down" id="userList">
+        <ul>
+            <li *ngFor="let user of userList">{{user.name}}</li>
         </ul>
-    </div>
-</ba-card>
+    </ba-card>
+</div>
 <ba-card class="col-sm-12">
     <div class="row" id="inputContainer">
         <div class="col-sm-9">
