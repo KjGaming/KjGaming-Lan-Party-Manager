@@ -22,6 +22,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     conversation = [];
     socket = null;
     time = '';
+    userList;
 
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
@@ -30,11 +31,15 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     ngOnInit() {
         let url = window.location.host;
-        this.socket = io(url);
+        this.socket = io('/chat');
         this.socket.emit('newUser', localStorage.getItem('nickName'));
         this.socket.on('chatUpdate', function (data) {
             this.conversation.push(data);
         }.bind(this));
+        this.socket.on('update-user', function (data) {
+            this.userList = data;
+        }.bind(this));
+
     }
 
     ngAfterViewChecked() {
@@ -43,6 +48,9 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     ngOnDestroy() {
         this.socket.emit('leaveUser', localStorage.getItem('nickName'));
+        this.socket.on('update-user', function (data) {
+            this.userList = data;
+        }.bind(this));
     }
 
     send() {
@@ -58,6 +66,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             'time': timeString
         });
         this.message = '';
+
+        console.log(this.userList);
 
     }
 
@@ -77,5 +87,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         } catch (err) {
         }
     }
+
+
 
 }
