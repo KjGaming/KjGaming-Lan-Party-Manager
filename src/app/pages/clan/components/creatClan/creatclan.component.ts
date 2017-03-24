@@ -53,6 +53,9 @@ export class CreatClanComponent {
                 .subscribe(
                     data => {
                         this._toastService.success(data.title, data.message);
+                        let clans = JSON.parse(localStorage.getItem('clans'));
+                        clans.push(data.clan);
+                        localStorage.setItem('clans', JSON.stringify(clans));
                         this._clanService.getClanList().subscribe(
                             data=> this._clanService.newClanList(data.obj)
                         );

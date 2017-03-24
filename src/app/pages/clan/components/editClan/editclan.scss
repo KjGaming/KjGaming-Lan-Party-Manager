@@ -15,11 +15,9 @@ ul.clan-list {
     list-style: none;
     position: relative;
     border: 1px solid $input-border;
-    cursor: grab;
     height: 42px;
     i.remove-clan {
       position: absolute;
-      cursor: pointer;
       top: 0px;
       right: 12px;
       font-size: 32px;
@@ -27,15 +25,15 @@ ul.clan-list {
       color: rgba($input-border, 0.5);
       visibility: hidden;
       line-height: 42px;
-      &:hover {
+      /*&:hover {
         color: $input-border;
-      }
+      }*/
     }
-    &:hover {
+    /*&:hover {
       i.remove-clan {
         visibility: visible;
       }
-    }
+    }*/
 
     &.checked {
       .clan-text {
@@ -54,11 +52,10 @@ ul.clan-list {
       height: 42px;
       min-width: 4px;
       background: $input-border;
-      cursor: pointer;
       transition: min-width 0.3s ease-out;
     }
 
-    &.active {
+    /*&.active {
       i.mark {
         min-width: 40px;
       }
@@ -75,7 +72,7 @@ ul.clan-list {
       label.clan-checkbox > input:checked + span:before {
         content: '\f00c';
       }
-    }
+    }*/
   }
 }
 
@@ -83,11 +80,12 @@ label.clan-checkbox {
   width: 100%;
   padding-right: 25px;
   min-height: 16px;
-  cursor: pointer;
   > span {
+    cursor: initial;
     white-space: nowrap;
     height: 16px;
     &:before {
+      cursor: initial;
       border: none;
       color: $help-text;
       transition: all 0.15s ease-out;
@@ -125,7 +123,6 @@ label.clan-checkbox {
       margin-top: -45px;
       margin-right: 5px;
       font-size: 25px;
-      cursor: pointer;
     }
 
     ul.clan-list {
