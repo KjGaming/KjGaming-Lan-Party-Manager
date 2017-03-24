@@ -8,6 +8,7 @@ import {B8Component} from "./components/b8/b8.component";
 import {TournamentRegisterComponent} from "./components/register/register.component";
 import {TournamentEndComponent} from "./components/end/end.component";
 import {SwissComponent} from "./components/swiss/swiss.component";
+import {TVoteComponent} from "./components/vote/tvote.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -38,6 +39,10 @@ const routes: Routes = [
     {
         path: 'end',
         component: TournamentEndComponent
+    },
+    {
+        path: 'vote',
+        component: TVoteComponent
     }
 
 ];

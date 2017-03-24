@@ -22,7 +22,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     conversation = [];
     socket = null;
     time = '';
-    userList;
+    userList = [];
 
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 

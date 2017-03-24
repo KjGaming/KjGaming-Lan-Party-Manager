@@ -5,7 +5,6 @@ import {NgaModule} from '../../theme/nga.module';
 
 import {routing}       from './tournament.routing';
 import {TournamentComponent} from './tournament.component';
-import {TournamentService} from "./tournament.service";
 import {HttpModule} from "@angular/http";
 import {B16Component} from "./components/b16/b16.component";
 import {PopoverModule} from "ng2-popover";
@@ -16,6 +15,7 @@ import {ModalModule} from 'ng2-bs4-modal/ng2-bs4-modal';
 import {SwissComponent} from "./components/swiss/swiss.component";
 import {B8Component} from "./components/b8/b8.component";
 import {B4Component} from "./components/b4/b4.component";
+import {TVoteComponent} from "./components/vote/tvote.component";
 
 
 @NgModule({
@@ -29,8 +29,6 @@ import {B4Component} from "./components/b4/b4.component";
         ReactiveFormsModule,
         SimpleNotificationsModule,
         ModalModule
-
-
     ],
     declarations: [
         TournamentComponent,
@@ -39,7 +37,8 @@ import {B4Component} from "./components/b4/b4.component";
         B4Component,
         TournamentRegisterComponent,
         TournamentEndComponent,
-        SwissComponent
+        SwissComponent,
+        TVoteComponent
     ],
     providers: [
     ]

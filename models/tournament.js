@@ -18,7 +18,8 @@ var schema = new Schema({
             rounds: {type: String},
             timeStart: {type: String},
             timeDuration: {type: String},
-            map: {type: String}
+            map: {type: String},
+            voteRoom : {type: Number}
         }],
         swiss : {
             secondRound : {type: Boolean},

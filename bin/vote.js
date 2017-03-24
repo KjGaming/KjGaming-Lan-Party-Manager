@@ -1,27 +1,32 @@
-module.exports = function (io) {
-    'use strict';
-    var nsp = io.of('/vote');
-    nsp.on('connection', function (socket) {
-        // Send message
-        socket.on('ready', function (data) {
-            socket.emit('chatUpdate', data);
-            socket.broadcast.emit('chatUpdate', data);
-        });
+let voteObj = {};
 
-        // check if new user is join
-        socket.on('newUser', function (data) {
-            socket.emit('chatUpdate',
-                {'userName': '', 'text': data + ' ist dem Chat2'});
-            socket.broadcast.emit('chatUpdate',
-                {'userName': '', 'text': data + ' ist dem Chat2'});
-        });
+module.exports = function ( io ) {
+  'use strict';
+  let nspa = io.of('/vote');
+  nspa.on('connection', socket => {
 
-        // check if user is leave
-        socket.on('leaveUser', function (data) {
-            socket.emit('chatUpdate',
-                {'userName': '', 'text': data + ' hat den Chat verlassen'});
-            socket.broadcast.emit('chatUpdate',
-                {'userName': '', 'text': data + ' hat den Chat verlassen'});
-        });
+    /** Join to Tournament Room **/
+    socket.on('jRoom', (room, nickname) => {
+      socket.join(room);
+      voteObj[room] = {
+        'room': room,
+        'user': []
+      };
+
+      voteObj[room].user.push({
+        'nickname': nickname,
+        'status' : 'join',
+        'ready' : false
+      });
+
+      nspa.in(room).emit('voteObj', voteObj);
     });
+
+    /** Socket Disconnect **/
+    socket.on('disconnect', () => {
+      console.log('Disconnect');
+    })
+
+  });
+
 };

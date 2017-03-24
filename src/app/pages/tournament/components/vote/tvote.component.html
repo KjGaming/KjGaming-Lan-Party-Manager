@@ -1,0 +1,25 @@
+<ba-card class="col-sm-12">
+  <p class="voteTime" *ngIf="!sTime">No Value</p>
+  <p class="voteTime" *ngIf="sTime">Value : {{sTime}}</p>
+  <div class="row">
+    <div *ngFor="let map of maps" class="col-3">
+      <div class="card mapCard" (click)="voteMap(map)">
+        <img class="card-img-top"
+             src="{{map.img}}"
+             alt="{{map.name}}">
+        <p class="voteMapName">{{map.name}}</p>
+      </div>
+    </div>
+  </div>
+</ba-card>
+<div class="row">
+  <ba-card class="col-sm-6">
+    <h1>User 1</h1>
+    <button (click)="ready('user1')" type="button" id="ready1" class="btn btn-success">READY</button>
+  </ba-card>
+  <ba-card class="col-sm-6">
+    <h1>User 2</h1>
+    <button (click)="ready('user2')" type="button" id="ready2" class="btn btn-success">READY</button>
+  </ba-card>
+</div>
+
