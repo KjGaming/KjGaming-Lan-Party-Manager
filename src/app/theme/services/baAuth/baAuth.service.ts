@@ -61,7 +61,6 @@ export class BaAuthService {
 
     isAdmin(): boolean {
         var adminToken = Number(localStorage.getItem('blackWidow'));
-        console.log(adminToken);
         if (adminToken == 481) {
             return true;
         } else if (adminToken == 153) {

@@ -144,9 +144,7 @@ export class EditClanComponent implements OnInit {
 
             },
             // the second argument is a function which runs on error
-            err => console.error(err),
-            // the third argument is a function which runs on completion
-            () => console.log('done loading clan')
+            err => console.error(err)
         );
     }
 

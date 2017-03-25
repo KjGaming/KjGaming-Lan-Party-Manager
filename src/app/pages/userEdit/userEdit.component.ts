@@ -30,7 +30,6 @@ export class UserEditComponent implements OnInit {
         this._userService.getUserInformation()
             .subscribe(
                 data => {
-                    console.log(data.obj);
                     this.userdata = data.obj;
                     this.games = [];
                     for (let game of data.obj.games) {
@@ -48,7 +47,6 @@ export class UserEditComponent implements OnInit {
     }
 
     refresh(event){
-        console.log(event);
         this.ngOnInit();
     }
 

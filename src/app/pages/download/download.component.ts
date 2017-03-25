@@ -26,12 +26,9 @@ export class DownloadComponent implements OnInit {
             // the first argument is a function which runs on success
             data => {
                 this.downloads = data.obj;
-                console.log(this.downloads);
             },
             // the second argument is a function which runs on error
-            err => console.error(err),
-            // the third argument is a function which runs on completion
-            () => console.log('done loading news')
+            err => console.error(err)
         );
     }
 }

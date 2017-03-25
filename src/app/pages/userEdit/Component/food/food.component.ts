@@ -76,7 +76,6 @@ export class FoodUserEditComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.food);
     if (this.food.length != 0) {
       this.foodString = this.food.food;
       this.vegi = this.food.vegi;

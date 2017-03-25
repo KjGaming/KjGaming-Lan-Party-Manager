@@ -128,7 +128,7 @@ export class SeatingComponent implements OnInit {
             this.seatTitle = 'Platz ' + id.split("_")[1] + ' ist frei';
             this.seatContent = 'free';
         }
-        console.log('clicked: ' + id);
+
     }
 
     seatShow(id: string) {
@@ -151,14 +151,10 @@ export class SeatingComponent implements OnInit {
                 // the first argument is a function which runs on success
                 data => {
                     this.seatArray = data.obj;
-                    console.log(this.seatArray);
                 },
                 // the second argument is a function which runs on error
-                err => console.error(err),
-                // the third argument is a function which runs on completion
-                () => console.log('done loading seats')
+                err => console.error(err)
             );
-        console.log(this.seatArray);
     }
 
     reserve(id) {
@@ -166,7 +162,6 @@ export class SeatingComponent implements OnInit {
             data => {
                 this._toastService.success(data.title, data.message);
                 this.getSeat();
-                console.log(data);
             },
             error => {
                 this._toastService.error(error.title, error.error.message);
@@ -180,7 +175,6 @@ export class SeatingComponent implements OnInit {
             data => {
                 this._toastService.success(data.title, data.message);
                 this.getSeat();
-                console.log(data);
             },
             error => {
                 this._toastService.error(error.title,error.error.message);
