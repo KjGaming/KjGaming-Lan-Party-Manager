@@ -52,7 +52,7 @@ export class FeedbackComponent {
                .subscribe(
                     data => {
                         this._toastService.success(data.message, '');
-                        console.log(data)
+
                     },
                     error => {
                         this._toastService.error(error.title,error.error.message);

@@ -46,7 +46,6 @@ export class Login {
             this.authService.signin(user)
                 .subscribe(
                     data => {
-                        console.log(data);
                         localStorage.setItem('id_token', data.id_token);
                         localStorage.setItem('expireDate', expireDate);
                         localStorage.setItem('userId', data.userId);
@@ -57,7 +56,7 @@ export class Login {
                     },
                     error => {
                         console.error(error);
-                        this._toastService.error(error.title,error.error.message);
+                        this._toastService.error(error.title, error.error.message);
 
                     }
                 );

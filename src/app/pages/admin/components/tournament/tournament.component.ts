@@ -32,6 +32,11 @@ export class AdminTournamentComponent implements OnInit {
     editTournamentPlayMode: String;
     editTournamentStatus: String;
 
+    editGameId;
+    editGameStart;
+    editGameEnd;
+    editGameMap;
+
     ngOnInit() {
         this.getTournament()
     }
@@ -63,6 +68,12 @@ export class AdminTournamentComponent implements OnInit {
         this.editTournamentStatus = event.status;
         this.selectTournament = event;
         console.log(event);
+    }
+
+    onGameChange(event){
+      this.editGameStart = event.start;
+      this.editGameEnd = event.end;
+      this.editGameMap = event.map;
     }
 
     getTournament(){
@@ -231,6 +242,10 @@ export class AdminTournamentComponent implements OnInit {
 
 
     }
+
+    saveGame(){
+
+    };
 
     delTournament(){
 

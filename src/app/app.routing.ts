@@ -5,4 +5,4 @@ export const routes: Routes = [
   { path: '**', redirectTo: 'pages/news' }
 ]
 
-export const routing = RouterModule.forRoot(routes,{ useHash: true });
+export const routing = RouterModule.forRoot(routes,{ useHash: false });

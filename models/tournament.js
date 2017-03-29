@@ -19,6 +19,7 @@ var schema = new Schema({
             timeStart: {type: String},
             timeDuration: {type: String},
             map: {type: String},
+            event: {type: Schema.Types.ObjectId, ref: "event"}
             voteRoom : {type: Number}
         }],
         swiss : {

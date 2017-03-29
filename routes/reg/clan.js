@@ -58,7 +58,11 @@ router.post('/', function (req, res, next) {
             res.status(201).json({
                 title: 'Erfolgreich',
                 message: 'Clan '+ result.name +' wurde erstellt.',
-                obj: result
+                obj: result,
+                clan: {
+                  '_id': result._id,
+                  'name': result.name
+                }
             });
         });
     });
@@ -164,7 +168,11 @@ router.post('/out', function (req, res, next) {
                                 title: 'Erfolgreich',
                                 message: 'Du hast '+ clanResult.name +' verlassen',
                                 objUser: userResult,
-                                objClan: clanResult
+                                objClan: clanResult,
+                                clan: {
+                                  '_id': dbClan._id,
+                                  'name': dbClan.name
+                                }
                             });
                         });
                     });
@@ -237,7 +245,11 @@ router.post('/in', function (req, res, next) {
                         title: 'Erfolgreich',
                         message: 'Du bist erfolgreich '+ clanResult.name +' beigetreten.',
                         objUser: userResult,
-                        objClan: clanResult
+                        objClan: clanResult,
+                        clan: {
+                          '_id': dbClan._id,
+                          'name': dbClan.name
+                        }
                     });
                 });
             });
@@ -290,7 +302,13 @@ router.post('/del', function (req, res, next) {
             res.status(201).json({
                 title: 'Erfolgreich',
                 message: 'Du hast '+ clan.name +' gelöscht.',
-                obj: clan
+                obj: clan,
+                clan: {
+                  '_id': clan._id,
+                  'name': clan.name
+                }
+
+
             });
         });
 

@@ -35,11 +35,9 @@ export class GamesUserEditComponent implements OnInit {
             data.games.push(g['value']);
         }
 
-        console.log(data);
         this._userService.setUserInformation(data)
             .subscribe(
                 data => {
-                    console.log(data);
                 },
                 error => {
                     console.error(error);

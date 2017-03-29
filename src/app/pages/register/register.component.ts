@@ -112,7 +112,7 @@ export class Register {
 
 
     addAmountLanPacket(lanNumber: number): void {
-        console.log(lanNumber);
+
 
         if (lanNumber == 0) {
             this.amount = 15;
@@ -176,7 +176,7 @@ export class Register {
 
 
             );
-            console.log(user);
+
 
             this.authService.signup(user)
                 .subscribe(

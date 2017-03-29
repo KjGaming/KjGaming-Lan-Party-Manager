@@ -31,16 +31,13 @@ export class TimetableComponent implements OnInit {
             data => {
                 this.events = data.obj;
                 this.sortEvent(data.obj);
-                /* console.log(this.events);*/
 
             },
             // the second argument is a function which runs on error
             error => {
                 this._toastService.error(error.title, error.error.message);
                 console.error(error);
-            },
-            // the third argument is a function which runs on completion
-            () => console.log('loading baEvent')
+            }
         );
     }
 
@@ -57,7 +54,6 @@ export class TimetableComponent implements OnInit {
             let isDayInList: boolean = false;
 
 
-            console.log(timeDurationHour);
             /** calculate the minits duration from the duration time**/
             if(timeDurationMin < 10){
                 event['durationMin'] = '0' + timeDurationMin;
@@ -135,7 +131,6 @@ export class TimetableComponent implements OnInit {
                 this.listDays[0].events.push(event);
             }
 
-            console.log(this.listDays);
         }
 
         //Sort the date

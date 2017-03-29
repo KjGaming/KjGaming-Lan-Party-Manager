@@ -37,7 +37,6 @@ export class PasswordUserEditComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.passwordForm.value.passwords.password);
         let data = {
             "type": 'cPassword',
             "password": this.passwordForm.value.passwords.password

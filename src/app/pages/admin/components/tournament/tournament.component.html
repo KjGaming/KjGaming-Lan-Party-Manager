@@ -1,88 +1,130 @@
 <simple-notifications [options]="options"></simple-notifications>
 <div class="row">
-    <ba-card title="Turnier erstellen" class="col-md-12">
-        <div class="row">
-            <div class="form-group col-md-3">
-                <label for="tournamentName">Turniername</label>
-                <input type="text" class="form-control" id="tournamentName" placeholder="Name des Turnieres"
-                       [(ngModel)]="tournamentName">
-            </div>
-            <div class="form-group col-md-3">
-                <label for="tournamentGame">Spiel</label>
-                <input type="text" class="form-control" id="tournamentGame" placeholder="Spielname"
-                       [(ngModel)]="tournamentGame">
-            </div>
-            <div class="form-group col-md-2">
-                <label for="tournamentMode">Turniermodus</label>
-                <select class="form-control" id="tournamentMode" [(ngModel)]="tournamentMode" (ngModelChange)="onChange($event, 'mode')">
-                    <option value="swiss" selected="selected">Swiss (8)</option>
-                    <option value="b16">SE 16</option>
-                    <option value="b8">SE 8</option>
-                    <option value="b4">SE 4</option>
-                </select>
-            </div>
-            <div class="form-group col-md-2">
-                <label for="tournamentPlayMode">Spielmodus</label>
-                <select class="form-control" id="tournamentPlayMode" [(ngModel)]="tournamentPlayMode" (ngModelChange)="onChange($event, 'playerMode')">
-                    <option value="Clan">Clan Modus</option>
-                    <option value="User">User Modus</option>
-                </select>
-            </div>
-            <div class="btnCreate col-md-2">
-                <button type="button" (click)="createTournament()" class="btn btn-success pull-right">erstellen</button>
-            </div>
-        </div>
-    </ba-card>
-    <ba-card class="col-md-12" title="Turnier bearbeiten">
-        <div class="row">
-            <div class="form-group col-md-8">
-                <label for="editChooseDownload">Turnier auswählen</label>
-                <select class="form-control" id="editChooseDownload" [(ngModel)]="editTournamentId" (ngModelChange)="onEditChange($event)">
-                    <option *ngFor="let tournament of tournaments" [ngValue]="tournament">{{tournament.name}}</option>
-                </select>
-            </div>
-            <div class="form-group col-md-4" *ngIf="editTournamentName">
-                <label for="editTournamentMode">Turniermodus</label>
-                <select class="form-control" id="editTournamentStatus" [(ngModel)]="editTournamentStatus" (ngModelChange)="onChange($event, 'status', 'edit')">
-                    <option value="on" selected="selected">Online (Spielphase)</option>
-                    <option value="off">Offline (Anmeldephase)</option>
-                    <option value="end">ENDE</option>
-                </select>
-            </div>
-        </div>
-        <div class="row" *ngIf="editTournamentName">
-            <div class="form-group col-md-4">
-                <label for="editTournamentName">Turniername</label>
-                <input type="text" class="form-control" id="editTournamentName" placeholder="Name des Turnieres"
-                       [(ngModel)]="editTournamentName">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="tournamentGame">Spiel</label>
-                <input type="text" class="form-control" id="editTournamentGame" placeholder="Spielname"
-                       [(ngModel)]="editTournamentGame">
-            </div>
-            <div class="form-group col-md-2">
-                <label for="editTournamentMode">Turniermodus</label>
-                <select class="form-control" id="editTournamentMode" [(ngModel)]="editTournamentMode" (ngModelChange)="onChange($event, 'mode', 'edit')">
-                    <option value="swiss" selected="selected">Swiss (8)</option>
-                    <option value="b16">SE 16</option>
-                    <option value="b8">SE 8</option>
-                    <option value="b4">SE 4</option>
-                </select>
-            </div>
-            <div class="form-group col-md-2">
-                <label for="editTournamentPlayMode">Spielmodus</label>
-                <select class="form-control" id="editTournamentPlayMode" [(ngModel)]="editTournamentPlayMode" (ngModelChange)="onChange($event, 'playerMode', 'edit')">
-                    <option value="Clan">Clan Modus</option>
-                    <option value="User">User Modus</option>
-                </select>
-            </div>
-        </div>
-        <div class="btnEdit col-md-12" *ngIf="editTournamentName">
-            <button type="button" (click)="saveTournament()" class="btn btn-success pull-right"><i class="material-icons">save</i></button>
-            <button type="button" (click)="delTournament()" class="btn btn-danger pull-right"><i class="material-icons">delete_forever</i></button>
-        </div>
+  <ba-card title="Turnier erstellen" class="col-md-12">
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label for="tournamentName">Turniername</label>
+        <input type="text" class="form-control" id="tournamentName" placeholder="Name des Turnieres"
+               [(ngModel)]="tournamentName">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="tournamentGame">Spiel</label>
+        <input type="text" class="form-control" id="tournamentGame" placeholder="Spielname"
+               [(ngModel)]="tournamentGame">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="tournamentMode">Turniermodus</label>
+        <select class="form-control" id="tournamentMode" [(ngModel)]="tournamentMode" (ngModelChange)="onChange($event, 'mode')">
+          <option value="swiss" selected="selected">Swiss (8)</option>
+          <option value="b16">SE 16</option>
+          <option value="b8">SE 8</option>
+          <option value="b4">SE 4</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="tournamentPlayMode">Spielmodus</label>
+        <select class="form-control" id="tournamentPlayMode" [(ngModel)]="tournamentPlayMode"
+                (ngModelChange)="onChange($event, 'playerMode')">
+          <option value="Clan">Clan Modus</option>
+          <option value="User">User Modus</option>
+        </select>
+      </div>
+      <div class="btnCreate col-md-2">
+        <button type="button" (click)="createTournament()" class="btn btn-success pull-right">erstellen</button>
+      </div>
+    </div>
+  </ba-card>
+  <ba-card class="col-md-12" title="Turnier bearbeiten">
+    <div class="row">
+      <div class="form-group col-md-8">
+        <label for="editChooseDownload">Turnier auswählen</label>
+        <select class="form-control" id="editChooseDownload" [(ngModel)]="editTournamentId" (ngModelChange)="onEditChange($event)">
+          <option *ngFor="let tournament of tournaments" [ngValue]="tournament">{{tournament.name}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4" *ngIf="editTournamentName">
+        <label for="editTournamentMode">Turniermodus</label>
+        <select class="form-control" id="editTournamentStatus" [(ngModel)]="editTournamentStatus"
+                (ngModelChange)="onChange($event, 'status', 'edit')">
+          <option value="on" selected="selected">Online (Spielphase)</option>
+          <option value="off">Offline (Anmeldephase)</option>
+          <option value="end">ENDE</option>
+        </select>
+      </div>
+    </div>
+    <div class="row" *ngIf="editTournamentName">
+      <div class="form-group col-md-4">
+        <label for="editTournamentName">Turniername</label>
+        <input type="text" class="form-control" id="editTournamentName" placeholder="Name des Turnieres"
+               [(ngModel)]="editTournamentName">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="tournamentGame">Spiel</label>
+        <input type="text" class="form-control" id="editTournamentGame" placeholder="Spielname"
+               [(ngModel)]="editTournamentGame">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="editTournamentMode">Turniermodus</label>
+        <select class="form-control" id="editTournamentMode" [(ngModel)]="editTournamentMode"
+                (ngModelChange)="onChange($event, 'mode', 'edit')">
+          <option value="swiss" selected="selected">Swiss (8)</option>
+          <option value="b16">SE 16</option>
+          <option value="b8">SE 8</option>
+          <option value="b4">SE 4</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="editTournamentPlayMode">Spielmodus</label>
+        <select class="form-control" id="editTournamentPlayMode" [(ngModel)]="editTournamentPlayMode"
+                (ngModelChange)="onChange($event, 'playerMode', 'edit')">
+          <option value="Clan">Clan Modus</option>
+          <option value="User">User Modus</option>
+        </select>
+      </div>
+    </div>
+    <div class="btnEdit col-md-12" *ngIf="editTournamentName">
+      <button type="button" (click)="saveTournament()" class="btn btn-success pull-right"><i class="material-icons">save</i></button>
+      <button type="button" (click)="delTournament()" class="btn btn-danger pull-right"><i class="material-icons">delete_forever</i>
+      </button>
+    </div>
 
-    </ba-card>
+  </ba-card>
+  <ba-card *ngIf="selectTournament" class="col-md-12" title="Spiele bearbeiten">
+    <div *ngIf="selectTournament.games">
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="editChooseGame">Spiel auswählen</label>
+          <select class="form-control" id="editChooseGame" [(ngModel)]="editGameId" (ngModelChange)="onGameChange($event)">
+            <option *ngFor="let game of selectTournament.games" [ngValue]="game">{{game.gameId}} | {{game.team1}} vs {{game.team2}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="editGameStart">Startzeit</label>
+          <input type="datetime-local" class="form-control" id="editGameStart" placeholder="Start des Turnieres"
+                 [(ngModel)]="editGameStart">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="editGameEnd">Endzeit</label>
+          <input type="datetime-local" class="form-control" id="editGameEnd" placeholder="Ende des Turnieres"
+                 [(ngModel)]="editGameEnd">
+
+        </div>
+        <div class="form-group col-md-12">
+          <label for="editGameMap">Map</label>
+          <input type="text" class="form-control" id="editGameMap" placeholder="Map des Turnieres"
+                 [(ngModel)]="editGameMap">
+        </div>
+        <div class="col-md-12">
+          <button type="button" (click)="saveGame()" class="btn btn-success pull-right"><i class="material-icons">save</i></button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!selectTournament.games">
+      <p>Noch keine Spiele gesetzt.</p>
+    </div>
+
+  </ba-card>
 </div>
 
