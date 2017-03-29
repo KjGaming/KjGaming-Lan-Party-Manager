@@ -29,8 +29,6 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
             {path: '', redirectTo: 'news', pathMatch: 'full', canActivate: [AuthGuard]},
-            {path: 'editors', loadChildren: () => System.import('./editors/editors.module'), canActivate: [AuthGuard]},
-            {path: 'charts', loadChildren: () => System.import('./charts/charts.module'), canActivate: [AuthGuard]},
             {path: 'news', loadChildren: () => System.import('./news/news.module'), canActivate: [AuthGuard]},
             {path: 'chat', loadChildren: () => System.import('./chat/chat.module'), canActivate: [AuthGuard, SideGuard]},
             {path: 'userEdit', loadChildren: () => System.import('./userEdit/userEdit.module'), canActivate: [AuthGuard]},
@@ -67,10 +65,6 @@ const routes: Routes = [
                 canActivate: [AuthGuard, SideGuard]
             },
             {path: 'seating', loadChildren: () => System.import('./seating/seating.module'), canActivate: [AuthGuard]},
-            {path: 'ui', loadChildren: () => System.import('./ui/ui.module'), canActivate: [AuthGuard]},
-            {path: 'forms', loadChildren: () => System.import('./forms/forms.module'), canActivate: [AuthGuard]},
-            {path: 'tables', loadChildren: () => System.import('./tables/tables.module'), canActivate: [AuthGuard]},
-            {path: 'maps', loadChildren: () => System.import('./maps/maps.module'), canActivate: [AuthGuard,]},
             {path: 'admin', loadChildren: () => System.import('./admin/admin.module'), canActivate: [AuthGuard, AdminGuard]}
         ]
     }
