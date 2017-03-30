@@ -1,7 +1,9 @@
+//TODO: Event ID aus Turnier/Game löschen, wenn Event gelöscht wird
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from "angular2-notifications";
 import { BaServerService } from "../../../../theme/services/baServer/baServer.service";
 import { BaTournamentService } from "../../../../theme/services/baTournament/baTournament.service";
+import { BaEventService } from "../../../../theme/services/baEvent/baEvent.service";
 
 @Component({
 	selector: 'admin-tournament',
@@ -14,7 +16,9 @@ export class AdminTournamentComponent implements OnInit {
 		timeOut: 5000
 	};
 
-	constructor(protected _tournamentService: BaTournamentService, private _toastService: NotificationsService) {
+	constructor(protected _tournamentService: BaTournamentService,
+				private _toastService: NotificationsService,
+				private _eventService: BaEventService) {
 	}
 
 	tournaments: any;
@@ -242,6 +246,71 @@ export class AdminTournamentComponent implements OnInit {
 	}
 
 	saveGame() {
+		let voteRoom;
+		let event;
+		let tournament;
+		const twoHours = 7200000;
+
+		let selectGame = this.editGameId;
+
+		if (!selectGame.voteRoom) {
+			voteRoom = this.chooseRoom();
+			console.log(voteRoom);
+		} else {
+			voteRoom = selectGame.voteRoom;
+		}
+
+
+		console.log(this.selectTournament);
+
+		if (!selectGame.event) {
+			event = {
+				'id': false,
+				'timeStart': new Date(this.editGameStart).getTime() - twoHours,
+				'timeEnd': new Date(this.editGameEnd).getTime() - twoHours,
+				'title': this.selectTournament.name + ' Game ' + selectGame.gameId,
+				'mode': 1,
+				'content': selectGame.team1 + ' vs ' + selectGame.team2,
+			};
+		} else {
+			event = {
+				'id': selectGame.event,
+				'timeStart': new Date(this.editGameStart).getTime() - twoHours,
+				'timeEnd': new Date(this.editGameEnd).getTime() - twoHours,
+				'title': this.selectTournament.name + ' Game ' + selectGame.gameId,
+				'mode': 1,
+				'content': selectGame.team1 + ' vs ' + selectGame.team2,
+			};
+		}
+
+		tournament = {
+			'tournamentId': this.selectTournament._id,
+			'gameId': this.editGameId.gameId,
+			'timeStart': new Date(this.editGameStart).getTime() - twoHours,
+			'timeEnd': new Date(this.editGameEnd).getTime() - twoHours,
+			'map': this.editGameMap,
+			'voteRoom': voteRoom,
+			'event': event
+		};
+
+		this._eventService.tournament(tournament.event).subscribe(
+			data => {
+				tournament.event = data.obj;
+				this._tournamentService.patchGameInfo(tournament).subscribe(
+					data2 => {
+						this._toastService.success(data2.title, data2.message);
+						this.ngOnInit();
+					},
+					error2 => {
+						console.error(error2);
+					}
+				)
+			},
+			error => {
+				console.error(error);
+			}
+		);
+
 
 	};
 
@@ -258,4 +327,24 @@ export class AdminTournamentComponent implements OnInit {
 			);
 		}
 	};
+
+	chooseRoom() {
+		let voteRoom;
+		let rooms = [];
+
+		for (let game of this.selectTournament.games) {
+			rooms.push(game.voteRoom);
+		}
+
+		voteRoom = Math.floor(Math.random() * (9999 - 1000)) + 1000;
+
+		if (rooms.indexOf(voteRoom)) {
+			return voteRoom;
+		} else {
+			this.chooseRoom();
+		}
+
+	}
+
+
 }

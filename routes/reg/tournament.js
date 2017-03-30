@@ -431,6 +431,39 @@ router.delete('/del', function ( req, res ) {
 	});
 });
 
+/** update GameInfo **/
+router.patch('/game/info', function ( req, res ) {
+	let diffDate = Math.abs(req.body.timeEnd - req.body.timeStart);
+	Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.gameId},
+		{
+			$set: {
+				'games.$.timeEnd': req.body.timeEnd,
+				'games.$.timeStart': req.body.timeStart,
+				'games.$.timeDuration': diffDate,
+				'games.$.map': req.body.map,
+				'games.$.event': req.body.event,
+				'games.$.voteRoom': req.body.voteRoom
+
+			}
+		},
+		function (err, result) {
+			if (err) {
+				return res.status(500).json({
+					title: 'Fehler',
+					error: {message: 'Beim speichern ist was schief gelaufen'}
+				});
+			}
+
+			return res.status(201).json({
+				title: 'Erflogreich',
+				message: 'Game wurde geändert',
+				obj: result
+			});
+		});
+});
+
+
+
 /** create swiss values **/
 router.post('/swiss/createResult', function (req, res, next) {
     var insert = [];

@@ -17,6 +17,7 @@ var schema = new Schema({
             result2: {type: Number},
             rounds: {type: String},
             timeStart: {type: String},
+            timeEnd: {type: String},
             timeDuration: {type: String},
             map: {type: String},
             event: {type: Schema.Types.ObjectId, ref: "event"},
