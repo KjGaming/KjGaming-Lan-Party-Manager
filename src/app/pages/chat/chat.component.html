@@ -4,8 +4,8 @@
             <ul *ngFor="let msg of conversation">
                 <li>
                     <div *ngIf="!isNewUserAlert(msg)">
-                        <span class="userTime">{{msg.time}}</span>
-                        <span class="userLabel"><{{msg.userName}}></span>
+                        <span class="userTime">{{msg.time | date: 'mediumTime'}}</span>
+                        <span class="userLabel"> <{{msg.nickName}}></span>
                         <span class="userText">{{msg.text}}</span>
                     </div>
                     <div *ngIf="isNewUserAlert(msg)">

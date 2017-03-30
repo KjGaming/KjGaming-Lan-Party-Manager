@@ -40,6 +40,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             this.userList = data;
         }.bind(this));
 
+        console.log(this.conversation);
     }
 
     ngAfterViewChecked() {
@@ -55,15 +56,10 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     send() {
         let time = new Date();
-        let timeString = (time.getHours() < 10 ? '0' + time.getHours() : time.getHours())
-            + ':' +
-            (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes())
-            + ':' +
-            (time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds());
         this.socket.emit('newMessage', {
-            'userName': localStorage.getItem('nickName'),
+            'nickName': localStorage.getItem('nickName'),
             'text': this.message,
-            'time': timeString
+            'time': time
         });
         this.message = '';
 
@@ -78,7 +74,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     isNewUserAlert(data) {
-        return data.userName === '';
+        return data.nickName === '';
     }
 
     scrollToBottom(): void {

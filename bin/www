@@ -29,6 +29,7 @@ io = io.listen(server)
  */
 require('../bin/socket')(io);
 require('../bin/vote')(io);
+require('../bin/message')(io);
 
 /**
  * Listen on provided port, on all network interfaces.

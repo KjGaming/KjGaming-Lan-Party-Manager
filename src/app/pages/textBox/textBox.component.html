@@ -1,0 +1,30 @@
+<div class="row">
+	<ba-card class="col-sm-12">
+		<div #scrollMe class="col-sm-12" id="messageContainer">
+			<div *ngFor="let msg of conversation" class="messageBox">
+				<div class="messageTitle">
+					<span class="userTime">{{msg.time | date: 'short'}}</span>
+					<span class="userLabel">{{msg.nickName}}</span>
+				</div>
+				<hr />
+				<div class="messageText">
+					<span class="userText">{{msg.text}}</span>
+				</div>
+			</div>
+		</div>
+	</ba-card>
+</div>
+<ba-card class="col-sm-12">
+	<div class="row" id="inputContainer">
+		<div class="col-sm-9">
+			<input id="country" type="text" id="inputSendText" class="form-control"
+				   [(ngModel)]="message"
+				   (keypress)="keypressHandler($event)">
+		</div>
+		<button (click)="send()" type="submit" id="btnSendText"
+				class="btn btn-success waves-effect waves-light s2" name="action">Senden
+		</button>
+	</div>
+</ba-card>
+
+

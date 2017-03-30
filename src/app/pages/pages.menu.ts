@@ -133,6 +133,19 @@ export const PAGES_MENU = [
                 }
             },
             {
+                path: 'textBox',
+                data: {
+                    menu: {
+                        title: 'Textbox',
+                        icon: 'message',
+                        iconClass: 'material-icons',
+                        selected: false,
+                        expanded: false,
+                        order: 91,
+                    }
+                }
+            },
+            {
                 path: 'feedback',
                 data: {
                     menu: {

@@ -15,6 +15,7 @@ var timetableRoutes = require('./reg/event');
 var cateringRoutes = require('./reg/catering');
 var tournamentRoutes = require('./reg/tournament');
 var sidesRoutes = require('./reg/sides');
+var textBoxRoutes = require('./reg/textBox');
 
 
 var secret = require('./secret/secret');
@@ -326,6 +327,7 @@ router.use('/reg/clan', clanRoutes);
 router.use('/reg/catering', cateringRoutes);
 router.use('/reg/tournament', tournamentRoutes);
 router.use('/reg/sides', sidesRoutes);
+router.use('/reg/textBox', textBoxRoutes);
 
 
 module.exports = router;

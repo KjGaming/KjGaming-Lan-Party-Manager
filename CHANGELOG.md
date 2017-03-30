@@ -164,7 +164,7 @@ Things to consider:
 That means that all the routes are moved to the `src/app/app.routes.ts` file. `src/app/app.menu.ts` is also merged into the routes configuration.
 More details on how to configure a new route you can find [here](https://akveo.github.io/ng2-admin/articles/015-sidebar/).
 
-* Forms are updated as well. Thus you need to reconfigure all your forms to use new Angular Forms. Checkout the `src/app/pages/login/chat.component.ts`component for more details and example.
+* Forms are updated as well. Thus you need to reconfigure all your forms to use new Angular Forms. Checkout the `src/app/pages/login/textBox.component.ts`component for more details and example.
 
 ### How to update
 
