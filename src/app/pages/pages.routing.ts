@@ -28,11 +28,32 @@ const routes: Routes = [
 		component: Pages,
 		canActivate: [AuthGuard],
 		children: [
-			{path: '', redirectTo: 'news', pathMatch: 'full', canActivate: [AuthGuard]},
-			{path: 'news', loadChildren: () => System.import('./news/news.module'), canActivate: [AuthGuard]},
-			{path: 'chat', loadChildren: () => System.import('./chat/chat.module'), canActivate: [AuthGuard, SideGuard]},
-			{path: 'textBox', loadChildren: () => System.import('./textBox/textBox.module'), canActivate: [AuthGuard, SideGuard]},
-			{path: 'userEdit', loadChildren: () => System.import('./userEdit/userEdit.module'), canActivate: [AuthGuard]},
+			{
+				path: '',
+				redirectTo: 'news',
+				pathMatch: 'full',
+				canActivate: [AuthGuard]
+			},
+			{
+				path: 'news',
+				loadChildren: () => System.import('./news/news.module'),
+				canActivate: [AuthGuard]
+			},
+			{
+				path: 'chat',
+				loadChildren: () => System.import('./chat/chat.module'),
+				canActivate: [AuthGuard, SideGuard]
+			},
+			{
+				path: 'textBox',
+				loadChildren: () => System.import('./textBox/textBox.module'),
+				canActivate: [AuthGuard, SideGuard]
+			},
+			{
+				path: 'userEdit',
+				loadChildren: () => System.import('./userEdit/userEdit.module'),
+				canActivate: [AuthGuard]
+			},
 			{
 				path: 'timetable',
 				loadChildren: () => System.import('./timetable/timetable.module'),
@@ -43,8 +64,16 @@ const routes: Routes = [
 				loadChildren: () => System.import('./memberlist/memberlist.module'),
 				canActivate: [AuthGuard, SideGuard]
 			},
-			{path: 'clan', loadChildren: () => System.import('./clan/clan.module'), canActivate: [AuthGuard, SideGuard]},
-			{path: 'server', loadChildren: () => System.import('./server/server.module'), canActivate: [AuthGuard, SideGuard]},
+			{
+				path: 'clan',
+				loadChildren: () => System.import('./clan/clan.module'),
+				canActivate: [AuthGuard, SideGuard]
+			},
+			{
+				path: 'server',
+				loadChildren: () => System.import('./server/server.module'),
+				canActivate: [AuthGuard, SideGuard]
+			},
 			{
 				path: 'tournament',
 				loadChildren: () => System.import('./tournament/tournament.module'),
@@ -65,8 +94,16 @@ const routes: Routes = [
 				loadChildren: () => System.import('./feedback/feedback.module'),
 				canActivate: [AuthGuard, SideGuard]
 			},
-			{path: 'seating', loadChildren: () => System.import('./seating/seating.module'), canActivate: [AuthGuard]},
-			{path: 'admin', loadChildren: () => System.import('./admin/admin.module'), canActivate: [AuthGuard, AdminGuard]}
+			{
+				path: 'seating',
+				loadChildren: () => System.import('./seating/seating.module'),
+				canActivate: [AuthGuard, SideGuard]
+			},
+			{
+				path: 'admin',
+				loadChildren: () => System.import('./admin/admin.module'),
+				canActivate: [AuthGuard, AdminGuard]
+			}
 		]
 	}
 
