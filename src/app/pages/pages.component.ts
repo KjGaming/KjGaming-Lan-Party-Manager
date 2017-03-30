@@ -13,13 +13,22 @@ import { Component, ViewEncapsulation } from '@angular/core';
       </div>
     </div>
     <footer class="al-footer clearfix">
-      <div class="al-footer-right">Created with <i class="ion-heart"></i></div>
+      <div class="al-footer-right">Created with <i class="ion-heart"></i>  |  v8.0.1</div>
       <div class="al-footer-main clearfix">
-        <div class="al-copy">&copy; <a href="http://kjgaming.de">KjGaming</a> 2016</div>
+        <div class="al-copy">&copy; <a href="http://kjgaming.de">KjGaming</a> 2017</div>
         <ul class="al-share clearfix">
           <li>
-              <a href="https://www.facebook.com/KjGaming.LANParty.Filderstadt">
+              <a target="_blank" href="https://www.facebook.com/KjGaming.LANParty.Filderstadt">
                 <i class="socicon socicon-facebook"></i>
+              </a>
+              <a target="_blank" href="http://steamcommunity.com/groups/kjgaming">
+                <i class="socicon socicon-steam"></i>
+              </a>
+              <a target="_blank" href="https://twitter.com/KjGamingg">
+                <i class="socicon socicon-twitter"></i>
+              </a>
+              <a target="_blank" href="https://www.instagram.com/kjgamingg/">
+                <i class="socicon socicon-instagram"></i>
               </a>
           </li>
         </ul>

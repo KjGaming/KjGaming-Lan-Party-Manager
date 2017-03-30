@@ -407,6 +407,30 @@ router.post('/create', function (req, res, next) {
     });
 });
 
+/** delete Tournament **/
+router.delete('/del', function ( req, res ) {
+	console.log(req.query.id);
+	if (!req.query.id) {
+		return res.status(400).json({
+			title: 'No tournament selected'
+		});
+	}
+
+	Tournament.findByIdAndRemove(req.query.id, function (err, result) {
+		if (err) {
+			return res.status(500).json({
+				title: 'Hier ist ein Fehler aufgetreten',
+				error: err
+			});
+		}
+		res.status(201).json({
+            title: 'Erflogreich!',
+			message: 'Turnier wurde gelöscht',
+			obj: result
+		});
+	});
+});
+
 /** create swiss values **/
 router.post('/swiss/createResult', function (req, res, next) {
     var insert = [];

@@ -168,6 +168,19 @@ export class BaTournamentService {
             });
     }
 
+    delTournament(id){
+		const headers = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization': localStorage.getItem('id_token')
+		});
+
+		return this.http.delete('/api/reg/tournament/del?id='+ id, {headers: headers})
+			.map((res: Response) => res.json())
+			.catch((err: Response) => {
+				return Observable.throw(err.json());
+			});
+    }
+
     /** Swiss System **/
     swissCreateResult(event) {
         const body = JSON.stringify(event);

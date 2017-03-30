@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var Server = require('../../models/server');
+let express = require('express');
+let router = express.Router();
+let Server = require('../../models/server');
 
 router.get('/', function (req, res, next) {
     Server.find()
@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    var server = new Server({
+    let server = new Server({
         title: req.body.title,
         content: req.body.content,
         status: req.body.status,
