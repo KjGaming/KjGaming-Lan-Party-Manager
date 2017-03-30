@@ -11,3 +11,4 @@ export * from './baUser';
 export * from './baClan';
 export * from './baTournament';
 export * from './baRouting';
+export * from './baTextBox';

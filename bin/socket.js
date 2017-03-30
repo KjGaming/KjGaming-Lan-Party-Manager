@@ -1,14 +1,20 @@
 let clientListNames = [];
+let Chat = require('../models/chat');
 
 module.exports = function (io, user) {
     'use strict';
-    let nsp = io.of('/chat');
-    nsp.on('connection', function (socket) {
+    let c_io = io.of('/chat');
+	c_io.on('connection', function (socket) {
         // Send message
         socket.on('newMessage', function (data) {
-            console.log(socket.id);
             socket.emit('chatUpdate', data);
             socket.broadcast.emit('chatUpdate', data);
+			let chat = new Chat({
+				nickName: data.nickName,
+				text: data.text,
+				time: data.time
+			});
+			chat.save();
         });
 
         // check if new user is join
@@ -18,10 +24,23 @@ module.exports = function (io, user) {
                 'name' : name
             });
             console.log(socket.id);
-            socket.emit('chatUpdate',
-                {'userName': '', 'text': name + ' ist dem Chat beigetreten'});
-            socket.broadcast.emit('chatUpdate',
-                {'userName': '', 'text': name + ' ist dem Chat beigetreten'});
+			Chat.find().limit(10).exec(function (err, result) {
+
+				for(let oldChat of result){
+					socket.emit('chatUpdate',
+						{
+							'nickName': oldChat.nickName,
+							'text': oldChat.text,
+							'time': oldChat.time,
+						});
+				}
+
+				socket.emit('chatUpdate',
+					{'nickName': '', 'text': name + ' ist dem Chat beigetreten'});
+				socket.broadcast.emit('chatUpdate',
+					{'nickName': '', 'text': name + ' ist dem Chat beigetreten'});
+			});
+
             socket.emit('update-user', clientListNames);
             socket.broadcast.emit('update-user', clientListNames);
         });
@@ -35,9 +54,9 @@ module.exports = function (io, user) {
                 }
             }
             socket.emit('chatUpdate',
-                {'userName': '', 'text': name + ' hat den Chat verlassen'});
+                {'nickName': '', 'text': name + ' hat den Chat verlassen'});
             socket.broadcast.emit('chatUpdate',
-                {'userName': '', 'text': name + ' hat den Chat verlassen'});
+                {'nickName': '', 'text': name + ' hat den Chat verlassen'});
             socket.emit('update-user', clientListNames);
             socket.broadcast.emit('update-user', clientListNames);
         });
@@ -52,9 +71,9 @@ module.exports = function (io, user) {
                 }
             }
             socket.emit('chatUpdate',
-                {'userName': '', 'text': user + ' hat den Chat verlassen'});
+                {'nickName': '', 'text': user + ' hat den Chat verlassen'});
             socket.broadcast.emit('chatUpdate',
-                {'userName': '', 'text': user + ' hat den Chat verlassen'});
+                {'nickName': '', 'text': user + ' hat den Chat verlassen'});
             socket.emit('update-user', clientListNames);
             socket.broadcast.emit('update-user', clientListNames);
 
