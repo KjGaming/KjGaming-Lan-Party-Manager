@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from "angular2-notifications";
 import {BaCateringService} from "../../theme/services/baCatering/baCatering.service";
-
+import * as io from 'socket.io-client';
 
 @Component({
     selector: 'catering',
@@ -11,6 +11,7 @@ import {BaCateringService} from "../../theme/services/baCatering/baCatering.serv
 
 
 export class CateringComponent implements OnInit {
+	static room: string = 'uCat';
     public products;
     public ordered;
     public delivered;
@@ -20,6 +21,8 @@ export class CateringComponent implements OnInit {
         position: ["top", "center"],
         timeOut: 5000
     };
+    socket;
+    room = 'uCat';
 
 
     constructor(private _cateringService: BaCateringService, private _toastService: NotificationsService) {
@@ -28,6 +31,11 @@ export class CateringComponent implements OnInit {
     ngOnInit() {
         this.getProducts();
         this.getCatering();
+		this.socket = io('/catering');
+		this.socket.emit('joinRoom', this.room);
+		this.socket.on('refresh', function () {
+			this.getCatering();
+		});
         if(localStorage.getItem('shoppingCard')){
             this.shoppingCart = JSON.parse(localStorage.getItem('shoppingCard'));
         }
@@ -119,11 +127,16 @@ export class CateringComponent implements OnInit {
                 });
             }
         }
+		console.log(this.shoppingCart);
         localStorage.setItem('shoppingCard', JSON.stringify(this.shoppingCart));
 
     }
 
     sendShoppingCart(shoppingCard){
+    	console.log(shoppingCard.length);
+    	if(0 == shoppingCard.length){
+    		return this._toastService.info('Information','Dein Warenkorb ist leer');
+		}
         this._cateringService.sendOrdered(shoppingCard).subscribe(
             // the first argument is a function which runs on success
             data => {
@@ -137,7 +150,32 @@ export class CateringComponent implements OnInit {
             () => console.log('done products')
         );
 
+
+
         localStorage.removeItem('shoppingCard');
         this.shoppingCart = [];
     }
+
+	changeShoppingCount(id, event){
+    	console.log(id);
+    	console.log(event);
+    	console.log(this.shoppingCart);
+
+
+		for (let key in this.shoppingCart) {
+			if (this.shoppingCart[key].id == id) {
+				if(event == 'up'){
+					this.shoppingCart[key].count += 1;
+
+				}else if(event == 'down'){
+					this.shoppingCart[key].count -= 1;
+					if(this.shoppingCart[key].count == 0){
+						this.shoppingCart.splice(parseInt(key), 1);
+					};
+				}
+				break;
+			}
+		}
+		localStorage.setItem('shoppingCard', JSON.stringify(this.shoppingCart));
+	}
 }
