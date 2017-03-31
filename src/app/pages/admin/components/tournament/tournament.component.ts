@@ -1,7 +1,6 @@
 //TODO: Event ID aus Turnier/Game löschen, wenn Event gelöscht wird
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from "angular2-notifications";
-import { BaServerService } from "../../../../theme/services/baServer/baServer.service";
 import { BaTournamentService } from "../../../../theme/services/baTournament/baTournament.service";
 import { BaEventService } from "../../../../theme/services/baEvent/baEvent.service";
 

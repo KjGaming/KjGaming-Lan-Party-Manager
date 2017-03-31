@@ -462,8 +462,6 @@ router.patch('/game/info', function ( req, res ) {
 		});
 });
 
-
-
 /** create swiss values **/
 router.post('/swiss/createResult', function (req, res, next) {
     var insert = [];
@@ -852,6 +850,7 @@ router.put('/swiss/setNewRound', function (req, res) {
 });
 
 /** set the swiss bracket  **/
+//TODO: Fehler bei Spiel 16 und 13 ERROR 500
 router.put('/swiss/bracket', function (req, res) {
     console.log(req.body);
     var gameId = 0;
