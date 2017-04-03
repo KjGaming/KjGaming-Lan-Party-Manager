@@ -407,6 +407,61 @@ router.post('/create', function (req, res, next) {
     });
 });
 
+/** delete Tournament **/
+router.delete('/del', function ( req, res ) {
+	console.log(req.query.id);
+	if (!req.query.id) {
+		return res.status(400).json({
+			title: 'No tournament selected'
+		});
+	}
+
+	Tournament.findByIdAndRemove(req.query.id, function (err, result) {
+		if (err) {
+			return res.status(500).json({
+				title: 'Hier ist ein Fehler aufgetreten',
+				error: err
+			});
+		}
+		res.status(201).json({
+            title: 'Erflogreich!',
+			message: 'Turnier wurde gelöscht',
+			obj: result
+		});
+	});
+});
+
+/** update GameInfo **/
+router.patch('/game/info', function ( req, res ) {
+	let diffDate = Math.abs(req.body.timeEnd - req.body.timeStart);
+	Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.gameId},
+		{
+			$set: {
+				'games.$.timeEnd': req.body.timeEnd,
+				'games.$.timeStart': req.body.timeStart,
+				'games.$.timeDuration': diffDate,
+				'games.$.map': req.body.map,
+				'games.$.event': req.body.event,
+				'games.$.voteRoom': req.body.voteRoom
+
+			}
+		},
+		function (err, result) {
+			if (err) {
+				return res.status(500).json({
+					title: 'Fehler',
+					error: {message: 'Beim speichern ist was schief gelaufen'}
+				});
+			}
+
+			return res.status(201).json({
+				title: 'Erflogreich',
+				message: 'Game wurde geändert',
+				obj: result
+			});
+		});
+});
+
 /** create swiss values **/
 router.post('/swiss/createResult', function (req, res, next) {
     var insert = [];
@@ -795,6 +850,7 @@ router.put('/swiss/setNewRound', function (req, res) {
 });
 
 /** set the swiss bracket  **/
+//TODO: Fehler bei Spiel 16 und 13 ERROR 500
 router.put('/swiss/bracket', function (req, res) {
     console.log(req.body);
     var gameId = 0;

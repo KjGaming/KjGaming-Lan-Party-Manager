@@ -38,11 +38,11 @@
 }
 
 .socicon-twitter {
-  @include socicon($twitter-color, "a");
+  @include socicon($twitter-color, "\e08d");
 }
 
 .socicon-facebook {
-  @include socicon($facebook-color, "b");
+  @include socicon($facebook-color, "\e028");
 }
 
 .socicon-google {
@@ -67,4 +67,11 @@
 
 .socicon-behace {
   @include socicon($behace-color, "H");
+}
+
+.socicon-steam {
+  @include socicon(#171a21 , '\e07e');
+}
+.socicon-instagram {
+  @include socicon(#000000 , '\e044');
 }

@@ -68,4 +68,23 @@ export class BaEventService {
 
     }
 
+    /** Update or Creat Event **/
+    tournament(event){
+        if(!event.id){
+        	console.log(event);
+            return this.create(event);
+        }else{
+            const body = JSON.stringify(event);
+            const headers = new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('id_token')
+            });
+            return this.http.patch('/api/admin/event', body ,{headers: headers})
+				.map((res: Response) => res.json())
+				.catch((err: Response)=> {
+                    return Observable.throw(err.json());
+                });
+        }
+    }
+
 }
