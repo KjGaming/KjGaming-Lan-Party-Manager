@@ -15,7 +15,10 @@ module.exports = function ( io ) {
 			socket.broadcast.to('uCat').emit('refreshDB', data);
 		});
 
-		socket.on('disconnect', function () {
+		socket.on('leaveRoom', function (room) {
+			socket.leave(room);
+			console.log('Im in!');
+
 		})
 
 

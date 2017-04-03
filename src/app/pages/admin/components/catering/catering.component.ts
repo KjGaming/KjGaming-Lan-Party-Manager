@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NotificationsService } from "angular2-notifications";
 import { BaCateringService } from "../../../../theme/services/baCatering/baCatering.service";
 import * as io from 'socket.io-client';
@@ -8,7 +8,7 @@ import * as io from 'socket.io-client';
 	styles: [require('./catering.scss')],
 	template: require('./catering.component.html'),
 })
-export class AdminCateringComponent implements OnInit {
+export class AdminCateringComponent implements OnInit, OnDestroy {
 	ordersId = [];
 	receivedId = [];
 
@@ -37,6 +37,10 @@ export class AdminCateringComponent implements OnInit {
 			this.getCatering();
 		});
 		this.getCatering();
+	}
+
+	ngOnDestroy(){
+		this.socket.emit('leaveRoom', this.room);
 	}
 
 	onChange() {

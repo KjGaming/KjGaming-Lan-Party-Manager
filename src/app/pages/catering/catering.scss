@@ -33,3 +33,21 @@
   }
 }
 
+table{
+  text-align: left;
+
+  td {
+    height: 50px;
+    vertical-align: middle;
+  }
+}
+
+button{
+  cursor: pointer;
+}
+
+.sum{
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
