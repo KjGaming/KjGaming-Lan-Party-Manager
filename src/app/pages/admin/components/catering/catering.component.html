@@ -1,0 +1,78 @@
+<simple-notifications [options]="options"></simple-notifications>
+<ba-card title="Bestellungen" button="true">
+    <table class="table table-hover">
+        <thead>
+        <tr class="tableHeader black-muted-bg">
+            <th>Benutzer</th>
+            <th>Platznummer</th>
+            <th>Produkte</th>
+            <th>Anzahl</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of ordered">
+            <td>{{order.name}}</td>
+            <td>{{order.seat}}</td>
+            <td>
+                <div *ngFor="let pro of order.products">
+                    {{pro.name}}
+                </div>
+            </td>
+            <td>
+                <div *ngFor="let pro of order.products">
+                    {{pro.count}}
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-success pull-right sendButton" (click)="orderRecord()">Bestellung aufnehmen</button>
+</ba-card>
+<ba-card title="Lieferung" button="true">
+    <table class="table table-hover">
+        <thead>
+        <tr class="tableHeader black-muted-bg">
+            <th>Benutzer</th>
+            <th>Platznummer</th>
+            <th>Produkte</th>
+            <th>Anzahl</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let receiv of received">
+            <td>{{receiv.name}}</td>
+            <td>{{receiv.seat}}</td>
+            <td>
+                <div *ngFor="let pro of receiv.products">
+                    {{pro.name}}
+                </div>
+            </td>
+            <td>
+                <div *ngFor="let pro of receiv.products">
+                    {{pro.count}}
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-8">
+            <table class="table table-hover">
+                <thead>
+                <tr class="tableHeader black-muted-bg">
+                    <th>Produkt</th>
+                    <th>Anzahl</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let receiv of allReceivedProducts">
+                    <td>{{receiv.name}}</td>
+                    <td>{{receiv.count}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="button" class="btn btn-success pull-right sendButton" (click)="orderDelivered()">Bestellung ausgeliefert</button>
+    </div>
+
+</ba-card>
