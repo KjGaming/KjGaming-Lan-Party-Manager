@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from "angular2-notifications";
 import {BaCateringService} from "../../theme/services/baCatering/baCatering.service";
 import * as io from 'socket.io-client';
+import construct = Reflect.construct;
 
 @Component({
     selector: 'catering',
@@ -26,19 +27,20 @@ export class CateringComponent implements OnInit {
 
 
     constructor(private _cateringService: BaCateringService, private _toastService: NotificationsService) {
+		this.socket = io('/catering');
+		this.socket.emit('joinRoom', this.room);
+		if(localStorage.getItem('shoppingCard')){
+			this.shoppingCart = JSON.parse(localStorage.getItem('shoppingCard'));
+		}
+		this.socket.on('refreshDB', (data) => {
+			this.getCatering();
+			this._toastService.info('Information',data);
+		});
     }
 
     ngOnInit() {
         this.getProducts();
         this.getCatering();
-		this.socket = io('/catering');
-		this.socket.emit('joinRoom', this.room);
-		this.socket.on('refresh', function () {
-			this.getCatering();
-		});
-        if(localStorage.getItem('shoppingCard')){
-            this.shoppingCart = JSON.parse(localStorage.getItem('shoppingCard'));
-        }
     }
 
     getProducts() {
@@ -142,7 +144,7 @@ export class CateringComponent implements OnInit {
             data => {
                 this._toastService.success(data.title, data.message);
                 this.ngOnInit();
-                console.log(this.products);
+                this.socket.emit('newOrder');
             },
             // the second argument is a function which runs on error
             err => console.error(err),

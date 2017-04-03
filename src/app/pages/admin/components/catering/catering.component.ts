@@ -26,16 +26,17 @@ export class AdminCateringComponent implements OnInit {
 	};
 
 	constructor(protected _cateringService: BaCateringService, private _toastService: NotificationsService) {
+
 	}
 
 	ngOnInit() {
-		this.getCatering();
 		this.socket = io('/catering');
 		this.socket.emit('joinRoom', this.room);
-		this.socket.on('pushAdminOrder', function () {
-			this.ordered = [];
+		this.socket.on('pushAdminOrder', () => {
+			this._toastService.info('Information','Eine weitere Bestellungen wurdegesendet');
 			this.getCatering();
-		}.bind(this));
+		});
+		this.getCatering();
 	}
 
 	onChange() {
@@ -63,7 +64,6 @@ export class AdminCateringComponent implements OnInit {
 
 				}
 				this.allReceivedProducts = this.sumProducts(this.received);
-				console.log(this.allReceivedProducts);
 
 			},
 			// the second argument is a function which runs on error
@@ -164,6 +164,7 @@ export class AdminCateringComponent implements OnInit {
 		this._cateringService.changeStatus(obj).subscribe(
 			data => {
 				this._toastService.success(data.title, data.message);
+				this.socket.emit('refresh', 'Die Bestellungen wurden entgegengenommen');
 				this.ordered = [];
 				this.received = [];
 				this.getCatering();
@@ -183,6 +184,7 @@ export class AdminCateringComponent implements OnInit {
 		this._cateringService.changeStatus(obj).subscribe(
 			data => {
 				this._toastService.success(data.title, data.message);
+				this.socket.emit('refresh', 'Die Bestellungen wurden geliefert');
 				this.ordered = [];
 				this.received = [];
 				this.getCatering();
