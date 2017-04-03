@@ -3,7 +3,7 @@ module.exports = {
     orgaSecret: "B",
     userSecret: "C",
     passwordSecret: "D",
-    adminTokenSecret: "1",
+    adminTokenSecret: "481",
     orgaTokenSecret: "2",
     userTokenSecret: "3",
     passwordEmail: 'asdasdp'

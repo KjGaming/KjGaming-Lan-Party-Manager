@@ -9,7 +9,7 @@ module.exports = function ( io, user ) {
 	u_io.on('connection', function ( socket ) {
 		socket.join('some room');
 
-		socket.io('joinRoom', function ( room ) {
+		socket.on('joinRoom', function ( room ) {
 			socket.join(room);
 		});
 

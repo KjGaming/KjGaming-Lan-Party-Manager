@@ -1,15 +1,16 @@
-var express = require('express');
-var router = express.Router();
-var jwt = require('jsonwebtoken');
+let express = require('express');
+let router = express.Router();
+let jwt = require('jsonwebtoken');
 
-var newsRoutes = require('./admin/news');
-var serverRoutes = require('./admin/server');
-var eventRoutes = require('./admin/event');
-var productRoutes = require('./admin/product');
-var userRoutes = require('./admin/user');
-var sidesRoutes = require('./admin/sides');
+let newsRoutes = require('./admin/news');
+let serverRoutes = require('./admin/server');
+let eventRoutes = require('./admin/event');
+let productRoutes = require('./admin/product');
+let userRoutes = require('./admin/user');
+let sidesRoutes = require('./admin/sides');
+let cateringRoutes = require('./admin/catering');
 
-var secret = require('./secret/secret');
+let secret = require('./secret/secret');
 
 
 /** check if reg is admin **/
@@ -32,6 +33,7 @@ router.use('/event', eventRoutes);
 router.use('/product', productRoutes);
 router.use('/user', userRoutes);
 router.use('/sides', sidesRoutes);
+router.use('/catering', cateringRoutes);
 
 
 module.exports = router;

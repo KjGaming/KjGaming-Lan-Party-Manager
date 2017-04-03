@@ -24,14 +24,14 @@ router.get('/', function ( req, res ) {
 		});
 });
 
-router.patch('/record', function ( req, res ) {
+router.patch('/changeStatus', function ( req, res ) {
 	Catering.update(
 		{
 			_id: {$in: req.body.ids}
 		},
 		{
-			$set: {status: 'received'}
-		}
+			$set: {status: req.body.status}
+		}, {multi: true}
 	).exec(function ( err, result ) {
 		if (err) {
 			return res.status(500).json({

@@ -127,13 +127,13 @@ export class BaCateringService {
             });
     }
 
-    orderRecord(data): Observable<any>{
+    changeStatus(data): Observable<any>{
         const body = JSON.stringify(data);
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('id_token')
         });
-        return this.http.patch('/api/admin/catering/record', body , {headers: headers})
+        return this.http.patch('/api/admin/catering/changeStatus', body , {headers: headers})
 			.map((res: Response) => res.json())
 			.catch((err: Response)=> {
                 return Observable.throw(err.json());
