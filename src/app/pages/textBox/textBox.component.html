@@ -17,9 +17,8 @@
 <ba-card class="col-sm-12">
 	<div class="row" id="inputContainer">
 		<div class="col-sm-9">
-			<input id="country" type="text" id="inputSendText" class="form-control"
-				   [(ngModel)]="message"
-				   (keypress)="keypressHandler($event)">
+			<textarea  id="country" id="inputSendText" class="form-control"
+				   [(ngModel)]="message"></textarea>
 		</div>
 		<button (click)="send()" type="submit" id="btnSendText"
 				class="btn btn-success waves-effect waves-light s2" name="action">Senden

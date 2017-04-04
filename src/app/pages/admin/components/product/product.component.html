@@ -1,94 +1,94 @@
 <simple-notifications [options]="options"></simple-notifications>
 <div class="row">
-    <ba-card title="Produkt erstellen" class="col-md-6">
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label for="createName">Produkt Name</label>
-                <input type="text" class="form-control" id="createName" placeholder="download title"
-                       [(ngModel)]="createName">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="createPrice">Preis</label>
-                <input type="number" class="form-control" id="createPrice" placeholder="download text"
-                       [(ngModel)]="createPrice">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="createNumber">Anzahl</label>
-                <input type="number" class="form-control" id="createNumber" placeholder="download pfad"
-                       [(ngModel)]="createNumber">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="createInfo">Info</label>
-            <input type="text" class="form-control" id="createInfo" placeholder="download pfad"
-                   [(ngModel)]="createInfo">
-        </div>
+	<ba-card title="Produkt erstellen" class="col-md-6">
+		<div class="row">
+			<div class="form-group col-md-4">
+				<label for="createName">Produkt Name</label>
+				<input type="text" class="form-control" id="createName" placeholder="download title"
+					   [(ngModel)]="createName">
+			</div>
+			<div class="form-group col-md-4">
+				<label for="createPrice">Preis</label>
+				<input type="number" class="form-control" id="createPrice" placeholder="download text"
+					   [(ngModel)]="createPrice">
+			</div>
+			<div class="form-group col-md-4">
+				<label for="createNumber">Anzahl</label>
+				<input type="number" class="form-control" id="createNumber" placeholder="download pfad"
+					   [(ngModel)]="createNumber">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="createInfo">Info</label>
+			<input type="text" class="form-control" id="createInfo" placeholder="download pfad"
+				   [(ngModel)]="createInfo">
+		</div>
 
-        <div class="btnDownload">
-            <button type="button" (click)="create()" class="btn btn-success">Produkt erstellen</button>
-        </div>
+		<div class="btnDownload">
+			<button type="button" (click)="create()" class="btn btn-success">Produkt erstellen</button>
+		</div>
 
-    </ba-card>
-    <ba-card title="Produkte bearbeiten" class="col-md-6">
-        <div class="form-group">
-            <label for="editChooseDownload">Download auswählen</label>
-            <select class="form-control" id="editChooseDownload" [(ngModel)]="id" (ngModelChange)="onChange()">
-                <option *ngFor="let product of products" [ngValue]="product._id">{{product.name}}</option>
-            </select>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label for="editName">Produkt Name</label>
-                <input type="text" class="form-control" id="editName" placeholder="download title"
-                       [(ngModel)]="editName">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="editPrice">Preis</label>
-                <input type="number" class="form-control" id="editPrice" placeholder="download text"
-                       [(ngModel)]="editPrice">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="editNumber">Anzahl</label>
-                <input type="number" class="form-control" id="editNumber" placeholder="download pfad"
-                       [(ngModel)]="editNumber">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="editInfo">Info</label>
-            <input type="text" class="form-control" id="editInfo" placeholder="download pfad" [(ngModel)]="editInfo">
-        </div>
+	</ba-card>
+	<ba-card title="Produkte bearbeiten" class="col-md-6">
+		<div class="form-group">
+			<label for="editChooseDownload">Download auswählen</label>
+			<select class="form-control" id="editChooseDownload" [(ngModel)]="id" (ngModelChange)="onChange()">
+				<option *ngFor="let product of products" [ngValue]="product._id">{{product.name}}</option>
+			</select>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-4">
+				<label for="editName">Produkt Name</label>
+				<input type="text" class="form-control" id="editName" placeholder="download title"
+					   [(ngModel)]="editName">
+			</div>
+			<div class="form-group col-md-4">
+				<label for="editPrice">Preis</label>
+				<input type="number" class="form-control" id="editPrice" placeholder="download text"
+					   [(ngModel)]="editPrice">
+			</div>
+			<div class="form-group col-md-4">
+				<label for="editNumber">Anzahl</label>
+				<input type="number" class="form-control" id="editNumber" placeholder="download pfad"
+					   [(ngModel)]="editNumber">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="editInfo">Info</label>
+			<input type="text" class="form-control" id="editInfo" placeholder="download pfad" [(ngModel)]="editInfo">
+		</div>
 
-        <div class="row">
-            <div class="btnDownload">
-                <button type="button" (click)="update()" class="btn btn-success">Produkt bearbeiten</button>
-            </div>
-            <div class="btnDownload">
-                <button type="button" (click)="del()" class="btn btn-danger">Produkt löschen</button>
-            </div>
-        </div>
+		<div class="row">
+			<div class="btnDownload">
+				<button type="button" (click)="update()" class="btn btn-success">Produkt bearbeiten</button>
+			</div>
+			<div class="btnDownload">
+				<button type="button" (click)="del()" class="btn btn-danger">Produkt löschen</button>
+			</div>
+		</div>
 
-    </ba-card>
+	</ba-card>
 </div>
 <ba-card title="Produktliste" button="true">
-    <table class="table table-hover">
-        <thead>
-        <tr class="black-muted-bg">
-            <th>Name</th>
-            <th>Preis</th>
-            <th>Info</th>
-            <th>aktuelle Stückzahl</th>
-            <th><h3 (click)="get()"><i class="material-icons float-right">refresh</i></h3></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let product of products">
-            <td>{{product.name}}</td>
-            <td>{{product.price}} €</td>
-            <td>{{product.info}}</td>
-            <td>{{(product.sold == null? product.number:product.number - product.sold)}}</td>
-            <td></td>
-        </tr>
-        </tbody>
-    </table>
+	<table class="table table-hover">
+		<thead>
+		<tr class="black-muted-bg">
+			<th>Name</th>
+			<th>Preis</th>
+			<th>Info</th>
+			<th>aktuelle Stückzahl</th>
+			<th><h3 (click)="get()"><i class="material-icons float-right">refresh</i></h3></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr *ngFor="let product of products">
+			<td>{{product.name}}</td>
+			<td>{{product.price}} €</td>
+			<td>{{product.info}}</td>
+			<td>{{(product.sold == null? product.number : product.number - product.sold)}}</td>
+			<td></td>
+		</tr>
+		</tbody>
+	</table>
 </ba-card>
 

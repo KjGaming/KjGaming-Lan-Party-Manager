@@ -70,9 +70,7 @@ export class CateringComponent implements OnInit, OnDestroy {
 				this.ordered = data.obj;
 			},
 			// the second argument is a function which runs on error
-			err => console.error(err),
-			// the third argument is a function which runs on completion
-			() => console.log('done ordered')
+			err => console.error(err)
 		);
 		this._cateringService.getCatering('delivered').subscribe(
 			// the first argument is a function which runs on success
@@ -84,9 +82,7 @@ export class CateringComponent implements OnInit, OnDestroy {
 				console.log(this.delivered);
 			},
 			// the second argument is a function which runs on error
-			err => console.error(err),
-			// the third argument is a function which runs on completion
-			() => console.log('done ordered')
+			err => console.error(err)
 		);
 		this._cateringService.getCatering('received').subscribe(
 			// the first argument is a function which runs on success
@@ -94,9 +90,7 @@ export class CateringComponent implements OnInit, OnDestroy {
 				this.received = data.obj;
 			},
 			// the second argument is a function which runs on error
-			err => console.error(err),
-			// the third argument is a function which runs on completion
-			() => console.log('done ordered')
+			err => console.error(err)
 		);
 	}
 

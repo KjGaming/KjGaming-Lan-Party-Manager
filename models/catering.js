@@ -10,7 +10,9 @@ var schema = new Schema({
     products: [{
         id: {type: Schema.Types.ObjectId, ref: "product", required: true},
         count: {type: Number, required: true}
-    }]
+    }],
+    food : {type: String},
+    foodPrice: {type: Number}
 
 
 });

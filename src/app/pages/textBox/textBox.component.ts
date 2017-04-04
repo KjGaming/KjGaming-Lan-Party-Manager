@@ -63,11 +63,6 @@ export class TextBoxComponent implements OnInit, AfterViewChecked {
 
 	}
 
-	keypressHandler(event) {
-		if (event.keyCode == 13) {
-			this.send();
-		}
-	}
 
 	scrollToBottom(): void {
 		try {

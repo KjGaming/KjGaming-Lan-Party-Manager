@@ -49,13 +49,26 @@ export class AdminProductComponent implements OnInit {
         this._cateringService.getProducts().subscribe(
             // the first argument is a function which runs on success
             data => {
-                this.products = data.obj;
-                console.log(this.products);
+                this._cateringService.getDelivered().subscribe(
+                    data2 => {
+                        this.products = data.obj;
+                        for(let key in this.products){
+                            for(let sold of data2.obj){
+                                console.log(sold);
+                                if(sold.name == this.products[key].name){
+
+                                    this.products[key].sold = sold.count;
+                                    break;
+                                }
+                            }
+                        }
+                        console.log(this.products);
+                    }
+                )
+
             },
             // the second argument is a function which runs on error
-            err => console.error(err),
-            // the third argument is a function which runs on completion
-            () => console.log('load products')
+            err => console.error(err)
         );
     }
 
