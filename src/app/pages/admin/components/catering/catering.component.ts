@@ -192,6 +192,8 @@ export class AdminCateringComponent implements OnInit, OnDestroy {
 				this.ordered = [];
 				this.received = [];
 				this.getCatering();
+
+				this._cateringService.calcLan().subscribe();
 			},
 			err => {
 				this._toastService.success(err.title, err.error.message);

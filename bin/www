@@ -22,7 +22,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-io = io.listen(server)
+io = io.listen(server);
 
 /**
  * Socket.io
@@ -30,6 +30,7 @@ io = io.listen(server)
 require('../bin/socket')(io);
 require('../bin/vote')(io);
 require('../bin/message')(io);
+require('../bin/catering')(io);
 
 /**
  * Listen on provided port, on all network interfaces.

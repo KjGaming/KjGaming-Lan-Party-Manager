@@ -119,10 +119,10 @@ export class SeatingComponent implements OnInit {
         if (seat.seatUsed) {
             if(seat.seatOwn){
                 this.seatContent = 'self';
-                this.seatTitle = "Hier sitzt Du";
+                this.seatTitle = id.split("_")[1] + " | Hier sitzt Du";
             }else{
                 this.seatContent = '';
-                this.seatTitle = "Hier sitzt '" + seat.seatName + "'";
+                this.seatTitle = id.split("_")[1] + " | Hier sitzt '" + seat.seatName + "'";
             }
         } else {
             this.seatTitle = 'Platz ' + id.split("_")[1] + ' ist frei';

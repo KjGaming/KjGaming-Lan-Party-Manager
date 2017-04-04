@@ -166,6 +166,19 @@ export class BaCateringService {
 
     }
 
+    calcLan(): Observable<any> {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+        return this.http.get('/api/admin/catering/calc', {headers: headers})
+			.map((res: Response) => res.json())
+			.catch((err: Response)=> {
+                return Observable.throw(err.json());
+            });
+
+    }
+
 
 }
 
