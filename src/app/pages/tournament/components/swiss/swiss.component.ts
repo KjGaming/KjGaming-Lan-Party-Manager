@@ -211,9 +211,7 @@ export class SwissComponent implements OnInit {
             // the second argument is a function which runs on error
             err => {
                 this._toastService.error(err.title, err.error.message);
-            },
-            // the third argument is a function which runs on completion
-            () => console.log('loading clan')
+            }
         );
     }
 

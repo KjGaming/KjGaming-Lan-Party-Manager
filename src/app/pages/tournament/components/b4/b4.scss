@@ -1,3 +1,19 @@
+/** svg styling **/
+.textName{
+  font-size:18px;
+}
+
+.textResult{
+  font-size:18px;
+  font-weight: bold;
+}
+
+.tournamentRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .tournamentColumn3 {
   display: flex;
   flex-direction: column;
@@ -29,13 +45,10 @@
   justify-content: flex-start;
 }
 
-#row1, #row2, #row3, #row4 {
+.row1, .row2, .row3, .row4 {
   display: flex;
   flex-direction: column;
-}
-
-#row2 svg{
-  margin-top: 41px;
+  justify-content: space-around;
 }
 
 .c_Team1 {
@@ -48,63 +61,23 @@
   display: flex;
   flex-direction: column;
 
-  .borderRow1 {
+  .borderRow {
     display: flex;
     flex-direction: row;
-    margin-bottom: 26px;
+    margin-bottom: 27px;
+    margin-top: 15px;
 
-    .firstBorderRow1 {
-      margin-top: 52px;
+    .firstBorderRow {
+      margin-top: 37px;
       width: 20px;
-      height: 81px;
+      height: 80px;
       border-right: 1px solid black;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
     }
 
-    .secondBorderRow1 {
-      margin-top: 91px;
-      width: 20px;
-      border-top: 1px solid black;
-    }
-  }
-  .borderRow2 {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 61px;
-
-    .firstBorderRow2 {
-      margin-top: 91px;
-      margin-bottom: 15px;
-      width: 20px;
-      height: 168px;
-      border-right: 1px solid black;
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
-    }
-
-    .secondBorderRow2 {
-      margin-top: 172px;
-      margin-bottom: 10px;
-      width: 20px;
-      border-top: 1px solid black;
-    }
-  }
-  .borderRow3 {
-    display: flex;
-    flex-direction: row;
-
-    .firstBorderRow3 {
-      margin-top: 172px;
-      width: 20px;
-      height: 337px;
-      border-right: 1px solid black;
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
-    }
-
-    .secondBorderRow3 {
-      margin-top: 339px;
+    .secondBorderRow {
+      margin-top: 75px;
       width: 20px;
       border-top: 1px solid black;
     }
@@ -112,17 +85,17 @@
 }
 
 #game9, #game10, #game11, #game12 {
-  margin-top: 40px;
-  padding-bottom: 44px;
+  margin-top: 39px;
+  padding-bottom: 26px;
 }
 
 #game13, #game14 {
-  margin-top: 122px;
-  padding-bottom: 130px;
+  margin-top: 106px;
+  padding-bottom: 90px;
 }
 
 #game15 {
-  margin-top: 288px;
+  margin-top: 240px;
   margin-bottom: 50px;
 }
 
@@ -158,4 +131,136 @@
       padding: 0;
     }
   }
+}
+
+/** Match Modal **/
+.modal-header{
+  background-color: #272a33;
+  border-bottom: 1px solid #31333c !important;
+  color: white;
+  .close{
+    color: white;
+  }
+}
+.matchModalBody{
+  background-color: #272a33;
+  color: white;
+
+  .looserText{
+    font-size: 12px;
+    color: white;
+    text-align: center;
+  }
+  .submitButton{
+    text-align: center;
+  }
+
+  .table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #292e3a;
+  }
+
+  .table{
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    td {
+      padding: 8px;
+      line-height: 1.42857143;
+      vertical-align: top;
+      text-align: left !important;
+      border: 1px solid #343946;
+
+    }
+  }
+  .matchInput{
+    width: 45px;
+    padding-left: 5px;
+    padding-right: 3px;
+  }
+}
+
+.matchModalResult{
+  border-bottom: 1px solid #343946;
+  padding-bottom: 10px;
+}
+
+.matchModalInfo{
+  margin-top: 10px;
+}
+
+.matchup{
+  clear: both;
+  .infoTeam{
+    width: 45%;
+    float: left;
+    text-align: center;
+    .contents{
+      background-color: #23252d;
+      border: 1px solid #1c1e25;
+      padding: 10px 5px;
+    }
+    .winner{
+      border-top-color: #ff7324;
+    }
+    .teamName{
+      display: inline-block;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .infoVersus{
+    width: 10%;
+    padding-top: 13px;
+    font-weight: bold;
+    color: #999;
+    float: left;
+    text-align: center;
+  }
+}
+
+.overallScore{
+  clear: both;
+  .score{
+    width: 45%;
+    float: left;
+    text-align: center;
+    .contents{
+      background-color: #393d4a;
+      font-size: 16px;
+      line-height: 13px;
+      padding: 8px 0;
+      border: 1px solid #1c1e25;
+      border-top: 0;
+    }
+  }
+  .divider{
+    width: 10%;
+    float: left;
+    text-align: center;
+    color: #666;
+  }
+}
+
+.matchInfo{
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  .info{
+    clear: both;
+    width: 100%;
+    .infoTitle{
+      float: left;
+      width: 20%;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .infoContent{
+      float: left;
+      width: 80%;
+      font-size: 16px;
+    }
+  }
+
 }

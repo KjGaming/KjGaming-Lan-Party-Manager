@@ -8,23 +8,25 @@ import { TournamentComponent } from './tournament.component';
 import { TournamentService } from "./tournament.service";
 import { HttpModule } from "@angular/http";
 import { B4Component } from "./components/b4/b4.component";
+import { ModalModule } from 'ng2-bs4-modal/ng2-bs4-modal';
 
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        NgaModule,
-        routing,
-        HttpModule,
-        ReactiveFormsModule
-    ],
-    declarations: [
-        B4Component
-    ],
-    providers: [
-        TournamentService
-    ]
+	imports: [
+		CommonModule,
+		FormsModule,
+		NgaModule,
+		routing,
+		HttpModule,
+		ReactiveFormsModule,
+		ModalModule
+	],
+	declarations: [
+		B4Component
+	],
+	providers: [
+		TournamentService
+	]
 })
 export default class B4Module {
 }

@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var schema = new Schema({
         name: {type: String, required: true}, // Tournament name
         gameName: {type: String, required: true}, // Game name
-        mode: {type: String, required: true, enum: ['b16', 'b8', 'b4', 'lb8', 'lb4', 'swiss']}, // Game mode
+        mode: {type: String, required: true, enum: ['b16', 'b8', 'b4', 'swiss']}, // Game mode
         size: {type: Number, required: true}, // Game player size
         playerMode: {type: String, required: true, enum: ['User', 'Clan']}, // Game mode Clan or User
         status: {type: String, required: true, enum: ['on', 'off', 'end']},

@@ -1,233 +1,230 @@
-import {Component, ViewEncapsulation, OnInit} from '@angular/core';
-
-import {SmartTablesService} from './smartTables.service';
-import {ActivatedRoute} from "@angular/router";
-import {FormBuilder, Validators, FormGroup} from '@angular/forms';
-import {NotificationsService} from "angular2-notifications/src/notifications.service";
-import {BaTournamentService} from "../../../../theme/services/baTournament/baTournament.service";
+import { Component, ViewEncapsulation, OnInit, ViewChild } from '@angular/core';
+import { ModalComponent } from "ng2-bs4-modal/components/modal";
+import { SmartTablesService } from './smartTables.service';
+import { ActivatedRoute } from "@angular/router";
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { NotificationsService } from "angular2-notifications/src/notifications.service";
+import { BaTournamentService } from "../../../../theme/services/baTournament/baTournament.service";
 
 @Component({
-    selector: 'bracket-8',
-    encapsulation: ViewEncapsulation.None,
-    styles: [require('./b8.scss')],
-    template: require('./b8.component.html')
+	selector: 'bracket-8',
+	encapsulation: ViewEncapsulation.None,
+	styles: [require('./b8.scss')],
+	template: require('./b8.component.html')
 })
 export class B8Component implements OnInit {
-    public options = {
-        position: ["top", "center"],
-        timeOut: 5000
-    };
+	public options = {
+		position: ["top", "center"],
+		timeOut: 5000
+	};
 
-    tournament; // The whole tournament
-    tournamentId; // The tournament ID
-    public games = []; // All Games in this tournament
+	@ViewChild('match') match: ModalComponent;
+	selectMatch = {};
+	userStatus = localStorage.getItem('blackWidow');
 
-    /** For the bracket **/
-    public row1 = [];
-    public row2 = [];
-    public row3 = [];
-    repeat4 = [1, 2];
+	tournament; // The whole tournament
+	tournamentId; // The tournament ID
+	games: Object = {
+		'Runde 1': {
+			"team1": "TBA",
+			"team2": "TBA",
+			"result1": 0,
+			"result2": 0,
+			"result": "0:0",
+			"rounds": "0-0",
+			"game": 1
+		},
+		'Runde 2': {
+			"team1": "TBA",
+			"team2": "TBA",
+			"result1": 0,
+			"result2": 0,
+			"result": "0:0",
+			"rounds": "0-0",
+			"game": 2
+		},
+		'Runde 3': {
+			"team1": "TBA",
+			"team2": "TBA",
+			"result1": 0,
+			"result2": 0,
+			"result": "0:0",
+			"rounds": "0-0",
+			"game": 2
+		},
+		'Runde 4': {
+			"team1": "TBA",
+			"team2": "TBA",
+			"result1": 0,
+			"result2": 0,
+			"result": "0:0",
+			"rounds": "0-0",
+			"game": 3
+		},
+		'Runde 5': {
+			"team1": "TBA",
+			"team2": "TBA",
+			"result1": 0,
+			"result2": 0,
+			"result": "0:0",
+			"rounds": "0-0",
+			"game": 3
+		},
+		'Runde 6': {
+			"team1": "TBA",
+			"team2": "TBA",
+			"result1": 0,
+			"result2": 0,
+			"result": "0:0",
+			"rounds": "0-0",
+			"game": 3
+		},
+		'Runde 7': {
+			"team1": "TBA",
+			"team2": "TBA",
+			"result1": 0,
+			"result2": 0,
+			"result": "0:0",
+			"rounds": "0-0",
+			"game": 3
+		},
+	};
 
+	constructor(private _tournamentService: BaTournamentService,
+				private route: ActivatedRoute,
+				public fb: FormBuilder,
+				private _toastService: NotificationsService) {
+		this.route.params.subscribe(params => {
+			this.tournamentId = params['tournamentId'];
+		});
+	}
 
-    //Variable for input the Value
-    userStatus = localStorage.getItem('blackWidow');
-    gameGameId;
-    gameTeam1;
-    gameTeam2;
-    gameResult1;
-    gameResult2;
-    gameTimeStart;
-    gameTimeDuration;
-    gameMap;
-    players1 = ['genin', 'SciTe', 'gabba', 'ata', 'bot'];
-    players2 = ['genin', 'SciTe', 'gabba', 'ata', 'bot'];
-    inGamen = null;//team1, team2, admin or null
+	ngOnInit() {
+		this.getTournament(this.tournamentId);
+	}
 
-    public resultForm: FormGroup;
+	getTournament(id) {
+		this._tournamentService.getTournamentInfos(id).subscribe(
+			// the first argument is a function which runs on success
+			data => {
+				console.log(data.obj);
+				this.tournament = data.obj;
+				for (let game of data.obj.games) {
+					this.games['Runde ' + game.gameId] = game;
+				}
+				console.log(this.games);
 
+			},
+			// the second argument is a function which runs on error
+			err => console.error(err),
+			// the third argument is a function which runs on completion
+			() => console.log('done loading news')
+		);
+	}
 
-    constructor(private _tournamentService: BaTournamentService,
-                private route: ActivatedRoute,
-                public fb: FormBuilder,
-                private _toastService: NotificationsService) {
-        this.route.params.subscribe(params => {
-            this.tournamentId = params['tournamentId'];
-        });
+	saveGameResult(match) {
+		this.match.close();
+		let winner;
+		let looser;
+		let input;
 
-        this.resultForm = this.fb.group({
-            result1: ["", Validators.required],
-            result2: ["", Validators.required]
-        });
+		if (match.result1 > match.result2) {
+			winner = match.team1;
+			looser = match.team2;
+		} else {
+			winner = match.team2;
+			looser = match.team1;
+		}
 
-    }
+		input = {
+			"gameId": match.gameId,
+			"tournamentId": this.tournamentId,
+			"result1": match.result1,
+			"result2": match.result2,
+			"winner": winner,
+			"looser": looser
+		};
 
-    ngOnInit() {
-        this.getTournament(this.tournamentId);
-    }
+		let round = 0;
 
+		this._tournamentService.saveGameResult(input).subscribe(
+			// the first argument is a function which runs on success
+			data => {
+				console.log(data);
+				let i = {
+					tournamentId: data.obj._id,
+					gameId: data.swiss.gameId,
+					winner: data.swiss.winner
+				};
+				this._tournamentService.setNextGame(i).subscribe(
+					data2 => {
+						this._toastService.success(data2.title, data2.message);
+						this.ngOnInit();
+					},
+					error => {
+						console.error(error);
+					}
+				);
+			},
+			// the second argument is a function which runs on error
+			err => {
+				console.error(err);
+			}
+		);
+	}
 
-    getTournament(id) {
-        this._tournamentService.getTournamentInfos(id).subscribe(
-            // the first argument is a function which runs on success
-            data => {
-                this.tournament = data.obj;
-                this.games = data.obj.games;
-                for (let game of this.games) {
-                    if (game.gameId <= 4) {
-                        this.row1.push(game);
-                    } else if (game.gameId <= 5 && game.gameId >= 6) {
-                        this.row2.push(game);
-                    } else if (game.gameId == 7) {
-                        this.row3.push(game);
-                    }
-                }
+	openMatchInfo(match) {
+		let user = localStorage.getItem('nickName');
+		let clans = JSON.parse(localStorage.getItem('clans'));
 
-                if (data.obj.playerMode == "Clan") {
+		function isInClan(value) {
+			if (match.team1 == value || match.team2 == value) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 
-                } else {
+		if (this.tournament.playerMode == 'User') {
+			match["isInClan"] = isInClan(user);
 
-                }
+		} else {
+			for (let uClan of clans) {
+				match["isInClan"] = isInClan(uClan.name);
+				if (match.isInClan) {
+					break;
+				}
+			}
+		}
 
-                console.log(this.games);
-                console.log(this.row1);
+		if (match.result1 > 0 || match.result2 > 0) {
+			match["resultSave"] = true;
+		} else {
+			match["resultSave"] = false;
+		}
 
-            },
-            // the second argument is a function which runs on error
-            err => console.error(err),
-            // the third argument is a function which runs on completion
-            () => console.log('done loading news')
-        );
-    }
+		this.match.open();
+		this.selectMatch = match;
+	}
 
-    clickIt(game) {
-        this.gameGameId = game.gameId;
-        this.gameTeam1 = game.team1;
-        this.gameTeam2 = game.team2;
-        this.gameResult1 = game.result1;
-        this.gameResult2 = game.result2;
-        this.gameTimeStart = game.timeStart;
-        this.gameTimeDuration = game.timeDuration;
-        this.gameMap = game.map;
-        this.inGamen = null;
-
-        //Check if reg is in this game
-        if (this.tournament.playerMode == "Clan") {
-            //get the clan of the User
-            var clans = JSON.parse(localStorage.getItem('clans'));
-            for (let clan of clans) {
-                if (clan.name == game.team1) {
-                    this.inGamen = "team1";
-                    break;
-                } else if (clan.name == game.team2) {
-                    this.inGamen = "team2";
-                    break;
-                }
-            }
-        } else {
-            var nickName = JSON.parse(localStorage.getItem('nickName'));
-            if (nickName == game.team1) {
-                this.inGamen = "team1";
-            } else if (nickName == game.team2) {
-                this.inGamen = "team2";
-            }
-        }
-
-        if (JSON.parse(localStorage.getItem('blackWidow')) == 481) {
-            this.inGamen = "admin";
-        }
-
-    }
-
-    saveResult(event) {
-        event['gameId'] = this.gameGameId;
-        event['tournamentId'] = this.tournamentId;
-        event['inGame'] = this.inGamen;
-
-        switch (this.gameGameId) {
-            case 1:
-            case 2:
-                event['winnerGame'] = 9;
-                event['looserGame'] = null;
-                break;
-            case 3:
-            case 4:
-                event['winnerGame'] = 10;
-                event['looserGame'] = null;
-                break;
-            case 5:
-            case 6:
-                event['winnerGame'] = 11;
-                event['looserGame'] = null;
-                break;
-            case 7:
-            case 8:
-                event['winnerGame'] = 12;
-                event['looserGame'] = null;
-                break;
-            case 9:
-            case 10:
-                event['winnerGame'] = 13;
-                event['looserGame'] = null;
-                break;
-            case 11:
-            case 12:
-                event['winnerGame'] = 14;
-                event['looserGame'] = null;
-                break;
-            case 13:
-            case 14:
-                event['winnerGame'] = 15;
-                event['looserGame'] = 16;
-                break;
-            default:
-                event['winnerGame'] = null;
-                event['looserGame'] = null;
-                break;
-        }
-
-        console.log(event);
-
-        if (event.result1 > event.result2 && event.inGame == "team2") {
-            this._tournamentService.postTournamentResult(event)
-                .subscribe(
-                    data => {
-                        this._toastService.success(data.message, '');
-                    },
-                    error => {
-                        console.error(error);
-                        this._toastService.error(error.title, error.error.message);
-
-                    }
-                );
-        } else if (event.result1 < event.result2 && event.inGame == "team1") {
-            this._tournamentService.postTournamentResult(event)
-                .subscribe(
-                    data => {
-                        this._toastService.success(data.message, '');
-                    },
-                    error => {
-                        console.error(error);
-                        this._toastService.error(error.title, error.error.message);
-
-                    }
-                );
-        } else if (event.inGame == "admin") {
-            this._tournamentService.postTournamentResult(event)
-                .subscribe(
-                    data => {
-                        this._toastService.success(data.message, '');
-                    },
-                    error => {
-                        console.error(error);
-                        this._toastService.error(error.title, error.error.message);
-
-                    }
-                );
-        } else {
-            this._toastService.error('Fehler', 'Das Ergebnis konnt so nicht übertragen werden');
-        }
-
-
-    }
+	whoIsWinner(match, team) {
+		if (match.result1 || match.result2) {
+			if (team == "team1") {
+				if (match.result1 > match.result2) {
+					return {'winner': true};
+				} else {
+					return {'winner': false};
+				}
+			} else if (team == "team2") {
+				if (match.result1 < match.result2) {
+					return {'winner': true};
+				} else {
+					return {'winner': false};
+				}
+			}
+		} else {
+			return {'winner': false};
+		}
+	}
 
 }

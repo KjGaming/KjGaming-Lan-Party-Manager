@@ -60,7 +60,7 @@ export class BaTournamentService {
             'Authorization': localStorage.getItem('id_token')
         });
 
-        return this.http.put('/api/reg/tournament/registration', body, {headers: headers})
+        return this.http.patch('/api/reg/tournament/registration', body, {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response) => {
                 return Observable.throw(err.json());
@@ -159,9 +159,21 @@ export class BaTournamentService {
             'Authorization': localStorage.getItem('id_token')
         });
 
-        console.log(body);
-
         return this.http.put('/api/reg/tournament/game/save', body, {headers: headers})
+            .map((res: Response) => res.json())
+            .catch((err: Response) => {
+                return Observable.throw(err.json());
+            });
+    }
+
+    setNextGame(event) {
+        const body = JSON.stringify(event);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.patch('/api/reg/tournament/setNextGame', body, {headers: headers})
             .map((res: Response) => res.json())
             .catch((err: Response) => {
                 return Observable.throw(err.json());
