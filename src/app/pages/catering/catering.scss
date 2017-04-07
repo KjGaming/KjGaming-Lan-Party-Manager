@@ -4,6 +4,8 @@
   cursor: pointer;
   text-align: center;
 
+
+
   .productTitle {
     color: black;
     width: 100%;
@@ -14,22 +16,24 @@
     font-weight: 700;
   }
 
+
   .productImage {
-    height: 100px;
+    height: 150px;
     width: 100%;
     background-size: 100% auto;
     background-repeat: no-repeat;
   }
 
   .productPrice {
-    color: black;
+    vertical-align: middle;
+    color: white;
     width: 100%;
     border: none;
-    height: 20px;
-    background-color: rgba(255,255, 255, 0.5);
+    height: 30px;
+    background-color: rgba(0,0, 0, 0.8);
     font-size: 15px;
-    padding-top: 2px;
-    margin-top: 55px;
+    padding-top: 6px;
+    margin-top: -30px;
   }
 }
 

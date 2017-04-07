@@ -2,12 +2,10 @@
 <div class="row">
 	<ba-card class="col-sm-12" title="Produkte">
 		<div class="row">
-			<div *ngFor="let product of products; let i = index" class="col-6 col-sm-3 col-lg-1  productCard"
+			<div *ngFor="let product of products; let i = index" class="col-6 col-sm-3 col-lg-2  productCard"
 				 (click)="addToShoppingCart(product)">
-				<div class="productImage" [ngStyle]="{'background-image': 'url(' + product.img + ')'}">
-					<div class="productTitle">{{product.name}}</div>
-					<div class="productPrice">{{product.price}} €</div>
-				</div>
+				<div class="productImage" [ngStyle]="{'background-image': 'url(' + product.img + ')'}"></div>
+				<div class="productPrice">{{product.price}} €</div>
 			</div>
 		</div>
 	</ba-card>

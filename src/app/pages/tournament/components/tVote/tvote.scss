@@ -1,0 +1,21 @@
+.mapCard{
+  cursor: pointer;
+  width: 100%;
+
+  .voteMapName{
+    text-align: center;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  img{
+    width: 100%;
+  }
+
+}
+.voteTime{
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 10px;
+}

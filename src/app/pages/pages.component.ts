@@ -13,7 +13,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
       </div>
     </div>
     <footer class="al-footer clearfix">
-      <div class="al-footer-right">Created with <i class="ion-heart"></i>  |  v9.0.1</div>
+      <div class="al-footer-right">Created with <i class="ion-heart"></i>  |  v1.0.0</div>
       <div class="al-footer-main clearfix">
         <div class="al-copy">&copy; <a href="http://kjgaming.de">KjGaming</a> 2017</div>
         <ul class="al-share clearfix">

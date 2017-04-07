@@ -16,6 +16,7 @@ import { ModalModule } from 'ng2-bs4-modal/ng2-bs4-modal';
 import { SwissComponent } from "./components/swiss/swiss.component";
 import { B8Component } from "./components/b8/b8.component";
 import { B4Component } from "./components/b4/b4.component";
+import { TVoteComponent } from "app/pages/tournament/components/tVote";
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { B4Component } from "./components/b4/b4.component";
 		B4Component,
 		TournamentRegisterComponent,
 		TournamentEndComponent,
-		SwissComponent
+		SwissComponent,
+		TVoteComponent
 	],
 	providers: []
 })
