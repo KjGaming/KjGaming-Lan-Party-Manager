@@ -4,31 +4,31 @@
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px"
-                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    viewBox="0 0 281 81" width="250px" height="80px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 1'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						Rip in Peace
+						{{games['Runde 1']['team1']}}
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40"/>
+				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 1'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						Konfukanaltanga
+						{{games['Runde 1']['team2']}}
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                            16
+                            {{games['Runde 1']['result1']}}
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                            10
+                            {{games['Runde 1']['result2']}}
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -51,31 +51,31 @@
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
 				xmlns:xlink="http://www.w3.org/1999/xlink"
 				x="0px" y="0px"
-				viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+				viewBox="0 0 281 81" width="250px" height="80px" xml:space="preserve"
 				preserveAspectRatio="xMaxYMax">
-			<rect class="team1"  y="0" fill="none" width="224" height="40" />
+			<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 2'])"/>
 			<g class="text">
 				<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-					Rip in Peace
+					{{games['Runde 2']['team1']}}
 				</text>
 			</g>
-			<rect class="team2" y="38" fill="none" width="224" height="40"/>
+			<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 2'])"/>
 			<g class="text">
 				<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-					Konfukanaltanga
+					{{games['Runde 2']['team2']}}
 				</text>
 			</g>
 				<rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
 				<g class="text">
 					<text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-						16
+						{{games['Runde 2']['result1']}}
 					</text>
 				</g>
 
 				<rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
 				<g class="text">
 					<text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-						10
+						{{games['Runde 2']['result2']}}
 					</text>
 				</g>
 				<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -98,31 +98,31 @@
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
 				xmlns:xlink="http://www.w3.org/1999/xlink"
 				x="0px" y="0px"
-				viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+				viewBox="0 0 281 81" width="250px" height="80px" xml:space="preserve"
 				preserveAspectRatio="xMaxYMax">
-			<rect class="team1"  y="0" fill="none" width="224" height="40" />
+			<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 3'])"/>
 			<g class="text">
 				<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-					Rip in Peace
+					{{games['Runde 1']['team1']}}
 				</text>
 			</g>
-			<rect class="team2" y="38" fill="none" width="224" height="40"/>
+			<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 3'])"/>
 			<g class="text">
 				<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-					Konfukanaltanga
+					{{games['Runde 3']['team2']}}
 				</text>
 			</g>
 				<rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
 				<g class="text">
 					<text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-						16
+						{{games['Runde 3']['result1']}}
 					</text>
 				</g>
 
 				<rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
 				<g class="text">
 					<text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-						10
+						{{games['Runde 3']['result2']}}
 					</text>
 				</g>
 				<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -145,31 +145,31 @@
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px"
-                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    viewBox="0 0 281 81" width="250px" height="80px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 4'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						Rip in Peace
+						{{games['Runde 4']['team1']}}
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40"/>
+				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 4'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						Konfukanaltanga
+						{{games['Runde 4']['team2']}}
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                            16
+                            {{games['Runde 4']['result1']}}
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                            10
+                            {{games['Runde 4']['result2']}}
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -204,31 +204,31 @@
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="20px" y="0px"
-                    viewBox="0 0 281 81" width="200px" height="120px" xml:space="preserve"
+                    viewBox="0 0 281 81" width="250px" height="120px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 5'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						Rip in Peace
+						{{games['Runde 5']['team1']}}
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40"/>
+				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 5'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						Konfukanaltanga
+						{{games['Runde 5']['team2']}}
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                            16
+                            {{games['Runde 5']['result1']}}
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                            10
+                            {{games['Runde 5']['result2']}}
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -251,31 +251,33 @@
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px"
-                    viewBox="0 0 281 81" width="200px" height="159px" xml:space="preserve"
+                    viewBox="0 0 281 81" width="250px" height="159px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 6'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						Rip in Peace
+						{{games['Runde 6']['team1']}}
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40"/>
+				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 6'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						Konfukanaltanga
+						{{games['Runde 6']['team2']}}
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                            16
+                            {{games['Runde 6']['result1']}}
+
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                            10
+                           {{games['Runde 6']['result2']}}
+
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -306,31 +308,31 @@
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px"
-                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    viewBox="0 0 281 81" width="200px" height="201px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 7'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						Rip in Peace
+						{{games['Runde 7']['team1']}}
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40"/>
+				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 7'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						Konfukanaltanga
+						{{games['Runde 7']['team2']}}
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                            16
+                            {{games['Runde 7']['result1']}}
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                            10
+                            {{games['Runde 7']['result2']}}
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -354,7 +356,7 @@
 </div>
 
 
-<modal #match>
+<modal id="matchModal" #match>
 	<modal-header [show-close]="true">
 		<h4 class="modal-title">Spiel {{selectMatch.gameId}}</h4>
 	</modal-header>

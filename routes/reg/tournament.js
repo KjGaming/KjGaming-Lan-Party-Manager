@@ -214,36 +214,36 @@ router.patch('/setNextGame', function ( req, res ) {
 
 		switch (tournament.mode) {
 			case 'b16':
-				if (req.body.gameId === (1 || 2)) {
+				if (req.body.gameId == 1 || req.body.gameId == 2) {
 					gameId = 9
 				}
-				if (req.body.gameId === (3 || 4)) {
+				if (req.body.gameId == 3 || req.body.gameId == 4) {
 					gameId = 10
 				}
-				if (req.body.gameId === (5 || 6)) {
+				if (req.body.gameId == 5 || req.body.gameId == 6) {
 					gameId = 11
 				}
-				if (req.body.gameId === (7 || 8)) {
+				if (req.body.gameId == 7 || req.body.gameId == 8) {
 					gameId = 12
 				}
-				if (req.body.gameId === (9 || 10)) {
+				if (req.body.gameId == 9 || req.body.gameId == 10) {
 					gameId = 13
 				}
-				if (req.body.gameId === (11 || 12)) {
+				if (req.body.gameId == 11 || req.body.gameId == 12) {
 					gameId = 14
 				}
-				if (req.body.gameId === (13 || 14)) {
+				if (req.body.gameId == 13 || req.body.gameId == 14) {
 					gameId = 15
 				}
 				break;
 			case 'b8':
-				if (req.body.gameId === (1 || 2)) {
+				if (req.body.gameId == 1 || req.body.gameId == 2) {
 					gameId = 5
 				}
-				if (req.body.gameId === (3 || 4)) {
+				if (req.body.gameId == 3 || req.body.gameId == 4) {
 					gameId = 6
 				}
-				if (req.body.gameId === (5 || 6)) {
+				if (req.body.gameId == 5 || req.body.gameId == 6) {
 					gameId = 7
 				}
 				break;
@@ -423,16 +423,64 @@ router.put('/game/save', function ( req, res, next ) {
 
 /** save the changes of a tournament **/
 router.put('/save', function ( req, res, next ) {
-	Tournament.findByIdAndUpdate(req.body.id,
-		{
-			$set: {
-				'name': req.body.name,
-				'gameName': req.body.gameName,
-				'mode': req.body.mode,
-				'size': req.body.size,
-				'playerMode': req.body.playerMode,
+	let sameMode = false;
+	let updateObj;
+
+	Tournament.findById(req.body.id)
+		.exec(function ( err, event ) {
+			if (err) {
+				return res.status(500).json({
+					title: 'An error occurred',
+					error: err
+				});
 			}
-		},
+			if (event.mode == req.body.mode) {
+				sameMode = true;
+			}
+		});
+
+	if (sameMode) {
+		updateObj =
+			{
+				$set: {
+					'name': req.body.name,
+					'gameName': req.body.gameName,
+					'mode': req.body.mode,
+					'size': req.body.size,
+					'playerMode': req.body.playerMode,
+				}
+			}
+	}else{
+		if(req.body.playerMode == 'Clan'){
+			updateObj =
+				{
+					$set: {
+						'name': req.body.name,
+						'gameName': req.body.gameName,
+						'mode': req.body.mode,
+						'size': req.body.size,
+						'playerMode': req.body.playerMode,
+						'player': []
+					}
+				}
+		}else{
+			updateObj =
+				{
+					$set: {
+						'name': req.body.name,
+						'gameName': req.body.gameName,
+						'mode': req.body.mode,
+						'size': req.body.size,
+						'playerMode': req.body.playerMode,
+						'clan' : []
+					}
+				}
+		}
+
+	}
+
+
+	Tournament.findByIdAndUpdate(req.body.id, updateObj,
 		function ( err, result ) {
 			if (err) {
 				return res.status(500).json({

@@ -1,35 +1,35 @@
 <simple-notifications [options]="options"></simple-notifications>
 <div class="bracket">
     <div id="row1">
-		<div *ngFor="let row_1 of row1, let i = index" [attr.id]="'game' + row_1.gameId">
+		<div *ngFor="let game of row1; let i = index">
 			<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px"
                     viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(row_1)" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(game)"/>
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						{{row_1.team1}}
+						{{game.team1}}
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(row_1)" />
+				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(game)"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						{{row_1.team2}}
+						{{game.team2}}
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                            {{row_1.result1}}
+                            {{game.result1}}
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                            {{row_1.result2}}
+                            {{game.result2}}
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -58,35 +58,35 @@
         </div>
     </div>
     <div id="row2">
-        <div *ngFor="let row_2 of row2, let i = index" [attr.id]="'game' + row_2.gameId">
+        <div *ngFor="let game of row2; let i = index">
 			<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px"
-                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    viewBox="0 0 281 81" width="200px" [attr.height]="game.height + 'px'" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(row_2)" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(game)"/>
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						{{row_2.team1}}
+						{{game.team1}}
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(row_2)" />
+				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(game)"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						{{row_2.team2}}
+						{{game.team2}}
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                            {{row_2.result1}}
+                            {{game.result1}}
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                            {{row_2.result2}}
+                            {{game.result2}}
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -119,35 +119,35 @@
         </div>
     </div>
     <div id="row3">
-        <div *ngFor="let row_3 of row3, let i = index" [attr.id]="'game' + row_3.gameId">
+        <div *ngFor="let game of row3; let i = index">
 			<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px"
-                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    viewBox="0 0 281 81" width="200px" [attr.height]="game.height + 'px'" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(row_3)" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(game)"/>
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						{{row_3.team1}}
+						{{game.team1}}
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(row_3)" />
+				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(game)"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						{{row_3.team2}}
+						{{game.team2}}
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                           {{row_3.result1}}
+                            {{game.result1}}
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                           {{row_3.result2}}
+                            {{game.result2}}
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -176,35 +176,34 @@
         </div>
     </div>
     <div id="row4">
-        <div *ngFor="let row_4 of row4, let i = index" [attr.id]="'game' + row_4.gameId">
-			<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px"
-                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    viewBox="0 0 281 81" width="200px" height="368px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
-				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(row_4)" />
+				<rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 15'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="17" text-anchor="middle" alignment-baseline="central">
-						{{row_4.team1}}
+						{{games['Runde 15']['team1']}}
 					</text>
 				</g>
-				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(row_4)" />
+				<rect class="team2" y="38" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 15'])"/>
 				<g class="text">
 					<text class="textName" x="112" y="59" text-anchor="middle" alignment-baseline="central">
-						{{row_4.team2}}
+						{{games['Runde 15']['team2']}}
 					</text>
 				</g>
                     <rect class="team1_result" x="225" y="0" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="20" text-anchor="middle" alignment-baseline="central">
-                            {{row_4.result1}}
+                            {{games['Runde 15']['result1']}}
                         </text>
                     </g>
 
                     <rect class="team2_result" x="225" y="38" fill="none" width="55" height="40"/>
                     <g class="text">
                         <text class="textResult" x="250" y="59" text-anchor="middle" alignment-baseline="central">
-                            {{row_4.result2}}
+                            {{games['Runde 15']['result2']}}
                         </text>
                     </g>
 					<rect x="0.5" y="0.5" fill="none" stroke="#000000" stroke-miterlimit="10" width="280" height="80"/>
@@ -224,19 +223,16 @@
 				</linearGradient>
 				<line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="40.5" x2="224" y2="40.5"/>
 				</svg>
-        </div>
-
     </div>
 </div>
 
-
-<modal #match>
+<modal id="matchModal" #match>
 	<modal-header [show-close]="true">
 		<h4 class="modal-title">Spiel {{selectMatch.gameId}}</h4>
 	</modal-header>
 	<modal-body class="matchModalBody">
 		<div class="matchModalResult"
-			 *ngIf="userAdminId == 481 || (selectMatch.isInClan == true && selectMatch.resultSave == false)">
+			 *ngIf="userStatus == 481 || (selectMatch.isInClan == true && selectMatch.resultSave == false)">
 			<table class="table table-striped table-bordered">
 				<tbody>
 				<tr>
@@ -284,11 +280,11 @@
 			<div class="matchInfo">
 				<div class="info">
 					<div class="infoTitle">Zeit:</div>
-					<div class="infoContent">20.04.2017 18:00 Uhr</div>
+					<div class="infoContent">{{selectMatch.timeStart | date: 'short'}}</div>
 				</div>
 				<div class="info">
 					<div class="infoTitle">Map:</div>
-					<div class="infoContent">de_dust2</div>
+					<div class="infoContent">{{selectMatch.map}}</div>
 				</div>
 			</div>
 		</div>

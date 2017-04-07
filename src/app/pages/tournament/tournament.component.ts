@@ -222,8 +222,11 @@ export class TournamentComponent implements OnInit {
 	checkClanStatus(tournament, event) {
 		let focusClanId = event.target.value;
 		let allClans = null;
+		tournament.regInTournament = 0;
+		console.log(focusClanId);
 
 		if (focusClanId != 'empty') {
+			tournament.regInTournament = 1;
 			this._clanService.getClanList().subscribe(
 				// the first argument is a function which runs on success
 				data => {
@@ -256,9 +259,6 @@ export class TournamentComponent implements OnInit {
 				// the second argument is a function which runs on error
 				err => console.error(err)
 			);
-		} else {
-			tournament.regInTournament = 0;
 		}
-
 	}
 }

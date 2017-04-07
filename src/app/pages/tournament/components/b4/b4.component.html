@@ -4,7 +4,7 @@
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px"
-                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    viewBox="0 0 281 81" width="250px" height="80px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
                     <rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 1'])"/>
                     <g class="text">
@@ -48,10 +48,10 @@
                     </linearGradient>
                     <line fill="none" stroke="url(#SVGID_2_)" stroke-miterlimit="10" x1="120" y1="40.5" x2="224" y2="40.5"/>
 				</svg>
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px"
-                    viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+                    viewBox="0 0 281 81" width="250px" height="80px" xml:space="preserve"
                     preserveAspectRatio="xMaxYMax">
                     <rect class="team1"  y="0" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 2'])"/>
                     <g class="text">
@@ -106,7 +106,7 @@
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
 				 xmlns:xlink="http://www.w3.org/1999/xlink"
 				 x="0px" y="0px"
-				 viewBox="0 0 281 81" width="200px" height="80px" xml:space="preserve"
+				 viewBox="0 0 281 81" width="250px" height="80px" xml:space="preserve"
 				 preserveAspectRatio="xMaxYMax">
 				<rect class="team1" y="0" fill="none" width="224" height="40" (click)="openMatchInfo(games['Runde 3'])"/>
 				<g class="text">
@@ -156,7 +156,7 @@
 </div>
 
 
-<modal #match>
+<modal id="matchModal" #match>
 	<modal-header [show-close]="true">
 		<h4 class="modal-title">Spiel {{selectMatch.gameId}}</h4>
 	</modal-header>
