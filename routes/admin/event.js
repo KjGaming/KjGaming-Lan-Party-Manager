@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let Event = require('../../models/event');
+let Tournament = require('../../models/tournament');
 
 
 router.post('/', function ( req, res, next ) {
@@ -11,7 +12,8 @@ router.post('/', function ( req, res, next ) {
 		timeEnd: req.body.timeEnd,
 		timeDuration: diffDate,
 		mode: req.body.mode,
-		content: req.body.content
+		content: req.body.content,
+		tournamentId: req.body.tournamentId
 	});
 
 	event.save(function ( err, result ) {
@@ -75,6 +77,7 @@ router.delete('/:id', function ( req, res, next ) {
 
 		});
 	}
+
 	Event.findByIdAndRemove(req.params.id, function ( err, result ) {
 		if (err) {
 			return res.status(500).json({

@@ -2,8 +2,10 @@ let express = require('express');
 let router = express.Router();
 let Tournament = require('../../models/tournament');
 let Clan = require('../../models/clan');
+let Event = require('../../models/event');
 let jwt = require('jsonwebtoken');
-let shuffle = require('shuffle-array')
+let shuffle = require('shuffle-array');
+var secret = require('../secret/secret');
 
 /** Get all tournaments **/
 router.get('/', function ( req, res, next ) {
@@ -199,7 +201,6 @@ router.post('/registration', function ( req, res, next ) {
 			});
 	}
 });
-
 
 router.patch('/setNextGame', function ( req, res ) {
 	Tournament.findById(req.body.tournamentId, function ( err, tournament ) {
@@ -450,8 +451,8 @@ router.put('/save', function ( req, res, next ) {
 					'playerMode': req.body.playerMode,
 				}
 			}
-	}else{
-		if(req.body.playerMode == 'Clan'){
+	} else {
+		if (req.body.playerMode == 'Clan') {
 			updateObj =
 				{
 					$set: {
@@ -463,7 +464,7 @@ router.put('/save', function ( req, res, next ) {
 						'player': []
 					}
 				}
-		}else{
+		} else {
 			updateObj =
 				{
 					$set: {
@@ -472,7 +473,7 @@ router.put('/save', function ( req, res, next ) {
 						'mode': req.body.mode,
 						'size': req.body.size,
 						'playerMode': req.body.playerMode,
-						'clan' : []
+						'clan': []
 					}
 				}
 		}
@@ -555,33 +556,78 @@ router.post('/create', function ( req, res, next ) {
 
 /** delete Tournament **/
 router.delete('/del', function ( req, res ) {
-	console.log(req.query.id);
+	let decode = jwt.decode(req.get('Authorization'));
+	let admin = false;
 	if (!req.query.id) {
 		return res.status(400).json({
 			title: 'No tournament selected'
 		});
 	}
 
-	Tournament.findByIdAndRemove(req.query.id, function ( err, result ) {
-		if (err) {
-			return res.status(500).json({
-				title: 'Hier ist ein Fehler aufgetreten',
-				error: err
+	Tournament.findById(req.query.id)
+		.exec(function ( err, tourn ) {
+			if(decode.user._id == tourn.admin){
+				admin = true;
+			}else if(jwt.verify(req.get('Authorization'), secret.adminSecret)){
+				admin = true;
+			}
+
+			if(admin == false){
+				return res.status(500).json({
+					title: 'Fehler',
+					message: 'Du bist nicht der Besitzer dieses Turnieres'
+				});
+			}
+
+			for(let game of tourn.games){
+
+				if(typeof game.event != undefined){
+					Event.findByIdAndRemove(game.event, function ( err, event ) {
+						if (err) {
+							return res.status(500).json({
+								title: 'Fehler',
+								message: 'Hier ist ein Fehler aufgetreten',
+								error: err
+							});
+						}
+					});
+				}
+			}
+
+			Tournament.findByIdAndRemove(req.query.id, function ( err, result ) {
+				if (err) {
+					return res.status(500).json({
+						title: 'Hier ist ein Fehler aufgetreten',
+						error: err
+					});
+				}
+
+				return res.status(201).json({
+					title: 'Erflogreich!',
+					message: 'Turnier wurde gelöscht',
+					obj: result
+				});
 			});
-		}
-		res.status(201).json({
-			title: 'Erflogreich!',
-			message: 'Turnier wurde gelöscht',
-			obj: result
+
 		});
-	});
+
 });
 
 /** update GameInfo **/
 router.patch('/game/info', function ( req, res ) {
 	let diffDate = Math.abs(req.body.timeEnd - req.body.timeStart);
-	Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.gameId},
-		{
+	let updateObj;
+	if (req.body.event == 0) {
+		updateObj = {
+			$set: {
+				'games.$.timeEnd': req.body.timeEnd,
+				'games.$.timeStart': req.body.timeStart,
+				'games.$.timeDuration': diffDate,
+				'games.$.map': req.body.map
+			}
+		}
+	} else {
+		updateObj = {
 			$set: {
 				'games.$.timeEnd': req.body.timeEnd,
 				'games.$.timeStart': req.body.timeStart,
@@ -591,7 +637,11 @@ router.patch('/game/info', function ( req, res ) {
 				'games.$.voteRoom': req.body.voteRoom
 
 			}
-		},
+		}
+	}
+
+
+	Tournament.findOneAndUpdate({"_id": req.body.tournamentId, 'games.gameId': req.body.gameId}, updateObj,
 		function ( err, result ) {
 			if (err) {
 				return res.status(500).json({
@@ -1207,6 +1257,53 @@ router.put('/createGames', function ( req, res, next ) {
 		});
 
 
+});
+
+/** User Tournament **/
+router.get('/user', function ( req, res ) {
+	let decoded = jwt.decode(req.get('Authorization'));
+	Tournament.find({statusUser: 'user', admin: decoded.user._id})
+		.exec(function ( err, event ) {
+			if (err) {
+				return res.status(500).json({
+					title: 'An error occurred',
+					error: err
+				});
+			}
+			res.status(200).json({
+				message: 'Success',
+				obj: event
+			});
+		});
+});
+
+/** User Create Tournament **/
+router.put('/user', function ( req, res ) {
+	let decoded = jwt.decode(req.get('Authorization'));
+	let tournament = new Tournament({
+		name: req.body.name,
+		gameName: req.body.gameName,
+		mode: req.body.mode,
+		size: req.body.size,
+		playerMode: req.body.playerMode,
+		status: 'off',
+		admin: decoded.user._id,
+		statusUser: 'user'
+	});
+
+	tournament.save(function ( err, result ) {
+		if (err) {
+			return res.status(500).json({
+				title: 'Hier ist ein Fehler aufgetreten',
+				error: err
+			});
+		}
+		res.status(201).json({
+			title: 'Erfolgreich',
+			message: 'Das Turnier wurde erstellt',
+			obj: result
+		});
+	});
 });
 
 

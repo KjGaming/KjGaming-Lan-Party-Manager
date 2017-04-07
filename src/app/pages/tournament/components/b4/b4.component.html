@@ -208,11 +208,11 @@
 				</div>
 			</div>
 			<div class="matchInfo">
-				<div class="info">
+				<div class="info" *ngIf="selectMatch.timeStart">
 					<div class="infoTitle">Zeit:</div>
 					<div class="infoContent">{{selectMatch.timeStart | date: 'short'}}</div>
 				</div>
-				<div class="info">
+				<div class="info" *ngIf="selectMatch.map">
 					<div class="infoTitle">Map:</div>
 					<div class="infoContent">{{selectMatch.map}}</div>
 				</div>

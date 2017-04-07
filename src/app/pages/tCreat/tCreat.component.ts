@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { BaServerService } from "../../theme/services/baServer/baServer.service";
+import { BaTournamentService } from "app/theme/services/baTournament";
+import { BaEventService } from "app/theme/services/baEvent";
 import { NotificationsService } from "angular2-notifications";
-import { BaTournamentService } from "../../../../theme/services/baTournament/baTournament.service";
-import { BaEventService } from "../../../../theme/services/baEvent/baEvent.service";
+
 
 @Component({
-	selector: 'admin-tournament',
-	styles: [require('./tournament.scss')],
-	template: require('./tournament.component.html'),
+	selector: 'download',
+	styles: [require('./tCreat.scss')],
+	template: require('./tCreat.component.html')
 })
-export class AdminTournamentComponent implements OnInit {
+
+
+export class TCreateComponent implements OnInit {
 	public options = {
 		position: ["top", "center"],
 		timeOut: 5000
@@ -79,7 +83,7 @@ export class AdminTournamentComponent implements OnInit {
 	}
 
 	getTournament() {
-		this._tournamentService.getTournament().subscribe(
+		this._tournamentService.getUserTournament().subscribe(
 			// the first argument is a function which runs on success
 			data => {
 				this.tournaments = data.obj;
@@ -96,9 +100,6 @@ export class AdminTournamentComponent implements OnInit {
 	createTournament() {
 		let size = 0;
 		switch (this.tournamentMode) {
-			case 'swiss':
-				size = 8;
-				break;
 			case 'b16':
 				size = 16;
 				break;
@@ -117,11 +118,10 @@ export class AdminTournamentComponent implements OnInit {
 			gameName: this.tournamentGame,
 			mode: this.tournamentMode,
 			size: size,
-			playerMode: this.tournamentPlayMode,
-			statusUser: 'kjg'
+			playerMode: this.tournamentPlayMode
 		};
 
-		this._tournamentService.createTournament(data).subscribe(
+		this._tournamentService.createUserTournament(data).subscribe(
 			// the first argument is a function which runs on success
 			data => {
 				this._toastService.success(data.title, data.message);
@@ -130,18 +130,13 @@ export class AdminTournamentComponent implements OnInit {
 			// the second argument is a function which runs on error
 			err => {
 				this._toastService.success(err.title, err.err.message);
-			},
-			// the third argument is a function which runs on completion
-			() => console.log('done delete download')
+			}
 		);
 	}
 
 	saveTournament() {
 		let size = 0;
 		switch (this.editTournamentMode) {
-			case 'swiss':
-				size = 8;
-				break;
 			case 'b16':
 				size = 16;
 				break;
@@ -244,42 +239,8 @@ export class AdminTournamentComponent implements OnInit {
 	}
 
 	saveGame() {
-		let voteRoom;
-		let event;
 		let tournament;
 		const twoHours = 7200000;
-
-		let selectGame = this.editGameId;
-
-		if (!selectGame.voteRoom) {
-			voteRoom = this.chooseRoom();
-			console.log(voteRoom);
-		} else {
-			voteRoom = selectGame.voteRoom;
-		}
-
-
-		console.log(this.selectTournament);
-
-		if (!selectGame.event) {
-			event = {
-				'id': false,
-				'timeStart': new Date(this.editGameStart).getTime() - twoHours,
-				'timeEnd': new Date(this.editGameEnd).getTime() - twoHours,
-				'title': this.selectTournament.name + ' Game ' + selectGame.gameId,
-				'mode': 1,
-				'content': selectGame.team1 + ' vs ' + selectGame.team2
-			};
-		} else {
-			event = {
-				'id': selectGame.event,
-				'timeStart': new Date(this.editGameStart).getTime() - twoHours,
-				'timeEnd': new Date(this.editGameEnd).getTime() - twoHours,
-				'title': this.selectTournament.name + ' Game ' + selectGame.gameId,
-				'mode': 1,
-				'content': selectGame.team1 + ' vs ' + selectGame.team2
-			};
-		}
 
 		tournament = {
 			'tournamentId': this.selectTournament._id,
@@ -287,28 +248,19 @@ export class AdminTournamentComponent implements OnInit {
 			'timeStart': new Date(this.editGameStart).getTime() - twoHours,
 			'timeEnd': new Date(this.editGameEnd).getTime() - twoHours,
 			'map': this.editGameMap,
-			'voteRoom': voteRoom,
-			'event': event
+			'event': 0,
+			'voteRoom': 0
 		};
 
-		this._eventService.tournament(tournament.event).subscribe(
+		this._tournamentService.patchGameInfo(tournament).subscribe(
 			data => {
-				tournament.event = data.obj;
-				this._tournamentService.patchGameInfo(tournament).subscribe(
-					data2 => {
-						this._toastService.success(data2.title, data2.message);
-						this.ngOnInit();
-					},
-					error2 => {
-						console.error(error2);
-					}
-				)
+				this._toastService.success(data.title, data.message);
+				this.ngOnInit();
 			},
 			error => {
 				console.error(error);
 			}
 		);
-
 
 	};
 
@@ -321,31 +273,9 @@ export class AdminTournamentComponent implements OnInit {
 					this._toastService.success(data.title, data.message);
 					this.editTournamentName = null;
 					this.ngOnInit();
-				},
-				error => {
-					console.error(error);
 				}
 			);
 		}
 	};
-
-	chooseRoom() {
-		let voteRoom;
-		let rooms = [];
-
-		for (let game of this.selectTournament.games) {
-			rooms.push(game.voteRoom);
-		}
-
-		voteRoom = Math.floor(Math.random() * (9999 - 1000)) + 1000;
-
-		if (rooms.indexOf(voteRoom)) {
-			return voteRoom;
-		} else {
-			this.chooseRoom();
-		}
-
-	}
-
 
 }

@@ -40,7 +40,8 @@ var schema = new Schema({
             team: {type: String}
         }],
         player: [{type: Schema.Types.ObjectId, ref: "users"}],
-        clan: [{type: Schema.Types.ObjectId, ref: "clan"}]
+        clan: [{type: Schema.Types.ObjectId, ref: "clan"}],
+        admin: {type: Schema.Types.ObjectId, ref: "users"}
     });
 
 module.exports = mongoose.model('tournament', schema);

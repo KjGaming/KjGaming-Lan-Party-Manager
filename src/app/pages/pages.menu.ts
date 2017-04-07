@@ -159,6 +159,19 @@ export const PAGES_MENU = [
                 }
             },
             {
+                path: 'tCreat',
+                data: {
+                    menu: {
+                        title: 'Turnier erstellen',
+                        icon: 'device_hub',
+                        iconClass: 'material-icons',
+                        selected: false,
+                        expanded: false,
+                        order: 91,
+                    }
+                }
+            },
+            {
                 path: 'admin',
                 data: {
                     menu: {

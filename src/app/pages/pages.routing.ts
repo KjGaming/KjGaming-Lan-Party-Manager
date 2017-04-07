@@ -100,6 +100,11 @@ const routes: Routes = [
 				canActivate: [AuthGuard, SideGuard]
 			},
 			{
+				path: 'tCreat',
+				loadChildren: () => System.import('./tCreat/tCreat.module'),
+				canActivate: [AuthGuard, SideGuard]
+			},
+			{
 				path: 'admin',
 				loadChildren: () => System.import('./admin/admin.module'),
 				canActivate: [AuthGuard, AdminGuard]

@@ -144,7 +144,8 @@ export class TournamentComponent implements OnInit {
 			if (tournament.clan.length == 0) {
 				tournament.inTournament = false;
 			}
-		} else {
+		}
+		else {
 			console.log(userId);
 			console.log(tournament);
 
@@ -166,7 +167,6 @@ export class TournamentComponent implements OnInit {
 				}
 			}
 		}
-
 
 		/* console.log(tournament);*/
 		this.focusTournament = tournament;

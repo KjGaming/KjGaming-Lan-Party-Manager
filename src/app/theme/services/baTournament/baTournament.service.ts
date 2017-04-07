@@ -274,5 +274,35 @@ export class BaTournamentService {
             });
     }
 
+    /** UserTournament **/
+    getUserTournament(): Observable<any>{
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.get('/api/reg/tournament/user', {headers: headers})
+			.map((res: Response) => res.json())
+			.catch((err: Response) => {
+                return Observable.throw(err.json());
+            });
+    }
+
+    createUserTournament(event): Observable<any>{
+        const body = JSON.stringify(event);
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        console.log(body);
+
+        return this.http.put('/api/reg/tournament/user', body, {headers: headers})
+			.map((res: Response) => res.json())
+			.catch((err: Response) => {
+                return Observable.throw(err.json());
+            });
+    }
+
 }
 
