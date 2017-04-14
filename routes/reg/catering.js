@@ -2,6 +2,7 @@ let express = require('express');
 let router = express.Router();
 let Catering = require('../../models/catering');
 let Products = require('../../models/product');
+let User = require('../../models/user');
 let jwt = require('jsonwebtoken');
 
 router.get('/', function (req, res, next) {
@@ -85,41 +86,82 @@ router.get('/products', function (req, res, next) {
 
 router.post('/ordered', function (req, res, next) {
     let decoded = jwt.decode(req.get('Authorization'));
+
     let userId = decoded.user._id;
-    let catering = new Catering({
-        ordered: req.body.ordered,
-        status: "ordered",
-        user: userId
-    });
-    for (let i = 0; req.body.products.length > i; i++) {
-        catering.products.push({
-            id: req.body.products[i].id,
-            count: req.body.products[i].count
-        });
-    }
+
+	let catering = new Catering({
+		ordered: req.body.ordered,
+		status: "ordered",
+		user: userId
+	});
+
+	for (let i = 0; req.body.products.length > i; i++) {
+		catering.products.push({
+			id: req.body.products[i].id,
+			count: req.body.products[i].count
+		});
+	}
+
+	if(req.body.reOrder){
+		User.findOne({'nickName': req.body.nickName}, function ( err, user ) {
+			if(err){
+				return res.status(500).json({
+					title: 'Fehler',
+					message: 'Hier ist ein Fehler aufgetreten!',
+					error: err
+				});
+			}
+
+			if(user.pin != req.body.pin){
+				return res.status(500).json({
+					title: 'Fehler',
+					message: 'Der Pin war falsch',
+					error: err
+				});
+			}
+			catering.user = user._id;
+			catering.status = 'delivered';
+			catering['ordered'] = Date.now();
+			catering['delivered'] = Date.now();
+
+			catering.save(function (err, result) {
+				if (err) {
+					if (typeof err.errors.nickName != 'undefined' && typeof err.errors.email != 'undefined') {
+						return res.status(500).json({
+							title: 'Hier ist ein Fehler aufgetreten',
+							error: err
+						});
+					}
+				}
+				return res.status(201).json({
+					title: 'Erfolgreich!',
+					message: 'Deine Bestellung wurde aufgenommen',
+					obj: result
+				});
+			});
+		});
+	}else{
+		if (req.body.delivered) {
+			catering.delivered = req.body.delivered;
+		}
 
 
-    if (req.body.delivered) {
-        catering.delivered = req.body.delivered;
-    }
-
-	console.log(catering);
-
-    catering.save(function (err, result) {
-        if (err) {
-            if (typeof err.errors.nickName != 'undefined' && typeof err.errors.email != 'undefined') {
-                return res.status(500).json({
-                    title: 'Hier ist ein Fehler aufgetreten',
-                    error: err
-                });
-            }
-        }
-        res.status(201).json({
-			title: 'Erfolgreich!',
-            message: 'Deine Bestellung wurde aufgenommen',
-            obj: result
-        });
-    });
+		catering.save(function (err, result) {
+			if (err) {
+				if (typeof err.errors.nickName != 'undefined' && typeof err.errors.email != 'undefined') {
+					return res.status(500).json({
+						title: 'Hier ist ein Fehler aufgetreten',
+						error: err
+					});
+				}
+			}
+			return res.status(201).json({
+				title: 'Erfolgreich!',
+				message: 'Deine Bestellung wurde aufgenommen',
+				obj: result
+			});
+		});
+	}
 
 });
 
@@ -135,7 +177,6 @@ router.post('/addFood', function (req, res, next) {
 		foodPrice : req.body.price
 	});
 
-	console.log(catering);
 	catering.save(function (err, result) {
 		if (err) {
 			if (typeof err.errors.nickName != 'undefined' && typeof err.errors.email != 'undefined') {
@@ -162,7 +203,6 @@ router.post('/addFood', function (req, res, next) {
 router.delete('/ordered', function (req, res, next) {
     let decoded = jwt.decode(req.get('Authorization'));
     let userId = decoded.user._id;
-    console.log(userId);
     Catering.find({user: userId, status: 'ordered'})
         .remove()
         .exec(function (err, result) {

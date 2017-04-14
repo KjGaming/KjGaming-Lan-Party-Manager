@@ -58,8 +58,8 @@ $warning-bg: tint($warning, 20%);
 $danger-bg: tint($danger, 20%);
 
 // link colors
-$activelink: #285eb8;
-$hoverlink: darken($activelink, 20%);
+$activelink: #fcaf17;
+$hoverlink: darken($activelink, 10%);
 
 // main background
 @mixin body-bg() {

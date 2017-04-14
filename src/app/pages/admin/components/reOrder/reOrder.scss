@@ -1,0 +1,61 @@
+.productCard {
+  margin-bottom: 5px;
+  width: auto;
+  cursor: pointer;
+  text-align: center;
+
+
+
+  .productTitle {
+    color: black;
+    width: 100%;
+    height: 25px;
+    background-color: rgba(255,255, 255, 0.5);
+    font-size: 15px;
+    padding-top: 5px;
+    font-weight: 700;
+  }
+
+
+  .productImage {
+    height: 150px;
+    width: 100%;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+  }
+
+  .productPrice {
+    vertical-align: middle;
+    color: white;
+    width: 100%;
+    border: none;
+    height: 30px;
+    background-color: rgba(0,0, 0, 0.8);
+    font-size: 15px;
+    padding-top: 6px;
+    margin-top: -30px;
+  }
+}
+
+table{
+  text-align: left;
+
+  td {
+    height: 50px;
+    vertical-align: middle;
+  }
+}
+
+button{
+  cursor: pointer;
+}
+
+.sum{
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.searchNickName{
+  color: black;
+}

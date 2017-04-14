@@ -16,6 +16,7 @@ var schema = new Schema({
     email: {type: String, required: true, unique: true},// User email
     seat: {type: Number, default: null},// User seat on the LAN Party
     password: {type: String, required: true},// User password
+    pin: {type: String},
     role: {type: Number, default: 0},// User role in the LAN MANAGER
     lock: {type: Boolean, default: false},// User lock or unlock for The LAN MANAGER
     agb: {type: Boolean, default: false},// AGB

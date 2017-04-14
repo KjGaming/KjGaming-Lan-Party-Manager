@@ -1,18 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NotificationsService } from "angular2-notifications";
-import { BaCateringService } from "../../theme/services/baCatering/baCatering.service";
-import * as io from 'socket.io-client';
-import construct = Reflect.construct;
+import { BaCateringService } from "../../../../theme/services/baCatering/baCatering.service";
+import { CompleterService, CompleterData } from 'ng2-completer';
+import { BaUserService } from "app/theme/services/baUser";
+import 'rxjs/Rx';
+
 
 @Component({
-	selector: 'catering',
-	styles: [require('./catering.scss')],
-	template: require('./catering.component.html')
+	selector: 'admin-reOrder',
+	encapsulation: ViewEncapsulation.None,
+	styles: [require('./reOrder.scss')],
+	template: require('./reOrder.component.html'),
 })
-
-
-export class CateringComponent implements OnInit, OnDestroy {
-	static room: string = 'uCat';
+export class AdminReOrderComponent implements OnInit {
 	public products;
 	public ordered;
 	public delivered;
@@ -23,30 +23,22 @@ export class CateringComponent implements OnInit, OnDestroy {
 		position: ["top", "center"],
 		timeOut: 5000
 	};
-	socket;
-	room = 'uCat';
+
+	pin;
+
+	searchStr: string;
+	searchUser: CompleterData;
 
 
-	constructor(private _cateringService: BaCateringService, private _toastService: NotificationsService) {
-		this.socket = io('/catering');
-		this.socket.emit('joinRoom', this.room);
-		if (localStorage.getItem('shoppingCard')) {
-			this.shoppingCart = JSON.parse(localStorage.getItem('shoppingCard'));
-		}
-		this.socket.on('refreshDB', (data) => {
-			this.getCatering();
-			this._toastService.info('Information', data);
-		});
+	constructor(private _cateringService: BaCateringService,
+				private _toastService: NotificationsService,
+				private _completerService: CompleterService) {
+		this.searchUser = _completerService.local(JSON.parse(localStorage.getItem('users')), 'nickName', 'nickName');
 	}
 
 	ngOnInit() {
 		this.getProducts();
 		this.getCatering();
-
-	}
-
-	ngOnDestroy(){
-		this.socket.emit('leaveRoom', this.room);
 	}
 
 	getProducts() {
@@ -94,21 +86,6 @@ export class CateringComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	deleteOrdered() {
-		if(confirm('Willst du wirklich deine Bestellung stornieren?')) {
-			this._cateringService.deleteOrdered().subscribe(
-				// the first argument is a function which runs on success
-				data => {
-					console.log(data);
-					this.getCatering();
-					this._toastService.success(data.title, data.message);
-				},
-				// the second argument is a function which runs on error
-				err => console.error(err)
-			);
-		}
-	}
-
 	addToShoppingCart(product) {
 		var isInArray = false;
 		if (!this.shoppingCart) {
@@ -136,42 +113,39 @@ export class CateringComponent implements OnInit, OnDestroy {
 				});
 			}
 		}
-		console.log(this.shoppingCart);
-		localStorage.setItem('shoppingCard', JSON.stringify(this.shoppingCart));
 
 	}
 
 	sendShoppingCart(shoppingCard) {
-		console.log(shoppingCard.length);
+
+		let data = {
+			nickName: this.searchStr,
+			pin: this.pin,
+			reOrder: true
+		};
 		if (0 == shoppingCard.length) {
-			return this._toastService.info('Information', 'Dein Warenkorb ist leer');
+			return this._toastService.info('Information', 'Der Warenkorb ist leer');
 		}
-		if(confirm('Willst du wirklich Bestellen?')){
-			this._cateringService.sendOrdered(shoppingCard, false).subscribe(
+		if (confirm('Willst du wirklich Bestellen?')) {
+			this._cateringService.sendOrdered(shoppingCard, data).subscribe(
 				// the first argument is a function which runs on success
 				data => {
 					this._toastService.success(data.title, data.message);
+					this.shoppingCart = [];
 					this.ngOnInit();
-					this.socket.emit('newOrder');
 				},
 				// the second argument is a function which runs on error
-				err => console.error(err),
-				// the third argument is a function which runs on completion
-				() => console.log('done products')
+				err => {
+					console.error(err);
+					this._toastService.error(err.title, err.message);
+				}
 			);
 
-
-			localStorage.removeItem('shoppingCard');
-			this.shoppingCart = [];
 		}
 
 	}
 
 	changeShoppingCount(id, event) {
-		console.log(id);
-		console.log(event);
-		console.log(this.shoppingCart);
-
 
 		for (let key in this.shoppingCart) {
 			if (this.shoppingCart[key].id == id) {
@@ -183,14 +157,14 @@ export class CateringComponent implements OnInit, OnDestroy {
 					if (this.shoppingCart[key].count == 0) {
 						this.shoppingCart.splice(parseInt(key), 1);
 					}
-					;
+
 				} else if (event == 'del') {
 					this.shoppingCart.splice(parseInt(key), 1);
 				}
 				break;
 			}
 		}
-		localStorage.setItem('shoppingCard', JSON.stringify(this.shoppingCart));
 	}
+
 
 }

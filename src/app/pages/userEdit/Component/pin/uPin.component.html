@@ -1,0 +1,13 @@
+<simple-notifications [options]="options"></simple-notifications>
+<ba-card title="Pin für Kassenbestellung" class="pinUser">
+	<div *ngIf="userKey" id="userKeyPin">
+		PIN: {{userKey}}
+	</div>
+	<div *ngIf="!userKey" class="buttonPin">
+		<button class="btn btn-primary btn-lg" (click)="setPin()">Pin generieren</button>
+	</div>
+</ba-card>
+
+
+
+

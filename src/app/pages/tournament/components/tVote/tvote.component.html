@@ -1,3 +1,4 @@
+<simple-notifications [options]="options"></simple-notifications>
 <ba-card class="col-sm-12">
 	<p class="voteTime" *ngIf="!sTime">No Value</p>
 	<p class="voteTime" *ngIf="sTime">Value : {{sTime}}</p>
@@ -16,10 +17,12 @@
 	<ba-card class="col-sm-6">
 		<h1>User 1</h1>
 		<button (click)="ready('user1')" type="button" id="ready1" class="btn btn-success">READY</button>
+		<div class="readyUser1">{{rU1}}</div>
 	</ba-card>
 	<ba-card class="col-sm-6">
 		<h1>User 2</h1>
 		<button (click)="ready('user2')" type="button" id="ready2" class="btn btn-success">READY</button>
+		<div class="readyUser2">{{rU2}}</div>
 	</ba-card>
 </div>
 

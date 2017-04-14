@@ -1,0 +1,84 @@
+<simple-notifications [options]="options"></simple-notifications>
+<div class="row">
+	<ba-card class="col-sm-12" title="Produkte">
+		<div class="row">
+			<div *ngFor="let product of products; let i = index" class="col-6 col-sm-3 col-lg-2  productCard"
+				 (click)="addToShoppingCart(product)">
+				<div class="productImage" [ngStyle]="{'background-image': 'url(' + product.img + ')'}"></div>
+				<div class="productPrice">{{product.price}} €</div>
+			</div>
+		</div>
+	</ba-card>
+</div>
+<div class="row">
+	<ba-card class="col-xlg-12 col-xl-12 col-lg-12 col-sm-12 col-xs-12" title="Warenkorb">
+		<div class="vertical-scroll">
+			<table class="table table-hover">
+				<thead>
+				<tr class="black-muted-bg">
+					<th class="table-id">#</th>
+					<th>Produkt</th>
+					<th>Einzelpreis</th>
+					<th>Anzahl</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr *ngFor="let item of shoppingCart; let i = index">
+					<td class="table-id">{{i + 1}}</td>
+					<td>{{ item.name }}</td>
+					<td>{{ item.price }} €</td>
+					<td>
+						<div class="row">
+							<div class="col-2">
+								{{item.count}}
+							</div>
+							<div class="col-10">
+								<button type="button" class="btn btn-sm btn-success" (click)="changeShoppingCount(item.id, 'up')">
+									<i class="material-icons">keyboard_arrow_up</i>
+								</button>
+								<button type="button" class="btn btn-sm btn-warning" (click)="changeShoppingCount(item.id, 'down')">
+									<i class="material-icons">keyboard_arrow_down</i>
+								</button>
+								<button type="button" class="btn btn-sm btn-danger" (click)="changeShoppingCount(item.id, 'del')">
+									<i class="material-icons">delete_forever</i>
+								</button>
+							</div>
+						</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</ba-card>
+</div>
+<div class="row">
+	<ba-card title="Nachbestellen" button="true" class="col-md-6">
+		<div class="row">
+			<ng2-completer
+					class="col-md-9 searchNickName"
+					[(ngModel)]="searchStr"
+					[datasource]="searchUser"
+					[minSearchLength]="0"
+					[placeholder]="'suche Nickname'"
+					[inputClass]="'form-control nickNameForm'"
+					[autoMatch]="true"
+					[textNoResults]="'Keinen Nickname gefunden!'"
+					[textSearching]="'suchen...'"
+			></ng2-completer>
+			<div class="col-md-3">
+				<input class="form-control"
+					   type="password"
+					   [(ngModel)]="pin"
+					   type="password"
+						placeholder="Pin eingabe">
+			</div>
+		</div>
+		<div align="center">
+			<button style="margin-top: 10px" type="button" class="btn btn-success"
+					(click)="sendShoppingCart(shoppingCart)">bestellen
+			</button>
+		</div>
+
+	</ba-card>
+</div>
+

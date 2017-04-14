@@ -52,6 +52,9 @@ export class Login {
                         localStorage.setItem('nickName', data.nickName);
                         localStorage.setItem('blackWidow', data.blackWidow);
                         localStorage.setItem('clans', JSON.stringify(data.clan));
+                        if(data.users){
+                            localStorage.setItem('users', JSON.stringify(data.users));
+                        }
                         this.router.navigateByUrl('/');
                     },
                     error => {

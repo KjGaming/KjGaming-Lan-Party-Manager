@@ -21,6 +21,8 @@ import { ChartsModule } from 'ng2-charts';
 import { AdminTournamentComponent } from "./components/tournament/tournament.component";
 import { AdminSidesComponent } from "./components/sides/sides.component";
 import { AdminCateringComponent } from "app/pages/admin/components/catering";
+import { AdminReOrderComponent } from "app/pages/admin/components/reOrder";
+import { Ng2CompleterModule } from "ng2-completer";
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { AdminCateringComponent } from "app/pages/admin/components/catering";
 		Ng2SmartTableModule,
 		SimpleNotificationsModule,
 		CKEditorModule,
-		ChartsModule
+		ChartsModule,
+		Ng2CompleterModule
 
 	],
 	declarations: [
@@ -49,7 +52,8 @@ import { AdminCateringComponent } from "app/pages/admin/components/catering";
 		AdminStatisticsComponent,
 		AdminTournamentComponent,
 		AdminSidesComponent,
-		AdminCateringComponent
+		AdminCateringComponent,
+		AdminReOrderComponent
 	],
 	providers: []
 })

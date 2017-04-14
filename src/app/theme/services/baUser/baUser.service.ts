@@ -92,6 +92,7 @@ export class BaUserService {
                 return Observable.throw(err.json());
             });
     }
+
     setUserInformation(data){
         const body = JSON.stringify(data);
         const headers = new Headers({
@@ -105,4 +106,30 @@ export class BaUserService {
                 return Observable.throw(err.json());
             });
     }
+
+    getUserPin(){
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('id_token')
+        });
+
+        return this.http.get('/api/reg/user/pin', {headers: headers})
+			.map((res: Response) => res.json())
+			.catch((err: Response) => {
+                return Observable.throw(err.json());
+            });
+    }
+
+	setUserPin(){
+		const headers = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization': localStorage.getItem('id_token')
+		});
+
+		return this.http.patch('/api/reg/user/pin',{}, {headers: headers})
+			.map((res: Response) => res.json())
+			.catch((err: Response) => {
+				return Observable.throw(err.json());
+			});
+	}
 }

@@ -11,6 +11,7 @@ import {AdminStatisticsComponent} from "./components/statistics/statistics.compo
 import {AdminTournamentComponent} from "./components/tournament/tournament.component";
 import {AdminSidesComponent} from "./components/sides/sides.component";
 import { AdminCateringComponent } from "app/pages/admin/components/catering";
+import { AdminReOrderComponent } from "app/pages/admin/components/reOrder";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'product', component: AdminProductComponent },
       { path: 'statistic', component: AdminStatisticsComponent },
       { path: 'sides', component: AdminSidesComponent },
+      { path: 'reOrder', component: AdminReOrderComponent },
     ]
   }
 ];

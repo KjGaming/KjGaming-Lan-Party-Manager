@@ -251,19 +251,6 @@ export const PAGES_MENU = [
                         }
                     },
                     {
-                        path: 'catering',
-                        data: {
-                            menu: {
-                                title: 'Catering',
-                                icon: 'restaurant',
-                                iconClass: 'material-icons',
-                                selected: false,
-                                expanded: false,
-                                order: 0
-                            }
-                        }
-                    },
-                    {
                         path: 'tournament',
                         data: {
                             menu: {
@@ -276,12 +263,38 @@ export const PAGES_MENU = [
                             }
                         }
                     },
+					{
+						path: 'catering',
+						data: {
+							menu: {
+								title: 'Catering',
+								icon: 'restaurant',
+								iconClass: 'material-icons',
+								selected: false,
+								expanded: false,
+								order: 0
+							}
+						}
+					},
                     {
                         path: 'product',
                         data: {
                             menu: {
                                 title: 'Produkte',
                                 icon: 'local_bar',
+                                iconClass: 'material-icons',
+                                selected: false,
+                                expanded: false,
+                                order: 0
+                            }
+                        }
+                    },
+                    {
+                        path: 'reOrder',
+                        data: {
+                            menu: {
+                                title: 'Nachbestellen',
+                                icon: 'shopping_basket',
                                 iconClass: 'material-icons',
                                 selected: false,
                                 expanded: false,

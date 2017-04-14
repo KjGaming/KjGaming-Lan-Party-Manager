@@ -5,8 +5,10 @@ import {
 	AfterViewChecked,
 	OnDestroy
 } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import * as io from 'socket.io-client';
+import { NotificationsService } from "angular2-notifications/src/notifications.service";
+
 
 
 @Component({
@@ -17,9 +19,8 @@ import * as io from 'socket.io-client';
 })
 export class TVoteComponent implements OnInit, AfterViewChecked, OnDestroy {
 	message = '';
-	room = '1234';
+	room;
 	socket;
-	conversation = [];
 	sTime: String = 'Test';
 	maps: Object[] = [
 		{
@@ -55,19 +56,31 @@ export class TVoteComponent implements OnInit, AfterViewChecked, OnDestroy {
 			'img': 'http://www.dexerto.com/app/uploads/2016/10/inferno-8.jpg'
 		}
 	];
+	public options = {
+		position: ["top", "center"],
+		timeOut: 5000
+	};
+	subscription;
+	rU1 = false;
+	rU2 = false;
 
 
-	constructor(private _router: Router) {
+	constructor(private _router: ActivatedRoute,private _r: Router,private _toastService: NotificationsService) {
 
 	}
 
 	ngOnInit() {
+		this.subscription = this._router.queryParams.subscribe(
+			(queryParam: any) => this.room = queryParam['room']
+		);
+		console.log('WUHUHUHUHU');
 		this.socket = io('/vote');
-		this.socket.emit('jRoom', this.room, localStorage.getItem('nickName'));
-		this.socket.on('voteObj', (data) => {
-			console.log(data);
+		this.socket.emit('joinRoom', this.room, localStorage.getItem('nickName'));
+		this.socket.on('error123', (data) => {
+			/*this._r.navigate(['/pages/tournament']);*/
+			console.error(data);
+			/*this._toastService.error('Fehler', data);*/
 		});
-
 	}
 
 	ngAfterViewChecked() {
@@ -75,11 +88,11 @@ export class TVoteComponent implements OnInit, AfterViewChecked, OnDestroy {
 	}
 
 	ngOnDestroy() {
+		this.subscription.unsubscribe();
+		this.socket.emit('leaveUser', this.room);
 	}
 
 	send() {
-
-
 	}
 
 	voteMap(map) {
@@ -87,8 +100,17 @@ export class TVoteComponent implements OnInit, AfterViewChecked, OnDestroy {
 	}
 
 	ready(user) {
+		this.socket.emit('ready', user);
+		this.socket.on('userReady', (user) => {
+			if(user == 1){
+				this.rU1 = true;
+			}else{
+				this.rU2 = true;
+			}
+		});
 		console.log(user);
-		this.sTime = 'es geht doch!';
+		this.sTime = 'es geht doch! => ' + this.room;
+
 	}
 
 
