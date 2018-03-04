@@ -23,20 +23,17 @@ export class Register {
 
     public lanPacketData = [
         {value: 0, display: 'Wähle ein Paket'},
-        {value: 0, display: 'Sparpaket (15€)'},
-        {value: 1, display: 'Komplettpaket (30€)'},
+        {value: 0, display: 'Sparpaket (10€)'},
+        {value: 1, display: 'Komplettpaket (25€)'},
         {value: 2, display: 'Individuelles Paket'}
     ];
 
     public eatPackets = [
-        {value: 0, display: 'Abendessen 20.04 (4€)', price: 4},
-        {value: 1, display: 'Frühstück 21.04 (2€)', price: 2},
-        {value: 2, display: 'Mittagessen 21.04 (3€)', price: 3},
-        {value: 3, display: 'Abendessen 21.04 (4€)', price: 4},
-        {value: 4, display: 'Frühstück 22.04 (2€)', price: 2},
-        {value: 5, display: 'Mittagessen 22.04 (3€)', price: 3},
-        {value: 6, display: 'Abendessen 22.04 (4€)', price: 4},
-        {value: 7, display: 'Frühstück 23.04 (3€)', price: 2}
+        {value: 0, display: 'Abendessen 25.04 (4€)', price: 4},
+        {value: 1, display: 'Frühstück 26.04 (2€)', price: 2},
+        {value: 2, display: 'Mittagessen 26.04 (3€)', price: 3},
+        {value: 3, display: 'Abendessen 26.04 (4€)', price: 4},
+        {value: 4, display: 'Frühstück 27.04 (2€)', price: 2}
     ];
 
     public options = {
@@ -50,7 +47,7 @@ export class Register {
     checkboxAGB = false;
     checkboxVegi = false;
     amount: number = 0;
-    lanFood: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
+    lanFood: number[] = [0, 0, 0, 0, 0];
 
     public form: FormGroup;
     public lanPacket: AbstractControl;
@@ -115,19 +112,20 @@ export class Register {
 
 
         if (lanNumber == 0) {
-            this.amount = 15;
+            this.amount = 10;
             this.packetId = 0;
-            this.lanFood = [0,0,0,0,0,0,0,0];
+            this.lanFood = [0, 0, 0, 0, 0];
         } else if (lanNumber == 1) {
-            this.amount = 30;
+            this.amount = 25;
             this.packetId = 1;
-            this.lanFood = [1,1,1,1,1,1,1,1];
+            this.lanFood = [1, 1, 1, 1, 1];
 
         } else {
-            this.amount = 15;
+            this.amount = 10;
             this.packetId = 2;
-            this.lanFood = [0,0,0,0,0,0,0,0];
+            this.lanFood = [0, 0, 0, 0, 0];
         }
+
     }
 
     addAmountFood(checked: boolean, price: number, value: number) {
@@ -148,7 +146,7 @@ export class Register {
 
 
             let lanFoodString = this.lanFood.toString();
-            lanFoodString = lanFoodString.replace(/,/g, "");
+            lanFoodString = lanFoodString.replace(/,/g, '');
 
             const user = new User(
                 values['email'], // email
@@ -157,7 +155,7 @@ export class Register {
                 values['firstname'], // firstname
                 values['lastname'], // lastname
                 date, // birth
-                0, //User role
+                0, // User role
                 false, // User lock
                 values['street'], // street
                 values['nr'], // nr
@@ -168,10 +166,10 @@ export class Register {
                 null, // Clan ID
                 this.packetId, // Packet id
                 false, // Packet paid or not
-                this.amount,// Packet price
-                lanFoodString,// Food id
-                this.checkboxVegi,// User vegitable
-                0,// Outher coast like drinks, snacks and so on
+                this.amount, // Packet price
+                lanFoodString, // Food id
+                this.checkboxVegi, // User vegitable
+                0, // Outher coast like drinks, snacks and so on
                 false// Paid all
 
 
@@ -182,7 +180,7 @@ export class Register {
                 .subscribe(
                     data => {
                         localStorage.setItem('regToken', 'LoggedInSuccessfully');
-                        this.router.navigate(['confirmReg'], {queryParams: {'choose':'register'}});
+                        this.router.navigate(['confirmReg'], {queryParams: {'choose': 'register'}});
                     },
                     error => {
                         this._toastService.error(error.title, error.error.message);
