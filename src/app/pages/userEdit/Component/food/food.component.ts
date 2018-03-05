@@ -14,29 +14,10 @@ import { BaCateringService } from "app/theme/services/baCatering";
 export class FoodUserEditComponent implements OnChanges {
 	@Input() food;
 	@Output() refresh: EventEmitter<string> = new EventEmitter();
-	foodString: String = '00000000';
+	foodString: String = '00000';
 	foodArray: String[];
 	vegi;
 	foods = [
-		{
-			'day': 'Donnerstag',
-			'eat': 'Abendessen',
-			'price': 4,
-			'img': '/assets/img/food/schinken.jpg'
-
-		},
-		{
-			'day': 'Freitag',
-			'eat': 'Frühstück',
-			'price': 2,
-			'img': '/assets/img/food/frueh.jpg'
-		},
-		{
-			'day': 'Freitag',
-			'eat': 'Mittagessen',
-			'price': 3,
-			'img': '/assets/img/food/chilli.jpg'
-		},
 		{
 			'day': 'Freitag',
 			'eat': 'Abendessen',
