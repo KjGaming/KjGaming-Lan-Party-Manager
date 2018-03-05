@@ -12,7 +12,6 @@ useFlexbox: false
 styleLoaders:
   - style
   - css
-  - postcss
   - sass
 
 # Extract styles to stand-alone css file
@@ -55,7 +54,6 @@ styles:
   mixins: true
 
   # Reset and dependencies
-  normalize: true
   print: true
 
   # Core CSS
@@ -85,7 +83,6 @@ styles:
   progress: true
   media: true
   list-group: true
-  responsive-embed: true
   close: true
   #tags: true
   badge: true
