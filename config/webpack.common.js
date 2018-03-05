@@ -297,8 +297,9 @@ module.exports = function (options) {
                 jQuery: 'jquery',
                 $: 'jquery',
                 jquery: 'jquery',
+                'Popper': 'popper.js',
                 "Tether": 'tether',
-                "window.Tether": "tether",
+                "window.Tether": "tether"
             }),
 
             /*
